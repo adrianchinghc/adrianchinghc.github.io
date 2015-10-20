@@ -1,0 +1,14 @@
+# Required
+language: 'en-us'
+url: 'https://www.adrianching.com'
+human_url: 'AdrianChing.com'
+name: 'Example Site'
+description: 'Example site description'
+title: 'Example site title'
+
+# Optional
+# logo_image_name: 'example-logo-big.png'
+# logo_image_path: 'http://www.examplecdn.com/example-logo-large.png'
+twitter_handle: '@adrianchinghc'
+# facebook_app_id: ''
+
