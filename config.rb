@@ -5,6 +5,8 @@
 set :markdown_engine, :redcarpet
 set :markdown, fenced_code_blocks: true
 activate :automatic_image_sizes
+activate :autoprefixer
+activate :directory_indexes
 
 activate :deploy do |deploy|
   deploy.method = :git
@@ -19,21 +21,21 @@ activate :blog do |blog|
   # blog.prefix = "blog"
 
   blog.permalink = "{title}"
-  # Matcher for blog source files
+  # # Matcher for blog source files
   blog.sources = "posts/{year}-{month}-{day}-{title}.html"
   blog.taglink = "tags/{tag}"
   blog.layout = "layouts/layout.slim"
   blog.summary_separator = /(READMORE)/
   blog.summary_length = 250
-  blog.year_link = "{year}"
-  blog.month_link = "{year}/{month}"
-  blog.day_link = "{year}/{month}/{day}"
+  # blog.year_link = "{year}"
+  # blog.month_link = "{year}/{month}"
+  # blog.day_link = "{year}/{month}/{day}"
   blog.default_extension = ".md"
 
   blog.tag_template = "tag.html"
   blog.calendar_template = "calendar.html"
 
-  # Enable pagination
+  # # Enable pagination
   blog.paginate = true
   blog.per_page = 10
   # blog.page_link = "page/{num}"
@@ -96,8 +98,6 @@ set :css_dir, 'assets/stylesheets'
 set :js_dir, 'assets/javascripts'
 set :images_dir, 'assets/images'
 
-activate :autoprefixer
-activate :directory_indexes
 
 # Build-specific configuration
 configure :build do
