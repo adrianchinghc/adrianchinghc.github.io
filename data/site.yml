@@ -1,10 +1,10 @@
 # Required
 language: 'en-us'
-url: 'https://www.adrianching.com'
+url: 'http://www.adrianching.com'
 human_url: 'AdrianChing.com'
-name: 'Example Site'
-description: 'Example site description'
-title: 'Example site title'
+name: 'Adrian Ching - Web Developer & Maker'
+description: 'Adrian Ching is a Web Developer & Maker, focusing on Backend Architecture. He helps startups to turn their ideas into awesome real life applications.'
+title: 'Adrian Ching - Web Developer & Maker'
 
 # Optional
 # logo_image_name: 'example-logo-big.png'

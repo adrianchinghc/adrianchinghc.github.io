@@ -41,9 +41,20 @@ html itemscope='' itemtype='http://schema.org/WebPage' lang=data.site.language
     = favicon_tag 'images/favicon.ico', rel: 'apple-touch-icon', type: 'image/png'
 
   body class=page_classes
+    nav.main-menu
+      .container
+        ul
+          li.main-menu__logo
+            a href="/" Adrian Ching
+          li.main-menu__items
+            ul
+              li
+                a href="#" Get In Touch
+
+  body class=page_classes
     main role='main'
       = yield
 
     / Footer
     footer
-      = link_to 'Sitemap', 'sitemap'
+      / = link_to 'Sitemap', 'sitemap'

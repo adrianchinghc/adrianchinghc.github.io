@@ -22,3 +22,6 @@
 
 # Ignore bower components
 /bower_components
+
+# Ignore ruby-version
+.ruby-version
