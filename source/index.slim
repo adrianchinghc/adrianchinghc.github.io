@@ -2,14 +2,105 @@
 title: Adrian Ching - Web Developer & Maker
 ---
 
-section#hero
-	h1
-		| I CRAFT BEAUTIFUL
-		br
-		| AND AMAZING
-		br
-		| WEB APPS.
+/ section#hero
+/ 	h1
+/ 		| I CRAFT BEAUTIFUL
+	/ 	br
+	/ 	| AND AMAZING
+	/ 	br
+	/ 	| WEB APPS.
 
-	div
-		| Learn More
-
+	/ div
+	/ 	| Learn More
+/! HEADER ///////////////////////////////////////////////////////////////////////////
+header#welcome.parent.module.parallax.parallax-1
+  #toggle.burger
+    span.top
+    span.middle
+    span.bottom
+  #navigation.navigation
+    nav.overlay-menu
+      ul
+        li
+          a.menu href="#about"  About
+          span.simple_line
+        li
+          a.menu href="#portfolio"  Works
+          span.simple_line
+        li
+          a.menu href="#contact"  Contact
+  .scroll_down
+    i.fa.fa-chevron-down
+  .fade.child
+    .container_small
+      /! Header Titles
+      h1.header_title Adrian Ching
+      h2.header_subtitle In love with all things technology and business
+/! END HEADER ///////////////////////////////////////////////////////////////////////////
+/! ABOUT SECTION ///////////////////////////////////////////////////////////////////////////
+section#about.module
+  .container_small
+    h2.section_title Who Am I?
+    h3.section_subtitle Web Designer & Front-end Developer
+    p Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima.
+    a.button href="#"
+      i.fa.fa-download
+      |  My Resume
+/! END ABOUT SECTION ///////////////////////////////////////////////////////////////////////////
+/! PORTFOLIO SECTION ///////////////////////////////////////////////////////////////////////////
+section#portfolio.module
+  .container_big
+    h2.section_title Latest Blog Posts
+    / h3.section_subtitle Simple & Creative
+    .works
+      /! Work 01
+      article
+        a data-featherlight="image" href="images/work_large.jpg"
+        .border
+          img alt="" src="images/work.jpg" /
+          h3.caption Black & White
+      /! Work 02
+      article
+        a data-featherlight="image" href="images/work_large.jpg"
+        .border
+          img alt="" src="images/work.jpg" /
+          h3.caption Business Life
+/! END PORTFOLIO SECTION ///////////////////////////////////////////////////////////////////////////
+/! CONTACT SECTION ///////////////////////////////////////////////////////////////////////////
+section#contact.module
+  .container_small
+    h2.section_title Say Hello!
+    h3.section_subtitle Let's Make Something Awesome
+    .info
+      /! Address
+      div
+        i.fa.fa-map-marker
+        h3 Address
+        p
+          | Budapest VI. kerület
+          br/
+          | Izabella utca 61.
+          br/
+          | Hungary
+      /! Phone
+      div
+        i.fa.fa-mobile
+        h3 Phone
+        p + 123 456 7890
+      /! Email
+      div
+        i.fa.fa-envelope-o
+        h3 Email
+        p info@example.com
+    /! Social icons
+    .social
+      /! Facebook
+      a href="https://www.facebook.com/adrianchinghc" target="_blank"
+        i.fa.fa-facebook
+      /! Twitter
+      a href="https://twitter.com/adrianchinghc" target="_blank"
+        i.fa.fa-twitter
+      /! Instagram
+      a href="https://www.instagram.com/adrianchinghc" target="_blank"
+        i.fa.fa-instagram
+/! END CONTACT SECTION ///////////////////////////////////////////////////////////////////////////

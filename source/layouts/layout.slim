@@ -3,6 +3,7 @@ html itemscope='' itemtype='http://schema.org/WebPage' lang=data.site.language
   head
     meta charset='utf-8'
     meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'
+    meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"
 
     title=page_title
     meta name='description' content=page_description
@@ -37,24 +38,38 @@ html itemscope='' itemtype='http://schema.org/WebPage' lang=data.site.language
 
     = stylesheet_link_tag 'all'
     = javascript_include_tag 'all'
+      | @media all {
+        .lightbox   display: none;
+      | }
     = favicon_tag 'images/favicon.ico'
     = favicon_tag 'images/favicon.ico', rel: 'apple-touch-icon', type: 'image/png'
 
-  body class=page_classes
-    nav.main-menu
-      .container
-        ul
-          li.main-menu__logo
-            a href="/" Adrian Ching
-          li.main-menu__items
-            ul
-              li
-                a href="#" Get In Touch
+  / body class=page_classes
+  /   nav.main-menu
+  /     .container
+  /       ul
+  /         li.main-menu__logo
+  /           a href="/" Adrian Ching
+  /         li.main-menu__items
+  /           ul
+  /             li
+  /               a href="#" Get In Touch
 
-  body class=page_classes
+  body.fade-in.cmon.body class=page_classes
     main role='main'
       = yield
 
-    / Footer
+    /! FOOTER ///////////////////////////////////////////////////////////////////////////
     footer
-      / = link_to 'Sitemap', 'sitemap'
+      .container_footer
+        .left
+          p
+            | © 2016
+            span  Adrian Ching
+        .right
+          a href="#welcome"
+            | Return to Top
+            | &nbsp;
+            i.fa.fa-long-arrow-up
+    /! END FOOTER ///////////////////////////////////////////////////////////////////////////
+    = javascript_include_tag 'parallax', 'menu', 'featherlight', 'scroll'
