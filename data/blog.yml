@@ -1,0 +1,13 @@
+articles:
+  - title: "14 alas hahaha hahahah test test test another test"
+    image: "../assets/images/work.jpg"
+    url: "https://adrianslab.com"
+  - title: "11 Sidebars"
+    image: "../assets/images/work.jpg"
+    url: "#"
+  - title: "17 Notes"
+    image: "../assets/images/work.jpg"
+    url: "#"
+  - title: "18 Diagrams"
+    image: "../assets/images/work.jpg"
+    url: "#"

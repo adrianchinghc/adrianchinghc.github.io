@@ -426,7 +426,7 @@ h1, h2, h3, h4, h5, h6 {
 /* 06 PORTFOLIO SETTINGS
 --------------------------------------------------------------- */
 
-#portfolio {
+#blog {
 	background: #f5f5f5;
 	padding: 100px 50px 75px;
 }
@@ -496,6 +496,7 @@ h1, h2, h3, h4, h5, h6 {
 	font-family: 'Montserrat', sans-serif;
 	text-transform: uppercase;
 	color: #a67d4a;
+	word-wrap: normal;
 }
 
 .videoWrapper {

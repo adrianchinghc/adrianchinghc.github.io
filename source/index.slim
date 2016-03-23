@@ -14,12 +14,13 @@ header#welcome.parent.module.parallax.parallax-1
           a.menu href="#about"  About
           span.simple_line
         li
-          a.menu href="#portfolio"  Works
+          a.menu href="#blog"  Blog
           span.simple_line
         li
           a.menu href="#contact"  Contact
   .scroll_down
-    i.fa.fa-chevron-down
+    a href="#about"
+      i.fa.fa-chevron-down
   .fade.child
     .container_small
       /! Header Titles
@@ -32,63 +33,57 @@ section#about.module
     h2.section_title Who Am I?
     h3.section_subtitle Ruby On Rails Developer
     p Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima.
-    a.button href="#"
-      i.fa.fa-download
-      |  My Resume
+    / a.button href="#"
+    /   i.fa.fa-download
+    /   |  My Resume
 /! END ABOUT SECTION ///////////////////////////////////////////////////////////////////////////
 /! PORTFOLIO SECTION ///////////////////////////////////////////////////////////////////////////
-section#portfolio.module
+section#blog.module
   .container_big
     h2.section_title Latest Blog Posts
     / h3.section_subtitle Simple & Creative
     .works
-      /! Work 01
-      article
-        a data-featherlight="image" href="images/work_large.jpg"
-        .border
-          img alt="" src="images/work.jpg" /
-          h3.caption Black & White
-      /! Work 02
-      article
-        a data-featherlight="image" href="images/work_large.jpg"
-        .border
-          img alt="" src="images/work.jpg" /
-          h3.caption Business Life
-      /! Work 03
-      article
-        a data-featherlight="image" href="images/work_large.jpg"
-        .border
-          img alt="" src="images/work.jpg" /
-          h3.caption Third Blogpost
+      - blog.articles[0...3].each_with_index do |article, index|
+        article
+          .border
+            a href="#{article.url}"
+              img alt="" src="assets/images/work.jpg" /
+              h3.caption = article.title
+    / a.button href="/blog"
+    /   i.fa.fa-pencil
+    /   |  view All Posts
 /! END PORTFOLIO SECTION ///////////////////////////////////////////////////////////////////////////
 /! CONTACT SECTION ///////////////////////////////////////////////////////////////////////////
 section#contact.module
   .container_small
-    h2.section_title Say Hello!
-    h3.section_subtitle Let's Make Something Awesome
+    h2.section_title Need an App?
+    h3.section_subtitle Drop me an email. Let's Make Something Awesome.
     .info
       /! Address
       div
         i.fa.fa-map-marker
         h3 Address
         p
-          | Budapest VI. kerület
+          | SOHO Suites @ KLCC
           br/
-          | Izabella utca 61.
+          | Kuala Lumpur
           br/
-          | Hungary
+          | Malaysia
       /! Phone
       div
-        i.fa.fa-mobile
-        h3 Phone
-        p + 123 456 7890
+        i.fa.fa-skype
+        h3 Skype
+        p adrianchinghc
       /! Email
       div
         i.fa.fa-envelope-o
         h3 Email
-        p info@example.com
+        p contact@adrianching.com
     /! Social icons
     .social
+      /! Github
+      a href="https://www.github.com/adrianchinghc" target="_blank"
+        i.fa.fa-github
       /! Facebook
       a href="https://www.facebook.com/adrianchinghc" target="_blank"
         i.fa.fa-facebook

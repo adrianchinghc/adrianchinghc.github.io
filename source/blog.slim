@@ -1,0 +1,28 @@
+---
+title: Blog - AdrianChing.com
+pageable: true
+---
+
+h2 Recent Articles
+- if paginate && num_pages > 1
+  p
+    | Page
+    = page_number
+    |  of
+    = num_pages
+- if prev_page
+  p
+    = link_to 'Previous page', prev_page
+ul
+  - blog.articles.each_with_index do |article, i|
+    li
+      = link_to article.title, article
+      = article.summary
+      span
+        = article.date.strftime('%b %e')
+
+- if paginate
+  - if next_page
+    p
+      = link_to 'Next page', next_page
+
