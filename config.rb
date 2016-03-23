@@ -99,6 +99,7 @@ set :images_dir, 'assets/images'
 # Build-specific configuration
 configure :build do
   # For example, change the Compass output style for deployment
+  activate :imageoptim
   activate :minify_css
   activate :minify_javascript
   activate :asset_hash
