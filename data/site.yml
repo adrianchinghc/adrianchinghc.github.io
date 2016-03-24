@@ -9,6 +9,7 @@ title: 'Adrian Ching - Web Developer & Maker'
 # Optional
 logo_image_name: 'Adrian Ching'
 logo_image_path: '../assets/images/adrianching.jpg'
+image: '../assets/images/adrianching.jpg'
 twitter_handle: '@adrianchinghc'
 # facebook_app_id: ''
 
