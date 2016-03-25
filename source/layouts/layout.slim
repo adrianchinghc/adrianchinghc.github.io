@@ -43,8 +43,8 @@ html itemscope='' itemtype='http://schema.org/WebPage' lang=data.site.language
       | @media all {
         .lightbox   display: none;
       | }
-    = favicon_tag '../assets/images/favicon.ico'
-    = favicon_tag '../assets/images/favicon.ico', rel: 'apple-touch-icon'
+    = favicon_tag '../assets/images/favicon.png', type: 'image/png'
+    = favicon_tag '../assets/images/favicon.png', rel: 'apple-touch-icon', type: 'image/png'
 
   body.fade-in.cmon.body class=page_classes
     main
