@@ -1,0 +1,199 @@
+doctype 5
+html itemscope='' itemtype='http://schema.org/WebPage' lang=data.site.language
+  head
+    meta charset='utf-8'
+    /![if IE] <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'
+    meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"
+
+    title=page_title
+    meta name='description' content=page_description
+    meta name='robots' content='index,follow'
+
+    // Twitter
+    meta name='twitter:card' content=page_twitter_card_type
+    meta name='twitter:site' content=data.site.twitter_handle
+    meta name='twitter:title' content=page_title
+    meta name='twitter:description' content=page_description
+    meta name='twitter:creator' content=data.site.twitter_handle
+    meta name='twitter:image:src' content=data.site.image
+    // Open Graph General (Facebook & Pinterest)
+    meta property='og:url' content=current_page_url
+    meta property='og:title' content=page_title
+    meta property='og:description' content=page_description
+    meta property='og:site_name' content=data.site.name
+    meta property='og:image' content=data.site.image
+    meta property='og:app_id' content='952268334783316'
+    meta property='og:type' content='website'
+    // Google Plus
+    meta itemprop='name' content=page_title
+    meta itemprop='description' content=page_description
+    meta itemprop='image' content=data.site.image
+    // Bing
+    meta name="msvalidate.01" content="2AFDCFD90C6614D4164019868C074980"
+
+    // Mobile Specific Metas
+    meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1'
+
+    // Preferred URL (rel="canonical")
+    - if current_page.data.preferred_url
+      link rel='canonical' href=current_page.data.preferred_url
+
+    = stylesheet_link_tag 'all'
+    = javascript_include_tag 'all'
+      | @media all {
+        .lightbox   display: none;
+      | }
+    = favicon_tag '../assets/images/favicon.png', type: 'image/png'
+    = favicon_tag '../assets/images/favicon.png', rel: 'apple-touch-icon', type: 'image/png'
+
+  body.fade-in.cmon.post_layout
+  a id="top"
+  section.top-sidebar
+    .container
+      .row
+        .widget.cats-widget.span4
+          h3 Categories
+          .widget-content
+            ul
+              li
+                a href="#"  Technology
+                span 37
+              li
+                a href="#"  Web Design
+                span 49
+              li
+                a href="#"  Miscellaneous
+                span 16
+              li
+                a href="#"  General / Off Topic
+                span 52
+        .widget.span4
+          h3 Twitter
+          .widget-content
+            .twitter-container
+              .tweet
+                p
+                  | The State of
+                  span.custom #WordPress
+                  | Themes: 87% of all WordPress theme shops sell themes on Themeforest
+                  a.custom href="#"  http://supportdash.com/wordpress
+              .tweet
+                p
+                  | What Are The Most Inspiring  Markepplace Moments Of ALl Time
+                  a.custom href="#"  http://enva.to/1vgh5d
+              .tweet
+                p
+                  | Our server maintenance is now done, so Envato Support should be working as normal now. If you see any problems please tweet
+                  span.custom @envato_support
+        .widget.span4
+          h3 Dribbble
+          .widget-content
+            a.dribbble-image href="#"
+              img alt=("Latest Dribbble Project") src="assets/images/blog/dribbble-image.png" /
+  header#header.header
+    .container
+      .row
+        .span12
+          .logo
+            a href="/"
+              strong ADRIAN CHING
+          .top-content
+            nav.menu
+              ul
+                li.toggle
+                  a href="#"  Menu
+                li
+                  a href="/"  Home
+                li
+                  a href="/blog"  Blog
+                / li
+                /   a href="/contact"  Contact
+            /! search and toggle
+            / .search
+            /   form.top-search
+            /     input.s placeholder="search..." type="text" /
+            /     input.submit type="submit" value="" /
+              /! toggle button
+            a.toggleSidebar href="#"
+  section.blog.single-blog-page
+    .container
+      .row
+        /! pagination
+        .top-pagination.span12
+          .wrap
+            = link_to '', current_article.next_article, :class => 'next'
+            = link_to '', current_article.previous_article, :class => 'prev'
+          /! end wrap
+        /! end pagination
+        /! single post [post with image]
+        .single-post
+          /! post image
+          .post-image.post-format-image.span12
+            .wrapper
+              / a href="post.html"
+              img alt=("Standard Post Image") src="assets/images/blog/images/post1.png" /
+            /! end wrapper
+          /! end post image
+          /! post content
+          .post-content
+            .span12
+              /! post inner content
+              .post-inner-content
+                h2.post-header #{current_article.title}
+                /! meta
+                .post-meta
+                  span.date #{current_article.date.strftime('%b %e %Y')}
+                  span.comments
+                    a.comments[href="#{current_article.url}#disqus_thread"]
+                      | Comments
+                /! end post meta
+                /! post main content
+                .main-content.single-post-main-content
+                  = yield
+                /! share and tags
+                .post-share
+                  .tags
+                    - current_article.tags.each do |t|
+                      = link_to "##{t}", tag_path(t)
+                  .share-box
+                    .social-icons
+                      a.facebook href="https://www.facebook.com/sharer/sharer.php?u=https://www.adrianching.com#{current_article.url}" target="_blank"
+                      a.twitter href="https://twitter.com/home?status=I%20just%20read%20an%20awesome%20article%20from%20Adrian%20Ching!%20Check%20it%20out%20here%3A%20https://www.adrianching.com#{current_article.url}" target="_blank"
+                    /! end social icons
+                    a.button.toggle-share-box href="#"  Share
+                  /! end share box
+                /! end post share
+              /! end inner content
+              /! author
+              / .post-inner-content.secondary-content-box
+              /   /! author bio
+              /   .author-bio
+              /     /! avatar
+              /     .avatar
+              /       img alt=("Harry Kewell") src="assets/images/blog/images/avatar1.png" /
+              /     /! end avatar
+              /     /! user bio
+              /     .author-bio-content
+              /       h4
+              /         a href="#"  Harry Kewell
+              /       p
+              /         | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita, suscipit, quo, hic illo id consequatur adipisci facere fuga dolore odio sed veniam vel autem blanditiis est necessitatibus officiis corrupti quis.
+                  /! end author bio
+                /! end author bio
+              /! end author
+              = disqus
+              = disqus_count
+  footer
+    .container_footer
+      .left
+        p
+          | © 2016
+          a href="/"
+            span  Adrian Ching
+      .right
+        a href="#top"
+          | Return to Top
+          | &nbsp;
+          i.fa.fa-long-arrow-up
+  = javascript_include_tag 'mediaelement.min', 'jquery.flexslider-min', 'jquery-ui-1.10.3.custom.min', 'custom', 'parallax', 'menu', 'featherlight', 'scroll'
+

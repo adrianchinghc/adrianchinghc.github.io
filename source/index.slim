@@ -47,11 +47,11 @@ section#blog.module
         article
           .border
             a href="#{article.url}"
-              img alt="#{article.title}" src="assets/images/work.jpg" /
+              img alt="#{article.title}" src="#{article.data.image_url}" /
               h3.caption = article.title
-    / a.button href="/blog"
-    /   i.fa.fa-pencil
-    /   |  view All Posts
+    a.button href="/blog"
+      i.fa.fa-pencil
+      |  view All Posts
 /! END PORTFOLIO SECTION ///////////////////////////////////////////////////////////////////////////
 /! CONTACT SECTION ///////////////////////////////////////////////////////////////////////////
 section#contact.module

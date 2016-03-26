@@ -24,9 +24,9 @@ activate :blog do |blog|
   # # Matcher for blog source files
   blog.sources = "posts/{year}-{month}-{day}-{title}.html"
   blog.taglink = "tags/{tag}"
-  blog.layout = "layouts/layout.slim"
+  blog.layout = "layouts/post.slim"
   blog.summary_separator = /(READMORE)/
-  blog.summary_length = 250
+  blog.summary_length = 500
   blog.default_extension = ".md"
 
   blog.tag_template = "tag.html"
@@ -36,6 +36,10 @@ activate :blog do |blog|
   blog.paginate = true
   blog.per_page = 10
   # blog.page_link = "page/{num}"
+end
+
+activate :disqus do |d|
+  d.shortname = 'adrianching'
 end
 
 ###

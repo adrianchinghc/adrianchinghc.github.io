@@ -48,6 +48,7 @@ html itemscope='' itemtype='http://schema.org/WebPage' lang=data.site.language
 
   body.fade-in.cmon.body class=page_classes
     main
+      a id="top"
       = yield
 
     /! FOOTER ///////////////////////////////////////////////////////////////////////////
@@ -59,9 +60,9 @@ html itemscope='' itemtype='http://schema.org/WebPage' lang=data.site.language
             a href="/"
               span  Adrian Ching
         .right
-          a href="#welcome"
+          a href="#top"
             | Return to Top
             | &nbsp;
             i.fa.fa-long-arrow-up
     /! END FOOTER ///////////////////////////////////////////////////////////////////////////
-    = javascript_include_tag 'parallax', 'menu', 'featherlight', 'scroll'
+    = javascript_include_tag 'mediaelement.min', 'jquery.flexslider-min', 'jquery-ui-1.10.3.custom.min', 'custom', 'parallax', 'menu', 'featherlight', 'scroll'

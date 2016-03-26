@@ -12,6 +12,7 @@ gem 'middleman-livereload', '~> 3.1.0'
 gem 'middleman-minify-html'
 gem 'middleman-imageoptim'
 gem 'middleman-deploy', '~> 1.0'
+gem "middleman-disqus"
 gem 'nokogiri'
 # gem 'font-awesome-middleman'
 # Lossless image size reduction
