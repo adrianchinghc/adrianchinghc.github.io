@@ -45,7 +45,7 @@ body.body-container
           h3 Dribbble
           .widget-content
             a.dribbble-image href="#"
-              img alt=("Latest Dribbble Project") src="assets/images/blog/dribbble-image.png" /
+              img alt=("Latest Dribbble Project") src="../assets/images/blog/dribbble-image.png" /
   header#header.header
     .container
       .row
@@ -78,8 +78,8 @@ body.body-container
           .single-post
             .post-image.post-format-image.span12
               .wrapper
-                a href="/#{article.url}"
-                  img alt=("Standard Post Image") src="#{article.data.image_url}" /
+                a href="/#{article.slug}"
+                  img alt=("Standard Post Image") src="../#{article.data.image_url}" /
             .post-content
               .span12
                 .post-inner-content
