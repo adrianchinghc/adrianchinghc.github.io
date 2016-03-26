@@ -89,7 +89,7 @@ html itemscope='' itemtype='http://schema.org/WebPage' lang=data.site.language
           h3 Dribbble
           .widget-content
             a.dribbble-image href="#"
-              img alt=("Latest Dribbble Project") src="assets/images/blog/dribbble-image.png" /
+              img alt=("Latest Dribbble Project") src="../assets/images/blog/dribbble-image.png" /
   header#header.header
     .container
       .row
@@ -131,7 +131,7 @@ html itemscope='' itemtype='http://schema.org/WebPage' lang=data.site.language
           .post-image.post-format-image.span12
             .wrapper
               / a href="post.html"
-              img alt=("Standard Post Image") src="assets/images/blog/images/post1.png" /
+              img alt=("Standard Post Image") src="../#{current_article.data.image_url}" /
             /! end wrapper
           /! end post image
           /! post content
@@ -144,7 +144,7 @@ html itemscope='' itemtype='http://schema.org/WebPage' lang=data.site.language
                 .post-meta
                   span.date #{current_article.date.strftime('%b %e %Y')}
                   span.comments
-                    a.comments[href="#{current_article.url}#disqus_thread"]
+                    a.comments[href="#{current_article.slug}#disqus_thread"]
                       | Comments
                 /! end post meta
                 /! post main content
@@ -157,8 +157,8 @@ html itemscope='' itemtype='http://schema.org/WebPage' lang=data.site.language
                       = link_to "##{t}", tag_path(t)
                   .share-box
                     .social-icons
-                      a.facebook href="https://www.facebook.com/sharer/sharer.php?u=https://www.adrianching.com#{current_article.url}" target="_blank"
-                      a.twitter href="https://twitter.com/home?status=I%20just%20read%20an%20awesome%20article%20from%20Adrian%20Ching!%20Check%20it%20out%20here%3A%20https://www.adrianching.com#{current_article.url}" target="_blank"
+                      a.facebook href="https://www.facebook.com/sharer/sharer.php?u=https://www.adrianching.com#{current_article.slug}" target="_blank"
+                      a.twitter href="https://twitter.com/home?status=I%20just%20read%20an%20awesome%20article%20from%20Adrian%20Ching!%20Check%20it%20out%20here%3A%20https://www.adrianching.com#{current_article.slug}" target="_blank"
                     /! end social icons
                     a.button.toggle-share-box href="#"  Share
                   /! end share box
@@ -195,5 +195,5 @@ html itemscope='' itemtype='http://schema.org/WebPage' lang=data.site.language
           | Return to Top
           | &nbsp;
           i.fa.fa-long-arrow-up
-  = javascript_include_tag 'mediaelement.min', 'jquery.flexslider-min', 'jquery-ui-1.10.3.custom.min', 'custom', 'parallax', 'menu', 'featherlight', 'scroll'
+  = javascript_include_tag 'scroll', 'mediaelement.min', 'jquery.flexslider-min', 'jquery-ui-1.10.3.custom.min', 'custom', 'parallax', 'menu', 'featherlight'
 
