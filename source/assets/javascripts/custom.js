@@ -3,7 +3,7 @@ jQuery(document).ready(function()
 {
 
 			"use strict";
-			/* Availabe Easing Methods 
+			/* Availabe Easing Methods
 				1. linear
 				2. swing
 				3. easeInQuad
@@ -53,18 +53,18 @@ jQuery(document).ready(function()
 		    }
 
 
-		     /* -------------------------------------------------------------- 
+		     /* --------------------------------------------------------------
 		     	Fix c7 form
 		      -------------------------------------------------------------- */
-		     
+
   			jQuery('.wpcf7-form-control[type=text] , textarea.wpcf7-form-control').each(function()
   				{
   						jQuery(this).attr('placeholder' , jQuery(this).val()).val('');
   				});
-		      		
 
-		  
-		   /* -------------------------------------------------------------- 
+
+
+		   /* --------------------------------------------------------------
 		   	Meida Element
 		    -------------------------------------------------------------- */
 		    jQuery('audio , video').mediaelementplayer({
@@ -74,13 +74,13 @@ jQuery(document).ready(function()
 			    features: ['playpause','progress', 'current' , 'volume'] ,
 			    audioHeight: 40,
 			    alwaysShowHours: false
-			  
+
 		    });
 
- 		 
 
 
-		     /* -------------------------------------------------------------- 
+
+		     /* --------------------------------------------------------------
 		     	Toggle Menu
 		      -------------------------------------------------------------- */
 		      jQuery(' nav.menu li.toggle a').on('click' , function()
@@ -89,7 +89,7 @@ jQuery(document).ready(function()
 		      				var items = jQuery(this).parent().parent().find('li:not(.toggle)');
 		      				var prnt = jQuery(this).parent().parent();
 		      				if(!prnt.hasClass('active-menu'))
-		      				{				
+		      				{
 
 
 		      								t.parent().addClass('active');
@@ -119,7 +119,7 @@ jQuery(document).ready(function()
 		      			}
 		      });
 
-		  	 /* -------------------------------------------------------------- 
+		  	 /* --------------------------------------------------------------
 			   Gallery
 			  -------------------------------------------------------------- */
 			    jQuery('.flexslider').flexslider({
@@ -130,7 +130,7 @@ jQuery(document).ready(function()
 			         keyboard : true,
 			         nextText : '' ,
 			         prevText : '',
-			         slideshow: true,                
+			         slideshow: true,
 			         slideshowSpeed: 5000,
 			         controlNav: false,
 			         directionNav: true
@@ -138,10 +138,10 @@ jQuery(document).ready(function()
 
 
 
-			  /* -------------------------------------------------------------- 
+			  /* --------------------------------------------------------------
 			  	Menu
 			   -------------------------------------------------------------- */
-			  
+
 
 		  		 jQuery('nav.menu > ul li').hover(function(){
 
@@ -166,7 +166,7 @@ jQuery(document).ready(function()
 		  		 });
 
 
-			 /* -------------------------------------------------------------- 
+			 /* --------------------------------------------------------------
 			 	Toggle Sidebar
 			  -------------------------------------------------------------- */
 			  jQuery('header .toggleSidebar').on('click' , function()
@@ -176,7 +176,7 @@ jQuery(document).ready(function()
 			  });
 
 
-			 /* -------------------------------------------------------------- 
+			 /* --------------------------------------------------------------
 			 	Toggle Share Buttons
 			  -------------------------------------------------------------- */
 			  jQuery('.share-box .toggle-share-box').on('click' , function()
@@ -188,7 +188,7 @@ jQuery(document).ready(function()
 			  );
 
 
-		  	/* -------------------------------------------------------------- 
+		  	/* --------------------------------------------------------------
 			  Accordion
 			  -------------------------------------------------------------- */
 			  /* Quick Accoridon */
@@ -200,7 +200,7 @@ jQuery(document).ready(function()
 			    if(acc.hasClass('opened')) {
 			     jQuery(this).find('.item:first').find('.item-content').slideDown();
 			    }
-			    
+
 			    // when click
 			    jQuery(this).find('.head').click(function() {
 			        if(!jQuery(this).hasClass('head-active')){
@@ -208,15 +208,15 @@ jQuery(document).ready(function()
 			      jQuery(this).parent().find('.item-content').slideDown(Speed , Animation);
 			      jQuery(this).addClass('head-active');
 			        }
-			        return false; 
+			        return false;
 			    });
 			  }); // End Accrodion
 
-			 
 
 
 
- 			 /* -------------------------------------------------------------- 
+
+ 			 /* --------------------------------------------------------------
  			 	Twitter Section
  			  -------------------------------------------------------------- */
  				var K = function () {
@@ -248,7 +248,7 @@ jQuery(document).ready(function()
 				jQuery('.twitter-section ').each(function(){
 					jQuery(this).find('p small').text(parseTwitterDate(jQuery(this).find('p small').text()));
 				});
- 			   
+
 
 
 });

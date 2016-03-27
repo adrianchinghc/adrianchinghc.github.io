@@ -102,8 +102,8 @@ html itemscope='' itemtype='http://schema.org/WebPage' lang=data.site.language
               ul
                 li.toggle
                   a href="#"  Menu
-                li
-                  a href="/"  Home
+                / li
+                /   a href="/"  Home
                 li
                   a href="/blog"  Blog
                 / li
@@ -195,5 +195,7 @@ html itemscope='' itemtype='http://schema.org/WebPage' lang=data.site.language
           | Return to Top
           | &nbsp;
           i.fa.fa-long-arrow-up
-  = javascript_include_tag 'scroll', 'mediaelement.min', 'jquery.flexslider-min', 'jquery-ui-1.10.3.custom.min', 'custom', 'parallax', 'menu', 'featherlight'
+  = javascript_include_tag 'mediaelement.min', 'jquery.flexslider-min', 'jquery-ui-1.10.3.custom.min', 'scroll', 'parallax', 'menu'
+  / = javascript_include_tag 'custom'
+  / 'featherlight'
 

@@ -1,27 +1,113 @@
 ---
+title: Tag - AdrianChing.com
 pageable: true
-per_page: 12
+per_page: 5
 ---
-h1
-  | Articles tagged '
-  = tagname
-  | '
-- if paginate && num_pages > 1
-  p
-    | Page
-    = page_number
-    |  of
-    = num_pages
-  - if prev_page
-    p
-      = link_to 'Previous page', prev_page
-ul
+
+body.body-container
+  section.top-sidebar
+    .container
+      .row
+        .widget.cats-widget.span4
+          h3 Categories
+          .widget-content
+            ul
+              li
+                a href="#"  Technology
+                span 37
+              li
+                a href="#"  Business
+                span 49
+              li
+                a href="#"  Travel
+                span 16
+              li
+                a href="#"  General / Off Topic
+                span 52
+        .widget.span4
+          h3 Twitter
+          .widget-content
+            .twitter-container
+              .tweet
+                p
+                  | The State of
+                  span.custom #WordPress
+                  | Themes: 87% of all WordPress theme shops sell themes on Themeforest
+                  a.custom href="#"  http://supportdash.com/wordpress
+              .tweet
+                p
+                  | What Are The Most Inspiring  Markepplace Moments Of ALl Time
+                  a.custom href="#"  http://enva.to/1vgh5d
+              .tweet
+                p
+                  | Our server maintenance is now done, so Envato Support should be working as normal now. If you see any problems please tweet
+                  span.custom @envato_support
+        .widget.span4
+          h3 Dribbble
+          .widget-content
+            a.dribbble-image href="#"
+              img alt=("Latest Dribbble Project") src="../assets/images/blog/dribbble-image.png" /
+  header#header.header
+    .container
+      .row
+        .span12
+          .logo
+            a href="/"
+              strong ADRIAN CHING
+          .top-content
+            nav.menu
+              ul
+                li.toggle
+                  a href="#"  Menu
+                / li
+                /   a href="/"  Home
+                li
+                  a href="/blog"  Blog
+                / li
+                /   a href="/contact"  Contact
+            /! search and toggle
+            / .search
+            /   form.top-search
+            /     input.s placeholder="search..." type="text" /
+            /     input.submit type="submit" value="" /
+              /! toggle button
+            a.toggleSidebar href="#"
   - page_articles.each_with_index do |article, i|
-    li
-      = link_to article.title, article
-      span
-        = article.date.strftime('%b %e')
-- if paginate
-  - if next_page
-    p
-      = link_to 'Next page', next_page
+    section.blog
+      .container
+        .row
+          .single-post
+            .post-image.post-format-image.span12
+              .wrapper
+                a href="../#{article.slug}"
+                  img alt=("Standard Post Image") src="../#{article.data.image_url}" /
+            .post-content
+              .span12
+                .post-inner-content
+                  h2.post-header
+                    = link_to article.title, "../#{article.slug}"
+                  .post-meta
+                    span.date #{article.date.strftime('%b %e %Y')}
+                    span.comments
+                      a.comments[href="../#{article.slug}#disqus_thread"]
+                        | Comments
+                  .main-content
+                    p #{article.summary}
+                  .clearfix
+                  .readmore
+                    a.readmore-button.button href="../#{article.slug}"  Read More
+        - if paginate && num_pages > 1
+          .blog-pagination.span12
+            .wrap.row
+              - if prev_page
+                = link_to '', prev_page, :class => 'prev'
+                .col-md-10.items-wrap
+                  p
+                    | Page
+                    = page_number
+                    |  of
+                    =<  num_pages
+              - if paginate
+                - if next_page
+                  = link_to '', next_page, :class => 'next'
+
