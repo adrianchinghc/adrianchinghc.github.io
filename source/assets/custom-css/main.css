@@ -227,7 +227,7 @@ a img.aligncenter {
 
 	.tag h1 , .tag h1 a ,
   .blog h1 , .blog h1 a {
-	font-size: 36px !importag;
+	font-size: 36px !important;
 	}
   .tag h2 , .tag h2 a ,
 	.blog h2 , .blog h2 a {

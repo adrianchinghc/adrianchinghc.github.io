@@ -85,7 +85,7 @@ body.body-container
               .span12
                 .post-inner-content
                   h2.post-header
-                    = link_to article.title, article
+                    = link_to article.title, "../#{article.slug}"
                   .post-meta
                     span.date #{article.date.strftime('%b %e %Y')}
                     span.comments
@@ -95,7 +95,7 @@ body.body-container
                     p #{article.summary}
                   .clearfix
                   .readmore
-                    a.readmore-button.button href="#{article.slug}"  Read More
+                    a.readmore-button.button href="../#{article.slug}"  Read More
         - if paginate && num_pages > 1
           .blog-pagination.span12
             .wrap.row
