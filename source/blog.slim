@@ -79,7 +79,7 @@ body.body-container
           .single-post
             .post-image.post-format-image.span12
               .wrapper
-                a href="#{article.slug}"
+                a href="../#{article.slug}"
                   img alt=("Standard Post Image") src="../#{article.data.image_url}" /
             .post-content
               .span12
@@ -89,7 +89,7 @@ body.body-container
                   .post-meta
                     span.date #{article.date.strftime('%b %e %Y')}
                     span.comments
-                      a.comments[href="#{article.slug}#disqus_thread"]
+                      a.comments[href="../#{article.slug}#disqus_thread"]
                         | Comments
                   .main-content
                     p #{article.summary}
