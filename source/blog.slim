@@ -12,18 +12,10 @@ body.body-container
           h3 Categories
           .widget-content
             ul
-              li
-                a href="#"  Technology
-                span 37
-              li
-                a href="#"  Business
-                span 49
-              li
-                a href="#"  Travel
-                span 16
-              li
-                a href="#"  General / Off Topic
-                span 52
+              - blog.tags.each do |tag|
+                li
+                  = link_to tag.first.capitalize, tag_path("#{tag.first}")
+                  span = tag.last.count
         .widget.span4
           h3 Twitter
           .widget-content

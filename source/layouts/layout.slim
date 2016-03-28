@@ -5,7 +5,7 @@ html itemscope='' itemtype='http://schema.org/WebPage' lang=data.site.language
     /![if IE] <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'
     meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"
 
-    title=page_title
+    title=yield_content(:title) || page_title
     meta name='description' content=page_description
     meta name='robots' content='index,follow'
 

@@ -358,12 +358,19 @@ a img.aligncenter {
 	section.top-sidebar .widget > h3 {
 		margin-bottom: 25px;
 	}
-	section.top-sidebar ul , section.top-sidebar .gallery-caption , section.top-sidebar footer p , section.top-sidebar li a , section.top-sidebar  p , section.top-sidebar span , section.top-sidebar article
-  	, section.top-sidebar nav , section.top-sidebar blockquote , section.top-sidebar dl , section.top-sidebar  dt , section.top-sidebar dd , section.top-sidebar td , section.top-sidebar tr , section.top-sidebar th , section.top-sidebar code , section.top-sidebar caption , section.top-sidebar figcaption , section.top-sidebar input , section.top-sidebar label , section.top-sidebar textarea a
-  	{
-			color: #b0b0b0;
-			font-size: 14px;
-  	}
+	section.top-sidebar ul , section.top-sidebar .gallery-caption , section.top-sidebar footer p , section.top-sidebar li a ,
+  section.top-sidebar  p , section.top-sidebar span , section.top-sidebar article, section.top-sidebar nav ,
+  section.top-sidebar blockquote , section.top-sidebar dl , section.top-sidebar  dt , section.top-sidebar dd ,
+  section.top-sidebar td , section.top-sidebar tr , section.top-sidebar th , section.top-sidebar code ,
+  section.top-sidebar caption , section.top-sidebar figcaption , section.top-sidebar input ,
+  section.top-sidebar label , section.top-sidebar textarea a {
+		color: #b0b0b0;
+		font-size: 14px;
+	}
+
+  .widget.cats-widget.span4, .widget.span4 {
+    text-align: left;
+  }
 
 
 
@@ -398,7 +405,7 @@ a img.aligncenter {
   		padding: 9px 7%;
   		border-radius: 3px;
   		-webkit-border-radius: 3px;
-  		width: 82%;
+  		width: 100%;
   	}
 
   	.widget.cats-widget ul li span {
