@@ -38,7 +38,8 @@ html itemscope='' itemtype='http://schema.org/WebPage' lang=data.site.language
     - if current_page.data.preferred_url
       link rel='canonical' href=current_page.data.preferred_url
 
-    = javascript_include_tag 'menu', 'scroll', 'mediaelement.min', 'jquery.flexslider-min', 'jquery-ui-1.10.3.custom.min', 'parallax'
+    = stylesheet_link_tag 'all', 'normalize.css', 'main.css', 'bootstrap.min.css', 'featherlight.min.css', 'font-awesome.min.css', 'style.css'
+
     = javascript_include_tag 'all'
       | @media all {
         .lightbox   display: none;
@@ -103,55 +104,36 @@ html itemscope='' itemtype='http://schema.org/WebPage' lang=data.site.language
               ul
                 li.toggle
                   a href="#"  Menu
-                / li
-                /   a href="/"  Home
                 li
                   a href="/blog"  Blog
-                / li
-                /   a href="/contact"  Contact
             /! search and toggle
             / .search
             /   form.top-search
             /     input.s placeholder="search..." type="text" /
             /     input.submit type="submit" value="" /
-              /! toggle button
             a.toggleSidebar href="#"
   section.blog.single-blog-page
     .container
       .row
-        /! pagination
         .top-pagination.span12
           .wrap
             = link_to '', current_article.next_article, :class => 'next'
             = link_to '', current_article.previous_article, :class => 'prev'
-          /! end wrap
-        /! end pagination
-        /! single post [post with image]
         .single-post
-          /! post image
           .post-image.post-format-image.span12
             .wrapper
-              / a href="post.html"
               img alt=("Standard Post Image") src="../#{current_article.data.image_url}" /
-            /! end wrapper
-          /! end post image
-          /! post content
           .post-content
             .span12
-              /! post inner content
               .post-inner-content
                 h2.post-header #{current_article.title}
-                /! meta
                 .post-meta
                   span.date #{current_article.date.strftime('%b %e %Y')}
                   span.comments
                     a.comments[href="#{current_article.slug}#disqus_thread"]
                       | Comments
-                /! end post meta
-                /! post main content
                 .main-content.single-post-main-content
                   = yield
-                /! share and tags
                 .post-share
                   .tags
                     - current_article.tags.each do |t|
@@ -160,28 +142,7 @@ html itemscope='' itemtype='http://schema.org/WebPage' lang=data.site.language
                     .social-icons
                       a.facebook href="https://www.facebook.com/sharer/sharer.php?u=https://www.adrianching.com/#{current_article.slug}" target="_blank"
                       a.twitter href="https://twitter.com/home?status=I%20just%20read%20an%20awesome%20article%20from%20Adrian%20Ching!%20Check%20it%20out%20here%3A%20https://www.adrianching.com/#{current_article.slug}" target="_blank"
-                    /! end social icons
                     a.button.toggle-share-box href="#"  Share
-                  /! end share box
-                /! end post share
-              /! end inner content
-              /! author
-              / .post-inner-content.secondary-content-box
-              /   /! author bio
-              /   .author-bio
-              /     /! avatar
-              /     .avatar
-              /       img alt=("Harry Kewell") src="assets/images/blog/images/avatar1.png" /
-              /     /! end avatar
-              /     /! user bio
-              /     .author-bio-content
-              /       h4
-              /         a href="#"  Harry Kewell
-              /       p
-              /         | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita, suscipit, quo, hic illo id consequatur adipisci facere fuga dolore odio sed veniam vel autem blanditiis est necessitatibus officiis corrupti quis.
-                  /! end author bio
-                /! end author bio
-              /! end author
               = disqus
               = disqus_count
   footer
@@ -196,9 +157,4 @@ html itemscope='' itemtype='http://schema.org/WebPage' lang=data.site.language
           | Return to Top
           | &nbsp;
           i.fa.fa-long-arrow-up
-  = stylesheet_link_tag 'all', 'normalize.css', 'main.css', 'bootstrap.min.css', 'featherlight.min.css', 'font-awesome.min.css', 'style.css'
-  = javascript_include_tag 'mediaelement.min', 'jquery.flexslider-min', 'jquery-ui-1.10.3.custom.min', 'scroll', 'parallax', 'menu'
-  = javascript_include_tag 'all'
-      | @media all {
-        .lightbox   display: none;
-      | }
+  = javascript_include_tag 'menu', 'scroll', 'mediaelement.min', 'jquery.flexslider-min', 'jquery-ui-1.10.3.custom.min', 'parallax'

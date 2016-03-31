@@ -38,7 +38,8 @@ html itemscope='' itemtype='http://schema.org/WebPage' lang=data.site.language
     - if current_page.data.preferred_url
       link rel='canonical' href=current_page.data.preferred_url
 
-    = javascript_include_tag 'menu', 'scroll', 'mediaelement.min', 'jquery.flexslider-min', 'jquery-ui-1.10.3.custom.min', 'parallax'
+    = stylesheet_link_tag 'all', 'normalize.css', 'main.css', 'bootstrap.min.css', 'featherlight.min.css', 'font-awesome.min.css', 'style.css'
+
     = javascript_include_tag 'all'
       | @media all {
         .lightbox   display: none;
@@ -59,8 +60,6 @@ html itemscope='' itemtype='http://schema.org/WebPage' lang=data.site.language
     main
       a id="top"
       = yield
-
-    /! FOOTER ///////////////////////////////////////////////////////////////////////////
     footer
       .container_footer
         .left
@@ -73,5 +72,4 @@ html itemscope='' itemtype='http://schema.org/WebPage' lang=data.site.language
             | Return to Top
             | &nbsp;
             i.fa.fa-long-arrow-up
-    /! END FOOTER ///////////////////////////////////////////////////////////////////////////
-    = stylesheet_link_tag 'all', 'normalize.css', 'main.css', 'bootstrap.min.css', 'featherlight.min.css', 'font-awesome.min.css', 'style.css'
+    = javascript_include_tag 'menu', 'scroll', 'mediaelement.min', 'jquery.flexslider-min', 'jquery-ui-1.10.3.custom.min', 'parallax'
