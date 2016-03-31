@@ -38,12 +38,7 @@ html itemscope='' itemtype='http://schema.org/WebPage' lang=data.site.language
     - if current_page.data.preferred_url
       link rel='canonical' href=current_page.data.preferred_url
 
-    = stylesheet_link_tag 'all', 'normalize.css', 'main.css', 'bootstrap.min.css', 'featherlight.min.css', 'font-awesome.min.css', 'style.css'
-
-    = javascript_include_tag 'all'
-      | @media all {
-        .lightbox   display: none;
-      | }
+    = stylesheet_link_tag 'all', 'normalize.css', 'main.css', 'bootstrap.min.css', 'font-awesome.min.css', 'style.css'
 
     javascript:
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -140,8 +135,8 @@ html itemscope='' itemtype='http://schema.org/WebPage' lang=data.site.language
                       = link_to "##{t}", tag_path(t)
                   .share-box
                     .social-icons
-                      a.facebook href="https://www.facebook.com/sharer/sharer.php?u=https://www.adrianching.com/#{current_article.slug}" target="_blank"
-                      a.twitter href="https://twitter.com/home?status=I%20just%20read%20an%20awesome%20article%20from%20Adrian%20Ching!%20Check%20it%20out%20here%3A%20https://www.adrianching.com/#{current_article.slug}" target="_blank"
+                      a.facebook href="https://www.facebook.com/sharer/sharer.php?u=#{data.site.url}/#{current_article.slug}" target="_blank"
+                      a.twitter href="https://twitter.com/home?status=I%20just%20read%20an%20awesome%20article%20from%20Adrian%20Ching!%20Check%20it%20out%20here%3A%20#{data.site.url}/#{current_article.slug}" target="_blank"
                     a.button.toggle-share-box href="#"  Share
               = disqus
               = disqus_count
@@ -157,4 +152,4 @@ html itemscope='' itemtype='http://schema.org/WebPage' lang=data.site.language
           | Return to Top
           | &nbsp;
           i.fa.fa-long-arrow-up
-  = javascript_include_tag 'menu', 'scroll', 'mediaelement.min', 'jquery.flexslider-min', 'jquery-ui-1.10.3.custom.min', 'parallax'
+  = javascript_include_tag 'all', 'menu', 'scroll', 'mediaelement.min', 'jquery.flexslider-min', 'jquery-ui-1.10.3.custom.min', 'parallax', async: true
