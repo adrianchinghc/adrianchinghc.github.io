@@ -47,7 +47,7 @@ html itemscope='' itemtype='http://schema.org/WebPage' lang=data.site.language
     javascript:
       loadCSS("//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css");
       loadCSS("assets/stylesheets/test.css");
-      loadCSS("assets/stylesheets/all.sass");
+      loadCSS("assets/stylesheets/all.css");
 
     javascript:
       !function(e,a,t,n,c,o,s){e.GoogleAnalyticsObject=c,e[c]=e[c]||function(){(e[c].q=e[c].q||[]).push(arguments)},e[c].l=1*new Date,o=a.createElement(t),s=a.getElementsByTagName(t)[0],o.async=1,o.src=n,s.parentNode.insertBefore(o,s)}(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-44406969-2","auto"),ga("send","pageview");
@@ -74,5 +74,5 @@ html itemscope='' itemtype='http://schema.org/WebPage' lang=data.site.language
             | Return to Top
             | &nbsp;
             i.fa.fa-long-arrow-up
-    = javascript_include_tag 'all', 'scroll', 'mediaelement.min', 'jquery-ui-1.10.3.custom.min', 'parallax', async: true
+    = javascript_include_tag 'all', 'parallax', 'scroll', 'mediaelement.min', 'jquery-ui-1.10.3.custom.min', async: true
     = javascript_include_tag 'menu', defer: true
