@@ -31,8 +31,8 @@ header#welcome.parent.module.parallax.parallax-1
 section#about.module
   .container_small
     h2.section_title Who Am I?
-    h3.section_subtitle Ruby On Rails Developer
-    p My name is Adrian and I want to get real with you for a minute. I’ve always dreamed big, strived for greatness and fight for the freedom that I want. I am an Electrical Engineer To-Be turned Software Developer after realising that being an Engineer doesn't provide me with the life & freedom that I have always wanted. And of course my passion for web technology. I am currrently a Software Engineer at <a target="_blank" href="http://www.surialabs.com">Surialabs</a>, a development house located right in the middle of Kuala Lumpur. Working with multiple clients from Europe and the United States has allowed me to rapidly enhance my technical and communication skills. I specializes in building <a target="_blank" href="https://en.wikipedia.org/wiki/Minimum_viable_product">MVP</a> applications for startups and business owners. Thank you for reading this far and do know that I appreciate you a lot. Drop me an email if you need an <a target="_blank" href="https://en.wikipedia.org/wiki/Minimum_viable_product">MVP</a>.
+    h3.section_subtitle Software Engineer
+    p My name is Adrian Ching and I am a Ruby on Rails Developer. I am currrently crafting good software at <a target="_blank" href="http://www.surialabs.com">Surialabs</a>, a development house located right in the middle of Kuala Lumpur. Working with multiple clients from Europe and the United States has allowed me to rapidly enhance my technical and communication skills. I specializes in building <a target="_blank" href="https://en.wikipedia.org/wiki/Minimum_viable_product">MVP</a> applications for startups and business owners. Always looking forward to working on interesting ideas and projects. Drop me an email if you need an <a target="_blank" href="https://en.wikipedia.org/wiki/Minimum_viable_product">MVP</a>.
     a.button href="#contact"
       i.fa.fa-envelope
       |  Contact Me
@@ -42,16 +42,20 @@ section#blog.module
   .container_big
     h2.section_title Latest Blog Posts
     / h3.section_subtitle Simple & Creative
-    .works
-      - blog.articles[0...3].each_with_index do |article, index|
-        article
-          .border
-            = link_to "#{article.slug}" do
-              = image_tag article.data.image_url alt="#{article.title}"
-              h3.caption = article.title
-    a.button href="/blog"
-      i.fa.fa-pencil
-      |   view All Posts
+    - if blog.articles.present?
+      .works
+        - blog.articles[0...3].each_with_index do |article, index|
+          article
+            .border
+              = link_to "#{article.slug}" do
+                = image_tag article.data.image_url alt="#{article.title}"
+                h3.caption = article.title
+      a.button href="/blog"
+        i.fa.fa-pencil
+        |   view All Posts
+    - else
+      .container_small
+        | If you are seeing this, it means I have not written any blog post yet. Come back sometime in the near future and you might see one. I am working hard to produce good blog posts that matter so do stay tuned. =)
 /! END PORTFOLIO SECTION ///////////////////////////////////////////////////////////////////////////
 /! CONTACT SECTION ///////////////////////////////////////////////////////////////////////////
 section#contact.module
