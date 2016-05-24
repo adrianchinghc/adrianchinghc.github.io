@@ -145,8 +145,8 @@ html itemscope='' itemtype='http://schema.org/WebPage' lang=data.site.language
                       = link_to "##{t}", tag_path(t)
                   .share-box
                     .social-icons
-                      a.facebook href="https://www.facebook.com/sharer/sharer.php?u=#{data.site.url}/#{current_article.slug}" target="_blank"
-                      a.twitter href="https://twitter.com/home?status=I%20just%20read%20an%20awesome%20article%20from%20Adrian%20Ching!%20Check%20it%20out%20here%3A%20#{data.site.url}/#{current_article.slug}" target="_blank"
+                      a.facebook rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=#{data.site.url}/#{current_article.slug}" target="_blank"
+                      a.twitter rel="noopener noreferrer" href="https://twitter.com/home?status=I%20just%20read%20an%20awesome%20article%20from%20Adrian%20Ching!%20Check%20it%20out%20here%3A%20#{data.site.url}/#{current_article.slug}" target="_blank"
                     a.button.toggle-share-box href="#"  Share
               = disqus
               = disqus_count
