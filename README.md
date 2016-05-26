@@ -1,2 +1,5 @@
-# adrianchinghc.github.io
-AdrianChing.com 2.0 https://adrianching.com
+# AdrianChing.com
+https://adrianching.com
+
+
+* Use `bundle exec middleman article "Title of Blogpost"` to generate new article
