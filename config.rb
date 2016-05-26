@@ -31,6 +31,7 @@ activate :blog do |blog|
 
   blog.tag_template = "tag.html"
   blog.calendar_template = "calendar.html"
+  blog.new_article_template = "source/article.slim"
 
   # # Enable pagination
   blog.paginate = true
