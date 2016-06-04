@@ -791,6 +791,10 @@ section.blog .single-post > .post-content .post-inner-content {
   color: #fff !important;
 }
 
+.readmore a:visited {
+  color: #fff !important;
+}
+
 
 
 
@@ -2310,7 +2314,7 @@ a.portfolio {
 }
 
 a:visited {
-  color: #a67d4a;
+  color: #a67d4a !important;
 }
 
 a:hover {
@@ -2957,9 +2961,7 @@ input#mc-embedded-subscribe {
   border-radius: .3rem;
   color: #fff !important;
   border: none;
-  -webkit-box-shadow: 0px 3px 0px #75450a;
-  -moz-box-shadow: 0px 3px 0px #75450a;
-  box-shadow: 0px 3px 0px #75450a;
+  border-bottom: 2px solid #825f35;
   text-transform: uppercase;
 }
 
