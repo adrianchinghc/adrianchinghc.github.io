@@ -1,0 +1,23 @@
+{
+  "name": "adrianching.com",
+  "version": "1.0.0",
+  "description": "Personal Site of Adrian Ching",
+  "main": "gulpfile.js",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "",
+    "gulp-uncss": "",
+    "gulp-csso": "",
+    "gulp-gzip": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adrianchinghc/adrianchinghc.github.io.git"
+  },
+  "author": "Adrian Ching",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adrianchinghc/adrianchinghc.github.io/issues"
+  },
+  "homepage": "https://github.com/adrianchinghc/adrianchinghc.github.io#readme"
+}

@@ -6,7 +6,7 @@ ruby '2.2.4'
 
 gem 'dotenv'
 
-gem 'middleman', '~>3.3.10'
+gem 'middleman', '~>3.4.0'
 gem 'middleman-blog'
 gem 'middleman-livereload', '~> 3.1.0'
 gem 'middleman-minify-html'
@@ -43,4 +43,3 @@ gem 'pry'
 gem 'wdm', '~> 0.1.0', :platforms => [:mswin, :mingw]
 # Windows does not come with time zone data
 gem 'tzinfo-data', platforms: [:mswin, :mingw]
-

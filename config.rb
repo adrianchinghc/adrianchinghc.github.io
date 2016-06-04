@@ -11,7 +11,7 @@ activate :directory_indexes
 activate :deploy do |deploy|
   deploy.method = :git
   deploy.branch = 'master'
-  deploy.build_before = true
+  deploy.build_before = false
 end
 
 Time.zone = "Kuala Lumpur"

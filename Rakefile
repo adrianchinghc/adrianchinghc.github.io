@@ -1,8 +1,9 @@
 task default: %w[build]
 
-desc 'Build the app and throw it into secret_sauce_api'
-task :build do
+desc 'Build the app and throw it into github'
+task :deploy do
   sh 'rm -rf build'
-  sh 'middleman build'
+  sh 'bundle exec middleman build'
+  sh 'gulp buildcss'
+  sh 'bundle exec middleman deploy'
 end
-
