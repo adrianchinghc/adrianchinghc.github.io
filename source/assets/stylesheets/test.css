@@ -2301,6 +2301,15 @@ a {
   transition: all 300ms linear
 }
 
+a.portfolio {
+  font-size: initial;
+  font-family: 'Montserrat', sans-serif;
+}
+
+a:visited {
+  color: #a67d4a;
+}
+
 a:hover {
   text-decoration: none;
   color: #999;
@@ -2601,6 +2610,10 @@ h1, h2, h3, h4, h5, h6 {
   padding: 100px 50px;
 }
 
+#about p {
+    padding-top: 10px;
+}
+
 .index .button {
   margin: 50px 0 0;
   padding: 0 20px;
@@ -2866,8 +2879,6 @@ footer p {
 
   .section_subtitle { margin: 0 0 30px 0; }
   #about, #contact { padding: 80px 25px; }
-
-  #portfolio { padding: 80px 25px 65px; }
 
   .works article {
     flex: 0 0 48%;
