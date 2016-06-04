@@ -2531,6 +2531,12 @@ h1, h2, h3, h4, h5, h6 {
   animation-delay: .55s;
 }
 
+.navigation.open li:nth-of-type(4) {
+  -webkit-animation-delay: .65s;
+  -moz-animation-delay: .65s;
+  animation-delay: .65s;
+}
+
 .navigation nav { position: relative; }
 
 .navigation ul {

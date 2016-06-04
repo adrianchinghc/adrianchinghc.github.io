@@ -7,7 +7,13 @@ gulp.task('uncss', function() {
   return gulp.src('build/assets/stylesheets/*.css')
     .pipe(uncss({
         html: ['build/**/*.html', 'build/*.html'],
-        ignore: ['.body_hidden', '.open', '.active']
+        ignore: ['.body_hidden', '.navigation.open',
+                 '.burger.active .top', '.burger.active .middle',
+                 '.burger.active .bottom', '.navigation.close',
+                 '.navigation', '.navigation.open li',
+                 '.navigation.open li:nth-of-type(2)',
+                 '.navigation.open li:nth-of-type(3)',
+                 '.navigation.open li:nth-of-type(4)']
     }))
     .pipe(csso())
     .pipe(gulp.dest('./build/assets/stylesheets'))
