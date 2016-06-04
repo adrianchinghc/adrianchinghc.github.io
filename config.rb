@@ -6,6 +6,7 @@ set :markdown_engine, :redcarpet
 set :markdown, fenced_code_blocks: true
 activate :automatic_image_sizes
 activate :autoprefixer
+activate :pry
 activate :directory_indexes
 
 activate :deploy do |deploy|

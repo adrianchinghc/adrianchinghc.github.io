@@ -53,7 +53,7 @@ section#blog.module
           article
             .border
               = link_to "#{article.slug}" do
-                = image_tag article.data.image_url alt="#{article.title}"
+                = image_tag(article.data.small_image_url, alt: "#{article.title}")
                 h3.caption = article.title
       a.button href="/blog"
         i.fa.fa-pencil

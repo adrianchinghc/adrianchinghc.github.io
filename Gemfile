@@ -14,9 +14,6 @@ gem 'middleman-imageoptim'
 gem 'middleman-deploy', '~> 1.0'
 gem "middleman-disqus"
 gem 'nokogiri'
-# gem 'font-awesome-middleman'
-# Lossless image size reduction
-# https://github.com/grosser/smusher
 gem 'middleman-smusher'
 
 # Generates robots.txt
@@ -36,7 +33,7 @@ gem 'bourbon'
 gem 'middleman-autoprefixer'
 
 ### Debugging
-gem 'pry'
+gem 'middleman-pry'
 
 ### For Windows
 # Faster file watcher updates on Windows:

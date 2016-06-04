@@ -8,18 +8,7 @@ body.body-container
   section.top-sidebar
     .container
       .row
-        .widget.cats-widget.span4
-          h3 Categories 
-          .widget-content
-            ul
-              - blog.tags.each do |tag|
-                li
-                  = link_to tag.first.capitalize, tag_path("#{tag.first}")
-                  span = tag.last.count
-        .widget.span8
-          h3 Subscribe to My Private Newsletter
-          .widget-content
-            = partial "layouts/partials/header_option_form"
+        = partial "layouts/partials/header_option_form"
   header#header.header
     .container
       .row

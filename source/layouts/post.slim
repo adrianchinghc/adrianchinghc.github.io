@@ -66,37 +66,7 @@ html itemscope='' itemtype='http://schema.org/WebPage' lang=data.site.language
   section.top-sidebar
     .container
       .row
-        .widget.cats-widget.span4
-          h3 Categories
-          .widget-content
-            ul
-              - blog.tags.each do |tag|
-                li
-                  = link_to tag.first.capitalize, tag_path("#{tag.first}")
-                  span = tag.last.count
-        .widget.span4
-          h3 Twitter
-          .widget-content
-            .twitter-container
-              .tweet
-                p
-                  | The State of
-                  span.custom #WordPress
-                  | Themes: 87% of all WordPress theme shops sell themes on Themeforest
-                  a.custom href="#"  http://supportdash.com/wordpress
-              .tweet
-                p
-                  | What Are The Most Inspiring  Markepplace Moments Of ALl Time
-                  a.custom href="#"  http://enva.to/1vgh5d
-              .tweet
-                p
-                  | Our server maintenance is now done, so Envato Support should be working as normal now. If you see any problems please tweet
-                  span.custom @envato_support
-        .widget.span4
-          h3 Dribbble
-          .widget-content
-            a.dribbble-image href="#"
-              / img alt=("Latest Dribbble Project") src="../assets/images/blog/dribbble-image.png" /
+        = partial "layouts/partials/header_option_form"
   header#header.header
     .container
       .row
@@ -127,7 +97,7 @@ html itemscope='' itemtype='http://schema.org/WebPage' lang=data.site.language
         .single-post
           .post-image.post-format-image.span12
             .wrapper
-              img alt=("Standard Post Image") src="../#{current_article.data.image_url}" /
+              = image_tag(current_article.data.image_url, alt: "#{current_article.title}")
           .post-content
             .span12
               .post-inner-content
