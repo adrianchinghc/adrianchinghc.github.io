@@ -3001,3 +3001,7 @@ input#mc-embedded-subscribe {
 a.readmore-button.button {
   color: #fff;
 }
+
+#loadOverlay {
+  display: none;
+}
