@@ -1,5 +1,5 @@
 ---
-title: Adrian Ching - Web Developer & Maker
+title: Adrian Ching - Product & Software Engineer
 ---
 
 header#welcome.parent.module.parallax.parallax-1
@@ -26,11 +26,8 @@ header#welcome.parent.module.parallax.parallax-1
       i.fa.fa-chevron-down
   .fade.child
     .container_small
-      /! Header Titles
       h1.header_title Adrian Ching
       h2.header_subtitle In love with all things technology and business
-/! END HEADER ///////////////////////////////////////////////////////////////////////////
-/! ABOUT SECTION ///////////////////////////////////////////////////////////////////////////
 section#about.module
   .container_small
     h2.section_title Who Am I?
@@ -41,12 +38,9 @@ section#about.module
       |  Contact Me
     p 
       a.portfolio rel="noopener noreferrer" href="https://portfolio.adrianching.com" target="_blank" Portfolio
-/! END ABOUT SECTION ///////////////////////////////////////////////////////////////////////////
-/! PORTFOLIO SECTION ///////////////////////////////////////////////////////////////////////////
 section#blog.module
   .container_big
     h2.section_title Latest Blog Posts
-    / h3.section_subtitle Simple & Creative
     - if blog.articles.present?
       .works
         - blog.articles[0...3].each_with_index do |article, index|
@@ -61,14 +55,11 @@ section#blog.module
     - else
       .container_small
         | If you are seeing this, it means I have not written any blog post yet. Come back sometime in the near future and you might see one. I am working hard to produce good blog posts that matter so do stay tuned. =)
-/! END PORTFOLIO SECTION ///////////////////////////////////////////////////////////////////////////
-/! CONTACT SECTION ///////////////////////////////////////////////////////////////////////////
 section#contact.module
   .container_small
     h2.section_title Need an App?
     h3.section_subtitle Drop me an email. Let's Make Something Awesome.
     .info
-      /! Address
       div
         i.fa.fa-map-marker
         h3 Address
@@ -78,28 +69,20 @@ section#contact.module
           | Kuala Lumpur
           br/
           | Malaysia
-      /! Phone
       div
         i.fa.fa-skype
         h3 Skype
         p adrianchinghc
-      /! Email
       div
         i.fa.fa-envelope-o
         h3 Email
-        p <a href="mailto:contact@adrianching.com">contact@adrianching.com</a>
-    /! Social icons
+        p contact@adrianching.com
     .social
-      /! Github
       a rel="noopener noreferrer" href="https://www.github.com/adrianchinghc" target="_blank"
         i.fa.fa-github
-      /! Facebook
       a rel="noopener noreferrer" href="https://www.facebook.com/adrianchinghc" target="_blank"
         i.fa.fa-facebook
-      /! Twitter
       a rel="noopener noreferrer" href="https://twitter.com/adrianchinghc" target="_blank"
         i.fa.fa-twitter
-      /! Instagram
       a rel="noopener noreferrer" href="https://www.instagram.com/adrianchinghc" target="_blank"
         i.fa.fa-instagram
-/! END CONTACT SECTION ///////////////////////////////////////////////////////////////////////////
