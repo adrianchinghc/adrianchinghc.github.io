@@ -1386,6 +1386,14 @@ span.highlight {
       margin-bottom: 10px;
     }
 
+    .post-share .tags a:hover {
+      color: #a67d4a;
+    }
+
+    .post-share .tags a:visited {
+      color: #c1c0c0 !important;
+    }
+
 
     /* Social Share Box */
     .post-share .share-box {
@@ -1439,7 +1447,8 @@ span.highlight {
       border-bottom-width: 2px;
       margin-left: 20px;
     }
-    .share-box .toggle-share-box:hover {
+    .share-box .toggle-share-box:hover,
+    .share-box .toggle-share-box:visited {
       color: #fff !important;
     }
 
@@ -2268,6 +2277,10 @@ table {
   border-spacing: 0;
 }
 
+.index a.button:hover, .index .social a:hover {
+  color: white !important;
+}
+
 /* 03 GENERAL SETTINGS
 --------------------------------------------------------------- */
 
@@ -2376,9 +2389,9 @@ h1, h2, h3, h4, h5, h6 {
     -moz-animation-fill-mode:forwards;
     animation-fill-mode:forwards;
 
-    -webkit-animation-duration:1s;
-    -moz-animation-duration:1s;
-    animation-duration:1s;
+    -webkit-animation-duration:0.5s;
+    -moz-animation-duration:0.5s;
+    animation-duration:0.5s;
 }
 
 .fade-in.cmon {
@@ -2851,6 +2864,14 @@ footer {
   margin: 0 auto;
   padding: 50px;
   overflow: hidden;
+}
+
+.container_footer a:visited {
+  color: #999 !important;
+}
+
+.container_footer .left a:hover {
+  color: #A67D4A !important;
 }
 
 footer p {

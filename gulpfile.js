@@ -13,7 +13,9 @@ gulp.task('uncss', function() {
                  '.navigation', '.navigation.open li',
                  '.navigation.open li:nth-of-type(2)',
                  '.navigation.open li:nth-of-type(3)',
-                 '.navigation.open li:nth-of-type(4)']
+                 '.navigation.open li:nth-of-type(4)',
+                 '#mc_embed_signup div.mce_inline_error'
+               ]
     }))
     .pipe(csso())
     .pipe(gulp.dest('./build/assets/stylesheets'))
