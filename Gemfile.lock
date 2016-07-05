@@ -8,7 +8,7 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.3.8)
-    autoprefixer-rails (6.3.6.2)
+    autoprefixer-rails (6.3.7)
       execjs
     bourbon (4.2.7)
       sass (~> 3.4)
@@ -46,7 +46,7 @@ GEM
     eventmachine (1.2.0.1)
     execjs (2.7.0)
     exifr (1.2.4)
-    ffi (1.9.10)
+    ffi (1.9.11)
     fspath (2.1.1)
     haml (4.0.7)
       tilt
