@@ -2,42 +2,13 @@
 pageable: true
 per_page: 5
 ---
-- content_for(:title, "#{tagname.capitalize} - AdrianChing.com")
+- content_for(:title, "Articles on #{tagname.capitalize} - Adrian Ching")
+#loadOverlay[style="background-color:#F2F2F2; position:absolute; top:0px; left:0px; width:100%; height:100%; z-index:2000;"]
 body.body-container
   section.top-sidebar
     .container
       .row
-        .widget.cats-widget.span4
-          h3 Categories
-          .widget-content
-            ul
-              - blog.tags.each do |tag|
-                li
-                  = link_to tag.first.capitalize, tag_path("#{tag.first}")
-                  span = tag.last.count
-        .widget.span4
-          h3 Twitter
-          .widget-content
-            .twitter-container
-              .tweet
-                p
-                  | The State of
-                  span.custom #WordPress
-                  | Themes: 87% of all WordPress theme shops sell themes on Themeforest
-                  a.custom href="#"  http://supportdash.com/wordpress
-              .tweet
-                p
-                  | What Are The Most Inspiring  Markepplace Moments Of ALl Time
-                  a.custom href="#"  http://enva.to/1vgh5d
-              .tweet
-                p
-                  | Our server maintenance is now done, so Envato Support should be working as normal now. If you see any problems please tweet
-                  span.custom @envato_support
-        .widget.span4
-          h3 Dribbble
-          .widget-content
-            a.dribbble-image href="#"
-              img alt=("Latest Dribbble Project") src="../assets/images/blog/dribbble-image.png" /
+        = partial "layouts/partials/header_option_form"
   header#header.header
     .container
       .row
@@ -50,18 +21,8 @@ body.body-container
               ul
                 li.toggle
                   a href="#"  Menu
-                / li
-                /   a href="/"  Home
                 li
                   a href="/blog"  Blog
-                / li
-                /   a href="/contact"  Contact
-            /! search and toggle
-            / .search
-            /   form.top-search
-            /     input.s placeholder="search..." type="text" /
-            /     input.submit type="submit" value="" /
-              /! toggle button
             a.toggleSidebar href="#"
   - page_articles.each_with_index do |article, i|
     section.blog
@@ -101,4 +62,3 @@ body.body-container
               - if paginate
                 - if next_page
                   = link_to '', next_page, :class => 'next'
-

@@ -1,4 +1,4 @@
-# Personal Site of Adrian Ching
+# Personal Website of Adrian Ching
 
 Generate Article
 * `bundle exec middleman article "Title of Blogpost"` to generate new article

@@ -1798,7 +1798,7 @@ span.highlight {
 
 
     /* top sidebar  */
-    section.top-sidebar , .blog header, .tag header {
+    section.top-sidebar {
       padding-left: 20px;
       padding-right: 20px;
       /*margin-left: -20px;*/
@@ -2211,5 +2211,3 @@ span.highlight {
 @media (min-width: 980px) {
 
 }
-
-

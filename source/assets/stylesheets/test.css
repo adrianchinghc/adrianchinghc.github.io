@@ -326,8 +326,8 @@ a img.aligncenter {
     background-color: #dadada;
   }
 
-  body.tag ,
-  body.blog {
+  body.tag , body.blog, body.categories,
+  body.x404 {
       background: #f2f2f2;
   }
 
@@ -1812,30 +1812,21 @@ span.highlight {
 
 @media (max-width: 767px) {
 
-
-
-
     /* top sidebar  */
-    section.top-sidebar , .blog header, .tag header {
+    section.top-sidebar {
       padding-left: 20px;
       padding-right: 20px;
-      /*margin-left: -20px;*/
     }
-
 
     /* top form */
      .top-form  {
        clear: both;
        margin-bottom: 20px !important;
        margin-top: 20px !important;
-
      }
-
-
 
     a.togglemenu {
       display: block;
-
     }
 
     header .top-content {
@@ -1849,19 +1840,13 @@ span.highlight {
       clear: both;
       width: 100%;
       margin-bottom: 10px;
-
-
     }
 
     nav.menu > ul {
       border-radius: 3px !important;
       overflow: hidden;
       padding-top: 10px;
-
-
     }
-
-
 
     nav.menu ul, nav.menu ul ul {
       background: #343434;
@@ -1924,28 +1909,14 @@ span.highlight {
       border: none;
     }
 
-
-
-
-
-
      nav.menu ul li a  ,  nav.menu ul ul li a{
-
       padding: 10px 3% !important;
       float: left;
       position: relative;
       transition: background 0.2s;
       text-align: left;
-
       margin: 0px !important;
-
-
-
-
     }
-
-
-
 
      nav.menu ul ul {
       position: relative !important;
@@ -1960,33 +1931,26 @@ span.highlight {
       border-bottom: none ;
     }
 
-
      nav.menu ul ul:after {
       display: none !important;
     }
 
-
-
      nav.menu ul ul li:last-child {
         padding-bottom: 0px;
     }
-
-
 
      nav.menu ul ul ul {
       left: auto !important;
       top: 0px;
     }
 
-
-
     /* toggle menu */
     nav.menu li.toggle {
       display: block;
       margin-left: -5px !important;
-
       padding-right: 15px !important;
     }
+
     nav.menu li.toggle a {
       display: block;
       color: #fff !important;
@@ -1994,9 +1958,8 @@ span.highlight {
       padding: 0px;
     }
 
-
     nav.menu li.toggle.active {
-          margin-bottom: 25px !important;
+      margin-bottom: 25px !important;
     }
 
     nav.menu  ul li {
@@ -2007,12 +1970,8 @@ span.highlight {
       display: block !important;
     }
 
-
-
     /* logo */
-
     header .logo {
-
       margin: 10px 0px 20px 0px;
       text-align: center;
       width: 100%;
@@ -2028,18 +1987,15 @@ span.highlight {
       text-align: center; display: inline-block;
     }
 
-
     /* searh bar */
-
     header  .search {
-    float: right;
-    margin-top: 10px;
-    margin-bottom: -10px;
-    margin-left: 0px;
-    width: 100%;
-    margin-right: 0px;
-
-  }
+      float: right;
+      margin-top: 10px;
+      margin-bottom: -10px;
+      margin-left: 0px;
+      width: 100%;
+      margin-right: 0px;
+    }
 
   header form.top-search {
       background: #f2f2f2;
@@ -2667,7 +2623,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #blog {
   background: #f5f5f5;
-  padding: 100px 50px 75px;
+  padding: 100px 10px 75px;
 }
 
 .works {
