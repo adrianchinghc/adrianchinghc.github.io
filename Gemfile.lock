@@ -45,7 +45,7 @@ GEM
     erubis (2.7.0)
     eventmachine (1.2.0.1)
     execjs (2.7.0)
-    exifr (1.2.4)
+    exifr (1.2.5)
     ffi (1.9.14)
     fspath (2.1.1)
     haml (4.0.7)
