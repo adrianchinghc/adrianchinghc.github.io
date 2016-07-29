@@ -15,6 +15,7 @@ gem 'middleman-deploy', '~> 1.0'
 gem "middleman-disqus"
 gem 'nokogiri'
 gem 'middleman-smusher'
+gem "middleman-syntax"
 
 # Generates robots.txt
 gem 'middleman-robots'

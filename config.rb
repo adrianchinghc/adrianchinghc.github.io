@@ -4,11 +4,12 @@ set :css_dir, 'assets/stylesheets'
 set :js_dir, 'assets/javascripts'
 set :images_dir, 'assets/images'
 set :markdown_engine, :redcarpet
-set :markdown, fenced_code_blocks: true
+set :markdown, fenced_code_blocks: true, smartypants: true
 activate :automatic_image_sizes
 activate :autoprefixer
 activate :pry
 activate :directory_indexes
+activate :syntax
 
 activate :deploy do |deploy|
   deploy.method = :git
@@ -64,6 +65,11 @@ configure :build do
     { user_agent: '*', allow: ['/'] }
   ],
   sitemap: "#{data.site.url}/sitemap.xml"
+  activate :imageoptim do |options|
+    options.manifest = false
+    options.svgo = false
+    options.pngout = false
+  end
 end
 
 # Add bower's directory to sprockets asset path

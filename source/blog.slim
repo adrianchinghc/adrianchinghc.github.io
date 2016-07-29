@@ -60,7 +60,7 @@ body.body-container
           .blog-pagination.span12
             .wrap.row
               - if prev_page
-                = link_to '', prev_page, :class => 'prev'
+                = link_to '', prev_page, class: 'prev'
                 .col-md-10.items-wrap
                   p
                     | Page
@@ -69,4 +69,4 @@ body.body-container
                     =<  num_pages
               - if paginate
                 - if next_page
-                  = link_to '', next_page, :class => 'next'
+                  = link_to '', next_page, class: 'next'
