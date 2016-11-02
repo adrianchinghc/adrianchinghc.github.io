@@ -39,23 +39,23 @@ body.body-container
           .single-post
             .post-image.post-format-image.span12
               .wrapper
-                a href="../#{article.slug}"
+                a href="../#{article.path}"
                   img alt=("Standard Post Image") src="../#{article.data.image_url}" /
             .post-content
               .span12
                 .post-inner-content
                   h2.post-header
-                    = link_to article.title, "../#{article.slug}"
+                    = link_to article.title, "../#{article.path}"
                   .post-meta
                     span.date #{article.date.strftime('%b %e %Y')}
                     span.comments
-                      a.comments[href="../#{article.slug}#disqus_thread"]
+                      a.comments[href="../#{article.path}#disqus_thread"]
                         | Comments
                   .main-content
                     p #{article.summary}
                   .clearfix
                   .readmore
-                    a.readmore-button.button href="../#{article.slug}"  Read More
+                    a.readmore-button.button href="../#{article.path}"  Read More
         - if paginate && num_pages > 1
           .blog-pagination.span12
             .wrap.row
