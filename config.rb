@@ -23,7 +23,7 @@ activate :blog do |blog|
   blog.taglink = "categories/{tag}.html"
   blog.layout = "layouts/post.slim"
   blog.summary_separator = /(READMORE)/
-  blog.summary_length = 500
+  blog.summary_length = 300
   blog.default_extension = ".md"
   blog.tag_template = "tag.html"
   blog.calendar_template = "calendar.html"
@@ -52,14 +52,13 @@ end
 
 # Build-specific configuration
 configure :build do
-  activate :imageoptim
+  activate :minify_html
   activate :minify_css
   activate :minify_javascript
   activate :asset_hash
   activate :smusher
   activate :asset_host
   activate :gzip
-  activate :minify_html
   activate :relative_assets
   activate :robots, rules: [
     { user_agent: '*', allow: ['/'] }
