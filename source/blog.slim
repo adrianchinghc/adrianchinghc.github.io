@@ -55,7 +55,7 @@ body.body-container
                     p #{article.summary}
                   .clearfix
                   .readmore
-                    a.readmore-button.button href="../#{article.path}"  Read More
+                    = link_to 'Read More', article.path, class: 'button readmore-button'
         - if paginate && num_pages > 1
           .blog-pagination.span12
             .wrap.row

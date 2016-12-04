@@ -102,6 +102,10 @@ a img {
  1 - Reset
  -------------------------------------------------------------- */
 
+code {
+  white-space: pre-wrap;
+}
+
 ul, .gallery-caption, li a, article, nav, blockquote, dl, dt, dd, td, tr, th, code, caption, figcaption, input, label, textarea {
   font-family: 'Lato' , sans-serif;
   font-weight: 400;
@@ -1606,7 +1610,7 @@ blockquote, .blockquote {
   padding-bottom: 35px;
   border-bottom: 2px solid #e9e9e9;
   clear: both;
-  float: left;
+  // float: left;
 }
 
 .secondary-content-box {
