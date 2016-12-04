@@ -8,7 +8,6 @@ set :markdown, fenced_code_blocks: true, smartypants: true
 activate :automatic_image_sizes
 activate :autoprefixer
 activate :pry
-activate :directory_indexes
 activate :syntax
 
 activate :deploy do |deploy|
@@ -34,6 +33,7 @@ activate :blog do |blog|
   blog.per_page = 5
 end
 
+activate :directory_indexes
 activate :disqus do |d|
   d.shortname = 'adrianching'
 end
