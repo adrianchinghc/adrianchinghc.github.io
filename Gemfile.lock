@@ -8,7 +8,7 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.3.8)
-    autoprefixer-rails (6.5.3.1)
+    autoprefixer-rails (6.5.4)
       execjs
     bourbon (4.2.7)
       sass (~> 3.4)
@@ -55,7 +55,7 @@ GEM
       uber (~> 0.0.14)
     htmlcompressor (0.2.0)
     http_parser.rb (0.6.0)
-    httpclient (2.8.2.4)
+    httpclient (2.8.3)
     i18n (0.7.0)
     image_optim (0.20.2)
       exifr (~> 1.1, >= 1.1.3)
