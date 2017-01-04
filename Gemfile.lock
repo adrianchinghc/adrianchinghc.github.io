@@ -148,7 +148,7 @@ GEM
     net-sftp (2.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (4.0.0)
-    nokogiri (1.7.0)
+    nokogiri (1.7.0.1)
       mini_portile2 (~> 2.1.0)
     oj (2.18.0)
     padrino-helpers (0.12.8.1)
