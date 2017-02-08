@@ -10,7 +10,7 @@ GEM
     addressable (2.3.8)
     autoprefixer-rails (6.7.2)
       execjs
-    bourbon (4.2.7)
+    bourbon (4.3.0)
       sass (~> 3.4)
       thor (~> 0.19)
     builder (3.2.3)
