@@ -87,8 +87,8 @@ html itemscope='' itemtype='http://schema.org/WebPage' lang=data.site.language
       .row
         .top-pagination.span12
           .wrap
-            = link_to '', current_article.next_article, :class => 'next'
-            = link_to '', current_article.previous_article, :class => 'prev'
+            = link_to '', current_article.next_article, class: 'next'
+            = link_to '', current_article.previous_article, class: 'prev'
         .single-post
           .post-image.post-format-image.span12
             .wrapper
@@ -100,7 +100,7 @@ html itemscope='' itemtype='http://schema.org/WebPage' lang=data.site.language
                 .post-meta
                   span.date #{current_article.date.strftime('%b %e %Y')}
                   span.comments
-                    a.comments[href="#{current_article.path}#disqus_thread"]
+                    = link_to "#{current_article.url}#disqus_thread", class: 'comments' do
                       | Comments
                 .main-content.single-post-main-content
                   = yield
@@ -110,8 +110,8 @@ html itemscope='' itemtype='http://schema.org/WebPage' lang=data.site.language
                       = link_to "##{t}", tag_path(t)
                   .share-box
                     .social-icons
-                      a.facebook rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=#{data.site.url}/#{current_article.path}" target="_blank"
-                      a.twitter rel="noopener noreferrer" href="https://twitter.com/home?status=I%20just%20read%20an%20awesome%20article%20from%20Adrian%20Ching!%20Check%20it%20out%20here%3A%20#{data.site.url}/#{current_article.path}" target="_blank"
+                      a.facebook rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=#{data.site.url}/#{current_article.url}" target="_blank"
+                      a.twitter rel="noopener noreferrer" href="https://twitter.com/home?status=I%20just%20read%20an%20awesome%20article%20from%20Adrian%20Ching!%20Check%20it%20out%20here%3A%20#{data.site.url}/#{current_article.url}" target="_blank"
                     a.button.toggle-share-box href="#"  Share
               = disqus
               = disqus_count
