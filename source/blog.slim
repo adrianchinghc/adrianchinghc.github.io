@@ -39,17 +39,17 @@ body.body-container
           .single-post
             .post-image.post-format-image.span12
               .wrapper
-                a href="../#{article.path}"
+                = link_to article.path do
                   img alt=("Standard Post Image") src="../#{article.data.image_url}" /
             .post-content
               .span12
                 .post-inner-content
                   h2.post-header
-                    = link_to article.title, "../#{article.path}"
+                    = link_to article.title, article.path
                   .post-meta
                     span.date #{article.date.strftime('%b %e %Y')}
                     span.comments
-                      a.comments[href="../#{article.path}#disqus_thread"]
+                      = link_to "#{article.path}#disqus_thread", class: 'comments' do
                         | Comments
                   .main-content
                     p #{article.summary}
