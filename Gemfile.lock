@@ -37,17 +37,19 @@ GEM
       sass (>= 3.3.0, < 3.5)
     compass-import-once (1.0.5)
       sass (>= 3.2, < 3.5)
-    dotenv (2.2.0)
+    dotenv (2.2.1)
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
     erubis (2.7.0)
+    escape_utils (1.2.1)
     eventmachine (1.2.3)
     execjs (2.7.0)
     exifr (1.2.5)
     ffi (1.9.18)
     fspath (2.1.1)
-    haml (4.0.7)
+    haml (5.0.0)
+      temple (>= 0.8.0)
       tilt
     hike (1.2.3)
     hooks (0.4.1)
@@ -149,7 +151,7 @@ GEM
     net-ssh (4.1.0)
     nokogiri (1.7.1)
       mini_portile2 (~> 2.1.0)
-    oj (2.18.5)
+    oj (3.0.4)
     padrino-helpers (0.12.8.1)
       i18n (~> 0.6, >= 0.6.7)
       padrino-support (= 0.12.8.1)
@@ -175,9 +177,8 @@ GEM
     ref (2.0.0)
     rouge (2.0.7)
     sass (3.4.23)
-    slim (3.0.7)
-      temple (~> 0.7.6)
-      tilt (>= 1.3.3, < 2.1)
+    slim (0.6.1)
+      escape_utils
     slop (3.6.0)
     smusher (0.4.9)
       httpclient (>= 2.2)
@@ -193,7 +194,7 @@ GEM
     sprockets-sass (1.3.1)
       sprockets (~> 2.0)
       tilt (~> 1.1)
-    temple (0.7.7)
+    temple (0.8.0)
     therubyracer (0.12.3)
       libv8 (~> 3.16.14.15)
       ref
@@ -236,6 +237,7 @@ DEPENDENCIES
   therubyracer
   tzinfo-data
   wdm (~> 0.1.0)
+
 
 RUBY VERSION
    ruby 2.2.4p230
