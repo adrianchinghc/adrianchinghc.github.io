@@ -32,7 +32,7 @@ module CustomHelpers
   end
 
   def page_image
-    current_page.data.image_url || data.site.image_url
+    "#{data.site.url}#{current_page.data.image_url || data.site.image_url}"
   end
 
   # Social share URLs

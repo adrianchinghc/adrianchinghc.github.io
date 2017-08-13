@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3600" height="1890" style="background:#34aaff" viewBox="0 0 3600 1890">
+  <g fill="none" fill-rule="evenodd">
+    <g transform="translate(224 606)">
+      <path fill="#FFF" fill-opacity=".75" d="M373.849169,198.187156 C402.986271,151.269624 450.22849,151.272271 479.363948,198.187156 L719.127387,584.262236 C748.264488,631.179768 727.107519,669.213942 671.887037,669.213942 L181.32608,669.213942 C126.098854,669.213942 104.950273,631.177121 134.08573,584.262236 L373.849169,198.187156 Z" transform="matrix(1 0 0 -1 0 832.214)"/>
+      <path fill="#FFF" fill-opacity=".75" d="M340.537975,178.673719 C369.675076,131.756187 416.917296,131.758835 446.052753,178.673719 L685.816192,564.748799 C714.953294,611.666331 693.796324,649.700505 638.575843,649.700505 L148.014886,649.700505 C92.7876594,649.700505 71.6390783,611.663684 100.774536,564.748799 L340.537975,178.673719 Z" transform="scale(1 -1) rotate(-32 -989.79 0)"/>
+      <path fill="#FFF" fill-opacity=".75" d="M406.537975,178.673719 C435.675076,131.756187 482.917296,131.758835 512.052753,178.673719 L751.816192,564.748799 C780.953294,611.666331 759.796324,649.700505 704.575843,649.700505 L214.014886,649.700505 C158.787659,649.700505 137.639078,611.663684 166.774536,564.748799 L406.537975,178.673719 Z" transform="scale(1 -1) rotate(32 1842.381 0)"/>
+      <path fill="#FFF" fill-opacity=".75" d="M373.849169,35.1871563 C402.986271,-11.7303757 450.22849,-11.7277285 479.363948,35.1871563 L719.127387,421.262236 C748.264488,468.179768 727.107519,506.213942 671.887037,506.213942 L181.32608,506.213942 C126.098854,506.213942 104.950273,468.177121 134.08573,421.262236 L373.849169,35.1871563 Z"/>
+      <text fill="#34AAFF" font-family="Montserrat-Black, Montserrat" font-size="300" font-weight="700">
+        <tspan x="307" y="479">A</tspan>
+      </text>
+    </g>
+    <text fill="#FFF" font-family="Montserrat-Bold, Montserrat" font-size="250" font-weight="bold">
+      <tspan x="1188" y="753">Adrian Ching</tspan>
+    </text>
+    <text fill="#FFF" font-family="Montserrat-Regular, Montserrat" font-size="150">
+      <tspan x="1188" y="961">Software Engineer and Maker</tspan>
+    </text>
+    <text fill="#FFF" font-family="Montserrat-Regular, Montserrat" font-size="100">
+      <tspan x="1188" y="1159">I’m sharing everything on my journey to </tspan> <tspan x="1188" y="1281">$1,000,000 in monthly revenue.</tspan>
+    </text>
+  </g>
+</svg>
