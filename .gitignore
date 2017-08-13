@@ -31,3 +31,5 @@
 
 # Ignore logs
 *.log
+
+/.tmp
