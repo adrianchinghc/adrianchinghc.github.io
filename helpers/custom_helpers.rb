@@ -24,7 +24,7 @@ module CustomHelpers
   end
 
   def page_twitter_card_type
-    current_page.data.twitter_card_type || 'summary'
+    current_page.data.twitter_card_type || 'summary_large_image'
   end
 
   def page_twitter_handle

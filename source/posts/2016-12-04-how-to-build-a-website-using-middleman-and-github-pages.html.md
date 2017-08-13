@@ -2,7 +2,7 @@
 title: How to Build A Website Using Middleman and Github Pages
 date: 2016-12-04 14:24 MYT
 tags: technology, ruby, middleman
-image_url: '/assets/images/posts/middlemanapp.svg'
+image_url: '/assets/images/posts/middlemanapp.png'
 ---
 Website is an essential part of our digital lifestyle. Freelancers need website to showcase themselves, businesses need website to market their products and you need a website to maintain your online presence.
 
