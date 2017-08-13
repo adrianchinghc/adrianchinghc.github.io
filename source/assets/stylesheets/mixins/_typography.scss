@@ -1,0 +1,49 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  color: $black;
+}
+
+h1 {
+  @include breakpoint($sm) {
+    font-size: 32px;
+  }
+
+  @include breakpoint($md) {
+    font-size: 40px;
+  }
+}
+
+a {
+  color: $blue;
+
+  &:hover {
+    color: $dark-blue;
+  }
+}
+
+p {
+  color: $grey;
+  font-weight: 300;
+  line-height: 1.625;
+}
+
+.blue-text {
+  color: $blue;
+}
+
+.dark-blue-text {
+  color: $dark-blue;
+}
+
+.black-text {
+  color: $black;
+}
+
+.white-text {
+  color: $white;
+}

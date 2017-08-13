@@ -1,43 +1,43 @@
-# If you do not have OpenSSL installed, update
-# the following line to use 'http://' instead
 source 'https://rubygems.org'
 
-ruby '2.2.4'
+# https://github.com/middleman/middleman#middleman---makes-developing-websites-simple
+gem 'middleman', '~> 4.2'
 
-gem 'dotenv'
+# https://github.com/middleman/middleman-minify-html#middleman-minify-html
+gem 'middleman-minify-html', '~> 3.4'
 
-gem 'middleman', '~>3.4.0'
-gem 'middleman-blog'
-gem 'middleman-livereload', '~> 3.1.0'
-gem 'middleman-minify-html'
-gem 'middleman-imageoptim'
-gem 'middleman-deploy', '~> 1.0'
-gem "middleman-disqus"
-gem 'nokogiri'
-gem 'middleman-smusher'
-gem "middleman-syntax"
+# Reference: https://github.com/middleman/middleman/issues/2087
+gem 'haml', '~> 5.0', '>= 5.0.1'
 
-# Generates robots.txt
+# https://middlemanapp.com/basics/blogging/
+gem 'middleman-blog', '~> 4.0', '>= 4.0.2'
+
+# https://github.com/sparklemotion/nokogiri
+gem 'nokogiri', '~> 1.8'
+
+# https://github.com/AndrewKvalheim/middleman-pry
+gem 'middleman-pry', '~> 1.0'
+
+# https://github.com/Aupajo/middleman-search_engine_sitemap
+gem 'middleman-search_engine_sitemap', '~> 1.4'
+
+# https://github.com/brigade/haml-lint
+gem 'haml_lint'
+
+# https://github.com/brigade/scss-lint
+gem 'scss_lint'
+
+gem 'middleman-deploy', '~> 2.0.0.pre.alpha'
+gem 'middleman-disqus'
 gem 'middleman-robots'
+gem 'middleman-syntax'
+
+# Templating
+gem 'redcarpet', '~> 3.3', '>= 3.3.3'
+
+# For feed.xml.builder
+gem 'builder'
 
 # faster JS compiles
-gem 'therubyracer'
 gem 'oj'
-
-# Use redcarpet for github flavoured markdown
-gem 'redcarpet'
-
-gem 'rake'
-gem 'builder' # XML Builder
-gem 'slim'
-gem 'bourbon'
-gem 'middleman-autoprefixer'
-
-### Debugging
-gem 'middleman-pry'
-
-### For Windows
-# Faster file watcher updates on Windows:
-gem 'wdm', '~> 0.1.0', :platforms => [:mswin, :mingw]
-# Windows does not come with time zone data
-gem 'tzinfo-data', platforms: [:mswin, :mingw]
+gem 'therubyracer'

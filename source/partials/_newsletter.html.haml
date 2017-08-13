@@ -1,0 +1,24 @@
+.container-fluid.newsletter
+  .row
+    .col-md-8.col-md-offset-2.col-sm-10.col-sm-offset-1
+      %h3.text-center #{title}
+  #mc_embed_signup
+    %form#mc-embedded-subscribe-form.validate{action: "//adrianching.us12.list-manage.com/subscribe/post?u=a818b467193d9315e8f002c75&id=bef9b73d36", method: "post", name: "mc-embedded-subscribe-form", novalidate: "", target: "_blank"}
+      #mc_embed_signup_scroll
+        .row
+          .mc-field-group.col-xs-12.col-sm-4.col-md-4.col-md-offset-1
+            %label.sr-only{for: "mce-FNAME"} First Name
+            %input.form-control#mce-FNAME{name: "FNAME", type: "text", value: "", placeholder: "First Name"}
+          .mc-field-group.col-xs-12.col-sm-4.col-md-4
+            %label.sr-only{for: "mce-EMAIL"} Email Address
+            %input.form-control#mce-EMAIL.required.email{name: "EMAIL", type: "email", value: "", placeholder: "Email"}
+          .col-xs-12.col-sm-4.col-md-2
+            %input.col-xs-12.col-sm-12.col-md-12.btn.btn-white#mc-embedded-subscribe.button{name: "subscribe", type: "submit", value: "Subscribe"}
+        #mce-responses.clear
+          #mce-error-response.response.alert.alert-danger.alert-dismissible.col-md-8.col-md-offset-2{style: "display:none"}
+          #mce-success-response.response.alert.alert-success.alert-dismissible.col-md-8.col-md-offset-2{style: "display:none"}
+        %div{"aria-hidden" => "true", style: "position: absolute; left: -5000px;"}
+          %input{name: "b_a818b467193d9315e8f002c75_bef9b73d36", tabindex: "-1", type: "text", value: ""}
+  %script{src: "//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js", type: "text/javascript"}
+  :javascript
+    (function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';}(jQuery));var $mcj = jQuery.noConflict(true);

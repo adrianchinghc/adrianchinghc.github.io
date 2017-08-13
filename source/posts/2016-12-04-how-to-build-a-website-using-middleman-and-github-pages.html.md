@@ -2,8 +2,7 @@
 title: How to Build A Website Using Middleman and Github Pages
 date: 2016-12-04 14:24 MYT
 tags: technology, ruby, middleman
-small_image_url: '/assets/images/posts/middlemanapp-small.png'
-image_url: '/assets/images/posts/middlemanapp.png'
+image_url: '/assets/images/posts/middlemanapp.svg'
 ---
 Website is an essential part of our digital lifestyle. Freelancers need website to showcase themselves, businesses need website to market their products and you need a website to maintain your online presence.
 
@@ -24,7 +23,7 @@ Static site is a perfect choice for personal websites, blogs, and landing pages 
 As this is a pretty technical blog post, you will need some experience in using terminal, code editor and code sharing site such as [Github](https://github.com)
 
 <p class="post-alert">
-  <strong>You can <a href="https://www.upwork.com/o/profiles/users/_~01c2b79130514bdaad/" target="blank" rel="noopener noreferrer">invite me to your job</a> on Upwork if you need a website.</strong>
+  You can <a href="https://www.upwork.com/o/profiles/users/_~01c2b79130514bdaad/" target="blank" rel="noopener noreferrer">invite me to your job</a> on Upwork if you need a website.
 </p>
 
 Middleman is a static page generator built using [Ruby](https://www.ruby-lang.org/en/) so you will need to install Ruby on your machine along with [Bundler](http://bundler.io/) ([RubyGems](https://rubygems.org/) Management Tool).

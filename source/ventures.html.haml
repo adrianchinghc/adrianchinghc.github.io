@@ -1,0 +1,44 @@
+---
+
+title: Ventures
+
+---
+
+.header
+  .container
+    %h1.text-uppercase.header-title
+      I bootstrap
+      = link_to 'companies', '#'
+      with
+      = succeed " and " do
+        = link_to 'products', '#'
+      = link_to 'services', '#'
+      that solve problems.
+
+.container-fluid.companies
+  %h2 Ventures
+  .companies-container
+    %ul
+      %li
+        .circle
+          .greybg
+            %h4.timedate May 2017
+            %p Co-founded Upstack Studio. A product development and venture building firm.
+            = link_to 'https://upstackstudio.com', target: '_blank' do
+              = image_tag 'ventures/upstack-studio.png', class: 'img-responsive'
+      %li
+        .circle
+          .greybg
+            %h4.timedate August 2017
+            %p Work in progress. Will be updated once it's launched.
+            = link_to '#' do
+              = image_tag 'ventures/coming-soon.png', class: 'img-responsive'
+
+
+.container.work-with-me
+  .content
+    %h2.title Working on something?
+    %p.description
+      I'd love to hear more about it. Drop me a line if you think it's no 🐂💩.
+      %span
+        = mail_to 'adrian@upstackstudio.com', 'Get in touch now', cc: 'contact@upstackstudio.com'

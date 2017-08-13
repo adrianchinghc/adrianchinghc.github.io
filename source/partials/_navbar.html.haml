@@ -1,0 +1,22 @@
+%nav.navbar
+  .container
+    .navbar-header
+      %button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#navigation", "data-toggle" => "collapse", type: "button"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      = link_to '/', class: 'navbar-brand' do
+        = image_tag 'logo.png'
+    #navigation.collapse.navbar-collapse
+      %ul.nav.navbar-nav.navbar-right
+        %li
+          = link_to 'Work', '/work'
+        %li
+          = link_to 'Ventures', '/ventures'
+        %li
+          = link_to 'Writing', '/blog'
+        %li
+          = link_to 'About', '/about'
+        %li
+          = mail_to 'adrian@upstackstudio.com', 'Contact', cc: 'contact@upstackstudio.com'

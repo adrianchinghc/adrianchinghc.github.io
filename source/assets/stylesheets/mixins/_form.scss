@@ -1,0 +1,20 @@
+.form-control {
+  height: inherit;
+  padding: 15px 18.75px;
+  line-height: 22px;
+  font-size: 16px;
+}
+
+#mc_embed_signup {
+  margin-top: 20px;
+
+  #mc_embed_signup_scroll {
+    .mc-field-group {
+      margin-bottom: 10px;
+    }
+
+    #mce-responses {
+      margin-top: 10px;
+    }
+  }
+}

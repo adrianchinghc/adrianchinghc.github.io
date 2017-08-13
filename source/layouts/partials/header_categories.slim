@@ -1,8 +1,0 @@
-.widget.cats-widget.span4
-  h3 Categories 
-  .widget-content
-    ul
-      - blog.tags.each do |tag|
-        li
-          = link_to tag.first.capitalize, tag_path("#{tag.first}")
-          span = tag.last.count

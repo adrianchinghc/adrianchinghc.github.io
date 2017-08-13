@@ -1,0 +1,63 @@
+---
+
+title: Work
+
+---
+
+.header
+  .container
+    %h1.text-uppercase.header-title
+      I help
+      = link_to 'companies', '#'
+      build amazing
+      = succeed "," do
+        = link_to 'apps', '#'
+      = succeed ' and ' do
+        = link_to 'products', '#'
+      = succeed '.' do
+        = link_to 'services', '#'
+
+.project-container.container
+  .row.project
+    .col-md-4.col-sm-6.text-left.project-description
+      %h2 Carpit
+      %p Carpit wants to make car services easy, transparent and convenient. It brings car services to vehicle owners' fingertips.
+      = link_to 'View Project', 'https://mycarpit.com', class: 'btn btn-primary', target: '_blank'
+      %ul.project-skills
+        %li React Native
+        %li Ruby on Rails
+        %li Bootstrap
+
+    .col-md-6.col-md-offset-2.col-sm-6.project-image.hidden-xs
+      = image_tag 'work/carpit.svg', class: 'img-responsive'
+  .row.project
+    .col-md-4.col-md-offset-1.col-sm-6.text-left.project-description.col-md-push-7.col-sm-push-6
+      %h2 Foooqy
+      %p Foooqy is an marketplace for online food delivery services. With Foooqy, it's easy to explore and discover food around Kuala Lumpur.
+      = link_to 'View Project', 'https://www.foooqy.com', class: 'btn btn-primary', target: '_blank'
+      %ul.project-skills
+        %li Ruby on Rails
+        %li Foundation
+    .col-md-7.col-sm-6.project-image.right.col-md-pull-5.col-sm-pull-6.hidden-xs
+      = image_tag 'work/foooqy.png', class: 'img-responsive hidden-sm'
+      = image_tag 'work/foooqy-sm.png', class: 'img-responsive visible-sm'
+  .row.project
+    .col-md-4.col-sm-6.text-left.project-description
+      %h2 FieldOps360
+      %p FieldOps360 puts the control of project operations back in the hands of contruction site managers to commmunicate and store the critical information.
+      = link_to 'View Project', 'http://fieldops360.com', class: 'btn btn-primary', target: '_blank'
+      %ul.project-skills
+        %li React Native
+        %li Firebase
+        %li Bootstrap
+
+    .col-md-6.col-md-offset-2.col-sm-6.project-image.hidden-xs
+      = image_tag 'work/fieldops360.svg', class: 'img-responsive'
+
+.container.work-with-me
+  .content
+    %h2.title Want to work with me?
+    %p.description
+      Are you working on something great? I'd love to help make it happen.
+      %span
+        = mail_to 'adrian@upstackstudio.com', 'Get in touch now', cc: 'contact@upstackstudio.com'

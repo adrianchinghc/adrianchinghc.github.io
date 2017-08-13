@@ -1,0 +1,31 @@
+.btn {
+  padding: 15px 18.75px;
+  font-size: 16px;
+  line-height: 20px;
+  border-radius: 5px;
+}
+
+.btn-primary {
+  color: $white;
+  background-color: $blue;
+  border-color: transparent;
+
+  &:hover {
+    color: $white;
+    background-color: $dark-blue;
+    border-color: transparent;
+  }
+}
+
+.btn-white {
+  color: $white;
+  background-color: $blue;
+  border: 2px solid $white;
+
+  &:hover, &:focus,  {
+    color: $dark-blue;
+    background-color: $white;
+    border-color: transparent;
+  }
+}
+

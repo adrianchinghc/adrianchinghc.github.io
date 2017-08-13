@@ -1,0 +1,37 @@
+.vertical-menu {
+  text-align: left;
+  
+  a {
+    display: block;
+    margin-bottom: 5px;
+  }
+}
+
+.footer {
+  background: $footer-grey;
+  padding: 30px 0 20px;
+
+  img {
+    width: 60px;
+    height: 60px;
+  }
+
+  a {
+    color: $grey;
+
+    &:hover {
+      color: $black;
+      text-decoration: none;
+    }
+  }
+
+  .intro {
+    padding: 10px;
+  }
+
+  .copyright {
+    border-top: 1px solid $light-grey;
+    margin-top: 40px;
+    padding-top: 20px;
+  }
+}

@@ -1,0 +1,58 @@
+.navbar, 
+.navbar-header, 
+.navbar-brand {
+  min-height: 90px;
+}
+
+.navbar-brand {
+  img {
+    width: 57px;
+    height: 57px;
+  }
+}
+ 
+.navbar-toggle {
+  margin-top: 28px;
+  margin-bottom: 28px;
+
+  .icon-bar {
+    background: $dark-grey;
+    width: 32px;
+    height: 4px;
+  }
+}
+
+#navigation {
+  a {
+    color: $grey;
+    font-size: 20px;
+
+    @include breakpoint($sm) {
+      font-size: 16px;
+    }
+  
+    @include breakpoint($md) {
+      font-size: 16px;
+    }
+
+    &:hover {
+      color: $black;
+      background-color: $white;
+    }
+
+    &:focus {
+      color: $black;
+      background-color: $white;
+    }
+
+    @include breakpoint($sm) {
+      padding-top: 35px;
+      padding-bottom: 35px;
+    }
+  
+    @include breakpoint($md) {
+      padding-top: 35px;
+      padding-bottom: 35px;
+    }
+  }
+}

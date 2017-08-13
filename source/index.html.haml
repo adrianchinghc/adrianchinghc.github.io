@@ -1,0 +1,61 @@
+---
+---
+
+.container.header
+  %h1.text-uppercase.header-title
+    I make
+    = link_to 'products', '/ventures'
+    that solve problems.
+    %br
+    Sometimes I help companies
+    %br
+    build
+    = succeed "." do
+      = link_to 'amazing apps', '/work'
+
+.container
+  .row
+    .col-md-6.col-sm-6
+      .shadow-box
+        = image_tag 'work.svg', height: '80px'
+        %h2 Work
+        %p I help companies build software that provide values to their audience.
+        = link_to 'View All Work', '/work', class: 'btn btn-primary'
+    .col-md-6.col-sm-6
+      .shadow-box
+        = image_tag 'ventures.svg', height: '80px'
+        %h2 Ventures
+        %p I make products that solve problems and build a business around them.
+        = link_to 'View All Ventures', '/ventures', class: 'btn btn-primary'
+
+.container.introduction
+  .intro-text
+    %h2.text-left
+      Hi, I'm Adrian Ching. I'm the co-founder of
+      = link_to 'Upstack Studio', 'https://upstackstudio.com', target: '_blank'
+      where I craft quality web and mobile applications for startups and companies. I also bootstrap companies by building products that solve real problems. Before this, I was Engineer #3 at Surialabs. Follow me on
+      = succeed " or " do
+        = link_to 'Twitter', 'https://twitter.com/adrianchinghc', target: '_blank'
+      = succeed "." do
+        = link_to 'read my posts', '/blog'
+
+- if blog.articles.present?
+  .container.latest-posts
+    %h2 Check out my latest post:
+    .row
+      - blog.articles.last(2).each do |article|
+        = link_to article.path do
+          .col-sm-6.col-md-6
+            .shadow-box.text-left
+              = image_tag article.data.image_url, class: 'img-responsive', alt: "#{article.title}"
+              .latest-post-container
+                %h3 #{article.title}
+                = link_to 'Read More', "#{article.path}", class: 'read-more'
+
+.container.work-with-me
+  .content
+    %h2.title Want to work with me?
+    %p.description
+      Are you working on something great? I'd love to help make it happen.
+      %span
+        = mail_to 'adrian@upstackstudio.com', 'Get in touch now', cc: 'contact@upstackstudio.com'

@@ -1,0 +1,35 @@
+---
+
+title: Writing
+pageable: true
+per_page: 5
+
+---
+
+.container
+  - page_articles.each_with_index do |article, i|
+    .row.text-left
+      .col-md-10.col-md-offset-1.col-sm-10.col-sm-12.bloglist-child
+        = link_to article.url do
+          = image_tag article.data.image_url, alt: article.title, class: 'img-responsive'
+        %h1.bloglist-child-title
+          = link_to article.title, article.url
+        .bloglist-child-summary
+          %p
+            = strip_tags(article.summary)
+        = link_to 'Read More', article.url, class: 'bloglist-child-readmore'
+
+  - if paginate && num_pages > 1
+    .row.pagination
+      - if prev_page
+        = link_to 'PREV', prev_page
+      - 1.upto(num_pages) do |number|
+        - url = number == 1 ? "/blog/" : "/blog/page/#{number}/"
+        - if number == page_number
+          = link_to number, url, class: 'active'
+        - else
+          = link_to number, url
+      - if next_page
+        = link_to 'NEXT', next_page.url
+
+= partial "partials/newsletter", locals: { title: 'Peek over my shoulder as I share everything on my journey to $1,000,000 in monthly revenue.' }
