@@ -133,9 +133,9 @@ body {
 }
 
 .newsletter {
+  background: $blue;
   padding-top: 50px;
   padding-bottom: 50px;
-  background: $blue;
   h3 {
     color: $white;
     font-size: 22px;
@@ -264,6 +264,7 @@ body {
         li {
           display: inline;
           color: $grey;
+          margin-right: 1px;
 
           &:last-child:after {
             content: "";
@@ -309,9 +310,34 @@ body {
       }
     }
   }
+
   @include breakpoint($xs) {
     .project {
       height: 350px;
+    }
+  }
+
+  .testimonial {
+    border-bottom: 1px solid $light-grey;
+    min-height: 400px;
+    padding: 50px 0;
+
+    blockquote {
+      border-left: 0;
+    }
+
+    .testimonial-portrait {
+      width: 70px;
+    }
+
+    .testimonial-name {
+      margin-top: 20px;
+    }
+  }
+
+  @include breakpoint($sm) {
+    .testimonial {
+      padding: 80px 0;
     }
   }
 }
