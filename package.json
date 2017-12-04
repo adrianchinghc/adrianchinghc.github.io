@@ -49,7 +49,9 @@
     "node": ">= 6.9.4"
   },
   "browserify": {
-    "transform": [ "browserify-shim" ]
+    "transform": [
+      "browserify-shim"
+    ]
   },
   "browserify-shim": {
     "./bower_components/jquery/dist/jquery.js": "$"
