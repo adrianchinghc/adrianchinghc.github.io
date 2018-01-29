@@ -105,7 +105,7 @@ GEM
       middleman-core (>= 3.2)
       rouge (~> 2.0)
     mini_portile2 (2.3.0)
-    minitest (5.11.2)
+    minitest (5.11.3)
     net-sftp (2.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (4.2.0)
