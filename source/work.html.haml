@@ -1,7 +1,7 @@
 ---
 
 title: Work
-description: Adrian Ching co-founded Upstack Studio to help companies build amazing apps, products and services. Check out his work here.
+description: Adrian Ching founded Upstack Studio to help companies build amazing apps, products and services. Check out his work here.
 image_url: /assets/images/banners/work.png
 
 ---
@@ -22,6 +22,77 @@ image_url: /assets/images/banners/work.png
 .project-container.container
   .row.project
     .col-md-4.col-sm-6.text-left.project-description
+      %h2 Malaysia Decides
+      %p Malaysia Decides reports and analyses the GE14 and also aggregates relevant news.
+      = link_to 'iOS', 'https://itunes.apple.com/us/app/malaysia-decides/id1377504231?ls=1&mt=8', class: 'btn btn-primary', target: '_blank'
+      = link_to 'Android', 'https://play.google.com/store/apps/details?id=com.malaysiadecides.app', class: 'btn btn-primary', target: '_blank'
+      %ul.project-skills
+        %li React Native
+        %li Firebase
+    .col-md-7.col-md-offset-1.col-sm-6.project-image.hidden-xs
+      = image_tag 'work/msia-decides.png', class: 'img-responsive'
+
+  .row.project
+    .col-md-4.col-md-offset-1.col-sm-6.text-left.project-description.col-md-push-7.col-sm-push-6
+      %h2 Rohm
+      %p Rohm is a social event discovery and coordination mobile app that gives users the ability to create and join events within two taps.
+      = link_to 'View Project ', 'http://www.rohmapp.com', class: 'btn btn-primary', target: '_blank'
+      %ul.project-skills
+        %li React Native
+        %li UI + Redux
+    .col-md-7.col-sm-6.project-image.col-md-pull-5.col-sm-pull-6.hidden-xs
+      = image_tag 'work/rohm.png', class: 'img-responsive'
+
+  .row.testimonial.text-center
+    .col-xs-12
+      %blockquote “Adrian always give constructive opinions and suggestions for ideas that we would like to materialise. If you need someone who knows what he's doing, you can't go wrong with him.”
+      = image_tag 'work/qiyao.jpg', class: 'img-responsive img-circle center-block testimonial-portrait'
+      %p.testimonial-name Tai Qiyao, Co-founder, Carpit
+
+  .row.project
+    .col-md-4.col-sm-6.text-left.project-description
+      %h2 Teleme
+      %p Teleme allows users to connect with doctors via video call or chat messenger and receive health advice without leaving the comfort of their home.
+      = link_to 'View Project', 'https://teleme.co/download', class: 'btn btn-primary', target: '_blank'
+      %ul.project-skills
+        %li React Native
+        %li Ruby on Rails
+    .col-md-6.col-md-offset-2.col-sm-6.project-image.hidden-xs
+      = image_tag 'work/teleme.png', class: 'img-responsive'
+
+  .row.project
+    .col-md-4.col-md-offset-1.col-sm-6.text-left.project-description.col-md-push-7.col-sm-push-6
+      %h2 FieldOps360
+      %p FieldOps360 puts the control of project operations back in the hands of construction site managers to communicate and store the critical information.
+      = link_to 'View Project', 'https://www.fieldops360.com', class: 'btn btn-primary', target: '_blank'
+      %ul.project-skills
+        %li React Native
+        %li Firebase
+        %li Bootstrap
+    .col-md-7.col-sm-6.project-image.col-md-pull-5.col-sm-pull-6.hidden-xs
+      = image_tag 'work/fieldops360.png', class: 'img-responsive'
+
+  .row.testimonial.text-center
+    .col-xs-12
+      %blockquote
+        “I've worked with Adrian for two years tackling both local and international projects. Our clients were quite fond of him because of his ability to problem solve, think outside the box and articulate technical concepts in layman's terms. He always saw things from the client's point of view and gave apt suggestions on how to improve the product.”
+      = image_tag 'work/sam.jpg', class: 'img-responsive img-circle center-block testimonial-portrait'
+      %p.testimonial-name Samuel Khew, COO, Surialabs
+
+  .row.project
+    .col-md-4.col-sm-6.text-left.project-description
+      %h2 Foooqy
+      %p Foooqy is a marketplace for online food delivery services. With Foooqy, it's easy to explore and discover food around Kuala Lumpur.
+      = link_to 'View Project', 'https://www.foooqy.com', class: 'btn btn-primary', target: '_blank'
+      %ul.project-skills
+        %li Ruby on Rails
+        %li Foundation
+    .col-md-6.col-md-offset-2.col-sm-6.project-image.hidden-xs
+      = image_tag 'work/foooqy.png', class: 'img-responsive hidden-sm'
+      = image_tag 'work/foooqy-sm.png', class: 'img-responsive visible-sm'
+
+  .row.project
+    .col-md-4.col-md-offset-1.col-sm-6.text-left.project-description.col-md-push-7.col-sm-push-6
       %h2 Carpit
       %p Carpit wants to make car services easy, transparent and convenient. It brings car services to vehicle owners' fingertips.
       = link_to 'View Project', 'https://mycarpit.com', class: 'btn btn-primary', target: '_blank'
@@ -29,52 +100,8 @@ image_url: /assets/images/banners/work.png
         %li React Native
         %li Ruby on Rails
         %li Bootstrap
-
-    .col-md-6.col-md-offset-2.col-sm-6.project-image.hidden-xs
-      = image_tag 'work/carpit.png', class: 'img-responsive'
-  .row.testimonial.text-center
-    .col-xs-12
-      %blockquote “Adrian always give constructive opinions and suggestions for ideas that we would like to materialise. If you need someone who knows what he's doing, you can't go wrong with him.”
-      = image_tag 'work/qiyao.jpg', class: 'img-responsive img-circle center-block testimonial-portrait'
-      %p.testimonial-name Tai Qiyao, Co-founder, Carpit
-  .row.project
-    .col-md-4.col-md-offset-1.col-sm-6.text-left.project-description.col-md-push-7.col-sm-push-6
-      %h2 Foooqy
-      %p Foooqy is an marketplace for online food delivery services. With Foooqy, it's easy to explore and discover food around Kuala Lumpur.
-      = link_to 'View Project', 'https://www.foooqy.com', class: 'btn btn-primary', target: '_blank'
-      %ul.project-skills
-        %li Ruby on Rails
-        %li Foundation
-    .col-md-7.col-sm-6.project-image.right.col-md-pull-5.col-sm-pull-6.hidden-xs
-      = image_tag 'work/foooqy.png', class: 'img-responsive hidden-sm'
-      = image_tag 'work/foooqy-sm.png', class: 'img-responsive visible-sm'
-  .row.testimonial.text-center
-    .col-xs-12
-      %blockquote
-        “I've worked with Adrian for two years tackling both local and international projects. Our clients were quite fond of him because of his ability to problem solve, think outside the box and articulate technical concepts in layman's terms. He always saw things from the client's point of view and gave apt suggestions on how to improve the product.”
-      = image_tag 'work/sam.jpg', class: 'img-responsive img-circle center-block testimonial-portrait'
-      %p.testimonial-name Samuel Khew, COO, Surialabs
-  .row.project
-    .col-md-4.col-sm-6.text-left.project-description
-      %h2 FieldOps360
-      %p FieldOps360 puts the control of project operations back in the hands of contruction site managers to commmunicate and store the critical information.
-      = link_to 'View Project', 'https://www.fieldops360.com', class: 'btn btn-primary', target: '_blank'
-      %ul.project-skills
-        %li React Native
-        %li Firebase
-        %li Bootstrap
-    .col-md-6.col-md-offset-2.col-sm-6.project-image.hidden-xs
-      = image_tag 'work/fieldops360.png', class: 'img-responsive'
-  .row.project
-    .col-md-4.col-md-offset-1.col-sm-6.text-left.project-description.col-md-push-7.col-sm-push-6
-      %h2 Teleme
-      %p Teleme allows users to connect with doctors via video call or chat messenger and receive health advice without leaving the comfort of their home.
-      = link_to 'View Project', 'https://teleme.co/download', class: 'btn btn-primary', target: '_blank'
-      %ul.project-skills
-        %li React Native
-        %li Ruby on Rails
     .col-md-7.col-sm-6.project-image.col-md-pull-5.col-sm-pull-6.hidden-xs
-      = image_tag 'work/teleme.png', class: 'img-responsive'
+      = image_tag 'work/carpit.png', class: 'img-responsive'
 
 .container.work-with-me
   .content
