@@ -21,16 +21,27 @@ image_url: /assets/images/banners/work.png
 
 .project-container.container
   .row.project
+    .col-md-4.col-md-offset-1.col-sm-6.text-left.project-description.col-md-push-7.col-sm-push-6
+      %h2 iWealth
+      %p iWealth is Malaysia’s first advisor-driven online wealth management mobile application. It seamlessly integrates bespoke advisory services with fintech innovation to deliver personalised wealth management solutions.
+      = link_to 'View Project ', 'https://iwealth.com.my/', class: 'btn btn-primary', target: '_blank'
+      %ul.project-skills
+        %li React Native
+        %li Firebase
+    .col-md-7.col-sm-6.project-image.col-md-pull-5.col-sm-pull-6.hidden-xs
+      = image_tag 'work/iwealth.png', class: 'img-responsive'
+
+  .row.project
     .col-md-4.col-sm-6.text-left.project-description
-      %h2 Malaysia Decides
-      %p Malaysia Decides reports and analyses the GE14 and also aggregates relevant news.
-      = link_to 'iOS', 'https://itunes.apple.com/us/app/malaysia-decides/id1377504231?ls=1&mt=8', class: 'btn btn-primary', target: '_blank'
+      %h2 The Malaysian Insight
+      %p The Malaysian Insight provides an unvarnished insight into Malaysia, its politics, economy, personalities and issues of the day, and also issues sidelined by the headlines of the day. (Previously Malaysia Decides)
+      = link_to 'iOS', 'https://itunes.apple.com/my/app/the-malaysian-insight/id1377504231?mt=8', class: 'btn btn-primary', target: '_blank'
       = link_to 'Android', 'https://play.google.com/store/apps/details?id=com.malaysiadecides.app', class: 'btn btn-primary', target: '_blank'
       %ul.project-skills
         %li React Native
         %li Firebase
     .col-md-7.col-md-offset-1.col-sm-6.project-image.hidden-xs
-      = image_tag 'work/msia-decides.png', class: 'img-responsive'
+      = image_tag 'work/tmi.png', class: 'img-responsive'
 
   .row.project
     .col-md-4.col-md-offset-1.col-sm-6.text-left.project-description.col-md-push-7.col-sm-push-6
@@ -45,9 +56,9 @@ image_url: /assets/images/banners/work.png
 
   .row.testimonial.text-center
     .col-xs-12
-      %blockquote “Adrian always give constructive opinions and suggestions for ideas that we would like to materialise. If you need someone who knows what he's doing, you can't go wrong with him.”
-      = image_tag 'work/qiyao.jpg', class: 'img-responsive img-circle center-block testimonial-portrait'
-      %p.testimonial-name Tai Qiyao, Co-founder, Carpit
+      %blockquote “I had the opportunity to work with Adrian and his team on the Teleme mobile app. He and the team over at #{link_to 'Upstack Studio', 'https://upstackstudio.com', target: '_blank'} had been incredibly professional on how they handled the whole development process from prototyping to the launching of our mobile app. The end product is not only good but better than what we have expected. I’d strongly recommend anyone who’s looking for a reliable software development company to engage Adrian and his team.”
+      = image_tag 'work/kevin.png', class: 'img-responsive img-circle center-block testimonial-portrait'
+      %p.testimonial-name Kevin Ong, ex-CTO, Teleme
 
   .row.project
     .col-md-4.col-sm-6.text-left.project-description
@@ -102,6 +113,12 @@ image_url: /assets/images/banners/work.png
         %li Bootstrap
     .col-md-7.col-sm-6.project-image.col-md-pull-5.col-sm-pull-6.hidden-xs
       = image_tag 'work/carpit.png', class: 'img-responsive'
+  
+  .row.testimonial.text-center
+    .col-xs-12
+      %blockquote “Adrian always give constructive opinions and suggestions for ideas that we would like to materialise. If you need someone who knows what he's doing, you can't go wrong with him.”
+      = image_tag 'work/qiyao.jpg', class: 'img-responsive img-circle center-block testimonial-portrait'
+      %p.testimonial-name Tai Qiyao, Co-founder, Carpit
 
 .container.work-with-me
   .content
