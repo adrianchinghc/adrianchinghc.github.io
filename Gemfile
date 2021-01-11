@@ -33,7 +33,7 @@ gem 'middleman-robots'
 gem 'middleman-syntax'
 
 # Templating
-gem 'redcarpet', '~> 3.3', '>= 3.3.3'
+gem 'redcarpet', '~> 3.5'
 
 # For feed.xml.builder
 gem 'builder'
