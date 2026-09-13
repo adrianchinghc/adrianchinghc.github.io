@@ -15,13 +15,11 @@
   <meta property="og:title" content="{% if title %}{{ title }} · {% endif %}Adrian Ching">
   <meta property="og:description" content="{{ description or site.description }}">
   <meta property="og:url" content="{{ site.url }}{{ page.url }}">
-  <meta property="og:image" content="{{ site.url }}{{ image or '/assets/images/banners/default.png' }}">
-  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@adrianchinghc">
   <meta name="twitter:creator" content="@adrianchinghc">
   <meta name="twitter:title" content="{% if title %}{{ title }} · {% endif %}Adrian Ching">
   <meta name="twitter:description" content="{{ description or site.description }}">
-  <meta name="twitter:image" content="{{ site.url }}{{ image or '/assets/images/banners/default.png' }}">
   <link rel="stylesheet" href="/assets/css/site.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Adrian Ching","url":"https://adrianching.com","image":"https://adrianching.com/assets/images/adrianching.jpg","jobTitle":"Founder","worksFor":{"@type":"Organization","name":"Second Team"},"sameAs":["{{ site.social.youtube }}","{{ site.social.x }}","{{ site.social.github }}"]}</script>
   {% block head %}{% endblock %}
