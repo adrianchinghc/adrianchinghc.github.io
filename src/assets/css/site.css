@@ -267,14 +267,22 @@ figcaption{font-size:.8125rem;line-height:1.5;color:var(--muted);margin-top:.75r
 .current-company p{color:var(--muted);font-size:1rem}
 .proof-section{border-top:1px solid var(--line)}
 .client-voices{margin-top:3rem;padding-top:2rem;border-top:1px solid var(--line)}
-.client-voice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2rem;margin-top:2rem}
+.client-voice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2.5rem;margin-top:2rem}
 .client-voice{display:flex;flex-direction:column;align-items:flex-start}
+.client-project-image{width:100%;height:auto;margin-bottom:1.5rem}
+.client-voice h4{font-size:1.25rem;line-height:1.4;letter-spacing:-.02em;margin:0 0 .5rem;font-weight:600}
+.client-project-context{font-size:.9375rem;color:var(--muted);margin-bottom:1.25rem}
 .client-voice blockquote{margin:0 0 1.25rem;font-size:1.125rem;line-height:1.65}
 .client-voice blockquote p{margin:0}
-.client-voice figcaption{margin-top:auto}
+.client-voice figcaption{display:flex;align-items:center;gap:.85rem;margin-top:auto}
+.client-voice figcaption img{width:48px;height:48px;border-radius:50%;object-fit:cover}
 .client-voice figcaption strong,.client-voice figcaption span{display:block}
 .client-voice figcaption strong{font-size:.9375rem;color:var(--ink)}
 .client-voice .text-link{margin-top:.75rem}
+.client-voice-written{grid-column:1/-1;border-top:1px solid var(--line);padding-top:2rem}
+.client-voice-written blockquote{font-size:1.35rem;max-width:45ch}
+.tradelink-story{align-items:center}
+.tradelink-story img{width:100%;height:auto}
 @media(max-width:760px){.client-voice-grid{grid-template-columns:1fr;gap:1.75rem}.client-voice+.client-voice{padding-top:1.75rem;border-top:1px solid var(--line)}}
 .case-feature{grid-template-columns:minmax(0,.7fr) minmax(0,1fr);align-items:start}
 .case-art>img{height:380px}
