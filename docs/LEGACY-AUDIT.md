@@ -16,7 +16,7 @@ This audit was completed from `source` before the rebuild removed any legacy fil
 - `/about/`, `/blog/`, and the historical article remain live at their original paths.
 - Static redirect pages preserve `/work/` and `/ventures/` while pointing search engines to their new canonical destinations.
 - The old sitemap used `http://`; the rebuild uses canonical `https://adrianching.com` URLs.
-- The existing 1200×630 social preview images and favicon are retained.
+- The existing 1200×630 social preview images and favicon are retained. The old social images are not referenced because their positioning is now out of date.
 
 ## Analytics found
 
