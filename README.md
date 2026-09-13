@@ -38,13 +38,9 @@ When analytics is configured, outbound Calendly clicks emit a `founder_fit_call_
 
 The established branch model is preserved: source code belongs on `source`; generated GitHub Pages files belong on `master`.
 
-1. Merge the approved pull request into `source`.
-2. Check out `source` locally and pull the merge.
-3. Supply final newsletter configuration if available.
-4. Run `npm install`, `npm run build`, and `npm run check`.
-5. Run `npm run deploy` to publish `_site` to `master`.
+Merging an approved pull request into `source` is the production release signal. `.github/workflows/publish.yml` installs dependencies, builds the site, runs the site checks and publishes `_site` to `master`. GitHub Pages then serves the generated files. No local deployment command is needed.
 
-Do not run the deployment command before Adrian approves the production release.
+The workflow can also be run manually from GitHub Actions when a release needs to be retried. `npm run deploy` remains available as an emergency local fallback; do not run it without Adrian's production approval.
 
 See [`docs/LEGACY-AUDIT.md`](docs/LEGACY-AUDIT.md) for the migration constraints and retained assets.
 
