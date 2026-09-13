@@ -34,11 +34,29 @@ if (existsSync(output)) {
     const html = readFileSync(file, "utf8");
     if (!html.includes("<html lang=\"en\"")) errors.push(`${file}: missing lang attribute`);
     if (!html.includes("<meta name=\"viewport\"")) errors.push(`${file}: missing viewport metadata`);
+    if (!html.includes('http-equiv="refresh"')) {
+      if ((html.match(/<h1\b/g) || []).length !== 1) errors.push(`${file}: expected one main heading`);
+      for (const marker of ['<title>', 'name="description"', 'rel="canonical"', 'property="og:image"', 'name="twitter:image:alt"']) {
+        if (!html.includes(marker)) errors.push(`${file}: missing ${marker}`);
+      }
+    }
     if (/cal\.com|CALCOM_URL/i.test(html)) errors.push(`${file}: legacy Cal.com reference found`);
     calendlyLinks += (html.match(/https:\/\/calendly\.com\/adrianchinghc\/30-minute-call/g) || []).length;
     for (const match of html.matchAll(/<(?:a|img|script|link)\b[^>]*(?:href|src)=\"([^\"]+)\"/g)) {
       const target = internalTarget(match[1]);
       if (target && !existsSync(target)) errors.push(`${file}: broken internal link ${match[1]}`);
+      const hash = match[1].split("#")[1];
+      if (hash && (target || match[1].startsWith("#"))) {
+        const fragmentFile = target || file;
+        if (existsSync(fragmentFile) && fragmentFile.endsWith(".html")) {
+          const fragment = decodeURIComponent(hash);
+          if (!readFileSync(fragmentFile, "utf8").includes(`id="${fragment}"`)) errors.push(`${file}: missing anchor ${match[1]}`);
+        }
+      }
+    }
+    for (const match of html.matchAll(/<meta\b[^>]*(?:property|name)="(?:og:image|twitter:image)"[^>]*content="https:\/\/adrianching\.com([^\"]+)"/g)) {
+      const target = internalTarget(match[1]);
+      if (!target || !existsSync(target)) errors.push(`${file}: missing social image ${match[1]}`);
     }
     for (const match of html.matchAll(/<img\b[^>]*>/g)) {
       if (!/\balt=\"[^\"]*\"/.test(match[0])) errors.push(`${file}: image missing alt text`);

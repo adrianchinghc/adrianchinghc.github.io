@@ -8,22 +8,23 @@
   <meta name="author" content="Adrian Ching">
   <meta name="robots" content="{{ robots or 'index, follow' }}">
   <link rel="canonical" href="{{ site.url }}{{ page.url }}">
-  <link rel="icon" type="image/png" href="/assets/images/logo.png">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <link rel="apple-touch-icon" href="/assets/images/logo.png">
-  <link rel="preconnect" href="https://i.ytimg.com">
+  {% if page.url == '/' or page.url == '/blog/' %}<link rel="preconnect" href="https://i.ytimg.com">{% endif %}
   <meta property="og:type" content="{{ ogType or 'website' }}">
   <meta property="og:site_name" content="Adrian Ching">
   <meta property="og:title" content="{% if title %}{{ title }} · {% endif %}Adrian Ching">
   <meta property="og:description" content="{{ description or site.description }}">
   <meta property="og:url" content="{{ site.url }}{{ page.url }}">
-  <meta property="og:image" content="{{ site.url }}/assets/images/adrian/founder.webp">
-  <meta property="og:image:alt" content="Adrian Ching, founder and builder">
+  <meta property="og:image" content="{{ site.url }}{{ socialImage or '/assets/images/adrian/founder.webp' }}">
+  <meta property="og:image:alt" content="{{ socialImageAlt or 'Adrian Ching, founder and builder' }}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@adrianchinghc">
   <meta name="twitter:creator" content="@adrianchinghc">
   <meta name="twitter:title" content="{% if title %}{{ title }} · {% endif %}Adrian Ching">
   <meta name="twitter:description" content="{{ description or site.description }}">
-  <meta name="twitter:image" content="{{ site.url }}/assets/images/adrian/founder.webp">
+  <meta name="twitter:image" content="{{ site.url }}{{ socialImage or '/assets/images/adrian/founder.webp' }}">
+  <meta name="twitter:image:alt" content="{{ socialImageAlt or 'Adrian Ching, founder and builder' }}">
   <link rel="stylesheet" href="/assets/css/site.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Adrian Ching","url":"https://adrianching.com","image":"https://adrianching.com/assets/images/adrian/founder.webp","jobTitle":"Founder","worksFor":{"@type":"Organization","name":"Second Team"},"alumniOf":{"@type":"Organization","name":"Upstack Studio"},"sameAs":["{{ site.social.youtube }}","{{ site.social.x }}","{{ site.social.github }}"]}</script>
   {% block head %}{% endblock %}
@@ -33,10 +34,10 @@
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="shell header-inner">
-      <a class="wordmark" href="/" aria-label="Adrian Ching, home"><strong>Adrian Ching</strong><span aria-hidden="true">.</span></a>
+      <a class="wordmark" href="/" aria-label="Adrian Ching, home"><span class="wordmark-mark" aria-hidden="true">AC</span><strong>Adrian Ching</strong></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
       <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
-        <a href="/about/">About</a><a href="/blog/">Ideas</a><a href="/work-with-me/">Work with me</a><a class="nav-cta" href="/newsletter/">Newsletter</a>
+        <a href="/about/"{% if page.url == '/about/' %} aria-current="page"{% endif %}>About</a><a href="/blog/"{% if page.url == '/blog/' %} aria-current="page"{% endif %}>Ideas</a><a href="/work-with-me/"{% if page.url == '/work-with-me/' %} aria-current="page"{% endif %}>Work with me</a><a class="nav-cta" href="/newsletter/"{% if page.url == '/newsletter/' %} aria-current="page"{% endif %}>Newsletter</a>
       </nav>
     </div>
   </header>

@@ -47,3 +47,14 @@ The established branch model is preserved: source code belongs on `source`; gene
 Do not run the deployment command before Adrian approves the production release.
 
 See [`docs/LEGACY-AUDIT.md`](docs/LEGACY-AUDIT.md) for the migration constraints and retained assets.
+
+## Preview and editorial maintenance
+
+Work stays on `rebuild-2026` in PR #116. Vercel automatically builds branch pushes using `vercel.json`; the stable preview is https://adrianchingcom-git-rebuild-2026-upstackstudio.vercel.app/. Never promote a preview or change production domains without Adrian's approval. Preview protection is managed in Vercel.
+
+- `src/_data/media.js` owns the three curated YouTube links and dated audience snapshots. The first video is featured; the other two are popular supporting picks. Recheck public counts when refreshing the selection. No API key, live feed or heavy player is needed.
+- The Ideas page distinguishes curated picks from the latest uploads link. Do not invent articles, dates, engagement or live-feed claims.
+- The homepage story uses Adrian's confirmed history. Founder situations are explicitly illustrative, not invented client stories. The Teleme proof comes from the legacy work page; the quoted excerpt and attribution are preserved. Past software proof is not presented as an AI Audit result.
+- Each page can set `socialImage` and `socialImageAlt` to an existing, relevant photograph. Keep the canonical production URL even on previews.
+- Navigation remains available without JavaScript. With JavaScript, the mobile menu supports Escape, outside click, focus exit and viewport changes.
+- Newsletter signup still needs a real `KIT_URL` before launch. The fallback is a same-page section, not a working signup form.

@@ -1,3 +1,7 @@
+// Curated, not a live feed. Counts are conservative snapshots verified 2026-09-13.
+// Keep real published titles. Put a founder-focused interpretation in the templates,
+// rather than presenting it as a quote or renaming a video to promise new content.
+// The first item is the flagship; the next two are supporting popular videos.
 export default {
   youtube: {
     channelUrl: "https://www.youtube.com/@adrianchinghc",

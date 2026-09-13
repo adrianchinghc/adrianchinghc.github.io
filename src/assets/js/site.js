@@ -1,6 +1,11 @@
 const toggle = document.querySelector(".nav-toggle");
 const nav = document.querySelector(".site-nav");
 if (toggle && nav) {
+  document.documentElement.classList.add("nav-ready");
+  const closeMenu = () => {
+    toggle.setAttribute("aria-expanded", "false");
+    nav.classList.remove("is-open");
+  };
   toggle.addEventListener("click", () => {
     const isOpen = toggle.getAttribute("aria-expanded") === "true";
     toggle.setAttribute("aria-expanded", String(!isOpen));
@@ -8,10 +13,22 @@ if (toggle && nav) {
   });
   nav.addEventListener("click", (event) => {
     if (event.target.closest("a")) {
-      toggle.setAttribute("aria-expanded", "false");
-      nav.classList.remove("is-open");
+      closeMenu();
     }
   });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+      closeMenu();
+      toggle.focus();
+    }
+  });
+  document.addEventListener("click", (event) => {
+    if (!nav.contains(event.target) && !toggle.contains(event.target)) closeMenu();
+  });
+  document.addEventListener("focusin", (event) => {
+    if (!nav.contains(event.target) && !toggle.contains(event.target)) closeMenu();
+  });
+  window.matchMedia("(min-width: 761px)").addEventListener("change", closeMenu);
 }
 
 document.querySelectorAll('a[href^="https://calendly.com/"]').forEach((link) => {

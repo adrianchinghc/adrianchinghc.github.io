@@ -1,27 +1,23 @@
 ---
 layout: layouts/base.njk
 title: Ideas
-description: Videos and writing from Adrian Ching on building Second Team, AI, software, growth and the decisions behind the work.
+description: Videos and writing for founders deciding what to build, what to buy and what to leave alone. From Adrian Ching, founder of Second Team.
 permalink: /blog/
+socialImage: /assets/images/adrian/studio.webp
+socialImageAlt: Adrian Ching recording a video
 ---
-<header class="writing-hero"><div class="shell writing-hero-grid"><div><p class="page-kicker">Ideas</p><h1>I share what I learn while I’m doing the work.</h1><p class="page-lede">That includes videos and writing about AI, software, growth, Second Team and the decisions behind building a company.</p><div class="actions"><a class="button" href="/newsletter/">Get new notes by email</a></div></div><figure><img src="/assets/images/adrian/studio.webp" alt="Adrian Ching recording an idea" width="1200" height="1600" fetchpriority="high"><figcaption>Sharing what proves useful.</figcaption></figure></div></header>
-<section class="section media-section">
-  <div class="shell media-heading">
-    <div><p class="section-index">Popular on YouTube</p><h2>Start with the videos people watched most.</h2><p class="section-lede">More than 27,000 people follow the channel. I’ve published over 300 videos on software, AI and building products.</p></div>
-    <div class="media-stats" aria-label="YouTube channel figures"><p><strong>{{ media.youtube.subscribers }}</strong><span>subscribers</span></p><p><strong>{{ media.youtube.videos }}</strong><span>videos published</span></p></div>
-  </div>
-  <div class="shell">{% include "featured-videos.njk" %}<div class="media-action"><a class="text-link" href="{{ media.youtube.channelUrl }}" target="_blank" rel="noopener" data-media-link="youtube-channel">Visit the YouTube channel ↗</a></div></div>
-</section>
-<section class="section"><div class="shell">
-  <div class="section-heading-grid"><p class="section-index">What I write about</p><div><h2>Four parts of the same work.</h2><p class="section-lede">Each note starts with something I am building, deciding or learning firsthand.</p></div></div>
-  <div class="topic-grid">
-    <article class="topic"><span>01</span><h3>AI and business growth</h3><p>Where AI can make or save money, and where it cannot.</p></article>
-    <article class="topic"><span>02</span><h3>Building Second Team</h3><p>Lessons from building the company, without sharing private product work.</p></article>
-    <article class="topic"><span>03</span><h3>Software and business</h3><p>When to build, when to buy and what business owners need to know.</p></article>
-    <article class="topic"><span>04</span><h3>Founder lessons</h3><p>Choices, mistakes and things I would do differently.</p></article>
-  </div>
+<header class="writing-hero"><div class="shell writing-hero-grid"><div><p class="page-kicker">Ideas from the work</p><h1>Better questions.<br>Better decisions.</h1><p class="page-lede">A cheaper way to build isn’t always a reason to build. I share what I’m learning about software, AI and running a business, including the choices I’ve changed my mind about.</p><nav class="page-jumps" aria-label="Browse ideas"><a href="#featured">Featured</a><a href="#popular">Popular</a><a href="#latest">Latest</a></nav></div><figure><img src="/assets/images/adrian/studio.webp" alt="Adrian Ching recording a video" width="1200" height="1600" fetchpriority="high"><figcaption>From the work to the camera.</figcaption></figure></div></header>
+<section class="section media-section" id="featured"><div class="shell">
+  <div class="section-heading-grid"><p class="section-index">01 / Featured</p><div><h2>The choice before the build.</h2><p class="section-lede">Start here if you’re weighing up another tool or software project.</p></div></div>
+  {% set lead = media.featuredVideos[0] %}
+  <div class="media-feature"><a class="video-card" href="{{ lead.url }}" target="_blank" rel="noopener" data-media-link="youtube-video" aria-label="Watch {{ lead.title }} on YouTube (opens in a new tab)"><div class="video-thumbnail"><img src="{{ lead.image }}" alt="" width="1280" height="720" loading="lazy" decoding="async"><span class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div><div class="video-meta"><span>{{ lead.views }}</span><span>{{ lead.topic }}</span></div><h3>{{ lead.title }}</h3></a><div class="media-note"><p class="section-index">A question to take into your next meeting</p><h3>What would make this worth building?</h3><p>Not just whether the tool can do it. Whether the problem matters enough, whether someone will use it and whether there’s a simpler answer.</p><p>That’s the thinking I bring to my own work, too.</p><p class="note-signoff">Adrian Ching</p></div></div>
 </div></section>
-<section class="section section-soft"><div class="shell"><div class="section-heading-grid"><p class="section-index">Archive</p><div><h2>Published writing</h2><p class="section-lede">The archive is small today. I’m adding to it when I have something worth publishing.</p></div></div>
-  <div class="article-list"><a class="article-row" href="/how-to-build-a-website-using-middleman-and-github-pages/"><time datetime="2016-12-04">Dec 2016</time><strong>How to Build a Website Using Middleman and GitHub Pages</strong><span class="category">Software</span></a></div>
+<section class="section" id="popular"><div class="shell">
+  <div class="section-heading-grid"><p class="section-index">02 / Popular</p><div><h2>Two more places to start.</h2><p class="section-lede">Popular videos on building with AI and choosing software help. Pick the question closest to the decision in front of you.</p></div></div>
+  <div class="popular-pair">{% for video in media.featuredVideos %}{% if not loop.first %}<a class="video-card" href="{{ video.url }}" target="_blank" rel="noopener" data-media-link="youtube-video" aria-label="Watch {{ video.title }} on YouTube (opens in a new tab)"><div class="video-thumbnail"><img src="{{ video.image }}" alt="" width="1280" height="720" loading="lazy" decoding="async"><span class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div><div class="video-meta"><span>{{ video.views }}</span><span>{{ video.topic }}</span></div><h3>{{ video.title }}</h3></a>{% endif %}{% endfor %}</div>
 </div></section>
-<section class="newsletter-band"><div class="shell newsletter-grid"><div><p class="section-index">New writing, directly</p><h2>Notes from inside the work.</h2></div><div><p>I write when I have something useful to say. No daily AI news. No filler.</p><a class="button" href="/newsletter/">Join the newsletter</a></div></div></section>
+<section class="section section-soft" id="latest"><div class="shell">
+  <div class="section-heading-grid"><p class="section-index">03 / Latest</p><div><h2>Keep up with the work.</h2><p class="section-lede">AI and growth. Building Second Team. Software decisions. Lessons from running a company.</p></div></div>
+  <div class="latest-note"><div><h3>New videos go on YouTube first.</h3><p>The videos above are a curated starting point, not a live feed. For my newest uploads, go straight to the channel.</p><a class="text-link" href="{{ media.youtube.channelUrl }}" target="_blank" rel="noopener" data-media-link="youtube-channel">See the newest videos on YouTube</a></div><div><h3>Writing, in your inbox.</h3><p>I write when there’s a decision, a mistake or a lesson worth sharing. You can follow along without checking back here.</p><a class="text-link" href="/newsletter/">Join the newsletter</a></div></div>
+</div></section>
+<section class="section"><div class="shell"><div class="section-heading-grid"><p class="section-index">From the archive</p><div><h2>Earlier writing.</h2><p class="section-lede">An older technical guide from before Upstack Studio. Kept here as part of the work, not as current software advice.</p></div></div><div class="article-list"><a class="article-row" href="/how-to-build-a-website-using-middleman-and-github-pages/"><time datetime="2016-12-04">4 Dec 2016</time><strong>How to Build a Website Using Middleman and GitHub Pages</strong><span class="category">Archive</span></a></div></div></section>
