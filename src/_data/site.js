@@ -18,7 +18,7 @@ export default function () {
       hotjar: process.env.HOTJAR_ID || ""
     },
     social: {
-      youtube: "https://www.youtube.com/@adrianching",
+      youtube: "https://www.youtube.com/@adrianchinghc",
       x: "https://x.com/adrianchinghc",
       github: "https://github.com/adrianchinghc"
     }

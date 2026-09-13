@@ -33,3 +33,24 @@ document.querySelectorAll('a[href^="https://calendly.com/"]').forEach((link) => 
     }
   });
 });
+
+document.querySelectorAll("[data-media-link]").forEach((link) => {
+  link.addEventListener("click", () => {
+    const eventData = {
+      link_url: link.href,
+      link_text: link.querySelector("h3")?.textContent.trim() || link.textContent.trim(),
+      link_type: link.dataset.mediaLink,
+      page_path: window.location.pathname
+    };
+
+    if (typeof window.gtag === "function") {
+      window.gtag("event", "youtube_click", eventData);
+    }
+    if (typeof window.fbq === "function") {
+      window.fbq("trackCustom", "YouTubeClick", eventData);
+    }
+    if (typeof window.hj === "function") {
+      window.hj("event", "youtube_click");
+    }
+  });
+});

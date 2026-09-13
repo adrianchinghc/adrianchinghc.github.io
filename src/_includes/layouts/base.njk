@@ -10,6 +10,7 @@
   <link rel="canonical" href="{{ site.url }}{{ page.url }}">
   <link rel="icon" type="image/png" href="/assets/images/logo.png">
   <link rel="apple-touch-icon" href="/assets/images/logo.png">
+  <link rel="preconnect" href="https://i.ytimg.com">
   <meta property="og:type" content="{{ ogType or 'website' }}">
   <meta property="og:site_name" content="Adrian Ching">
   <meta property="og:title" content="{% if title %}{{ title }} · {% endif %}Adrian Ching">
@@ -35,7 +36,7 @@
       <a class="wordmark" href="/" aria-label="Adrian Ching, home"><strong>Adrian Ching</strong><span aria-hidden="true">.</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
       <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
-        <a href="/about/">About</a><a href="/blog/">Writing</a><a href="/work-with-me/">Work with me</a><a class="nav-cta" href="/newsletter/">Newsletter</a>
+        <a href="/about/">About</a><a href="/blog/">Ideas</a><a href="/work-with-me/">Work with me</a><a class="nav-cta" href="/newsletter/">Newsletter</a>
       </nav>
     </div>
   </header>
@@ -43,7 +44,7 @@
   <footer class="site-footer">
     <div class="shell footer-grid">
       <div><a class="footer-name" href="/">Adrian Ching.</a><p>Building Second Team. Sharing what I learn.</p></div>
-      <nav aria-label="Footer navigation"><a href="/about/">About</a><a href="/blog/">Writing</a><a href="/newsletter/">Newsletter</a><a href="/work-with-me/">Work with me</a></nav>
+      <nav aria-label="Footer navigation"><a href="/about/">About</a><a href="/blog/">Ideas</a><a href="/newsletter/">Newsletter</a><a href="/work-with-me/">Work with me</a></nav>
       <div class="footer-connect"><a href="{{ site.social.youtube }}" rel="me noopener" target="_blank">YouTube</a><a href="{{ site.social.x }}" rel="me noopener" target="_blank">X</a><a href="{{ site.social.github }}" rel="me noopener" target="_blank">GitHub</a><a href="{{ site.contactUrl }}">Contact</a></div>
     </div>
     <div class="shell footer-bottom"><span>© {{ "now" | year }} Adrian Ching</span><span>Kuala Lumpur · Building globally</span></div>
