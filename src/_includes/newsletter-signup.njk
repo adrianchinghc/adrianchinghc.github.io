@@ -1,0 +1,7 @@
+{% from "icons.njk" import icon %}
+{% if site.newsletterUrl %}
+<div class="actions"><a class="button" href="{{ site.newsletterUrl }}" data-newsletter-link>Join the newsletter</a></div>
+<p class="microcopy">I send a note when I have something useful to say. Unsubscribe anytime.</p>
+{% else %}
+<div class="signup-pending"><p>Newsletter signup will be available here soon. In the meantime, you can find my videos on YouTube.</p><a class="text-link" href="{{ site.social.youtube }}" target="_blank" rel="noopener" data-media-link="youtube-channel">Watch on YouTube{{ icon("external", "link-arrow") }}</a></div>
+{% endif %}

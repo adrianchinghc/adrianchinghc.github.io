@@ -1,0 +1,19 @@
+{% from "icons.njk" import icon %}
+<div class="client-voices" aria-labelledby="client-voices-title">
+  <h3 id="client-voices-title">In their own words.</h3>
+  <p class="case-disclosure">Client feedback on software projects delivered with the Upstack Studio team.</p>
+  <div class="client-voice-grid">
+    {% for testimonial in testimonials %}
+    <figure class="client-voice{% if not testimonial.image %} client-voice-written{% endif %}">
+      {% if testimonial.image %}
+      <img class="client-project-image" src="{{ testimonial.image }}" alt="{{ testimonial.imageAlt }}" width="1000" height="1000" loading="lazy" decoding="async">
+      <h4>{{ testimonial.project }}</h4>
+      <p class="client-project-context">{{ testimonial.context }}</p>
+      {% endif %}
+      <blockquote cite="{{ testimonial.url }}"><p>“{{ testimonial.quote }}”</p></blockquote>
+      <figcaption>{% if testimonial.portrait %}<img src="{{ testimonial.portrait }}" alt="" width="400" height="400" loading="lazy" decoding="async">{% endif %}<div><strong>{{ testimonial.name }}</strong><span>{{ testimonial.attribution }}</span></div></figcaption>
+      <a class="text-link" href="{{ testimonial.url }}">{{ icon(testimonial.icon, "") }}{{ testimonial.action }}</a>
+    </figure>
+    {% endfor %}
+  </div>
+</div>

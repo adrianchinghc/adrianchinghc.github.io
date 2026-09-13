@@ -1,59 +1,16 @@
 {
   "name": "adrianching.com",
-  "version": "1.0.0",
-  "description": "Personal Site of Adrian Ching",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/adrianchinghc/adrianchinghc.github.io.git"
-  },
-  "author": "Adrian Ching",
-  "bugs": {
-    "url": "https://github.com/adrianchinghc/adrianchinghc.github.io/issues"
-  },
-  "homepage": "https://github.com/adrianchinghc/adrianchinghc.github.io#readme",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "The personal website of Adrian Ching.",
   "scripts": {
-    "development": "NODE_ENV=development gulp default",
-    "production": "NODE_ENV=production gulp production"
+    "dev": "node scripts/dev.mjs",
+    "build": "eleventy",
+    "check": "node scripts/check-site.mjs"
   },
   "devDependencies": {
-    "bourbon": "^5.0.0",
-    "bourbon-neat": "^2.0.0",
-    "browser-sync": "^2.26.7",
-    "browserify": "^14.0.0",
-    "browserify-shim": "^3.8.14",
-    "del": "^3.0.0",
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^4.0.0",
-    "gulp-changed": "^3.1.0",
-    "gulp-clean-css": "^3.4.0",
-    "gulp-environments": "^0.1.2",
-    "gulp-imagemin": "^3.2.0",
-    "gulp-load-plugins": "^1.5.0",
-    "gulp-sass": "^3.1.0",
-    "gulp-sizereport": "^1.2.1",
-    "gulp-sourcemaps": "^2.6.4",
-    "gulp-strip-debug": "^1.1.0",
-    "gulp-uglify": "^3.0.0",
-    "gulp-util": "^3.0.8",
-    "run-sequence": "^1.2.2",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0"
+    "@11ty/eleventy": "^3.1.2"
   },
-  "dependencies": {
-    "jquery": "^3.5.1",
-    "moment": "^2.18.1",
-    "webfontloader": "^1.6.27"
-  },
-  "engines": {
-    "node": ">= 6.9.4"
-  },
-  "browserify": {
-    "transform": [
-      "browserify-shim"
-    ]
-  },
-  "browserify-shim": {
-    "./bower_components/jquery/dist/jquery.js": "$"
-  }
+  "engines": { "node": ">=20.12" }
 }
