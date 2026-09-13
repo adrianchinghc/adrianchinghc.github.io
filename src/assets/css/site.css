@@ -52,7 +52,7 @@ p,li,dd{text-wrap:pretty}
 .button:active:not(:focus-visible),.nav-toggle:active:not(:focus-visible){transform:scale(.98)}
 .text-link{display:inline-flex;align-items:center;min-height:44px;font-size:.9375rem;font-weight:650;line-height:1.45;text-decoration:underline}
 
-/* A face, a name, and the work. The portrait precedes the intro on phones. */
+/* A face, a name, and the work. The intro precedes the portrait on phones. */
 .home-hero{padding-block:clamp(2.5rem,5vw,4.75rem)}
 .founder-hero-grid{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);column-gap:clamp(3rem,8vw,7rem);align-items:center}
 .founder-heading{grid-column:1;grid-row:1;align-self:end}
@@ -399,4 +399,79 @@ figcaption{font-size:.8125rem;line-height:1.5;color:var(--muted);margin-top:.75r
   .newsletter-hero figure{max-width:300px}
   .newsletter-hero figure img{aspect-ratio:4/3;max-height:none;object-position:center 35%}
   .case-feature{grid-template-columns:1fr}
+}
+
+/* Photographs add context; icons support the words rather than replacing them. */
+.icon{display:inline-block;width:20px;height:20px;flex:0 0 20px;vertical-align:middle}
+.icon-heading{display:flex;align-items:baseline;gap:.65rem}
+.icon-heading .icon{align-self:flex-start;margin-top:.2em;color:var(--signal)}
+.section-icon{display:block;width:28px;height:28px;color:var(--signal);margin-bottom:1.15rem}
+.button,.text-link{gap:.6rem}
+.link-arrow{width:18px;height:18px;flex-basis:18px;transition:transform 160ms var(--ease-out)}
+.text-link .link-arrow{margin-left:.1rem}
+.engagement-summary dt .icon{width:17px;height:17px;flex-basis:17px;margin-top:.1em}
+.engagement-summary dd{padding-left:calc(17px + .65rem)}
+.current-work-photo{grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1fr);align-items:start;gap:1.75rem 2.5rem}
+.current-work-photo .working-photo{grid-column:1;grid-row:1 / span 2}
+.current-work-photo>h2{grid-column:2 / -1;max-width:none;margin:0}
+.current-work-photo .current-company{grid-row:2}
+.working-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 45%}
+.audit-photo{margin-top:2rem;max-width:390px}
+.audit-photo img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center 43%}
+.personal-moments h2{margin-bottom:2rem}
+.life-photos{display:grid;grid-template-columns:1.2fr 1fr;gap:2rem;align-items:start}
+.life-photos figure+figure{margin-top:4rem}
+.life-photos img{width:100%;height:auto}
+.latest-with-photo{grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1fr);gap:2.5rem;align-items:center}
+.recording-photo img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center 50%}
+/* The play control sits clear of faces. Only clickable photographs move. */
+.video-play{inset:auto auto 1rem 1rem}
+.video-play svg{width:40px;height:40px;padding:12px}
+.video-thumbnail img{transition:transform 180ms var(--ease-out)}
+.menu-mark{position:relative;display:block;width:20px;height:16px;flex:0 0 20px}
+.menu-mark span{position:absolute;left:0;width:20px;height:1.5px;background:currentColor;transform-origin:center;transition:transform 140ms var(--ease-out)}
+.menu-mark span:first-child{top:4px}.menu-mark span:last-child{top:11px}
+.nav-toggle[aria-expanded="true"] .menu-mark span:first-child{transform:translateY(3.5px) rotate(45deg)}
+.nav-toggle[aria-expanded="true"] .menu-mark span:last-child{transform:translateY(-3.5px) rotate(-45deg)}
+.nav-toggle[data-motion="instant"] .menu-mark span{transition:none}
+html[data-input="keyboard"]{scroll-behavior:auto}
+@media(hover:hover) and (pointer:fine){
+  .text-link:hover:not(:focus-visible) .link-arrow,.button:hover:not(:focus-visible) .link-arrow{transform:translateX(3px)}
+  .video-card:hover:not(:focus-visible) .video-thumbnail img{transform:scale(1.02)}
+}
+.text-link:focus-visible .link-arrow,.button:focus-visible .link-arrow,.video-card:focus-visible .video-thumbnail img,.video-card:focus-visible .video-play svg{transform:none;transition:none}
+@media(max-width:1000px){
+  .current-work-photo{grid-template-columns:minmax(0,.8fr) minmax(0,1fr);gap:1.5rem 2rem}
+  .current-work-photo .working-photo{grid-row:1 / span 3}
+  .current-work-photo>h2{grid-column:2}
+  .current-work-photo .current-company{grid-column:2;grid-row:auto}
+  .latest-with-photo{grid-template-columns:.8fr 1fr;gap:2rem}
+  .latest-with-photo .recording-photo{grid-row:1 / span 2}
+}
+@media(max-width:760px){
+  .nav-ready .nav-toggle{gap:.65rem;margin-left:auto}
+  .nav-ready .site-nav{display:flex;visibility:hidden;opacity:0;pointer-events:none;transform:translateY(-6px) scale(.98);transform-origin:top right;transition:opacity 140ms var(--ease-out),transform 140ms var(--ease-out),visibility 0s 140ms}
+  .nav-ready .site-nav.is-open{visibility:visible;opacity:1;pointer-events:auto;transform:none;transition-duration:180ms,180ms,0s;transition-delay:0s}
+  .nav-ready .site-nav[data-motion="instant"]{transition:none}
+  .current-work-photo{grid-template-columns:1fr 1fr;gap:1.5rem}
+  .current-work-photo>h2{grid-column:1 / -1;grid-row:1}
+  .current-work-photo .working-photo{grid-column:1 / -1;grid-row:2;max-width:420px;width:100%}
+  .current-work-photo .working-photo img{aspect-ratio:16/10;max-height:300px}
+  .current-work-photo .current-company{grid-column:auto;grid-row:3}
+  .current-work-photo .current-company+.current-company{border:0;padding:0}
+  .life-photos{gap:1rem;grid-template-columns:1fr}
+  .life-photos figure+figure{margin-top:.75rem}
+  .latest-with-photo{grid-template-columns:1fr;gap:2rem}
+  .latest-with-photo .recording-photo{grid-row:auto;max-width:360px}
+  .recording-photo img{aspect-ratio:4/3;object-position:center 48%}
+  .audit-photo{max-width:360px}
+}
+@media(max-width:420px){
+  .current-work-photo{grid-template-columns:1fr}
+  .current-work-photo .current-company{grid-column:1;grid-row:auto}
+  .current-work-photo .current-company+.current-company{border-top:1px solid var(--line);padding-top:1.25rem}
+}
+@media(prefers-reduced-motion:reduce){
+  .link-arrow,.video-thumbnail img,.menu-mark span{transition:none!important}
+  .text-link:hover .link-arrow,.button:hover .link-arrow,.video-card:hover .video-thumbnail img,.nav-ready .site-nav{transform:none!important}
 }

@@ -1,37 +1,44 @@
 const toggle = document.querySelector(".nav-toggle");
 const nav = document.querySelector(".site-nav");
 if (toggle && nav) {
-  document.documentElement.classList.add("nav-ready");
-  const closeMenu = () => {
-    toggle.setAttribute("aria-expanded", "false");
-    toggle.textContent = "Menu";
-    nav.classList.remove("is-open");
+  const wideScreen = window.matchMedia("(min-width: 761px)");
+  const label = toggle.querySelector(".nav-label");
+  const setMenu = (open, instant = true) => {
+    nav.dataset.motion = instant ? "instant" : "pointer";
+    toggle.dataset.motion = nav.dataset.motion;
+    toggle.setAttribute("aria-expanded", String(open));
+    label.textContent = open ? "Close menu" : "Menu";
+    nav.classList.toggle("is-open", open);
+    // Closed mobile links leave the tab order immediately, including during exit.
+    nav.inert = !wideScreen.matches && !open;
   };
-  toggle.addEventListener("click", () => {
-    const isOpen = toggle.getAttribute("aria-expanded") === "true";
-    toggle.setAttribute("aria-expanded", String(!isOpen));
-    toggle.textContent = isOpen ? "Menu" : "Close menu";
-    nav.classList.toggle("is-open", !isOpen);
+  setMenu(false);
+  document.documentElement.classList.add("nav-ready");
+  toggle.addEventListener("click", (event) => {
+    const open = toggle.getAttribute("aria-expanded") !== "true";
+    setMenu(open, event.detail === 0);
   });
   nav.addEventListener("click", (event) => {
-    if (event.target.closest("a")) {
-      closeMenu();
-    }
+    if (event.target.closest("a")) setMenu(false);
   });
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
-      closeMenu();
+      setMenu(false);
       toggle.focus();
     }
   });
   document.addEventListener("click", (event) => {
-    if (!nav.contains(event.target) && !toggle.contains(event.target)) closeMenu();
+    if (!nav.contains(event.target) && !toggle.contains(event.target)) setMenu(false, event.detail === 0);
   });
   document.addEventListener("focusin", (event) => {
-    if (!nav.contains(event.target) && !toggle.contains(event.target)) closeMenu();
+    if (!nav.contains(event.target) && !toggle.contains(event.target)) setMenu(false);
   });
-  window.matchMedia("(min-width: 761px)").addEventListener("change", closeMenu);
+  wideScreen.addEventListener("change", () => setMenu(false));
 }
+
+// Keyboard section jumps are immediate; pointer-initiated jumps retain native smooth scrolling.
+document.addEventListener("keydown", () => { document.documentElement.dataset.input = "keyboard"; });
+document.addEventListener("pointerdown", () => { document.documentElement.dataset.input = "pointer"; });
 
 document.querySelectorAll('a[href^="https://calendly.com/"]').forEach((link) => {
   link.addEventListener("click", () => {

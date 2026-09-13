@@ -5,13 +5,14 @@ permalink: /
 socialImage: /assets/images/adrian/founder.webp
 socialImageAlt: Adrian Ching, founder of Second Team
 ---
+{% from "icons.njk" import icon %}
 <section class="home-hero">
   <div class="shell home-introduction">
     <div class="home-copy">
       <h1>Adrian Ching.</h1>
       <p class="hero-declaration">I build companies.<br>I share what I learn.</p>
       <p class="hero-support">I’m building Second Team and a portfolio of software, media and other businesses I own. This is where I share the work and what it teaches me.</p>
-      <div class="actions"><a class="button" href="/blog/" data-cta="home-ideas">Explore my ideas</a><a class="text-link" href="/work-with-me/" data-cta="home-work">Work with me</a></div>
+      <div class="actions"><a class="button" href="/blog/" data-cta="home-ideas"><span>Explore my ideas</span>{{ icon("arrow", "link-arrow") }}</a><a class="text-link" href="/work-with-me/" data-cta="home-work">Work with me{{ icon("arrow", "link-arrow") }}</a></div>
     </div>
     <figure class="home-portrait"><img src="/assets/images/adrian/founder.webp" alt="Adrian Ching seated outside a studio" width="1013" height="1800" fetchpriority="high"></figure>
   </div>
@@ -21,19 +22,19 @@ socialImageAlt: Adrian Ching, founder of Second Team
 <section class="section media-section" id="start-here"><div class="shell">
   <div class="section-heading-grid"><h2>A useful place to start.</h2><p class="section-lede">Choosing a tool, trying AI or hiring someone to build? Start with the decision in front of you.</p></div>
   {% include "editorial-media.njk" %}
-  <div class="media-action"><a class="text-link" href="/blog/">All videos and writing</a></div>
+  <div class="media-action"><a class="text-link" href="/blog/">All videos and writing{{ icon("arrow", "link-arrow") }}</a></div>
 </div></section>
 
 <section class="section section-soft" id="my-story"><div class="shell story-composition">
   <div class="story-opening"><h2>I built an agency.<br>Then I chose to stop.</h2><p class="section-lede">Being able to keep going isn’t always a reason to.</p></div>
   <figure class="story-photo"><img src="/assets/images/adrian/upstack-team.webp" alt="Adrian Ching with the Upstack Studio team" width="1130" height="1130" loading="lazy" decoding="async"><figcaption>With the Upstack Studio team.</figcaption></figure>
-  <div class="story-copy"><p>I founded Upstack Studio in 2017. My team and I spent years building web and mobile software with business owners.</p><p>The work taught me to look past the feature list. What will customers use? What deserves the budget? What is the team actually trying to change?</p><p>Eventually, I had to ask the same kind of question about my own business. Was this still the model I wanted to build?</p><p class="story-turn">The answer was no. I shut the agency down and chose a different path.</p><a class="text-link" href="/about/">Read my story</a></div>
+  <div class="story-copy"><p>I founded Upstack Studio in 2017. My team and I spent years building web and mobile software with business owners.</p><p>The work taught me to look past the feature list. What will customers use? What deserves the budget? What is the team actually trying to change?</p><p>Eventually, I had to ask the same kind of question about my own business. Was this still the model I wanted to build?</p><p class="story-turn">The answer was no. I shut the agency down and chose a different path.</p><a class="text-link" href="/about/">Read my story{{ icon("arrow", "link-arrow") }}</a></div>
 </div></section>
 
-<section class="section" id="now"><div class="shell current-work">
+<section class="section" id="now"><div class="shell current-work current-work-photo"><figure class="working-photo"><img src="/assets/images/adrian/at-work.webp" alt="Adrian Ching working at a laptop beside a café window" width="909" height="1600" loading="lazy" decoding="async"></figure>
   <h2>What I’m building now.</h2>
-  <div class="current-company"><h3>Second Team</h3><p>My main company. It gets most of my time and it’s where I’m focused for the long term.</p></div>
-  <div class="current-company"><h3>A portfolio of my own</h3><p>Alongside Second Team, I’m building software, media and other businesses I own and operate.</p><a class="text-link" href="/about/#what-im-building">More about the work</a></div>
+  <div class="current-company"><h3 class="icon-heading">{{ icon("building", "") }}Second Team</h3><p>My main company. It gets most of my time and it’s where I’m focused for the long term.</p></div>
+  <div class="current-company"><h3 class="icon-heading">{{ icon("portfolio", "") }}A portfolio of my own</h3><p>Alongside Second Team, I’m building software, media and other businesses I own and operate.</p><a class="text-link" href="/about/#what-im-building">More about the work{{ icon("arrow", "link-arrow") }}</a></div>
 </div></section>
 
 <section class="section proof-section" id="proof"><div class="shell">
@@ -44,7 +45,7 @@ socialImageAlt: Adrian Ching, founder of Second Team
 
 <section class="section section-soft" id="work-together"><div class="shell">
   <div class="section-heading-grid"><h2>The business works. Too much still comes back to you.</h2><p class="section-lede">Leads wait for someone to follow up. Past customers go quiet. The team repeats the same work. Then another AI proposal lands on your desk.</p><p>I help a small number of established B2B founders decide what’s worth fixing first.</p></div>
-  <div class="offer-list"><article class="offer"><div><h3>AI Profit Opportunity Audit</h3><p>A focused business review, your top three opportunities and a clear 90-day roadmap. Diagnosis and prioritisation only.</p></div><div class="offer-meta"><span class="offer-price">Founding price: USD $2,500</span><a class="text-link" href="/ai-profit-opportunity-audit/">What the Audit covers</a></div></article><article class="offer"><div><h3>Private AI &amp; Growth Advisor</h3><p>Two 60-minute CEO sessions each month, bounded questions between calls and an independent view on important decisions.</p></div><div class="offer-meta"><span class="offer-price">Founding price: USD $3,500/month</span><a class="text-link" href="/advisory/">How advisory works</a></div></article></div>
-  <div class="work-call"><p>We start with a 30-minute fit call on Google Meet. We agree on the engagement before payment; the Audit is paid upfront. The call establishes fit and does not include an Audit or strategy session.</p><a class="button" href="{{ site.bookingUrl }}">Book a Founder Fit Call</a></div>
+  <div class="offer-list"><article class="offer"><div><h3 class="icon-heading">{{ icon("search", "") }}AI Profit Opportunity Audit</h3><p>A focused business review, your top three opportunities and a clear 90-day roadmap. Diagnosis and prioritisation only.</p></div><div class="offer-meta"><span class="offer-price">Founding price: USD $2,500</span><a class="text-link" href="/ai-profit-opportunity-audit/">What the Audit covers{{ icon("arrow", "link-arrow") }}</a></div></article><article class="offer"><div><h3 class="icon-heading">{{ icon("chat", "") }}Private AI &amp; Growth Advisor</h3><p>Two 60-minute CEO sessions each month, bounded questions between calls and an independent view on important decisions.</p></div><div class="offer-meta"><span class="offer-price">Founding price: USD $3,500/month</span><a class="text-link" href="/advisory/">How advisory works{{ icon("arrow", "link-arrow") }}</a></div></article></div>
+  <div class="work-call"><p>We start with a 30-minute fit call on Google Meet. We agree on the engagement before payment; the Audit is paid upfront. The call establishes fit and does not include an Audit or strategy session.</p><a class="button" href="{{ site.bookingUrl }}">{{ icon("calendar", "") }}<span>Book a Founder Fit Call</span></a></div>
 </div></section>
 {% include "story-newsletter.njk" %}
