@@ -10,7 +10,7 @@
   <link rel="canonical" href="{{ site.url }}{{ page.url }}">
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <link rel="apple-touch-icon" href="/assets/images/logo.png">
-  {% if page.url == '/' or page.url == '/blog/' %}<link rel="preconnect" href="https://i.ytimg.com">{% endif %}
+  <link rel="preload" href="/assets/fonts/manrope-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
   <meta property="og:type" content="{{ ogType or 'website' }}">
   <meta property="og:site_name" content="Adrian Ching">
   <meta property="og:title" content="{% if title %}{{ title }} · {% endif %}Adrian Ching">

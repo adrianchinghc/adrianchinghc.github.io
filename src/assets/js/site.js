@@ -36,6 +36,7 @@ document.querySelectorAll('a[href^="https://calendly.com/"]').forEach((link) => 
     const eventData = {
       link_url: link.href,
       link_text: link.textContent.trim(),
+      cta_location: link.dataset.cta || link.closest("section, header, footer")?.getAttribute("id") || link.closest("section, header, footer")?.className || "page",
       page_path: window.location.pathname
     };
 
@@ -48,6 +49,20 @@ document.querySelectorAll('a[href^="https://calendly.com/"]').forEach((link) => 
     if (typeof window.hj === "function") {
       window.hj("event", "founder_fit_call_click");
     }
+  });
+});
+
+// Track interest, not completed bookings or subscriptions. Existing events stay intact.
+document.querySelectorAll('a[href="/work-with-me/"], a[href="/newsletter/"], [data-newsletter-link]').forEach((link) => {
+  link.addEventListener("click", () => {
+    if (typeof window.gtag !== "function") return;
+    const eventName = link.getAttribute("href") === "/work-with-me/" ? "work_with_me_click" : "newsletter_click";
+    window.gtag("event", eventName, {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      page_path: window.location.pathname,
+      cta_location: link.dataset.cta || link.closest("header, footer, section")?.className || "page"
+    });
   });
 });
 

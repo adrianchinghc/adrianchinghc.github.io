@@ -9,7 +9,7 @@ export default function () {
     url: "https://adrianching.com",
     description: "Adrian Ching is building Second Team, sharing what he learns and helping a small number of B2B founders decide where AI is worth using.",
     bookingUrl: "https://calendly.com/adrianchinghc/30-minute-call",
-    newsletterUrl: process.env.KIT_URL || "/newsletter/#join",
+    newsletterUrl: process.env.KIT_URL || "",
     contactUrl: process.env.CONTACT_URL || "/work-with-me/#fit-call",
     paymentUrl: process.env.PAYMENT_URL || "",
     analytics: {

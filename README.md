@@ -27,7 +27,7 @@ npm run check
 Copy `.env.example` to `.env` or provide the variables in the shell used for the build.
 
 - Founder Fit Call buttons link directly to Adrian's active 30-minute Calendly event at `https://calendly.com/adrianchinghc/30-minute-call`. The event uses Google Meet and intentionally limited availability. No scheduling embed or public checkout is included.
-- `KIT_URL`: public Kit landing-page or form URL. Until configured, newsletter buttons stay on the newsletter signup section.
+- `KIT_URL`: public Kit landing-page or form URL. Until configured, the newsletter page states that signup is not yet available and offers a working YouTube link. No fake form or self-link is shown.
 - `CONTACT_URL`: optional public contact destination.
 - `PAYMENT_URL`: reserved for a later qualified-client payment flow and not linked from the public site.
 - `GA_MEASUREMENT_ID`, `META_PIXEL_ID`, `HOTJAR_ID`: optional tracking IDs. No tracking scripts are emitted when blank.
@@ -57,4 +57,12 @@ Work stays on `rebuild-2026` in PR #116. Vercel automatically builds branch push
 - The homepage story uses Adrian's confirmed history. Founder situations are explicitly illustrative, not invented client stories. The Teleme proof comes from the legacy work page; the quoted excerpt and attribution are preserved. Past software proof is not presented as an AI Audit result.
 - Each page can set `socialImage` and `socialImageAlt` to an existing, relevant photograph. Keep the canonical production URL even on previews.
 - Navigation remains available without JavaScript. With JavaScript, the mobile menu supports Escape, outside click, focus exit and viewport changes.
-- Newsletter signup still needs a real `KIT_URL` before launch. The fallback is a same-page section, not a working signup form.
+- Newsletter signup still needs a real `KIT_URL` before launch. The fallback is an honest signup-unavailable notice with a YouTube link.
+
+## Design and conversion refinements
+
+See `DESIGN.md` for the visual system and maintenance rules. Design skill packages are kept outside this repository. No frontend framework or animation library was added.
+
+The visual system uses a self-hosted Latin Manrope variable font from `@fontsource-variable/manrope` 5.3.0 (OFL license beside the font). Video covers are local editorial photographs of Adrian, not claimed original YouTube thumbnails. Published video titles, links and count snapshots are unchanged.
+
+Commercial pages expose price and scope near the primary CTA. The Work With Me page presents offer choices before the longer story and explains the fit-call → agreement/payment → intake flow. With existing Google Analytics configured, `work_with_me_click` and `newsletter_click` record interest; `founder_fit_call_click` now also records CTA location. These are click events, not completed booking or signup events. No conversion-rate increase is claimed without live traffic measurements.

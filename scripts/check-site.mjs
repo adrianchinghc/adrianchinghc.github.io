@@ -34,6 +34,8 @@ if (existsSync(output)) {
     const html = readFileSync(file, "utf8");
     if (!html.includes("<html lang=\"en\"")) errors.push(`${file}: missing lang attribute`);
     if (!html.includes("<meta name=\"viewport\"")) errors.push(`${file}: missing viewport metadata`);
+    if (/<a\b[^>]*href="(?:|#)"/.test(html)) errors.push(`${file}: empty or dead-end link`);
+    if (/<img\b[^>]*src="https:\/\/(?:i\.ytimg\.com|img\.youtube\.com)/.test(html)) errors.push(`${file}: remote YouTube cover dependency`);
     if (!html.includes('http-equiv="refresh"')) {
       if ((html.match(/<h1\b/g) || []).length !== 1) errors.push(`${file}: expected one main heading`);
       for (const marker of ['<title>', 'name="description"', 'rel="canonical"', 'property="og:image"', 'name="twitter:image:alt"']) {
@@ -63,6 +65,7 @@ if (existsSync(output)) {
     }
   }
   if (calendlyLinks < 8) errors.push(`Expected Calendly CTAs across commercial pages; found ${calendlyLinks}`);
+  if (existsSync(join(output, ".agents"))) errors.push("Development skills must not be published in the site output");
 }
 
 if (existsSync(join(output, "CNAME")) && readFileSync(join(output, "CNAME"), "utf8").trim() !== "adrianching.com") {
