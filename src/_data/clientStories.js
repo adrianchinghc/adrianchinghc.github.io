@@ -84,14 +84,14 @@ export default {
       "role": "Former CTO, Teleme",
       "image": "/assets/images/work/kevin.png",
       "quote": "The end product is not only good but better than what we have expected.",
-      "source": "From my original work page"
+      "source": "Project feedback"
     },
     {
       "name": "Tai Qiyao",
       "role": "Co-founder, Carpit",
       "image": "/assets/images/work/qiyao.jpg",
       "quote": "If you need someone who knows what he's doing, you can't go wrong with him.",
-      "source": "From my original work page"
+      "source": "Project feedback"
     }
   ],
   "summaries": [
