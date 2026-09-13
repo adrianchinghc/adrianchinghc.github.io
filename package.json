@@ -7,12 +7,10 @@
   "scripts": {
     "dev": "node scripts/dev.mjs",
     "build": "eleventy",
-    "check": "node scripts/check-site.mjs",
-    "deploy": "npm run build && gh-pages -d _site -b master"
+    "check": "node scripts/check-site.mjs"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^3.1.2",
-    "gh-pages": "^6.3.0"
+    "@11ty/eleventy": "^3.1.2"
   },
   "engines": { "node": ">=20.12" }
 }

@@ -36,17 +36,15 @@ When analytics is configured, outbound Calendly clicks emit a `founder_fit_call_
 
 ## Publishing after approval
 
-The established branch model is preserved: source code belongs on `source`; generated GitHub Pages files belong on `master`.
+Source code belongs on `source`. Merging an approved pull request into `source` is the production release signal. `.github/workflows/publish.yml` installs dependencies, builds the site, runs the site checks and deploys the generated `_site` artifact through GitHub Pages. `master` no longer needs to be updated.
 
-Merging an approved pull request into `source` is the production release signal. `.github/workflows/publish.yml` installs dependencies, builds the site, runs the site checks and publishes `_site` to `master`. GitHub Pages then serves the generated files. No local deployment command is needed.
-
-The workflow can also be run manually from GitHub Actions when a release needs to be retried. `npm run deploy` remains available as an emergency local fallback; do not run it without Adrian's production approval.
+Before the first automated release, set **Settings → Pages → Build and deployment → Source** to **GitHub Actions**. This is a one-time repository setting. The workflow can also be run manually from the Actions tab when a release needs to be retried.
 
 See [`docs/LEGACY-AUDIT.md`](docs/LEGACY-AUDIT.md) for the migration constraints and retained assets.
 
 ## Preview and editorial maintenance
 
-Work stays on `rebuild-2026` in PR #116. Vercel automatically builds branch pushes using `vercel.json`; the stable preview is https://adrianchingcom-git-rebuild-2026-upstackstudio.vercel.app/. Never promote a preview or change production domains without Adrian's approval. Preview protection is managed in Vercel.
+Work stays on `rebuild-2026` in PR #116. Vercel automatically builds branch pushes using `vercel.json`; the stable preview is https://adrianchingcom-git-rebuild-2026-upstackstudio.vercel.app/. Vercel is the preview environment; GitHub Pages hosts production. Never promote a Vercel preview or change production domains without Adrian's approval. Preview protection is managed in Vercel.
 
 - `src/_data/media.js` owns the three curated YouTube links and dated audience snapshots. The first video is featured; the other two are popular supporting picks. Recheck public counts when refreshing the selection. No API key, live feed or heavy player is needed.
 - The Ideas page distinguishes curated picks from the latest uploads link. Do not invent articles, dates, engagement or live-feed claims.
