@@ -15,13 +15,16 @@
   <meta property="og:title" content="{% if title %}{{ title }} · {% endif %}Adrian Ching">
   <meta property="og:description" content="{{ description or site.description }}">
   <meta property="og:url" content="{{ site.url }}{{ page.url }}">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="{{ site.url }}/assets/images/adrian/founder.webp">
+  <meta property="og:image:alt" content="Adrian Ching, founder and builder">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@adrianchinghc">
   <meta name="twitter:creator" content="@adrianchinghc">
   <meta name="twitter:title" content="{% if title %}{{ title }} · {% endif %}Adrian Ching">
   <meta name="twitter:description" content="{{ description or site.description }}">
+  <meta name="twitter:image" content="{{ site.url }}/assets/images/adrian/founder.webp">
   <link rel="stylesheet" href="/assets/css/site.css">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Adrian Ching","url":"https://adrianching.com","image":"https://adrianching.com/assets/images/adrianching.jpg","jobTitle":"Founder","worksFor":{"@type":"Organization","name":"Second Team"},"sameAs":["{{ site.social.youtube }}","{{ site.social.x }}","{{ site.social.github }}"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Adrian Ching","url":"https://adrianching.com","image":"https://adrianching.com/assets/images/adrian/founder.webp","jobTitle":"Founder","worksFor":{"@type":"Organization","name":"Second Team"},"alumniOf":{"@type":"Organization","name":"Upstack Studio"},"sameAs":["{{ site.social.youtube }}","{{ site.social.x }}","{{ site.social.github }}"]}</script>
   {% block head %}{% endblock %}
   {% include "analytics.njk" %}
 </head>
@@ -29,18 +32,18 @@
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="shell header-inner">
-      <a class="wordmark" href="/" aria-label="Adrian Ching, home"><span aria-hidden="true">AC</span><strong>Adrian Ching</strong></a>
+      <a class="wordmark" href="/" aria-label="Adrian Ching, home"><strong>Adrian Ching</strong><span aria-hidden="true">.</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
       <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
-        <a href="/work-with-me/">Work with me</a><a href="/blog/">Thinking</a><a href="/about/">About</a><a class="nav-cta" href="/newsletter/">Newsletter</a>
+        <a href="/about/">About</a><a href="/blog/">Writing</a><a href="/work-with-me/">Work with me</a><a class="nav-cta" href="/newsletter/">Newsletter</a>
       </nav>
     </div>
   </header>
   <main id="main">{{ content | safe }}</main>
   <footer class="site-footer">
     <div class="shell footer-grid">
-      <div><a class="footer-name" href="/">Adrian Ching</a><p>Building businesses in the AI era.</p></div>
-      <nav aria-label="Footer navigation"><a href="/work-with-me/">Work with me</a><a href="/ai-profit-opportunity-audit/">AI Profit Opportunity Audit</a><a href="/advisory/">Private advisory</a><a href="/blog/">Thinking</a></nav>
+      <div><a class="footer-name" href="/">Adrian Ching.</a><p>Building useful businesses—and sharing what I learn.</p></div>
+      <nav aria-label="Footer navigation"><a href="/about/">About</a><a href="/blog/">Writing</a><a href="/newsletter/">Newsletter</a><a href="/work-with-me/">Work with me</a></nav>
       <div class="footer-connect"><a href="{{ site.social.youtube }}" rel="me noopener" target="_blank">YouTube</a><a href="{{ site.social.x }}" rel="me noopener" target="_blank">X</a><a href="{{ site.social.github }}" rel="me noopener" target="_blank">GitHub</a><a href="{{ site.contactUrl }}">Contact</a></div>
     </div>
     <div class="shell footer-bottom"><span>© {{ "now" | year }} Adrian Ching</span><span>Kuala Lumpur · Building globally</span></div>
