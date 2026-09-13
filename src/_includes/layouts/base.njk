@@ -37,7 +37,7 @@
       <a class="wordmark" href="/" aria-label="Adrian Ching, home"><span class="wordmark-mark" aria-hidden="true">AC</span><strong>Adrian Ching</strong></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
       <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
-        <a href="/about/"{% if page.url == '/about/' %} aria-current="page"{% endif %}>About</a><a href="/blog/"{% if page.url == '/blog/' %} aria-current="page"{% endif %}>Ideas</a><a href="/work-with-me/"{% if page.url == '/work-with-me/' %} aria-current="page"{% endif %}>Work with me</a><a class="nav-cta" href="/newsletter/"{% if page.url == '/newsletter/' %} aria-current="page"{% endif %}>Newsletter</a>
+        <a href="/about/"{% if page.url == '/about/' %} aria-current="page"{% endif %}>About</a><a href="/blog/"{% if page.url == '/blog/' %} aria-current="page"{% endif %}>Ideas</a><a href="/work-with-me/"{% if page.url == '/work-with-me/' %} aria-current="page"{% endif %}>Work with me</a><a{% if site.newsletterUrl %} class="nav-cta"{% endif %} href="/newsletter/"{% if page.url == '/newsletter/' %} aria-current="page"{% endif %}>Newsletter</a>
       </nav>
     </div>
   </header>

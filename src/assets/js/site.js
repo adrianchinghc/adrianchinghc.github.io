@@ -72,7 +72,7 @@ document.querySelectorAll("[data-media-link]").forEach((link) => {
   link.addEventListener("click", () => {
     const eventData = {
       link_url: link.href,
-      link_text: link.querySelector("h3")?.textContent.trim() || link.textContent.trim(),
+      link_text: link.querySelector("h3")?.textContent.trim() || link.getAttribute("aria-label") || link.textContent.trim(),
       link_type: link.dataset.mediaLink,
       page_path: window.location.pathname
     };

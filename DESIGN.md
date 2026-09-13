@@ -26,3 +26,11 @@ Keep this a light, reading-oriented publication with restrained motion and gener
 ## Evidence and maintenance
 
 Prices, scope, historical client quotes, canonical URLs and analytics event names are preserved. Each template supplies its social photograph and alt text. Font licensing accompanies the local font asset. Design tooling stays outside this repository.
+
+## Page composition
+
+Use one visual language with a distinct purpose for each page. The homepage introduces Adrian and gives immediate paths to ideas and selective work; its introduction and actions precede the portrait on phones. About develops the agency chapter, the decision to close it and the businesses being built now. Ideas brings real published work close to the top and organizes it around the visitor’s questions.
+
+Commercial pages put price, session duration, outcome and scope together, with jump links for readers scanning details. Newsletter invitations say “About the newsletter” while Kit is unconfigured. Editorial photographs link explicitly to YouTube; they are not original video thumbnails.
+
+Taste guidance is calibrated to moderate layout variation, low motion and generous reading space. Impeccable critique, layout, typography, adaptation and polish guide refinements; project constraints take priority over generic defaults. No skill packages belong in this repository.
