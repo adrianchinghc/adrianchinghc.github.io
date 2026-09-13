@@ -417,7 +417,7 @@ figcaption{font-size:.8125rem;line-height:1.5;color:var(--muted);margin-top:.75r
 .current-work-photo .current-company{grid-row:2}
 .working-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 45%}
 .audit-photo{margin-top:2rem;max-width:390px}
-.audit-photo img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center 43%}
+.audit-photo img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center 35%}
 .personal-moments h2{margin-bottom:2rem}
 .life-photos{display:grid;grid-template-columns:1.2fr 1fr;gap:2rem;align-items:start}
 .life-photos figure+figure{margin-top:4rem}
