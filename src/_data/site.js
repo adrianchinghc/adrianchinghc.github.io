@@ -19,8 +19,10 @@ export default function () {
     },
     social: {
       youtube: "https://www.youtube.com/@adrianchinghc",
-      x: "https://x.com/adrianchinghc",
-      github: "https://github.com/adrianchinghc"
+      linkedin: "https://www.linkedin.com/in/adrianchinghc",
+      instagram: "https://www.instagram.com/adrianchinghc",
+      facebook: "https://www.facebook.com/adrianchinghc",
+      x: "https://x.com/adrianchinghc"
     }
   };
 }
