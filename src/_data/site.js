@@ -8,7 +8,7 @@ export default function () {
     name: "Adrian Ching",
     url: "https://adrianching.com",
     description: "Adrian Ching is a founder and operator building businesses in the AI era, including Second Team.",
-    bookingUrl: process.env.CALCOM_URL || "/work-with-me/#fit-call",
+    bookingUrl: "https://calendly.com/adrianchinghc/30-minute-call",
     newsletterUrl: process.env.KIT_URL || "/newsletter/#join",
     contactUrl: process.env.CONTACT_URL || "/work-with-me/#fit-call",
     paymentUrl: process.env.PAYMENT_URL || "",

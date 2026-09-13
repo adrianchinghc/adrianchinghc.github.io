@@ -29,10 +29,13 @@ function internalTarget(url) {
 }
 
 if (existsSync(output)) {
+  let calendlyLinks = 0;
   for (const file of filesIn(output).filter((path) => path.endsWith(".html"))) {
     const html = readFileSync(file, "utf8");
     if (!html.includes("<html lang=\"en\"")) errors.push(`${file}: missing lang attribute`);
     if (!html.includes("<meta name=\"viewport\"")) errors.push(`${file}: missing viewport metadata`);
+    if (/cal\.com|CALCOM_URL/i.test(html)) errors.push(`${file}: legacy Cal.com reference found`);
+    calendlyLinks += (html.match(/https:\/\/calendly\.com\/adrianchinghc\/30-minute-call/g) || []).length;
     for (const match of html.matchAll(/<(?:a|img|script|link)\b[^>]*(?:href|src)=\"([^\"]+)\"/g)) {
       const target = internalTarget(match[1]);
       if (target && !existsSync(target)) errors.push(`${file}: broken internal link ${match[1]}`);
@@ -41,6 +44,7 @@ if (existsSync(output)) {
       if (!/\balt=\"[^\"]*\"/.test(match[0])) errors.push(`${file}: image missing alt text`);
     }
   }
+  if (calendlyLinks < 8) errors.push(`Expected Calendly CTAs across commercial pages; found ${calendlyLinks}`);
 }
 
 if (existsSync(join(output, "CNAME")) && readFileSync(join(output, "CNAME"), "utf8").trim() !== "adrianching.com") {

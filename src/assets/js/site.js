@@ -13,3 +13,23 @@ if (toggle && nav) {
     }
   });
 }
+
+document.querySelectorAll('a[href^="https://calendly.com/"]').forEach((link) => {
+  link.addEventListener("click", () => {
+    const eventData = {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      page_path: window.location.pathname
+    };
+
+    if (typeof window.gtag === "function") {
+      window.gtag("event", "founder_fit_call_click", eventData);
+    }
+    if (typeof window.fbq === "function") {
+      window.fbq("trackCustom", "FounderFitCallClick", eventData);
+    }
+    if (typeof window.hj === "function") {
+      window.hj("event", "founder_fit_call_click");
+    }
+  });
+});
