@@ -5,7 +5,7 @@ const output = "_site";
 const errors = [];
 const required = [
   "index.html", "work-with-me/index.html", "ai-profit-opportunity-audit/index.html",
-  "advisory/index.html", "about/index.html", "blog/index.html", "newsletter/index.html",
+  "advisory/index.html", "about/index.html", "client-stories/index.html", "blog/index.html", "newsletter/index.html",
   "404.html", "robots.txt", "sitemap.xml", "CNAME", "BingSiteAuth.xml"
 ];
 

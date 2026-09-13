@@ -66,3 +66,7 @@ See `DESIGN.md` for the visual system and maintenance rules. Design skill packag
 The visual system uses a self-hosted Latin Manrope variable font from `@fontsource-variable/manrope` 5.3.0 (OFL license beside the font). Video covers are local editorial photographs of Adrian, not claimed original YouTube thumbnails. Published video titles, links and count snapshots are unchanged.
 
 Commercial pages expose price and scope near the primary CTA. The Work With Me page presents offer choices before the longer story and explains the fit-call → agreement/payment → intake flow. With existing Google Analytics configured, `work_with_me_click` and `newsletter_click` record interest; `founder_fit_call_click` now also records CTA location. These are click events, not completed booking or signup events. No conversion-rate increase is claimed without live traffic measurements.
+
+### Client stories
+
+`/client-stories/` collects historical Upstack Studio client videos, source-linked ratings, written feedback, separate colleague feedback and the dated In Real Life feature. Content lives in `src/_data/clientStories.js`; homepage excerpts remain in `src/_data/testimonials.js`. See `docs/PROOF-SOURCES.md` before changing attribution, quotes, ratings or photos. Ratings are dated snapshots, not live widgets or reviews of the current offers.

@@ -1,0 +1,55 @@
+---
+layout: layouts/base.njk
+title: Client stories
+description: Client videos, real reviews and a published feature from Adrian Ching’s years building software with the Upstack Studio team.
+permalink: /client-stories/
+socialImage: /assets/images/adrian/upstack-team.webp
+socialImageAlt: Adrian Ching with the Upstack Studio team
+---
+{% from "icons.njk" import icon %}
+<header class="page-hero stories-hero"><div class="shell">
+  <p class="page-kicker">Client stories · The Upstack Studio years</p>
+  <h1>What it was like to work together.</h1>
+  <p class="page-lede">The best way to understand my work is to hear from the people on the other side of it. These are their videos, reviews and words from the years my team and I built software at Upstack Studio.</p>
+  <p class="stories-context">I’ve since closed the agency. This feedback belongs to that chapter, rather than my current Audit or advisory work.</p>
+  <nav class="page-jumps" aria-label="On this page"><a href="#client-videos">Client videos</a><a href="#client-reviews">Written feedback</a><a href="#in-the-press">In the press</a></nav>
+  <div class="ratings-strip" aria-label="Upstack Studio ratings">
+    <div><strong>4.9<span>/5</span></strong><a class="text-link" href="https://clutch.co/profile/upstack-studio">Upstack Studio on Clutch {{ icon("external") }}</a><p>12 reviews</p></div>
+    <div><strong>4.9<span>/5</span></strong><a class="text-link" href="https://maps.app.goo.gl/AHLf6HGQSg1vKmNW9">Upstack Studio on Google {{ icon("external") }}</a><p>Business profile rating</p></div>
+    <p class="rating-date">Ratings checked <time datetime="2026-09-13">13 September 2026</time>. Follow the source links for the latest reviews.</p>
+  </div>
+</div></header>
+<section class="section" id="client-videos"><div class="shell">
+  <div class="section-heading-grid"><h2>Hear it from the founders.</h2><p class="section-lede">Two conversations about the work, the decisions and the experience of building together.</p></div>
+  <div class="stories-videos">
+  {% for testimonial in testimonials %}{% if testimonial.image %}
+    <article class="story-video">
+      <a class="video-card" href="{% if loop.first %}https://youtu.be/kRUL8NrM_Rk{% else %}https://youtu.be/KdxPAqwEDHY{% endif %}" aria-label="Watch {{ testimonial.name }}’s full client story on YouTube">
+        <div class="video-thumbnail"><img src="/assets/images/work/{% if loop.first %}jason-anderson{% else %}justin-ruffier{% endif %}-video.jpg" alt="{{ testimonial.name }} speaking in his client video" width="1280" height="508" loading="lazy" decoding="async"><span class="story-play">{{ icon("play") }} Watch on YouTube</span></div>
+        <h3>{{ testimonial.name }}</h3><p class="story-video-company">{{ testimonial.attribution }}</p>
+      </a>
+      <p>{{ testimonial.context }}</p>
+      <blockquote cite="{{ testimonial.url }}"><p>“{{ testimonial.quote }}”</p></blockquote>
+    </article>
+  {% endif %}{% endfor %}
+  </div>
+</div></section>
+<section class="section section-soft" id="client-reviews"><div class="shell">
+  <div class="section-heading-grid"><h2>In their own words.</h2><p class="section-lede">Excerpts from project reviews and feedback collected during those years. Roles shown are from that period.</p></div>
+  <div class="stories-review-grid">
+  {% for review in clientStories.reviews %}
+    <figure class="story-review">
+      <figcaption>{% if review.image %}<img src="{{ review.image }}" alt="" width="72" height="72" loading="lazy" decoding="async">{% endif %}<div><strong>{{ review.name }}</strong><span>{{ review.role }}</span></div></figcaption>
+      <blockquote{% if review.url %} cite="{{ review.url }}"{% endif %}><p>“{{ review.quote }}”</p></blockquote>
+      {% if review.url %}<a class="text-link" href="{{ review.url }}">{{ review.source }}{{ icon("external") }}</a>{% else %}<p class="review-source">{{ review.source }}</p>{% endif %}
+    </figure>
+  {% endfor %}
+  </div>
+  <div class="more-reviews"><h3>More project reviews.</h3><p class="case-disclosure">Short summaries of three further Clutch reviews. These are summaries, not quotations.</p>
+    {% for review in clientStories.summaries %}<article class="review-summary"><div><h4>{{ review.name }}</h4><p class="review-source">{{ review.role }}</p></div><p>{{ review.summary }}</p><a class="text-link" href="{{ review.url }}" aria-label="Read {{ review.name }}’s project review on Clutch">Read on Clutch{{ icon("external") }}</a></article>{% endfor %}
+    <a class="text-link" href="https://clutch.co/profile/upstack-studio">Explore all 12 reviews on Clutch{{ icon("arrow", "link-arrow") }}</a>
+  </div>
+</div></section>
+<section class="section"><div class="shell collaborator-note"><div><h2>From someone I worked alongside.</h2><p class="section-lede">A different perspective: Samuel and I worked together on local and international projects.</p></div><figure class="story-review"><figcaption><img src="{{ clientStories.collaborator.image }}" alt="" width="150" height="150" loading="lazy" decoding="async"><div><strong>{{ clientStories.collaborator.name }}</strong><span>{{ clientStories.collaborator.role }} · At the time</span></div></figcaption><blockquote><p>“{{ clientStories.collaborator.quote }}”</p></blockquote><p class="review-source">Colleague feedback from my original work page</p></figure></div></section>
+<section class="section section-soft" id="in-the-press"><div class="shell press-feature"><div><p class="page-kicker">In the press</p><h2>The story behind the work.</h2></div><article><p class="press-byline">In Real Life · <time datetime="2025-01-02">2 January 2025</time> · By Lee Chow Ping</p><h3><a href="{{ clientStories.feature.url }}">{{ clientStories.feature.title }}</a></h3><p>{{ clientStories.feature.summary }}</p><a class="text-link" href="{{ clientStories.feature.url }}">Read the feature{{ icon("external") }}</a></article></div></section>
+<section class="section"><div class="shell stories-next"><div><h2>That experience comes with me.</h2><p>Today, most of my time goes into Second Team. I also help a small number of founders think through important AI, software and growth decisions.</p></div><div class="actions"><a class="text-link" href="/about/">Read my story{{ icon("arrow", "link-arrow") }}</a><a class="button" href="/work-with-me/">Work with me{{ icon("arrow", "link-arrow") }}</a></div></div></section>
