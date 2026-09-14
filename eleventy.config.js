@@ -1,4 +1,7 @@
+import { responsiveImages } from "./scripts/responsive-images.mjs";
+
 export default function (eleventyConfig) {
+  responsiveImages(eleventyConfig);
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
   eleventyConfig.addPassthroughCopy("src/CNAME");
   eleventyConfig.addPassthroughCopy("src/BingSiteAuth.xml");

@@ -1,0 +1,35 @@
+name: Lighthouse
+on:
+  push:
+    branches: [rebuild-2026, source]
+  pull_request:
+    branches: [source]
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        device: [mobile, desktop]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      # Local production-mode output: preview noindex is deliberately preserved on Vercel.
+      - run: npm run build && npm run check
+      - run: npx --yes @lhci/cli@0.15.1 autorun
+        env:
+          LHCI_DEVICE: ${{ matrix.device }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-${{ matrix.device }}
+          path: |
+            lighthouse-reports
+            .lighthouseci

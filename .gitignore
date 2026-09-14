@@ -3,6 +3,8 @@
 *.log
 node_modules/
 _site/
+.lighthouseci/
+lighthouse-reports/
 .sites-runtime/
 
 # Keep locally installed design skill packages out of source control.
