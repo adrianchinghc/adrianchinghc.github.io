@@ -280,6 +280,7 @@ figcaption{font-size:.8125rem;line-height:1.5;color:var(--muted);margin-top:.75r
 .current-company p{color:var(--muted);font-size:1rem}
 .proof-section{border-top:1px solid var(--line)}
 .client-voices{margin-top:3rem;padding-top:2rem;border-top:1px solid var(--line)}
+.proof-section .client-voices{margin-top:0;padding-top:0;border-top:0}
 .client-voice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2.5rem;margin-top:2rem}
 .client-voice{display:flex;flex-direction:column;align-items:flex-start}
 .client-project-image{width:100%;height:auto;margin-bottom:1.5rem}
