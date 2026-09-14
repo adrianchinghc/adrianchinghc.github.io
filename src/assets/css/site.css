@@ -569,3 +569,19 @@ html[data-input="keyboard"]{scroll-behavior:auto}
   .story-play{font-size:.6875rem;padding:.3rem .45rem;left:.5rem;bottom:.5rem}.story-play .icon{width:17px;height:17px;flex-basis:17px}
   .stories-entry{align-items:flex-start;flex-direction:column}
 }
+
+/* Inline Kit form uses the site's typography, colours and focus treatment. */
+.newsletter-form{margin-top:1.5rem;max-width:640px}
+.newsletter-fields{display:flex;align-items:flex-end;gap:.75rem;margin-bottom:1rem}
+.newsletter-email{display:block;flex:1;min-width:0;font-size:.875rem;font-weight:600}
+.newsletter-email input{display:block;margin-top:.4rem;width:100%;min-height:52px;border:1px solid var(--line);border-radius:var(--radius-control);padding:.75rem;background:var(--white);color:var(--ink);font-size:1rem}
+.newsletter-email input::placeholder{color:var(--muted)}
+.newsletter-form .button{min-height:52px;cursor:pointer}
+.newsletter-form .button:disabled{cursor:wait;opacity:.7}
+.newsletter-form .formkit-alert{padding:1rem;border:1px solid var(--line);background:var(--soft);color:var(--ink);margin:0 0 1rem;list-style:none}
+.newsletter-form .formkit-alert:empty{display:none}
+.newsletter-form .formkit-alert-error:not(:empty){border-color:var(--signal)}
+.newsletter-form .formkit-submit[data-active] .signup-label{display:none}
+.newsletter-form .formkit-submit[data-active] .signup-busy{display:inline}
+.kit-credit{display:inline-flex;align-items:center;min-height:44px;font-size:.75rem;color:var(--muted)}
+@media(max-width:420px){.newsletter-fields{flex-direction:column;align-items:stretch}.newsletter-email{width:100%}}

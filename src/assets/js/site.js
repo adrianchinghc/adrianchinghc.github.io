@@ -229,3 +229,10 @@ window.addEventListener("error", (event) => {
   track("javascript_error", { error_type: "runtime", source_file: (event.filename || "unknown").split("/").pop(), line_number: event.lineno || 0 });
 });
 window.addEventListener("unhandledrejection", () => track("javascript_error", { error_type: "unhandled_promise" }));
+
+// Kit emits this only after a successful form submission. Do not copy its
+// event detail: it includes the email address. Confirmation happens in Kit.
+document.addEventListener("ckjs:submission:complete", (event) => {
+  if (!event.target.matches?.(".newsletter-form")) return;
+  track("newsletter_signup_submitted", { form_id: "9916003" });
+});

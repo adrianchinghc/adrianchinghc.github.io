@@ -27,7 +27,7 @@ npm run check
 Copy `.env.example` to `.env` or provide the variables in the shell used for the build.
 
 - Founder Fit Call buttons link directly to Adrian's active 30-minute Calendly event at `https://calendly.com/adrianchinghc/30-minute-call`. The event uses Google Meet and intentionally limited availability. No scheduling embed or public checkout is included.
-- `KIT_URL`: public Kit landing-page or form URL. Until configured, the newsletter page states that signup is not yet available and offers a working YouTube link. No fake form or self-link is shown.
+- Newsletter uses the public Kit form `9916003` (`ab0394af6d`) directly on `/newsletter/`. No API key or `KIT_URL` is needed. The official Kit script handles inline responses and validation.
 - `CONTACT_URL`: optional public contact destination.
 - `PAYMENT_URL`: reserved for a later qualified-client payment flow and not linked from the public site.
 - `GA_MEASUREMENT_ID`: Google Analytics 4 measurement ID. `GOOGLE_SITE_VERIFICATION`: Search Console verification token.
@@ -57,7 +57,7 @@ Work stays on `rebuild-2026` in PR #116. Vercel automatically builds branch push
 - Each page can set `socialImage` and `socialImageAlt` to an existing, relevant photograph. Keep the canonical production URL even on previews.
 - Navigation remains available without JavaScript. With JavaScript, the mobile menu supports Escape, outside click, focus exit and viewport changes.
 - Light and dark palettes follow the visitor's operating-system preference on first visit. The header toggle remembers a manual choice in the browser.
-- Newsletter signup still needs a real `KIT_URL` before launch. The fallback is an honest signup-unavailable notice with a YouTube link.
+- Before merging newsletter changes, test with your own email and confirm the incentive email, sender identity and double opt-in settings in Kit. Submission success is not proof of confirmed subscription.
 
 ## Design and conversion refinements
 
@@ -70,3 +70,5 @@ Commercial pages expose price and scope near the primary CTA. The Work With Me p
 ### Client stories
 
 `/client-stories/` collects historical Upstack Studio client videos, source-linked ratings, written feedback, separate colleague feedback and the dated In Real Life feature. Content lives in `src/_data/clientStories.js`; homepage excerpts remain in `src/_data/testimonials.js`. See `docs/PROOF-SOURCES.md` before changing attribution, quotes, ratings or photos. Ratings are dated snapshots, not live widgets or reviews of the current offers.
+
+`newsletter_signup_submitted` is emitted on Kit’s completion event only when site analytics consent is accepted. No email or event-detail payload is forwarded. Kit owns confirmation metrics. With JavaScript unavailable the native POST opens Kit; normal submissions remain inline.
