@@ -15,7 +15,7 @@
   <link rel="preload" href="/assets/fonts/manrope-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
   <meta name="theme-color" content="#fafaf7" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#151613" media="(prefers-color-scheme: dark)">
-  <script>try{const theme=localStorage.getItem("adrian_theme");if(theme==="light"||theme==="dark")document.documentElement.dataset.theme=theme}catch(_){}</script>
+  <script>document.documentElement.classList.add("nav-ready");try{const theme=localStorage.getItem("adrian_theme");if(theme==="light"||theme==="dark")document.documentElement.dataset.theme=theme}catch(_){}</script>
   <meta property="og:type" content="{{ ogType or 'website' }}">
   <meta property="og:site_name" content="Adrian Ching">
   <meta property="og:locale" content="en_MY">
@@ -58,6 +58,6 @@
     <div class="shell footer-bottom"><span>© {{ "now" | year }} Adrian Ching</span><span>Kuala Lumpur · Building globally</span></div>
   </footer>
   {% if site.analyticsEnabled %}<aside class="consent" data-consent-banner hidden aria-label="Analytics choice"><p><strong>Help me improve this site.</strong> Analytics shows which pages and links are useful. Optional tracking only runs if you accept. <a href="/privacy/">Privacy details</a>.</p><div><button class="button" type="button" data-consent="accept">Accept analytics</button><button class="text-button" type="button" data-consent="decline">Decline</button></div></aside>{% endif %}
-  <script src="/assets/js/site.js" defer></script>
+  <script src="/assets/js/site.js" defer onerror="document.documentElement.classList.remove('nav-ready')"></script>
 </body>
 </html>
