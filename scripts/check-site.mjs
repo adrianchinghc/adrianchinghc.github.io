@@ -95,6 +95,10 @@ if (existsSync(output)) {
   }
   if (!readFileSync(join(output, "client-stories/index.html"), "utf8").includes("https://youtu.be/38lsk8YyA3c")) errors.push("client-stories/index.html: missing Mario Vela video");
   if (!readFileSync(join(output, "client-stories/index.html"), "utf8").includes('alt="Mario Vela speaking in his client video"')) errors.push("client-stories/index.html: missing Mario Vela portrait");
+  const homepageHtml = readFileSync(join(output, "index.html"), "utf8");
+  for (const project of ["Daikin", "BookXcess", "Teleme"]) {
+    if (!homepageHtml.includes(project)) errors.push(`index.html: missing featured ${project} project story`);
+  }
   const confirmationHtml = readFileSync(join(output, "newsletter/confirmed/index.html"), "utf8");
   if (!confirmationHtml.includes('<meta name="robots" content="noindex, nofollow">')) errors.push("newsletter/confirmed/index.html: confirmation page must remain noindex");
   if (sitemap.includes("/newsletter/confirmed/")) errors.push("sitemap.xml: confirmation page must not be indexed");

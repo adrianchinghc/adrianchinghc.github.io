@@ -134,6 +134,25 @@ figcaption{font-size:.8125rem;line-height:1.5;color:var(--muted);margin-top:.75r
 .case-story .testimonial-credit{display:flex;align-items:center;gap:.8rem;font-size:.8125rem;font-style:normal;line-height:1.5}
 .case-story blockquote img{width:44px;height:44px;border-radius:50%;object-fit:cover}
 .case-disclosure{font-size:.8125rem;color:var(--muted);margin-top:1.25rem}
+.project-stories{border-top:1px solid var(--line)}
+.project-story{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1fr);gap:clamp(2.5rem,6vw,5rem);align-items:center;padding-block:clamp(3rem,6vw,5rem);border-bottom:1px solid var(--line)}
+.project-story:nth-child(even) .project-story-visual{order:2}
+.project-story-visual{min-width:0;margin:0}
+.project-story-visual>div{aspect-ratio:1;overflow:hidden;background:var(--soft)}
+.project-story-visual img{display:block;width:160%;max-width:none;height:auto;transform:translate(-37%,-5%)}
+.project-story-visual-bookxcess img{transform:translate(-38%,-5%)}
+.project-story-visual-teleme img{transform:translate(-33%,-5%)}
+.project-story-visual figcaption{text-align:center}
+.project-story-copy .page-kicker{margin-bottom:.75rem;color:var(--signal)}
+.project-story-copy h3{font-size:clamp(1.75rem,2.8vw,2.35rem);line-height:1.25;margin-bottom:1.25rem;max-width:18ch}
+.project-story-copy>p:not(.page-kicker){color:var(--muted)}
+.project-story-copy dl{margin:1.5rem 0}
+.project-story-copy dl>div+div{margin-top:1.25rem}
+.project-story-copy dt{font-size:.8125rem;font-weight:700;margin-bottom:.3rem}
+.project-story-copy dd{margin:0;color:var(--muted)}
+.project-story-copy blockquote{margin:1.5rem 0;padding-top:1.25rem;border-top:1px solid var(--line)}
+.project-story-copy blockquote p{font-size:1.125rem;line-height:1.65;margin:0 0 .75rem}
+.project-story-copy blockquote cite{font-size:.8125rem;color:var(--muted);font-style:normal}
 .supporting-work{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--line)}
 .supporting-work article{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:center}
 .supporting-work img{width:100%;aspect-ratio:4/3;object-fit:contain}
@@ -415,6 +434,7 @@ figcaption{font-size:.8125rem;line-height:1.5;color:var(--muted);margin-top:.75r
   .building-editorial,.story-editorial,.recognition-grid,.case-feature,.supporting-work,.newsletter-grid,.two-col,.values-grid{grid-template-columns:1fr;gap:2rem}
   .story-title,.story-excerpt,.story-wide{grid-column:1;grid-row:auto}.story-title{order:0}.story-wide{order:1}.story-excerpt{order:2}.story-wide img{max-height:420px;aspect-ratio:4/3}.story-excerpt .story-turn{font-size:1.2rem}
   .case-art{padding:1.5rem}.case-art>img{height:360px}.supporting-work article{grid-template-columns:minmax(0,.8fr) minmax(0,1fr);gap:1.25rem}.supporting-work{gap:2rem}
+  .project-story{grid-template-columns:1fr;gap:2rem;padding-block:3rem}.project-story:nth-child(even) .project-story-visual{order:0}.project-story-copy h3{font-size:1.8rem}
   .offer{grid-template-columns:1fr;gap:1.25rem}.offer h3{font-size:1.35rem}.offer-meta{gap:.35rem}.work-call{flex-direction:column;align-items:stretch;gap:1.5rem}
   .offer-comparison{gap:2.5rem}.offer-comparison .ruled-block+.ruled-block{padding-top:2.5rem;border-top:1px solid var(--line)}
   .about-hero-grid,.writing-hero-grid,.newsletter-hero-grid,.about-build-grid,.photo-break,.content-grid{grid-template-columns:1fr;gap:2rem}.about-hero,.writing-hero,.newsletter-hero,.page-hero{padding-block:2.75rem}.about-hero h1,.writing-hero h1,.newsletter-hero h1,.page-hero h1{font-size:clamp(2.15rem,7.8vw,3.2rem);line-height:1.18;max-width:25ch}
