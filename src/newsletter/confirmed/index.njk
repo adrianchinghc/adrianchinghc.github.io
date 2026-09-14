@@ -1,0 +1,18 @@
+---
+layout: layouts/base.njk
+title: Subscription confirmed
+description: Your subscription to Adrian Ching's newsletter is confirmed.
+robots: noindex, nofollow
+eleventyExcludeFromCollections: true
+permalink: /newsletter/confirmed/
+---
+{% from "icons.njk" import icon %}
+<section class="confirmation-page"><div class="reading confirmation-message">
+  <p class="confirmation-kicker">Newsletter</p>
+  <h1>You’re in.</h1>
+  <p class="page-lede">Your subscription is confirmed. I’ll send a note when I have something useful to say.</p>
+  <div class="actions confirmation-actions">
+    <a class="button" href="/blog/">Explore my ideas{{ icon("arrow", "link-arrow") }}</a>
+    <a class="text-link" href="/">Return home{{ icon("arrow", "link-arrow") }}</a>
+  </div>
+</div></section>

@@ -29,7 +29,7 @@ export default [
     attribution: "Former Assistant Manager, BookXcess",
     portrait: "/assets/images/work/dinie-johari.jpg",
     quote: "Ease of communication, transparency, professionalism and great problem-solving skills.",
-    url: "https://clutch.co/profile/upstack-studio",
+    url: "https://clutch.co/go-to-review/1e4ccebe-2c58-45fe-8b6a-a22a8d81dd5f/201640",
     action: "Read the review on Clutch",
     icon: "external"
   }

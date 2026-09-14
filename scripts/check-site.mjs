@@ -5,7 +5,7 @@ const output = "_site";
 const errors = [];
 const required = [
   "index.html", "work-with-me/index.html", "ai-profit-opportunity-audit/index.html",
-  "advisory/index.html", "about/index.html", "client-stories/index.html", "blog/index.html", "newsletter/index.html", "privacy/index.html",
+  "advisory/index.html", "about/index.html", "client-stories/index.html", "blog/index.html", "newsletter/index.html", "newsletter/confirmed/index.html", "privacy/index.html",
   "404.html", "robots.txt", "sitemap.xml", "CNAME", "BingSiteAuth.xml"
 ];
 
@@ -31,6 +31,26 @@ function internalTarget(url) {
 if (existsSync(output)) {
   const titles = new Map();
   const descriptions = new Map();
+  const visibleImages = new Map();
+  const duplicatePhotoGroups = new Map([
+    ["/assets/images/adrian/founder.webp", "adrian-seated-outside"],
+    ["/assets/images/adrian/seated-portrait.webp", "adrian-seated-outside"],
+    ["/assets/images/adrian/upstack-team.webp", "upstack-team-group"],
+    ["/assets/images/adrian/team-gathering.webp", "upstack-team-group"],
+    ["/assets/images/adrian/at-work.webp", "adrian-cafe-window"],
+    ["/assets/images/adrian/working-side.webp", "adrian-cafe-window"],
+    ["/assets/images/adrian/studio.webp", "adrian-recording-camera"],
+    ["/assets/images/adrian/recording-camera.webp", "adrian-recording-camera"],
+    ["/assets/images/adrian/building.webp", "adrian-working-front"],
+    ["/assets/images/adrian/working-front.webp", "adrian-working-front"],
+    ["/assets/images/adrian/conversation.webp", "adrian-recording-conversation"],
+    ["/assets/images/adrian/recording-conversation.webp", "adrian-recording-conversation"],
+    ["/assets/images/adrian/behind-the-scenes.webp", "recording-production"],
+    ["/assets/images/adrian/recording-session.webp", "recording-production"]
+  ]);
+  const intentionalImageRepeats = new Map([
+    ["/assets/images/work/dinie-johari.jpg", new Set([join(output, "index.html"), join(output, "client-stories/index.html")])]
+  ]);
   for (const file of filesIn(output).filter((path) => path.endsWith(".html"))) {
     const html = readFileSync(file, "utf8");
     if (!html.includes("<html lang=\"en\"")) errors.push(`${file}: missing lang attribute`);
@@ -75,6 +95,19 @@ if (existsSync(output)) {
     }
     for (const match of html.matchAll(/<img\b[^>]*>/g)) {
       if (!/\balt=\"[^\"]*\"/.test(match[0])) errors.push(`${file}: image missing alt text`);
+      const src = match[0].match(/\bdata-image-source=\"([^\"]+)\"/)?.[1] ?? match[0].match(/\bsrc=\"([^\"]+)\"/)?.[1];
+      if (src?.startsWith("/assets/images/")) {
+        const imageKey = duplicatePhotoGroups.get(src) ?? src;
+        if (visibleImages.has(imageKey)) {
+          const allowedFiles = intentionalImageRepeats.get(src);
+          const firstImage = visibleImages.get(imageKey);
+          if (!allowedFiles?.has(firstImage.file) || !allowedFiles.has(file)) errors.push(`${file}: visible image ${src} repeats ${firstImage.src} from ${firstImage.file}`);
+        } else visibleImages.set(imageKey, { file, src });
+      }
+    }
+    for (const match of html.matchAll(/<a\b[^>]*\bhref="https?:\/\/[^\"]+"[^>]*>/g)) {
+      if (!/\btarget="_blank"/.test(match[0])) errors.push(`${file}: external link must open in a new tab`);
+      if (!/\brel="[^"]*\bnoopener\b[^"]*"/.test(match[0])) errors.push(`${file}: external link missing noopener`);
     }
   }
   const sitemap = readFileSync(join(output, "sitemap.xml"), "utf8");
@@ -90,6 +123,15 @@ if (existsSync(output)) {
     if (!html.includes('href="https://calendly.com/adrianchinghc/30-minute-call"')) errors.push(`${route}: missing Founder Fit Call destination`);
   }
   if (!readFileSync(join(output, "client-stories/index.html"), "utf8").includes("https://youtu.be/38lsk8YyA3c")) errors.push("client-stories/index.html: missing Mario Vela video");
+  if (!readFileSync(join(output, "client-stories/index.html"), "utf8").includes('alt="Mario Vela speaking in his client video"')) errors.push("client-stories/index.html: missing Mario Vela portrait");
+  const homepageHtml = readFileSync(join(output, "index.html"), "utf8");
+  for (const project of ["Black Tulip", "Whisker Tracker", "Dinie Johari"]) {
+    if (!homepageHtml.includes(project)) errors.push(`index.html: missing featured ${project} client story`);
+  }
+  if (homepageHtml.includes("The work behind my perspective")) errors.push("index.html: removed project-proof section was restored");
+  const confirmationHtml = readFileSync(join(output, "newsletter/confirmed/index.html"), "utf8");
+  if (!confirmationHtml.includes('<meta name="robots" content="noindex, nofollow">')) errors.push("newsletter/confirmed/index.html: confirmation page must remain noindex");
+  if (sitemap.includes("/newsletter/confirmed/")) errors.push("sitemap.xml: confirmation page must not be indexed");
   if (existsSync(join(output, ".agents"))) errors.push("Development skills must not be published in the site output");
 }
 

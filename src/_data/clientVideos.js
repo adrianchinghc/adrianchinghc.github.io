@@ -28,10 +28,12 @@ export default [
     name: "Mario Vela",
     attribution: "Tradelink",
     context: "Building transport management software to replace an earlier no-code product.",
+    quote: "Working with your designers … was basically the simplest way that I can explain how to build an app.",
+    cite: "https://www.youtube.com/watch?v=38lsk8YyA3c&t=166s",
     url: "https://youtu.be/38lsk8YyA3c",
-    image: "/assets/images/work/tradelink.jpg",
-    imageAlt: "Tradelink software screens for managing transport loads, trips and trailers",
-    width: 1000,
-    height: 1000
+    image: "/assets/images/work/mario-vela-video.webp",
+    imageAlt: "Mario Vela speaking in his client video",
+    width: 1280,
+    height: 508
   }
 ];
