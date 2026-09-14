@@ -6,10 +6,8 @@
     {% for testimonial in testimonials %}
     <figure class="client-voice{% if not testimonial.image %} client-voice-written{% endif %}">
       {% if testimonial.image %}
-      <a class="client-project-link" href="{{ testimonial.url }}" aria-label="{{ testimonial.action }}">
-        <span class="client-project-media"><img class="client-project-image" src="{{ testimonial.image }}" alt="{{ testimonial.imageAlt }}" width="1000" height="1000" loading="lazy" decoding="async"><span class="story-play">{{ icon("play") }} Client story</span></span>
-        <h4>{{ testimonial.project }}</h4>
-      </a>
+      <img class="client-project-image" src="{{ testimonial.image }}" alt="{{ testimonial.imageAlt }}" width="1000" height="1000" loading="lazy" decoding="async">
+      <h4>{{ testimonial.project }}</h4>
       <p class="client-project-context">{{ testimonial.context }}</p>
       {% endif %}
       <blockquote cite="{{ testimonial.url }}"><p>“{{ testimonial.quote }}”</p></blockquote>
