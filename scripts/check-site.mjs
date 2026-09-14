@@ -81,7 +81,10 @@ if (existsSync(output)) {
   for (const route of ["/", "/work-with-me/", "/ai-profit-opportunity-audit/", "/advisory/", "/privacy/"]) {
     if (!sitemap.includes(`<loc>https://adrianching.com${route}</loc>`)) errors.push(`sitemap.xml: missing ${route}`);
   }
-  if (!readFileSync(join(output, "assets/css/site.css"), "utf8").includes("prefers-color-scheme:dark")) errors.push("site.css: missing system dark mode");
+  const siteCss = readFileSync(join(output, "assets/css/site.css"), "utf8");
+  if (!siteCss.includes("prefers-color-scheme:dark")) errors.push("site.css: missing system dark mode");
+  if (!siteCss.includes(':root[data-theme="dark"]')) errors.push("site.css: missing manual dark mode");
+  if (!readFileSync(join(output, "index.html"), "utf8").includes("data-theme-toggle")) errors.push("index.html: missing theme toggle");
   for (const route of ["index.html", "work-with-me/index.html", "ai-profit-opportunity-audit/index.html", "advisory/index.html"]) {
     const html = readFileSync(join(output, route), "utf8");
     if (!html.includes('href="https://calendly.com/adrianchinghc/30-minute-call"')) errors.push(`${route}: missing Founder Fit Call destination`);

@@ -52,7 +52,7 @@ Work stays on `rebuild-2026` in PR #116. Vercel automatically builds branch push
 - The homepage story uses Adrian's confirmed history. Founder situations are explicitly illustrative, not invented client stories. The Teleme proof comes from the legacy work page; the quoted excerpt and attribution are preserved. Past software proof is not presented as an AI Audit result.
 - Each page can set `socialImage` and `socialImageAlt` to an existing, relevant photograph. Keep the canonical production URL even on previews.
 - Navigation remains available without JavaScript. With JavaScript, the mobile menu supports Escape, outside click, focus exit and viewport changes.
-- Light and dark palettes follow the visitor's operating-system preference. The site does not override that preference or add another setting to manage.
+- Light and dark palettes follow the visitor's operating-system preference on first visit. The header toggle remembers a manual choice in the browser.
 - Newsletter signup still needs a real `KIT_URL` before launch. The fallback is an honest signup-unavailable notice with a YouTube link.
 
 ## Design and conversion refinements

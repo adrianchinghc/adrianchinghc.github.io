@@ -15,6 +15,7 @@
   <link rel="preload" href="/assets/fonts/manrope-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
   <meta name="theme-color" content="#fafaf7" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#151613" media="(prefers-color-scheme: dark)">
+  <script>try{const theme=localStorage.getItem("adrian_theme");if(theme==="light"||theme==="dark")document.documentElement.dataset.theme=theme}catch(_){}</script>
   <meta property="og:type" content="{{ ogType or 'website' }}">
   <meta property="og:site_name" content="Adrian Ching">
   <meta property="og:locale" content="en_MY">
@@ -40,10 +41,11 @@
   <header class="site-header">
     <div class="shell header-inner">
       <a class="wordmark" href="/" aria-label="Adrian Ching, home"><span class="wordmark-mark" aria-hidden="true">AC</span><strong>Adrian Ching</strong></a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span class="nav-label">Menu</span><span class="menu-mark" aria-hidden="true"><span></span><span></span></span></button>
       <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
         <a href="/about/"{% if page.url == '/about/' %} aria-current="page"{% endif %}>About</a><a href="/blog/"{% if page.url == '/blog/' %} aria-current="page"{% endif %}>Ideas</a><a href="/work-with-me/"{% if page.url == '/work-with-me/' %} aria-current="page"{% endif %}>Work with me</a><a{% if site.newsletterUrl %} class="nav-cta"{% endif %} href="/newsletter/"{% if page.url == '/newsletter/' %} aria-current="page"{% endif %}>Newsletter</a>
       </nav>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch colour theme">{{ icon("moon", "theme-icon theme-icon-moon") }}{{ icon("sun", "theme-icon theme-icon-sun") }}</button>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span class="nav-label">Menu</span><span class="menu-mark" aria-hidden="true"><span></span><span></span></span></button>
     </div>
   </header>
   <main id="main" tabindex="-1">{{ content | safe }}</main>
