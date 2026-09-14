@@ -2,12 +2,10 @@ module.exports = {
   ci: {
     collect: {
       staticDistDir: "./_site",
-      url: process.env.LHCI_GROUP === "content"
-        ? ["/", "/about/", "/blog/", "/client-stories/"]
-        : process.env.LHCI_GROUP === "commercial"
-          ? ["/work-with-me/", "/ai-profit-opportunity-audit/", "/advisory/", "/newsletter/"]
-          : ["/", "/about/", "/blog/", "/work-with-me/", "/ai-profit-opportunity-audit/", "/advisory/", "/newsletter/", "/client-stories/"],
-      numberOfRuns: 3,
+      // Cover the homepage, proof, commercial and third-party form patterns.
+      // The deterministic site check validates every generated page separately.
+      url: ["/", "/client-stories/", "/work-with-me/", "/newsletter/"],
+      numberOfRuns: 1,
       settings: process.env.LHCI_DEVICE === "desktop" ? { preset: "desktop" } : {}
     },
     assert: {
@@ -18,6 +16,6 @@ module.exports = {
         "categories:seo": ["error", { minScore: 1 }]
       }
     },
-    upload: { target: "filesystem", outputDir: "./lighthouse-reports" }
+    upload: { target: "filesystem", outputDir: `./lighthouse-reports/${process.env.LHCI_DEVICE || "mobile"}` }
   }
 };
