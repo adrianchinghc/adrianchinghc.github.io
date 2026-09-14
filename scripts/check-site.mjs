@@ -76,6 +76,10 @@ if (existsSync(output)) {
     for (const match of html.matchAll(/<img\b[^>]*>/g)) {
       if (!/\balt=\"[^\"]*\"/.test(match[0])) errors.push(`${file}: image missing alt text`);
     }
+    for (const match of html.matchAll(/<a\b[^>]*\bhref="https?:\/\/[^\"]+"[^>]*>/g)) {
+      if (!/\btarget="_blank"/.test(match[0])) errors.push(`${file}: external link must open in a new tab`);
+      if (!/\brel="[^"]*\bnoopener\b[^"]*"/.test(match[0])) errors.push(`${file}: external link missing noopener`);
+    }
   }
   const sitemap = readFileSync(join(output, "sitemap.xml"), "utf8");
   for (const route of ["/", "/work-with-me/", "/ai-profit-opportunity-audit/", "/advisory/", "/privacy/"]) {
@@ -90,6 +94,7 @@ if (existsSync(output)) {
     if (!html.includes('href="https://calendly.com/adrianchinghc/30-minute-call"')) errors.push(`${route}: missing Founder Fit Call destination`);
   }
   if (!readFileSync(join(output, "client-stories/index.html"), "utf8").includes("https://youtu.be/38lsk8YyA3c")) errors.push("client-stories/index.html: missing Mario Vela video");
+  if (!readFileSync(join(output, "client-stories/index.html"), "utf8").includes('alt="Mario Vela speaking in his client video"')) errors.push("client-stories/index.html: missing Mario Vela portrait");
   const confirmationHtml = readFileSync(join(output, "newsletter/confirmed/index.html"), "utf8");
   if (!confirmationHtml.includes('<meta name="robots" content="noindex, nofollow">')) errors.push("newsletter/confirmed/index.html: confirmation page must remain noindex");
   if (sitemap.includes("/newsletter/confirmed/")) errors.push("sitemap.xml: confirmation page must not be indexed");
