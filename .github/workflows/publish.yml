@@ -21,7 +21,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
-      GA_MEASUREMENT_ID: ${{ secrets.GA_MEASUREMENT_ID }}
+      # Public measurement ID; production only. Vercel previews do not inherit it.
+      GA_MEASUREMENT_ID: G-Z7QMLP7BSE
       META_PIXEL_ID: ${{ secrets.META_PIXEL_ID }}
       HOTJAR_ID: ${{ secrets.HOTJAR_ID }}
       GOOGLE_SITE_VERIFICATION: ${{ secrets.GOOGLE_SITE_VERIFICATION }}

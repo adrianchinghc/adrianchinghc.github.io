@@ -39,7 +39,7 @@ These are intent themes, not claims of search volume. Validate them with Search 
 
 ## Account configuration
 
-GitHub Actions builds production. Add repository secrets named `GA_MEASUREMENT_ID` and `GOOGLE_SITE_VERIFICATION`. Add `META_PIXEL_ID` or `HOTJAR_ID` only if there is a deliberate advertising or behaviour-research need. Configure equivalent variables for the Vercel preview only when testing consent and events; the preview remains `noindex`.
+GitHub Actions builds production with Adrian's public GA4 measurement ID `G-Z7QMLP7BSE` in the publishing workflow. It is not a secret. Add `GOOGLE_SITE_VERIFICATION` as a repository secret when supplied. Add `META_PIXEL_ID` or `HOTJAR_ID` only if there is a deliberate advertising or behaviour-research need. For Vercel testing, use a separate test property's ID; never send preview traffic to the production GA4 property. The preview remains `noindex`.
 
 Submit `https://adrianching.com/sitemap.xml` in Google Search Console and Bing Webmaster Tools. Mark `founder_fit_call_click` as a key event only if booking intent is the outcome being reported; use confirmed Calendly bookings as the stronger conversion.
 
