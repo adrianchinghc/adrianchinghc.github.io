@@ -8,14 +8,14 @@ A personal founder, builder and writer website for established B2B owners. Secon
 
 Refine the existing editorial identity: quiet light surfaces, dark text, a restrained rust accent, Adrian's real photography and strong but readable sans-serif type. Keep the page's story and route structure. Remove decorative section numbers and excessive labels. Reserve dividers for genuinely distinct groups.
 
-Keep this a light, reading-oriented publication with restrained motion and generous whitespace. No scroll hijacking, parallax, reveal gate or faux dashboard.
+Keep this a reading-oriented publication with restrained motion and generous whitespace. Both colour themes must preserve the same quiet editorial character. No scroll hijacking, parallax, reveal gate or faux dashboard.
 
 ## Rules
 
 - One self-hosted Manrope family with system sans fallback, swap loading, restrained weight steps and display tracking no tighter than -0.04em.
 - Body 17px, 1.7 line height, paragraphs up to 65ch. Main reading content up to 720px. Display headings scale with screen width rather than forcing line breaks.
 - Shell up to 1160px, mobile gutter 20px (16px at narrow sizes). One mobile layout boundary at 760px, an intermediate adjustment at 1000px, and a narrow-screen adjustment at 420px.
-- Consistent light theme. Soft tinted surfaces group content without switching to black blocks. Keep photographs unfiltered and render their faces with deliberate crops.
+- Consistent light and dark themes, following the system until a visitor uses the persistent header toggle. Soft tinted surfaces group content without harsh black blocks. Keep photographs unfiltered and render their faces with deliberate crops.
 - Buttons at least 48px high; navigation and standalone links at least 44px. Visible focus, keyboard menu controls, no-JavaScript navigation and reduced motion remain supported.
 - Motion only acknowledges interactions: press feedback 140ms, directional link feedback 160ms, pointer hover 180ms, and a mobile menu that opens in 180ms and closes in 140ms. Keyboard and reduced-motion interactions are immediate. No automatic animation hides content.
 - Sharp editorial image edges; small 4px control radii. The existing AC monogram and favicon stay intact.

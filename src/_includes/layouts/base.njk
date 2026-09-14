@@ -4,17 +4,22 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% if title %}{{ title }} · {% endif %}{{ site.name }}</title>
+  <title>{% if seoTitle or title %}{{ seoTitle or title }} · {% endif %}{{ site.name }}</title>
   <meta name="description" content="{{ description or site.description }}">
   <meta name="author" content="Adrian Ching">
-  <meta name="robots" content="{{ robots or 'index, follow' }}">
+  <meta name="robots" content="{{ robots or site.robots }}">
+  {% if site.googleSiteVerification %}<meta name="google-site-verification" content="{{ site.googleSiteVerification }}">{% endif %}
   <link rel="canonical" href="{{ site.url }}{{ page.url }}">
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <link rel="apple-touch-icon" href="/assets/images/logo.png">
   <link rel="preload" href="/assets/fonts/manrope-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <meta name="theme-color" content="#fafaf7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#151613" media="(prefers-color-scheme: dark)">
+  <script>document.documentElement.classList.add("nav-ready");try{const theme=localStorage.getItem("adrian_theme");if(theme==="light"||theme==="dark")document.documentElement.dataset.theme=theme}catch(_){}</script>
   <meta property="og:type" content="{{ ogType or 'website' }}">
   <meta property="og:site_name" content="Adrian Ching">
-  <meta property="og:title" content="{% if title %}{{ title }} · {% endif %}Adrian Ching">
+  <meta property="og:locale" content="en_MY">
+  <meta property="og:title" content="{% if seoTitle or title %}{{ seoTitle or title }} · {% endif %}Adrian Ching">
   <meta property="og:description" content="{{ description or site.description }}">
   <meta property="og:url" content="{{ site.url }}{{ page.url }}">
   <meta property="og:image" content="{{ site.url }}{{ socialImage or '/assets/images/adrian/founder.webp' }}">
@@ -22,24 +27,25 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@adrianchinghc">
   <meta name="twitter:creator" content="@adrianchinghc">
-  <meta name="twitter:title" content="{% if title %}{{ title }} · {% endif %}Adrian Ching">
+  <meta name="twitter:title" content="{% if seoTitle or title %}{{ seoTitle or title }} · {% endif %}Adrian Ching">
   <meta name="twitter:description" content="{{ description or site.description }}">
   <meta name="twitter:image" content="{{ site.url }}{{ socialImage or '/assets/images/adrian/founder.webp' }}">
   <meta name="twitter:image:alt" content="{{ socialImageAlt or 'Adrian Ching, founder and builder' }}">
   <link rel="stylesheet" href="/assets/css/site.css">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Adrian Ching","url":"https://adrianching.com","image":"https://adrianching.com/assets/images/adrian/founder.webp","jobTitle":"Founder","worksFor":{"@type":"Organization","name":"Second Team"},"alumniOf":{"@type":"Organization","name":"Upstack Studio"},"sameAs":["{{ site.social.youtube }}","{{ site.social.linkedin }}","{{ site.social.instagram }}","{{ site.social.facebook }}","{{ site.social.x }}"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://adrianching.com/#website","url":"https://adrianching.com","name":"Adrian Ching","inLanguage":"en"},{"@type":"Person","@id":"https://adrianching.com/#adrian-ching","name":"Adrian Ching","url":"https://adrianching.com","image":"https://adrianching.com/assets/images/adrian/founder.webp","jobTitle":"Founder","worksFor":{"@type":"Organization","name":"Second Team"},"alumniOf":{"@type":"Organization","name":"Upstack Studio"},"homeLocation":{"@type":"Place","name":"Kuala Lumpur, Malaysia"},"sameAs":["{{ site.social.youtube }}","{{ site.social.linkedin }}","{{ site.social.instagram }}","{{ site.social.facebook }}","{{ site.social.x }}"]}]}</script>
   {% block head %}{% endblock %}
   {% include "analytics.njk" %}
 </head>
-<body>
+<body{% if site.analyticsEnabled %} data-analytics-enabled="true"{% endif %}>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="shell header-inner">
       <a class="wordmark" href="/" aria-label="Adrian Ching, home"><span class="wordmark-mark" aria-hidden="true">AC</span><strong>Adrian Ching</strong></a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span class="nav-label">Menu</span><span class="menu-mark" aria-hidden="true"><span></span><span></span></span></button>
       <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
         <a href="/about/"{% if page.url == '/about/' %} aria-current="page"{% endif %}>About</a><a href="/blog/"{% if page.url == '/blog/' %} aria-current="page"{% endif %}>Ideas</a><a href="/work-with-me/"{% if page.url == '/work-with-me/' %} aria-current="page"{% endif %}>Work with me</a><a{% if site.newsletterUrl %} class="nav-cta"{% endif %} href="/newsletter/"{% if page.url == '/newsletter/' %} aria-current="page"{% endif %}>Newsletter</a>
       </nav>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch colour theme">{{ icon("moon", "theme-icon theme-icon-moon") }}{{ icon("sun", "theme-icon theme-icon-sun") }}</button>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span class="nav-label">Menu</span><span class="menu-mark" aria-hidden="true"><span></span><span></span></span></button>
     </div>
   </header>
   <main id="main" tabindex="-1">{{ content | safe }}</main>
@@ -47,10 +53,11 @@
     <div class="shell footer-grid">
       <div><a class="footer-name" href="/">Adrian Ching.</a><p>Building Second Team. Sharing what I learn.</p></div>
       <nav aria-label="Footer navigation"><a href="/about/">About</a><a href="/client-stories/"{% if page.url == "/client-stories/" %} aria-current="page"{% endif %}>Client stories</a><a href="/blog/">Ideas</a><a href="/newsletter/">Newsletter</a><a href="/work-with-me/">Work with me</a></nav>
-      <nav class="footer-connect" aria-label="Connect with Adrian"><a href="{{ site.social.youtube }}" rel="me noopener" target="_blank">YouTube</a><a href="{{ site.social.linkedin }}" rel="me noopener" target="_blank">LinkedIn</a><a href="{{ site.social.instagram }}" rel="me noopener" target="_blank">Instagram</a><a href="{{ site.social.facebook }}" rel="me noopener" target="_blank">Facebook</a><a href="{{ site.social.x }}" rel="me noopener" target="_blank">X</a><a href="{{ site.contactUrl }}">Contact</a></nav>
+      <nav class="footer-connect" aria-label="Connect with Adrian"><a href="{{ site.social.youtube }}" rel="me noopener" target="_blank">YouTube</a><a href="{{ site.social.linkedin }}" rel="me noopener" target="_blank">LinkedIn</a><a href="{{ site.social.instagram }}" rel="me noopener" target="_blank">Instagram</a><a href="{{ site.social.facebook }}" rel="me noopener" target="_blank">Facebook</a><a href="{{ site.social.x }}" rel="me noopener" target="_blank">X</a><a href="{{ site.contactUrl }}">Contact</a><a href="/privacy/">Privacy</a></nav>
     </div>
     <div class="shell footer-bottom"><span>© {{ "now" | year }} Adrian Ching</span><span>Kuala Lumpur · Building globally</span></div>
   </footer>
-  <script src="/assets/js/site.js" defer></script>
+  {% if site.analyticsEnabled %}<aside class="consent" data-consent-banner hidden aria-label="Analytics choice"><p><strong>Help me improve this site.</strong> Analytics shows which pages and links are useful. Optional tracking only runs if you accept. <a href="/privacy/">Privacy details</a>.</p><div><button class="button" type="button" data-consent="accept">Accept analytics</button><button class="text-button" type="button" data-consent="decline">Decline</button></div></aside>{% endif %}
+  <script src="/assets/js/site.js" defer onerror="document.documentElement.classList.remove('nav-ready')"></script>
 </body>
 </html>

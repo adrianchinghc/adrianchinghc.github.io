@@ -4,6 +4,17 @@ import { loadEnvFile } from "node:process";
 if (existsSync(".env")) loadEnvFile(".env");
 
 export default function () {
+  const cleanId = (name, pattern) => {
+    const value = (process.env[name] || "").trim();
+    return pattern.test(value) ? value : "";
+  };
+  const analytics = {
+    ga: cleanId("GA_MEASUREMENT_ID", /^G-[A-Z0-9]+$/i),
+    metaPixel: cleanId("META_PIXEL_ID", /^\d+$/),
+    hotjar: cleanId("HOTJAR_ID", /^\d+$/)
+  };
+  const isPreview = process.env.VERCEL_ENV === "preview" || process.env.VERCEL_ENV === "development";
+
   return {
     name: "Adrian Ching",
     url: "https://adrianching.com",
@@ -12,11 +23,11 @@ export default function () {
     newsletterUrl: (process.env.KIT_URL || "").trim(),
     contactUrl: process.env.CONTACT_URL || "/work-with-me/#fit-call",
     paymentUrl: process.env.PAYMENT_URL || "",
-    analytics: {
-      ga: process.env.GA_MEASUREMENT_ID || "",
-      metaPixel: process.env.META_PIXEL_ID || "",
-      hotjar: process.env.HOTJAR_ID || ""
-    },
+    analytics,
+    analyticsEnabled: Object.values(analytics).some(Boolean),
+    isPreview,
+    robots: isPreview ? "noindex, nofollow" : "index, follow",
+    googleSiteVerification: cleanId("GOOGLE_SITE_VERIFICATION", /^[A-Za-z0-9_-]+$/),
     social: {
       youtube: "https://www.youtube.com/@adrianchinghc",
       linkedin: "https://www.linkedin.com/in/adrianchinghc",

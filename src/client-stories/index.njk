@@ -1,6 +1,7 @@
 ---
 layout: layouts/base.njk
 title: Client stories
+seoTitle: Software client stories and reviews
 description: Client videos, real reviews and a published feature from Adrian Ching’s years building software with the Upstack Studio team.
 permalink: /client-stories/
 socialImage: /assets/images/adrian/upstack-team.webp
@@ -20,18 +21,18 @@ socialImageAlt: Adrian Ching with the Upstack Studio team
   </div>
 </div></header>
 <section class="section" id="client-videos"><div class="shell">
-  <div class="section-heading-grid"><h2>Hear it from the founders.</h2><p class="section-lede">Two conversations about the work, the decisions and the experience of building together.</p></div>
+  <div class="section-heading-grid"><h2>Hear from the people we built with.</h2><p class="section-lede">Three client conversations about the work, the decisions and the experience of building together.</p></div>
   <div class="stories-videos">
-  {% for testimonial in testimonials %}{% if testimonial.image %}
+  {% for testimonial in clientVideos %}
     <article class="story-video">
-      <a class="video-card" href="{% if loop.first %}https://youtu.be/kRUL8NrM_Rk{% else %}https://youtu.be/KdxPAqwEDHY{% endif %}" aria-label="Watch {{ testimonial.name }}’s full client story on YouTube">
-        <div class="video-thumbnail"><img src="/assets/images/work/{% if loop.first %}jason-anderson{% else %}justin-ruffier{% endif %}-video.jpg" alt="{{ testimonial.name }} speaking in his client video" width="1280" height="508" loading="lazy" decoding="async"><span class="story-play">{{ icon("play") }} Watch on YouTube</span></div>
+      <a class="video-card" href="{{ testimonial.url }}" aria-label="Watch {{ testimonial.name }}’s full client story on YouTube">
+        <div class="video-thumbnail"><img src="{{ testimonial.image }}" alt="{{ testimonial.imageAlt }}" width="{{ testimonial.width }}" height="{{ testimonial.height }}" loading="lazy" decoding="async"><span class="story-play">{{ icon("play") }} Watch on YouTube</span></div>
         <h3>{{ testimonial.name }}</h3><p class="story-video-company">{{ testimonial.attribution }}</p>
       </a>
       <p>{{ testimonial.context }}</p>
-      <blockquote cite="{{ testimonial.url }}"><p>“{{ testimonial.quote }}”</p></blockquote>
+      {% if testimonial.quote %}<blockquote cite="{{ testimonial.cite or testimonial.url }}"><p>“{{ testimonial.quote }}”</p></blockquote>{% endif %}
     </article>
-  {% endif %}{% endfor %}
+  {% endfor %}
   </div>
 </div></section>
 <section class="section section-soft" id="client-reviews"><div class="shell">

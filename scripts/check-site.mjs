@@ -5,7 +5,7 @@ const output = "_site";
 const errors = [];
 const required = [
   "index.html", "work-with-me/index.html", "ai-profit-opportunity-audit/index.html",
-  "advisory/index.html", "about/index.html", "client-stories/index.html", "blog/index.html", "newsletter/index.html",
+  "advisory/index.html", "about/index.html", "client-stories/index.html", "blog/index.html", "newsletter/index.html", "privacy/index.html",
   "404.html", "robots.txt", "sitemap.xml", "CNAME", "BingSiteAuth.xml"
 ];
 
@@ -29,6 +29,8 @@ function internalTarget(url) {
 }
 
 if (existsSync(output)) {
+  const titles = new Map();
+  const descriptions = new Map();
   for (const file of filesIn(output).filter((path) => path.endsWith(".html"))) {
     const html = readFileSync(file, "utf8");
     if (!html.includes("<html lang=\"en\"")) errors.push(`${file}: missing lang attribute`);
@@ -39,6 +41,19 @@ if (existsSync(output)) {
       if ((html.match(/<h1\b/g) || []).length !== 1) errors.push(`${file}: expected one main heading`);
       for (const marker of ['<title>', 'name="description"', 'rel="canonical"', 'property="og:image"', 'name="twitter:image:alt"']) {
         if (!html.includes(marker)) errors.push(`${file}: missing ${marker}`);
+      }
+      const title = html.match(/<title>([^<]+)<\/title>/)?.[1];
+      const description = html.match(/<meta name="description" content="([^"]+)">/)?.[1];
+      if (title) {
+        if (titles.has(title)) errors.push(`${file}: duplicate title also used by ${titles.get(title)}`);
+        titles.set(title, file);
+      }
+      if (description) {
+        if (descriptions.has(description)) errors.push(`${file}: duplicate description also used by ${descriptions.get(description)}`);
+        descriptions.set(description, file);
+      }
+      for (const match of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
+        try { JSON.parse(match[1]); } catch { errors.push(`${file}: invalid JSON-LD`); }
       }
     }
     if (/cal\.com|CALCOM_URL/i.test(html)) errors.push(`${file}: legacy Cal.com reference found`);
@@ -62,10 +77,19 @@ if (existsSync(output)) {
       if (!/\balt=\"[^\"]*\"/.test(match[0])) errors.push(`${file}: image missing alt text`);
     }
   }
+  const sitemap = readFileSync(join(output, "sitemap.xml"), "utf8");
+  for (const route of ["/", "/work-with-me/", "/ai-profit-opportunity-audit/", "/advisory/", "/privacy/"]) {
+    if (!sitemap.includes(`<loc>https://adrianching.com${route}</loc>`)) errors.push(`sitemap.xml: missing ${route}`);
+  }
+  const siteCss = readFileSync(join(output, "assets/css/site.css"), "utf8");
+  if (!siteCss.includes("prefers-color-scheme:dark")) errors.push("site.css: missing system dark mode");
+  if (!siteCss.includes(':root[data-theme="dark"]')) errors.push("site.css: missing manual dark mode");
+  if (!readFileSync(join(output, "index.html"), "utf8").includes("data-theme-toggle")) errors.push("index.html: missing theme toggle");
   for (const route of ["index.html", "work-with-me/index.html", "ai-profit-opportunity-audit/index.html", "advisory/index.html"]) {
     const html = readFileSync(join(output, route), "utf8");
     if (!html.includes('href="https://calendly.com/adrianchinghc/30-minute-call"')) errors.push(`${route}: missing Founder Fit Call destination`);
   }
+  if (!readFileSync(join(output, "client-stories/index.html"), "utf8").includes("https://youtu.be/38lsk8YyA3c")) errors.push("client-stories/index.html: missing Mario Vela video");
   if (existsSync(join(output, ".agents"))) errors.push("Development skills must not be published in the site output");
 }
 

@@ -1,0 +1,36 @@
+name: Monitor AdrianChing.com
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  production-health:
+    name: Production availability and TLS
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check the homepage
+        run: |
+          curl --fail --silent --show-error --location --max-time 30 \
+            --retry 2 --retry-all-errors \
+            --output homepage.html https://adrianching.com/
+          grep --fixed-strings '<link rel="canonical" href="https://adrianching.com/">' homepage.html
+          grep --fixed-strings '<h1>Adrian Ching.</h1>' homepage.html
+
+      - name: Check discovery files
+        run: |
+          curl --fail --silent --show-error --max-time 30 https://adrianching.com/robots.txt | grep --fixed-strings 'Sitemap: https://adrianching.com/sitemap.xml'
+          curl --fail --silent --show-error --max-time 30 https://adrianching.com/sitemap.xml | grep --fixed-strings '<loc>https://adrianching.com/</loc>'
+
+      - name: Check public TLS expiry
+        run: |
+          expiry=$(openssl s_client -connect adrianching.com:443 -servername adrianching.com </dev/null 2>/dev/null | openssl x509 -noout -enddate | cut -d= -f2)
+          test -n "$expiry"
+          expiry_epoch=$(date --date="$expiry" +%s)
+          warning_epoch=$(date --date="now + 21 days" +%s)
+          test "$expiry_epoch" -gt "$warning_epoch"
