@@ -140,7 +140,7 @@ figcaption{font-size:.8125rem;line-height:1.5;color:var(--muted);margin-top:.75r
 .project-story-visual{min-width:0;margin:0}
 .project-story-visual>div{aspect-ratio:1;overflow:hidden;background:var(--soft)}
 .project-story-visual img{display:block;width:160%;max-width:none;height:auto;transform:translate(-37%,-5%)}
-.project-story-visual-bookxcess img{transform:translate(-38%,-5%)}
+.project-story-visual-bookxcess img{transform:translate(-46%,-5%)}
 .project-story-visual-teleme img{transform:translate(-33%,-5%)}
 .project-story-visual figcaption{text-align:center}
 .project-story-copy .page-kicker{margin-bottom:.75rem;color:var(--signal)}
