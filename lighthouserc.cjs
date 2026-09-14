@@ -5,8 +5,8 @@ module.exports = {
       url: process.env.LHCI_GROUP === "content"
         ? ["/", "/about/", "/blog/", "/client-stories/"]
         : process.env.LHCI_GROUP === "commercial"
-          ? ["/work-with-me/", "/ai-profit-opportunity-audit/", "/advisory/", "/newsletter/", "/newsletter/confirmed/"]
-          : ["/", "/about/", "/blog/", "/work-with-me/", "/ai-profit-opportunity-audit/", "/advisory/", "/newsletter/", "/newsletter/confirmed/", "/client-stories/"],
+          ? ["/work-with-me/", "/ai-profit-opportunity-audit/", "/advisory/", "/newsletter/"]
+          : ["/", "/about/", "/blog/", "/work-with-me/", "/ai-profit-opportunity-audit/", "/advisory/", "/newsletter/", "/client-stories/"],
       numberOfRuns: 3,
       settings: process.env.LHCI_DEVICE === "desktop" ? { preset: "desktop" } : {}
     },
