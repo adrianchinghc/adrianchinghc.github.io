@@ -32,6 +32,9 @@ if (existsSync(output)) {
   const titles = new Map();
   const descriptions = new Map();
   const visibleImages = new Map();
+  const intentionalImageRepeats = new Map([
+    ["/assets/images/work/dinie-johari.jpg", new Set(["index.html", "client-stories/index.html"])]
+  ]);
   for (const file of filesIn(output).filter((path) => path.endsWith(".html"))) {
     const html = readFileSync(file, "utf8");
     if (!html.includes("<html lang=\"en\"")) errors.push(`${file}: missing lang attribute`);
@@ -78,8 +81,11 @@ if (existsSync(output)) {
       if (!/\balt=\"[^\"]*\"/.test(match[0])) errors.push(`${file}: image missing alt text`);
       const src = match[0].match(/\bsrc=\"([^\"]+)\"/)?.[1];
       if (src?.startsWith("/assets/images/")) {
-        if (visibleImages.has(src)) errors.push(`${file}: visible image ${src} is already used by ${visibleImages.get(src)}`);
-        else visibleImages.set(src, file);
+        if (visibleImages.has(src)) {
+          const allowedFiles = intentionalImageRepeats.get(src);
+          const firstFile = visibleImages.get(src);
+          if (!allowedFiles?.has(firstFile) || !allowedFiles.has(file)) errors.push(`${file}: visible image ${src} is already used by ${firstFile}`);
+        } else visibleImages.set(src, file);
       }
     }
     for (const match of html.matchAll(/<a\b[^>]*\bhref="https?:\/\/[^\"]+"[^>]*>/g)) {

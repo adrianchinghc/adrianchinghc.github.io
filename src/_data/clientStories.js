@@ -4,6 +4,7 @@ export default {
     {
       "name": "Dinie Johari",
       "role": "Former Assistant Manager, BookXcess",
+      "image": "/assets/images/work/dinie-johari.jpg",
       "quote": "Their response was very quick and timely. Work is delivered on time. And they even go out of their way to complete urgent tasks which we really appreciate.",
       "url": "https://clutch.co/go-to-review/1e4ccebe-2c58-45fe-8b6a-a22a8d81dd5f/201640",
       "source": "Project review on Clutch"

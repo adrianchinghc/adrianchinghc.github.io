@@ -312,7 +312,7 @@ figcaption{font-size:.8125rem;line-height:1.5;color:var(--muted);margin-top:.75r
 .idea-collection{padding-top:3rem}
 .idea-entry{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(2rem,5vw,4rem);align-items:center;padding-block:2.75rem;border-bottom:1px solid var(--line);scroll-margin-top:1.5rem}
 .idea-entry:first-child{padding-top:0}
-.idea-entry .video-thumbnail{aspect-ratio:4/3}
+.idea-entry .video-thumbnail{aspect-ratio:16/10}
 .idea-entry h2{font-size:clamp(1.7rem,2.8vw,2.45rem);line-height:1.2;max-width:24ch}
 .idea-content>p:not(.content-topic){color:var(--muted)}
 .collection-note{margin:1.25rem 0 0;max-width:75ch}
@@ -470,6 +470,9 @@ figcaption{font-size:.8125rem;line-height:1.5;color:var(--muted);margin-top:.75r
 .life-photos img{width:100%;height:auto}
 .latest-with-photo{grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1fr);gap:2.5rem;align-items:center}
 .recording-photo img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center 50%}
+/* A restrained photographic grade keeps real moments cohesive without making them feel staged. */
+.home-portrait img,.story-photo img,.working-photo img,.about-hero figure img,.team-photo img,.life-photos img,.work-introduction figure img,.audit-photo img,.recording-photo img,.idea-entry .video-thumbnail img{filter:saturate(.94) contrast(1.04) brightness(.99)}
+.home-portrait,.story-photo,.working-photo,.about-hero figure,.team-photo,.life-photos figure,.work-introduction figure,.audit-photo,.recording-photo,.idea-entry .video-thumbnail{filter:drop-shadow(0 18px 30px color-mix(in srgb,var(--ink) 9%,transparent))}
 /* The play control sits clear of faces. Only clickable photographs move. */
 .video-play{inset:auto auto 1rem 1rem}
 .video-play svg{width:40px;height:40px;padding:12px}
