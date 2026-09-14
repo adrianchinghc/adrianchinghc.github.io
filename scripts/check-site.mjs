@@ -89,6 +89,7 @@ if (existsSync(output)) {
     const html = readFileSync(join(output, route), "utf8");
     if (!html.includes('href="https://calendly.com/adrianchinghc/30-minute-call"')) errors.push(`${route}: missing Founder Fit Call destination`);
   }
+  if (!readFileSync(join(output, "client-stories/index.html"), "utf8").includes("https://youtu.be/38lsk8YyA3c")) errors.push("client-stories/index.html: missing Mario Vela video");
   if (existsSync(join(output, ".agents"))) errors.push("Development skills must not be published in the site output");
 }
 

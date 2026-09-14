@@ -15,13 +15,13 @@ The two videos are unlisted and accessible using the links Adrian supplied for t
 ## Additional sources and limits
 
 - Adrian supplied `Zero-To-Launch-MY.pdf` (23 pages) as an attachment after the Gamma link could not be read. Page 13 supplies the original 1000 × 1000 project images for Whisker Tracker, Black Tulip and Tradelink. Page 15 identifies Dinie Johari alongside his portrait. The website uses these extracted JPEG assets, not generated or recreated product screens. The full sales deck is not published with the website.
-- The deck identifies Tradelink as a transport management software product built to replace its earlier no-code version. Its visual shows loads, trips and trailers; the About page uses that bounded project description. Mario’s video remains unreviewed and no quote is attributed to him.
+- The deck identifies Tradelink as a transport management software product built to replace its earlier no-code version. Its visual shows loads, trips and trailers; the About and Client Stories pages use that bounded project description. Mario’s video is linked without attributing an unverified quotation to him.
 - The deck’s Whisker Tracker claim is broader than Justin’s video: he says the facial-recognition component was developed separately (4:49–4:59), and describes discussions about potential government funding, not funding already secured (3:56–4:17). The website therefore describes the cat-management app without claiming Upstack built the recognition model or secured funding.
 - Old package prices, delivery guarantees, support promises, project failure statistics and Black Tulip spend comparisons are not carried into the current offers. Their inclusion in a historical sales deck does not establish a promise or independently verified result for today’s business.
 
 - Archive: https://web.archive.org/web/20260115150923/https://upstackstudio.com/work/. Accessible. Historical testimonials include Andrew Yap (BookXcess and Big Bad Wolf Books), Loo Toon Tan (NiuAce), Heidzir Jamaraji (The Malaysian Insight), Chien Yee Tan (PriverCar), Siyuan Lye (Whitman) and Mark Choo (Teleme). Existing Kevin Ong proof remains from the repository’s original work page, not attributed to this archive snapshot.
 - Google Maps: https://maps.app.goo.gl/AHLf6HGQSg1vKmNW9. Correct Upstack Studio business found, but the browser displays a limited view with no individual reviews or review count. No Google review excerpt has been published.
-- Mario Vela, Tradelink: https://drive.google.com/file/d/1RTuGXgMa3UMWDduRlNzb_H9hpQeLTOTD/view. File title: `Mario- Short Version(1).mp4`. The 669,274,361-byte video exceeds the connected Drive download limit of 268,435,456 bytes. A smaller export or transcript is needed before quoting. Public playback accessibility has not been verified.
+- Mario Vela, Tradelink: https://youtu.be/38lsk8YyA3c. Adrian supplied the replacement YouTube link on 14 September 2026. The unlisted 3:25 video is publicly playable and titled `Tradelink - Mario Vela`. YouTube reports captions unavailable, so the site links the full video without publishing a quotation. The authentic Tradelink project image from the supplied sales deck is used as its local cover; it is not presented as a video frame.
 
 ## Social profiles and personal photographs
 
@@ -31,7 +31,7 @@ Adrian confirmed the beach photograph shows the Trailblazers group at their Bora
 
 ## Client stories page
 
-`/client-stories/` brings together two founder videos, 12 written excerpts, three clearly labelled review summaries, a separate colleague quotation and the In Real Life feature. It does not claim to reproduce every Google review or the unreviewed Mario video. Main navigation remains focused; the page is linked from the homepage proof section, About, Work With Me and the footer.
+`/client-stories/` brings together three founder videos, 12 written excerpts, three clearly labelled review summaries, a separate colleague quotation and the In Real Life feature. It does not claim to reproduce every Google review. Main navigation remains focused; the page is linked from the homepage proof section, About, Work With Me and the footer.
 
 - Eight excerpts and real reviewer portraits come from the user-supplied PDF, pages 15–16: Dinie Johari, Bon Chee Fong, Ivan Lee, Mark Douglas Choo, Eddy How, Tan Loo Toon, Heidzir Jamaraji and Siyuan Lye. JPEGs are extracted originals. “Project review on Clutch” links to the related source profile; the deck's wording is retained. Ivan's organization uses the matching Clutch review attribution (Financial Planning Association); the deck's AFA Malaysia attribution is not assumed to mean the same organization.
 - Jason and Justin's video images are original JPEGs extracted from PDF pages 17–18. The dedicated page opens their full videos; the homepage still links near its quoted excerpt. No video loads until the visitor follows a link.
