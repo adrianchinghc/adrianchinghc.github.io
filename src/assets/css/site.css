@@ -413,6 +413,7 @@ figcaption{font-size:.8125rem;line-height:1.5;color:var(--muted);margin-top:.75r
   .offer-comparison{gap:2.5rem}.offer-comparison .ruled-block+.ruled-block{padding-top:2.5rem;border-top:1px solid var(--line)}
   .about-hero-grid,.writing-hero-grid,.newsletter-hero-grid,.about-build-grid,.photo-break,.content-grid{grid-template-columns:1fr;gap:2rem}.about-hero,.writing-hero,.newsletter-hero,.page-hero{padding-block:2.75rem}.about-hero h1,.writing-hero h1,.newsletter-hero h1,.page-hero h1{font-size:clamp(2.15rem,7.8vw,3.2rem);line-height:1.18;max-width:25ch}
   .about-hero figure img,.writing-hero figure img,.newsletter-hero figure img{aspect-ratio:4/3;max-height:400px;object-position:center 36%}
+  .about-hero figure img[src$="/reading.webp"],.newsletter-hero figure img[src$="/reading.webp"]{object-position:center 65%}
   .story-chapter{grid-template-columns:1fr;gap:.5rem;margin-bottom:2.5rem}.story-chapter h2{font-size:1.8rem}.wide-story-photo{margin-block:2rem}.wide-story-photo img{aspect-ratio:4/3}.about-build-grid>div:first-child{grid-column:1}
   .photo-break>img{height:380px}.photo-break>div{padding:0 20px 2.5rem;max-width:none}.content-grid{padding-bottom:2.5rem;margin-bottom:2.5rem;gap:1.25rem}.content-grid>h2{color:var(--signal);font-size:1.1rem}.content-body h3{font-size:1.4rem}
   .price-panel{flex-direction:column;align-items:stretch;padding:1.5rem;gap:1.5rem}.price{font-size:clamp(1.6rem,6.4vw,2.75rem);letter-spacing:-.035em}.price-note{font-size:.875rem}
@@ -429,7 +430,7 @@ figcaption{font-size:.8125rem;line-height:1.5;color:var(--muted);margin-top:.75r
 @media(max-width:760px){
   .newsletter-hero-grid{grid-template-columns:1fr;gap:2rem}
   .newsletter-hero figure{max-width:300px}
-  .newsletter-hero figure img{aspect-ratio:4/3;max-height:none;object-position:center 35%}
+  .newsletter-hero figure img{aspect-ratio:4/3;max-height:none;object-position:center 65%}
   .case-feature{grid-template-columns:1fr}
 }
 
