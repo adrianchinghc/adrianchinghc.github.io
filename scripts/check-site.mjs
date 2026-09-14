@@ -32,8 +32,24 @@ if (existsSync(output)) {
   const titles = new Map();
   const descriptions = new Map();
   const visibleImages = new Map();
+  const duplicatePhotoGroups = new Map([
+    ["/assets/images/adrian/founder.webp", "adrian-seated-outside"],
+    ["/assets/images/adrian/seated-portrait.webp", "adrian-seated-outside"],
+    ["/assets/images/adrian/upstack-team.webp", "upstack-team-group"],
+    ["/assets/images/adrian/team-gathering.webp", "upstack-team-group"],
+    ["/assets/images/adrian/at-work.webp", "adrian-cafe-window"],
+    ["/assets/images/adrian/working-side.webp", "adrian-cafe-window"],
+    ["/assets/images/adrian/studio.webp", "adrian-recording-camera"],
+    ["/assets/images/adrian/recording-camera.webp", "adrian-recording-camera"],
+    ["/assets/images/adrian/building.webp", "adrian-working-front"],
+    ["/assets/images/adrian/working-front.webp", "adrian-working-front"],
+    ["/assets/images/adrian/conversation.webp", "adrian-recording-conversation"],
+    ["/assets/images/adrian/recording-conversation.webp", "adrian-recording-conversation"],
+    ["/assets/images/adrian/behind-the-scenes.webp", "recording-production"],
+    ["/assets/images/adrian/recording-session.webp", "recording-production"]
+  ]);
   const intentionalImageRepeats = new Map([
-    ["/assets/images/work/dinie-johari.jpg", new Set(["index.html", "client-stories/index.html"])]
+    ["/assets/images/work/dinie-johari.jpg", new Set([join(output, "index.html"), join(output, "client-stories/index.html")])]
   ]);
   for (const file of filesIn(output).filter((path) => path.endsWith(".html"))) {
     const html = readFileSync(file, "utf8");
@@ -79,13 +95,14 @@ if (existsSync(output)) {
     }
     for (const match of html.matchAll(/<img\b[^>]*>/g)) {
       if (!/\balt=\"[^\"]*\"/.test(match[0])) errors.push(`${file}: image missing alt text`);
-      const src = match[0].match(/\bsrc=\"([^\"]+)\"/)?.[1];
+      const src = match[0].match(/\bdata-image-source=\"([^\"]+)\"/)?.[1] ?? match[0].match(/\bsrc=\"([^\"]+)\"/)?.[1];
       if (src?.startsWith("/assets/images/")) {
-        if (visibleImages.has(src)) {
+        const imageKey = duplicatePhotoGroups.get(src) ?? src;
+        if (visibleImages.has(imageKey)) {
           const allowedFiles = intentionalImageRepeats.get(src);
-          const firstFile = visibleImages.get(src);
-          if (!allowedFiles?.has(firstFile) || !allowedFiles.has(file)) errors.push(`${file}: visible image ${src} is already used by ${firstFile}`);
-        } else visibleImages.set(src, file);
+          const firstImage = visibleImages.get(imageKey);
+          if (!allowedFiles?.has(firstImage.file) || !allowedFiles.has(file)) errors.push(`${file}: visible image ${src} repeats ${firstImage.src} from ${firstImage.file}`);
+        } else visibleImages.set(imageKey, { file, src });
       }
     }
     for (const match of html.matchAll(/<a\b[^>]*\bhref="https?:\/\/[^\"]+"[^>]*>/g)) {

@@ -276,7 +276,8 @@ figcaption{font-size:.8125rem;line-height:1.5;color:var(--muted);margin-top:.75r
 .story-opening{grid-column:1/-1;max-width:780px}
 .story-opening h2{font-size:clamp(2rem,4.4vw,3.75rem);max-width:24ch}
 .story-opening .section-lede{margin-bottom:0}
-.story-photo img,.team-photo img{width:100%;height:auto;aspect-ratio:1;object-fit:contain}
+.story-photo img{width:100%;height:auto;aspect-ratio:1;object-fit:contain}
+.team-photo img{width:100%;aspect-ratio:4/3;object-fit:cover}
 .story-copy p{color:var(--muted)}
 .story-copy .story-turn,.decision-chapter .story-turn{font-size:1.4rem;color:var(--ink);line-height:1.55;letter-spacing:-.02em;margin-block:1.75rem}
 .current-work{display:grid;grid-template-columns:minmax(0,1.1fr) repeat(2,minmax(0,1fr));gap:3rem}

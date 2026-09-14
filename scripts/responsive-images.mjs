@@ -34,7 +34,7 @@ export function responsiveImages(config) {
       // Lazy images use their actual layout width in supporting browsers.
       const sizes = tag.includes('loading="lazy"') ? 'auto, (max-width: 760px) calc(100vw - 40px), 600px' : '(max-width: 760px) calc(100vw - 40px), (max-width: 1000px) 45vw, 520px';
       let replacement = tag.replace(/\s(?:width|height)="[^"]*"/g, "").replace(`src="${src}"`, `src="${result.fallback}"`);
-      replacement = replacement.replace(/>$/, ` width="${result.meta.width}" height="${result.meta.height}" srcset="${result.srcset}" sizes="${sizes}">`);
+      replacement = replacement.replace(/>$/, ` data-image-source="${src}" width="${result.meta.width}" height="${result.meta.height}" srcset="${result.srcset}" sizes="${sizes}">`);
       html = html.replace(tag, replacement);
     }
     return html;
