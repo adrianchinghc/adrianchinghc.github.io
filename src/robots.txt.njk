@@ -3,6 +3,9 @@ permalink: /robots.txt
 eleventyExcludeFromCollections: true
 ---
 User-agent: *
+{% if site.isPreview %}Disallow: /
+{% else %}
 Allow: /
 
 Sitemap: https://adrianching.com/sitemap.xml
+{% endif %}

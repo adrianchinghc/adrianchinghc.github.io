@@ -30,9 +30,10 @@ Copy `.env.example` to `.env` or provide the variables in the shell used for the
 - `KIT_URL`: public Kit landing-page or form URL. Until configured, the newsletter page states that signup is not yet available and offers a working YouTube link. No fake form or self-link is shown.
 - `CONTACT_URL`: optional public contact destination.
 - `PAYMENT_URL`: reserved for a later qualified-client payment flow and not linked from the public site.
-- `GA_MEASUREMENT_ID`, `META_PIXEL_ID`, `HOTJAR_ID`: optional tracking IDs. No tracking scripts are emitted when blank.
+- `GA_MEASUREMENT_ID`: Google Analytics 4 measurement ID. `GOOGLE_SITE_VERIFICATION`: Search Console verification token.
+- `META_PIXEL_ID`, `HOTJAR_ID`: optional advertising and behaviour-research tools. Leave them blank unless there is a specific need. No optional analytics loads before consent, and no configuration is emitted when all IDs are blank.
 
-When analytics is configured, outbound Calendly clicks emit a `founder_fit_call_click` event. The commercial flow remains: website → Founder Fit Call → qualification → paid engagement → intake.
+When analytics is configured and accepted, the site measures navigation, outbound clicks, scroll depth, engaged time, supported Core Web Vitals and sanitised JavaScript errors. Outbound Calendly clicks emit `founder_fit_call_click`; they are not treated as completed bookings. See [`docs/MEASUREMENT-SEO.md`](docs/MEASUREMENT-SEO.md) for the event dictionary, funnel definitions, search-intent map and account setup.
 
 ## Publishing after approval
 
@@ -51,6 +52,7 @@ Work stays on `rebuild-2026` in PR #116. Vercel automatically builds branch push
 - The homepage story uses Adrian's confirmed history. Founder situations are explicitly illustrative, not invented client stories. The Teleme proof comes from the legacy work page; the quoted excerpt and attribution are preserved. Past software proof is not presented as an AI Audit result.
 - Each page can set `socialImage` and `socialImageAlt` to an existing, relevant photograph. Keep the canonical production URL even on previews.
 - Navigation remains available without JavaScript. With JavaScript, the mobile menu supports Escape, outside click, focus exit and viewport changes.
+- Light and dark palettes follow the visitor's operating-system preference. The site does not override that preference or add another setting to manage.
 - Newsletter signup still needs a real `KIT_URL` before launch. The fallback is an honest signup-unavailable notice with a YouTube link.
 
 ## Design and conversion refinements
