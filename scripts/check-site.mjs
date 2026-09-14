@@ -5,7 +5,7 @@ const output = "_site";
 const errors = [];
 const required = [
   "index.html", "work-with-me/index.html", "ai-profit-opportunity-audit/index.html",
-  "advisory/index.html", "about/index.html", "client-stories/index.html", "blog/index.html", "newsletter/index.html", "privacy/index.html",
+  "advisory/index.html", "about/index.html", "client-stories/index.html", "blog/index.html", "newsletter/index.html", "newsletter/confirmed/index.html", "privacy/index.html",
   "404.html", "robots.txt", "sitemap.xml", "CNAME", "BingSiteAuth.xml"
 ];
 
@@ -90,6 +90,9 @@ if (existsSync(output)) {
     if (!html.includes('href="https://calendly.com/adrianchinghc/30-minute-call"')) errors.push(`${route}: missing Founder Fit Call destination`);
   }
   if (!readFileSync(join(output, "client-stories/index.html"), "utf8").includes("https://youtu.be/38lsk8YyA3c")) errors.push("client-stories/index.html: missing Mario Vela video");
+  const confirmationHtml = readFileSync(join(output, "newsletter/confirmed/index.html"), "utf8");
+  if (!confirmationHtml.includes('<meta name="robots" content="noindex, nofollow">')) errors.push("newsletter/confirmed/index.html: confirmation page must remain noindex");
+  if (sitemap.includes("/newsletter/confirmed/")) errors.push("sitemap.xml: confirmation page must not be indexed");
   if (existsSync(join(output, ".agents"))) errors.push("Development skills must not be published in the site output");
 }
 

@@ -330,6 +330,12 @@ figcaption{font-size:.8125rem;line-height:1.5;color:var(--muted);margin-top:.75r
 .topic-notes h3{font-size:1.3rem}
 .topic-notes p{color:var(--muted);margin-bottom:0}
 .letter-closing h2{max-width:24ch;font-size:clamp(1.9rem,3.7vw,3rem)}
+.confirmation-page{display:grid;align-items:center;min-height:min(68vh,680px);padding-block:clamp(4.5rem,10vw,8.5rem);border-bottom:1px solid var(--line)}
+.confirmation-message{margin-inline:auto}
+.confirmation-kicker{margin:0 0 1rem;color:var(--signal);font-size:.875rem;font-weight:650;line-height:1.5}
+.confirmation-message h1{max-width:12ch;font-size:clamp(3rem,7vw,5.5rem);letter-spacing:-.04em}
+.confirmation-message .page-lede{max-width:48ch}
+.confirmation-actions{margin-top:2rem}
 .work-introduction{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.7fr);gap:clamp(2rem,5vw,4rem);align-items:center}
 .work-introduction h1{max-width:16ch}
 .work-introduction img{width:100%;aspect-ratio:4/5;max-height:420px;object-fit:cover;object-position:center 38%}
