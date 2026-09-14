@@ -325,6 +325,7 @@ figcaption{font-size:.8125rem;line-height:1.5;color:var(--muted);margin-top:.75r
 .agency-chapter p{color:var(--muted)}
 .decision-chapter h2{font-size:clamp(2rem,4vw,3.3rem);max-width:24ch}
 .personal-invitation{display:grid;grid-template-columns:minmax(0,.55fr) minmax(0,1fr);gap:clamp(2rem,6vw,5rem);align-items:center;max-width:1000px}
+.personal-invitation-text{display:block;max-width:720px}
 .personal-invitation img{width:100%;aspect-ratio:1;object-fit:cover;object-position:center 38%}
 .personal-invitation h2{font-size:clamp(1.9rem,3vw,2.75rem);max-width:25ch}
 .personal-invitation p{color:var(--muted)}

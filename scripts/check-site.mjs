@@ -31,6 +31,7 @@ function internalTarget(url) {
 if (existsSync(output)) {
   const titles = new Map();
   const descriptions = new Map();
+  const visibleImages = new Map();
   for (const file of filesIn(output).filter((path) => path.endsWith(".html"))) {
     const html = readFileSync(file, "utf8");
     if (!html.includes("<html lang=\"en\"")) errors.push(`${file}: missing lang attribute`);
@@ -75,6 +76,11 @@ if (existsSync(output)) {
     }
     for (const match of html.matchAll(/<img\b[^>]*>/g)) {
       if (!/\balt=\"[^\"]*\"/.test(match[0])) errors.push(`${file}: image missing alt text`);
+      const src = match[0].match(/\bsrc=\"([^\"]+)\"/)?.[1];
+      if (src?.startsWith("/assets/images/")) {
+        if (visibleImages.has(src)) errors.push(`${file}: visible image ${src} is already used by ${visibleImages.get(src)}`);
+        else visibleImages.set(src, file);
+      }
     }
     for (const match of html.matchAll(/<a\b[^>]*\bhref="https?:\/\/[^\"]+"[^>]*>/g)) {
       if (!/\btarget="_blank"/.test(match[0])) errors.push(`${file}: external link must open in a new tab`);
