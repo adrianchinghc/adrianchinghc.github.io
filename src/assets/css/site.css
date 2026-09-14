@@ -572,7 +572,8 @@ html[data-input="keyboard"]{scroll-behavior:auto}
 
 /* Inline Kit form uses the site's typography, colours and focus treatment. */
 .newsletter-form{margin-top:1.5rem;max-width:640px}
-.newsletter-fields{display:flex;align-items:flex-end;gap:.75rem;margin-bottom:1rem}
+.newsletter-fields{display:grid;grid-template-columns:1fr 1fr;align-items:end;gap:.75rem;margin-bottom:1rem}
+.newsletter-fields .button{grid-column:1/-1;justify-self:start}
 .newsletter-email{display:block;flex:1;min-width:0;font-size:.875rem;font-weight:600}
 .newsletter-email input{display:block;margin-top:.4rem;width:100%;min-height:52px;border:1px solid var(--line);border-radius:var(--radius-control);padding:.75rem;background:var(--white);color:var(--ink);font-size:1rem}
 .newsletter-email input::placeholder{color:var(--muted)}
@@ -583,5 +584,4 @@ html[data-input="keyboard"]{scroll-behavior:auto}
 .newsletter-form .formkit-alert-error:not(:empty){border-color:var(--signal)}
 .newsletter-form .formkit-submit[data-active] .signup-label{display:none}
 .newsletter-form .formkit-submit[data-active] .signup-busy{display:inline}
-.kit-credit{display:inline-flex;align-items:center;min-height:44px;font-size:.75rem;color:var(--muted)}
-@media(max-width:420px){.newsletter-fields{flex-direction:column;align-items:stretch}.newsletter-email{width:100%}}
+@media(max-width:600px){.newsletter-fields{grid-template-columns:1fr}.newsletter-fields .button{justify-self:stretch}.newsletter-email{width:100%}}
