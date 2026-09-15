@@ -1,6 +1,6 @@
 <div class="video-grid">
   {% for video in media.featuredVideos %}
-  <a class="video-card{% if loop.first %} video-card-featured{% endif %}" href="{{ video.url }}" target="_blank" rel="noopener" data-media-link="youtube-video" aria-label="Watch {{ video.title }} on YouTube">
+  <a class="video-card{% if loop.first %} video-card-featured{% endif %}" href="{{ video.url }}" target="_blank" rel="noopener" data-analytics-event="youtube_click" aria-label="Watch {{ video.title }} on YouTube">
     <div class="video-thumbnail">
       <img src="{{ video.image }}" alt="Thumbnail for {{ video.title }}" width="720" height="404" loading="lazy" decoding="async">
       <span class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><path d="M8 5v14l11-7z"></path></svg></span>
