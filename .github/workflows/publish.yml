@@ -45,8 +45,8 @@ jobs:
       - name: Check generated site
         run: npm run check
 
-      - name: Check navigation and cache clearing
-        run: node --test scripts/navigation.test.mjs
+      - name: Check navigation, images and cache clearing
+        run: node --test scripts/*.test.mjs
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v6
