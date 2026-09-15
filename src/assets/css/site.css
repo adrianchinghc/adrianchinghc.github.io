@@ -347,7 +347,8 @@ figcaption{font-size:.8125rem;line-height:1.5;color:var(--muted);margin-top:.75r
 .confirmation-actions{margin-top:2rem}
 .work-introduction{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.7fr);gap:clamp(2rem,5vw,4rem);align-items:center}
 .work-introduction h1{max-width:16ch}
-.work-introduction img{width:100%;aspect-ratio:4/5;max-height:420px;object-fit:cover;object-position:center 38%}
+.work-introduction figure{overflow:hidden}
+.work-introduction img{width:100%;aspect-ratio:4/5;max-height:420px;object-fit:cover;object-position:center 38%;transform:scale(1.15);transform-origin:left center}
 .work-introduction .microcopy{margin-bottom:0}
 .engagement-layout{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,.8fr);gap:clamp(2rem,5vw,4rem);align-items:start}
 .engagement-layout h1{font-size:clamp(2.4rem,4.5vw,3.75rem);max-width:19ch}
