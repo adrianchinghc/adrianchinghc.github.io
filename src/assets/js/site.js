@@ -173,8 +173,9 @@ document.querySelectorAll("a[href]").forEach((link) => {
   link.addEventListener("click", () => {
     const url = new URL(link.href, window.location.href);
     const data = linkData(link);
-    let eventName = url.origin === "https://calendly.com" ? "founder_fit_call_click" : "link_click";
-    if (link.matches("[data-media-link]")) eventName = "youtube_click";
+    let eventName = "link_click";
+    if (url.origin === "https://calendly.com") eventName = "founder_fit_call_click";
+    else if (link.matches("[data-media-link]")) eventName = "youtube_click";
     else if (url.pathname === "/work-with-me/") eventName = "work_with_me_click";
     else if (url.pathname === "/newsletter/") eventName = "newsletter_click";
     else if (url.origin !== window.location.origin) eventName = "outbound_click";
