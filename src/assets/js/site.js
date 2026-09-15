@@ -169,6 +169,14 @@ function linkData(link) {
   };
 }
 
+function youtubeVideoId(url) {
+  if (url.hostname === "youtu.be") return url.pathname.split("/").filter(Boolean)[0] || "";
+  if (url.hostname === "youtube.com" || url.hostname.endsWith(".youtube.com")) {
+    return url.searchParams.get("v") || url.pathname.match(/^\/(?:shorts|embed|live)\/([^/]+)/)?.[1] || "";
+  }
+  return "";
+}
+
 document.querySelectorAll("a[href]").forEach((link) => {
   link.addEventListener("click", () => {
     const url = new URL(link.href, window.location.href);
@@ -179,6 +187,11 @@ document.querySelectorAll("a[href]").forEach((link) => {
       if (url.pathname === "/work-with-me/") eventName = "work_with_me_click";
       else if (url.pathname === "/newsletter/") eventName = "newsletter_click";
       else if (url.origin !== window.location.origin) eventName = "outbound_click";
+    }
+    if (eventName === "youtube_click") {
+      data.video_title = (link.dataset.videoTitle || data.link_text).slice(0, 100);
+      const videoId = youtubeVideoId(url);
+      if (videoId) data.video_id = videoId;
     }
     track(eventName, data);
   });
