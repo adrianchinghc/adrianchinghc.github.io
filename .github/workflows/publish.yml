@@ -45,6 +45,9 @@ jobs:
       - name: Check generated site
         run: npm run check
 
+      - name: Check navigation and cache clearing
+        run: node --test scripts/navigation.test.mjs
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v6
 
@@ -62,6 +65,44 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: Check out release source
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - name: Download release artifact for cache URL manifest
+        uses: actions/download-artifact@v4
+        with:
+          name: github-pages
+          path: pages-artifact
+
+      - name: Prepare current and previous cache URL manifests
+        run: |
+          mkdir -p _site
+          tar -xf pages-artifact/artifact.tar -C _site
+          curl --fail --silent --show-error --retry 3 --max-time 30 "https://adrianching.com/sitemap.xml?release=${GITHUB_SHA}" -o previous-sitemap.xml
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
+
+      - name: Check cache clearing configuration
+        id: cache_config
+        env:
+          PURGE_TOKEN: ${{ secrets.CLOUDFLARE_CACHE_PURGE_TOKEN }}
+        run: |
+          if [ -n "$PURGE_TOKEN" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::Automatic HTML cache clearing is inactive. Add CLOUDFLARE_CACHE_PURGE_TOKEN; cached HTML expires using the origin TTL until configured."
+          fi
+
+      - name: Clear published HTML from Cloudflare
+        if: steps.cache_config.outputs.enabled == 'true'
+        env:
+          CLOUDFLARE_ZONE_ID: fa2b373c43bcc6f4112bdc7feacd051a
+          CLOUDFLARE_CACHE_PURGE_TOKEN: ${{ secrets.CLOUDFLARE_CACHE_PURGE_TOKEN }}
+        run: node scripts/purge-cloudflare.mjs

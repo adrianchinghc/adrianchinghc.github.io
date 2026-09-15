@@ -4,10 +4,10 @@ import { createHash } from "node:crypto";
 
 const output = "_site";
 const errors = [];
-const versionedAssets = ["css", "js"].map((extension) => {
-  const bytes = readFileSync(`src/assets/${extension}/site.${extension}`);
+const versionedAssets = [["site", "css"], ["site", "js"], ["prefetch", "js"]].map(([name, extension]) => {
+  const bytes = readFileSync(`src/assets/${extension}/${name}.${extension}`);
   const hash = createHash("sha256").update(bytes).digest("hex").slice(0, 12);
-  const url = `/static/site.${hash}.${extension}`;
+  const url = `/static/${name}.${hash}.${extension}`;
   const destination = join(output, url);
   if (!existsSync(destination) || !readFileSync(destination).equals(bytes)) {
     errors.push(`Missing or mismatched versioned asset: ${url}`);

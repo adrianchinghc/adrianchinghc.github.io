@@ -43,6 +43,16 @@ Before the first automated release, set **Settings → Pages → Build and deplo
 
 See [`docs/LEGACY-AUDIT.md`](docs/LEGACY-AUDIT.md) for the migration constraints and retained assets.
 
+### Navigation caching
+
+Rocket Loader stays off. HTML uses browser revalidation while Cloudflare can retain a short-lived shared copy using the origin's ten-minute lifetime. CSS and JavaScript retain content-hashed filenames.
+
+After page load, browsers supporting Speculation Rules prefetch up to six same-origin primary navigation destinations. This downloads HTML only; it does not prerender, execute analytics, submit forms, replace the document, or intercept link clicks. Unsupported browsers keep native navigation. Data Saver and 2G connections skip this enhancement.
+
+The publishing workflow clears all generated HTML and previous sitemap HTML URLs, including directory aliases, after GitHub Pages reports a successful deployment. Configure the GitHub Actions secret `CLOUDFLARE_CACHE_PURGE_TOKEN` with only Cache Purge permission for the adrianching.com zone. A missing secret produces an explicit workflow warning and skips automatic clearing; an API purge failure fails the workflow and can be retried. Arbitrary query-string variants are not enumerated by the sitemap and expire according to the short edge TTL; an already prefetched browser document can also remain until the browser discards it.
+
+Validate with `node --test scripts/navigation.test.mjs`, `npm run build`, and `npm run check`.
+
 ## Preview and editorial maintenance
 
 Images are resized at build time by Sharp into content-hashed WebP variants. Source photographs remain intact; generated HTML has intrinsic dimensions and responsive `srcset`/`sizes`. No image service runs in the browser or at request time.
