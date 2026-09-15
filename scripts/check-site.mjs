@@ -91,6 +91,14 @@ if (existsSync(output)) {
       }
     }
     if (/cal\.com|CALCOM_URL/i.test(html)) errors.push(`${file}: legacy Cal.com reference found`);
+    for (const match of html.matchAll(/<a\b[^>]*>/g)) {
+      const tag = match[0];
+      const locationCount = (tag.match(/\bdata-cta=/g) || []).length;
+      if (locationCount > 1) errors.push(`${file}: link has duplicate data-cta attributes`);
+      if (/\bdata-analytics-event=/.test(tag) && locationCount !== 1) {
+        errors.push(`${file}: explicit analytics event requires one data-cta location`);
+      }
+    }
     for (const match of html.matchAll(/<(?:a|img|script|link)\b[^>]*(?:href|src)=\"([^\"]+)\"/g)) {
       const target = internalTarget(match[1]);
       if (target && !existsSync(target)) errors.push(`${file}: broken internal link ${match[1]}`);
