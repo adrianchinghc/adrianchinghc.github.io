@@ -31,7 +31,7 @@
   <meta name="twitter:description" content="{{ description or site.description }}">
   <meta name="twitter:image" content="{{ site.url }}{{ socialImage or '/assets/images/adrian/founder.webp' }}">
   <meta name="twitter:image:alt" content="{{ socialImageAlt or 'Adrian Ching, founder and builder' }}">
-  <link rel="stylesheet" href="/assets/css/site.css">
+  <link rel="stylesheet" href="{{ '/assets/css/site.css' | assetUrl }}">
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://adrianching.com/#website","url":"https://adrianching.com","name":"Adrian Ching","inLanguage":"en"},{"@type":"Person","@id":"https://adrianching.com/#adrian-ching","name":"Adrian Ching","url":"https://adrianching.com","image":"https://adrianching.com/assets/images/adrian/founder.webp","jobTitle":"Founder","worksFor":{"@type":"Organization","name":"Second Team"},"alumniOf":{"@type":"Organization","name":"Upstack Studio"},"homeLocation":{"@type":"Place","name":"Kuala Lumpur, Malaysia"},"sameAs":["{{ site.social.youtube }}","{{ site.social.linkedin }}","{{ site.social.instagram }}","{{ site.social.facebook }}","{{ site.social.x }}"]}]}</script>
   {% block head %}{% endblock %}
   {% include "analytics.njk" %}
@@ -58,6 +58,6 @@
     <div class="shell footer-bottom"><span>© {{ "now" | year }} Adrian Ching</span><span>Kuala Lumpur · Building globally</span></div>
   </footer>
   {% if site.analyticsEnabled %}<aside class="consent" data-consent-banner hidden aria-label="Analytics choice"><p><strong>Help me improve this site.</strong> Analytics shows which pages and links are useful. Optional tracking only runs if you accept. <a href="/privacy/">Privacy details</a>.</p><div><button class="button" type="button" data-consent="accept">Accept analytics</button><button class="text-button" type="button" data-consent="decline">Decline</button></div></aside>{% endif %}
-  <script src="/assets/js/site.js" defer onerror="document.documentElement.classList.remove('nav-ready')"></script>
+  <script src="{{ '/assets/js/site.js' | assetUrl }}" defer onerror="document.documentElement.classList.remove('nav-ready')"></script>
 </body>
 </html>
