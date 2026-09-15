@@ -159,25 +159,70 @@ document.querySelectorAll("[data-consent-reset]").forEach((button) => {
   });
 });
 
+function analyticsSlug(value) {
+  return String(value || "")
+    .trim()
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "");
+}
+
+function analyticsLocation(link) {
+  if (link.dataset.cta) return link.dataset.cta;
+
+  const labelledRegion = link.closest("[data-analytics-location]");
+  if (labelledRegion?.dataset.analyticsLocation) return labelledRegion.dataset.analyticsLocation;
+
+  const labelledNav = link.closest("nav[aria-label]");
+  if (labelledNav) return analyticsSlug(labelledNav.getAttribute("aria-label")) || "navigation";
+
+  const identifiedLandmark = link.closest("section[id], header[id], footer[id], main[id], article[id]");
+  if (identifiedLandmark?.id) {
+    return `${identifiedLandmark.tagName.toLowerCase()}_${analyticsSlug(identifiedLandmark.id)}`;
+  }
+
+  if (link.closest("header")) return "page_header";
+  if (link.closest("footer")) return "page_footer";
+  if (link.closest("article")) return "article";
+  if (link.closest("section")) return "page_section";
+  return "page";
+}
+
 function linkData(link) {
   const url = new URL(link.href, window.location.href);
   return {
     link_text: (link.getAttribute("aria-label") || link.textContent || "").trim().replace(/\s+/g, " ").slice(0, 80),
     link_domain: url.hostname,
     link_path: url.pathname,
-    cta_location: link.dataset.cta || link.closest("section, header, footer")?.id || link.closest("section, header, footer")?.className || "page"
+    cta_location: analyticsLocation(link)
   };
+}
+
+function youtubeVideoId(url) {
+  if (url.hostname === "youtu.be") return url.pathname.split("/").filter(Boolean)[0] || "";
+  if (url.hostname === "youtube.com" || url.hostname.endsWith(".youtube.com")) {
+    return url.searchParams.get("v") || url.pathname.match(/^\/(?:shorts|embed|live)\/([^/]+)/)?.[1] || "";
+  }
+  return "";
 }
 
 document.querySelectorAll("a[href]").forEach((link) => {
   link.addEventListener("click", () => {
     const url = new URL(link.href, window.location.href);
     const data = linkData(link);
-    let eventName = url.origin === "https://calendly.com" ? "founder_fit_call_click" : "link_click";
-    if (link.matches("[data-media-link]")) eventName = "youtube_click";
-    else if (url.pathname === "/work-with-me/") eventName = "work_with_me_click";
-    else if (url.pathname === "/newsletter/") eventName = "newsletter_click";
-    else if (url.origin !== window.location.origin) eventName = "outbound_click";
+    const explicitEvent = link.dataset.analyticsEvent;
+    let eventName = explicitEvent || "link_click";
+    if (!explicitEvent) {
+      if (url.pathname === "/work-with-me/") eventName = "work_with_me_click";
+      else if (url.pathname === "/newsletter/") eventName = "newsletter_click";
+      else if (url.origin !== window.location.origin) eventName = "outbound_click";
+    }
+    if (eventName === "youtube_click") {
+      data.video_title = (link.dataset.videoTitle || data.link_text).slice(0, 100);
+      const videoId = youtubeVideoId(url);
+      if (videoId) data.video_id = videoId;
+    }
     track(eventName, data);
   });
 });

@@ -33,7 +33,7 @@ Copy `.env.example` to `.env` or provide the variables in the shell used for the
 - `GA_MEASUREMENT_ID`: Google Analytics 4 measurement ID. `GOOGLE_SITE_VERIFICATION`: Search Console verification token.
 - `META_PIXEL_ID`, `HOTJAR_ID`: optional advertising and behaviour-research tools. Leave them blank unless there is a specific need. No optional analytics loads before consent, and no configuration is emitted when all IDs are blank.
 
-When analytics is configured and accepted, the site measures navigation, outbound clicks, scroll depth, engaged time, supported Core Web Vitals and sanitised JavaScript errors. Outbound Calendly clicks emit `founder_fit_call_click`; they are not treated as completed bookings. See [`docs/MEASUREMENT-SEO.md`](docs/MEASUREMENT-SEO.md) for the event dictionary, funnel definitions, search-intent map and account setup.
+When analytics is configured and accepted, the site measures navigation, outbound clicks, scroll depth, engaged time, supported Core Web Vitals and sanitised JavaScript errors. Founder Fit Call clicks emit `founder_fit_call_click`; they are not treated as completed bookings. Every link click includes `page_path`, `cta_location`, `link_text`, `link_domain` and `link_path`. New links inherit a semantic location automatically; use `data-analytics-location` on a containing region or `data-cta` on an individual link when a controlled reporting label is needed. See [`docs/MEASUREMENT-SEO.md`](docs/MEASUREMENT-SEO.md) for the event dictionary, tagging rules, funnel definitions, search-intent map and account setup.
 
 ## Publishing after approval
 

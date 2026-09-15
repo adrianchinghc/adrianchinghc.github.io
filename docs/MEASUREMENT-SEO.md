@@ -12,6 +12,21 @@ After a visitor accepts analytics, the site can send page views and these events
 - `javascript_error`: a sanitised runtime or unhandled-promise signal. Messages and stack traces are intentionally excluded.
 - `system_theme`: light or dark system preference.
 
+Every link event includes `page_path`, `cta_location`, `link_text`, `link_domain` and `link_path`. YouTube clicks also include `video_title` and `video_id`.
+
+### Link-location tagging rules
+
+The shared click tracker resolves location in this order:
+
+1. `data-cta` on the link for an exact, controlled placement.
+2. `data-analytics-location` on the nearest containing region.
+3. A semantic fallback based on the nearest labelled navigation or identified landmark.
+4. A stable generic value such as `page_header`, `page_footer`, `article`, `page_section` or `page`.
+
+For a new reusable section, label the container once with `data-analytics-location="descriptive_name"` so every present and future link inside inherits it. Use lowercase snake case and reuse existing labels. Add `data-cta` only when one link needs a more specific placement. Add `data-analytics-event` only when the click needs a distinct event name rather than the standard internal or outbound fallback.
+
+Register `cta_location`, `video_title` and `video_id` as event-scoped custom dimensions in GA4.
+
 Do not send names, email addresses, intake answers, business data or full URL query strings to analytics.
 
 ## Funnel definitions
