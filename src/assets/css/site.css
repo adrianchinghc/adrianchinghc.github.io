@@ -332,7 +332,7 @@ figcaption{font-size:.8125rem;line-height:1.5;color:var(--muted);margin-top:.75r
 .personal-invitation h2{font-size:clamp(1.9rem,3vw,2.75rem);max-width:25ch}
 .personal-invitation p{color:var(--muted)}
 .newsletter-hero-grid{grid-template-columns:minmax(0,1.4fr) minmax(0,.6fr);gap:clamp(2rem,7vw,6rem)}
-.newsletter-hero figure img{aspect-ratio:3/4;object-position:center 35%;max-height:460px}
+.newsletter-hero figure img{aspect-ratio:4/5;object-position:center bottom;max-height:460px}
 .newsletter-topics{display:grid;grid-template-columns:minmax(0,.65fr) minmax(0,1fr);gap:clamp(2rem,6vw,5rem)}
 .newsletter-topics>h2{max-width:14ch}
 .topic-notes article+article{border-top:1px solid var(--line);padding-top:1.5rem;margin-top:1.5rem}
@@ -446,7 +446,7 @@ figcaption{font-size:.8125rem;line-height:1.5;color:var(--muted);margin-top:.75r
 @media(max-width:760px){
   .newsletter-hero-grid{grid-template-columns:1fr;gap:2rem}
   .newsletter-hero figure{max-width:300px}
-  .newsletter-hero figure img{aspect-ratio:4/3;max-height:none;object-position:center 65%}
+  .newsletter-hero figure img{aspect-ratio:4/5;max-height:none;object-position:center bottom}
   .case-feature{grid-template-columns:1fr}
 }
 
