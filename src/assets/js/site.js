@@ -159,13 +159,43 @@ document.querySelectorAll("[data-consent-reset]").forEach((button) => {
   });
 });
 
+function analyticsSlug(value) {
+  return String(value || "")
+    .trim()
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "");
+}
+
+function analyticsLocation(link) {
+  if (link.dataset.cta) return link.dataset.cta;
+
+  const labelledRegion = link.closest("[data-analytics-location]");
+  if (labelledRegion?.dataset.analyticsLocation) return labelledRegion.dataset.analyticsLocation;
+
+  const labelledNav = link.closest("nav[aria-label]");
+  if (labelledNav) return analyticsSlug(labelledNav.getAttribute("aria-label")) || "navigation";
+
+  const identifiedLandmark = link.closest("section[id], header[id], footer[id], main[id], article[id]");
+  if (identifiedLandmark?.id) {
+    return `${identifiedLandmark.tagName.toLowerCase()}_${analyticsSlug(identifiedLandmark.id)}`;
+  }
+
+  if (link.closest("header")) return "page_header";
+  if (link.closest("footer")) return "page_footer";
+  if (link.closest("article")) return "article";
+  if (link.closest("section")) return "page_section";
+  return "page";
+}
+
 function linkData(link) {
   const url = new URL(link.href, window.location.href);
   return {
     link_text: (link.getAttribute("aria-label") || link.textContent || "").trim().replace(/\s+/g, " ").slice(0, 80),
     link_domain: url.hostname,
     link_path: url.pathname,
-    cta_location: link.dataset.cta || link.closest("section, header, footer")?.id || link.closest("section, header, footer")?.className || "page"
+    cta_location: analyticsLocation(link)
   };
 }
 
