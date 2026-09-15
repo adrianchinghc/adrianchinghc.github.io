@@ -57,6 +57,8 @@ Validate with `node --test scripts/navigation.test.mjs`, `npm run build`, and `n
 
 Images are resized at build time by Sharp into content-hashed WebP variants. Source photographs remain intact; generated HTML has intrinsic dimensions and responsive `srcset`/`sizes`. No image service runs in the browser or at request time.
 
+The homepage, About and Newsletter hero photographs and homepage video covers also use mobile art direction through `<picture>`. Mobile crops preserve the existing CSS aspect ratios and focal positions, with AVIF preferred and WebP fallback. Generated filenames hash the final encoded bytes, so crop, quality and codec changes cannot overwrite a cached image. Only generated `/responsive/` images and hashed `/static/` CSS/JS are eligible for one-year immutable caching; original image and font URLs retain their existing policy.
+
 The Lighthouse workflow audits eight primary routes on mobile and desktop, three runs each, using local production-mode output. It requires median performance of at least 95 and automated accessibility, best-practices and SEO scores of 100. Reports are retained as workflow artifacts. These checks do not establish real-user performance or replace manual accessibility reviews. Vercel previews remain deliberately non-indexable.
 
 Work stays on `rebuild-2026` in PR #116. Vercel automatically builds branch pushes using `vercel.json`; the stable preview is https://adrianchingcom-git-rebuild-2026-upstackstudio.vercel.app/. Vercel is the preview environment; GitHub Pages hosts production. Never promote a Vercel preview or change production domains without Adrian's approval. Preview protection is managed in Vercel.

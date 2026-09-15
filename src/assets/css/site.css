@@ -607,3 +607,7 @@ html[data-input="keyboard"]{scroll-behavior:auto}
 .newsletter-form .formkit-submit[data-active] .signup-label{display:none}
 .newsletter-form .formkit-submit[data-active] .signup-busy{display:inline}
 @media(max-width:600px){.newsletter-fields{grid-template-columns:1fr}.newsletter-fields .button{justify-self:stretch}.newsletter-email{width:100%}}
+
+/* Picture sources keep the same layout and focal points as the original images. */
+.responsive-picture{display:block}
+.video-thumbnail>.responsive-picture{width:100%;height:100%}
