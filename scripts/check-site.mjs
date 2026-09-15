@@ -1,8 +1,19 @@
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { extname, join } from "node:path";
+import { createHash } from "node:crypto";
 
 const output = "_site";
 const errors = [];
+const versionedAssets = ["css", "js"].map((extension) => {
+  const bytes = readFileSync(`src/assets/${extension}/site.${extension}`);
+  const hash = createHash("sha256").update(bytes).digest("hex").slice(0, 12);
+  const url = `/static/site.${hash}.${extension}`;
+  const destination = join(output, url);
+  if (!existsSync(destination) || !readFileSync(destination).equals(bytes)) {
+    errors.push(`Missing or mismatched versioned asset: ${url}`);
+  }
+  return url;
+});
 const required = [
   "index.html", "work-with-me/index.html", "ai-profit-opportunity-audit/index.html",
   "advisory/index.html", "about/index.html", "client-stories/index.html", "blog/index.html", "newsletter/index.html", "newsletter/confirmed/index.html", "privacy/index.html",
@@ -58,6 +69,9 @@ if (existsSync(output)) {
     if (/<a\b[^>]*href="(?:|#)"/.test(html)) errors.push(`${file}: empty or dead-end link`);
     if (/<img\b[^>]*src="https:\/\/(?:i\.ytimg\.com|img\.youtube\.com)/.test(html)) errors.push(`${file}: remote YouTube cover dependency`);
     if (!html.includes('http-equiv="refresh"')) {
+      for (const url of versionedAssets) {
+        if (!html.includes(`"${url}"`)) errors.push(`${file}: missing current asset ${url}`);
+      }
       if ((html.match(/<h1\b/g) || []).length !== 1) errors.push(`${file}: expected one main heading`);
       for (const marker of ['<title>', 'name="description"', 'rel="canonical"', 'property="og:image"', 'name="twitter:image:alt"']) {
         if (!html.includes(marker)) errors.push(`${file}: missing ${marker}`);
@@ -114,7 +128,10 @@ if (existsSync(output)) {
   for (const route of ["/", "/work-with-me/", "/ai-profit-opportunity-audit/", "/advisory/", "/privacy/"]) {
     if (!sitemap.includes(`<loc>https://adrianching.com${route}</loc>`)) errors.push(`sitemap.xml: missing ${route}`);
   }
-  const siteCss = readFileSync(join(output, "assets/css/site.css"), "utf8");
+  const siteCss = readFileSync(join(output, versionedAssets[0]), "utf8");
+  for (const selector of [".newsletter-fields{display:grid", ".newsletter-email input{display:block", ".theme-toggle .theme-icon-sun{display:none}"]) {
+    if (!siteCss.includes(selector)) errors.push(`site.css: missing critical component rule ${selector}`);
+  }
   if (!siteCss.includes("prefers-color-scheme:dark")) errors.push("site.css: missing system dark mode");
   if (!siteCss.includes(':root[data-theme="dark"]')) errors.push("site.css: missing manual dark mode");
   if (!readFileSync(join(output, "index.html"), "utf8").includes("data-theme-toggle")) errors.push("index.html: missing theme toggle");
