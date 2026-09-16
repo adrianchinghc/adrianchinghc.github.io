@@ -7,5 +7,14 @@ User-agent: *
 {% else %}
 Allow: /
 
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
 Sitemap: https://adrianching.com/sitemap.xml
 {% endif %}
