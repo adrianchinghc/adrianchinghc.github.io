@@ -8,9 +8,9 @@ import { resolve, join } from "node:path";
 const cards = {
   "/": { title: "Building companies.\nLessons you can use.", label: "ADRIAN CHING · FOUNDER & BUILDER", action: "Explore the work →", description: "Explore the companies, decisions and lessons behind Adrian Ching's work as he builds Second Team and a portfolio of businesses.", photo: "founder", y: 95 },
   "/about/": { title: "Why I closed\nmy software agency.", label: "THE FOUNDER STORY", action: "Read the story →", description: "I founded Upstack Studio in 2017, then chose to close it. Here's why, what I learned and what I'm building now.", photo: "adrian-in-conversation", x: 100, y: 55 },
-  "/blog/": { title: "Build, buy or skip?\nStart with better questions.", label: "AI · SOFTWARE · BUSINESS", action: "Explore the videos & writing →", description: "Choosing AI tools, hiring developers or planning software? Explore videos and writing around the decision you're making.", photo: "studio", y: 85, x: 70, zoom: 1.15 },
+  "/blog/": { title: "Build, buy or skip?\nAsk better questions.", label: "AI · SOFTWARE · BUSINESS", action: "Explore the videos & writing →", description: "Choosing AI tools, hiring developers or planning software? Explore videos and writing around the decision you're making.", photo: "studio", y: 85, x: 70, zoom: 1.15 },
   "/newsletter/": { title: "Building a business?\nLearn from my decisions.", label: "ADRIAN CHING'S NEWSLETTER", action: "See what you'll receive →", description: "Notes on building companies, AI, software and growth: the decisions, mistakes and lessons behind the work. Sent when I have something useful to say.", photo: "reading", y: 100 },
-  "/work-with-me/": { title: "AI, software, growth.\nWhat should you fix first?", label: "FOR ESTABLISHED B2B FOUNDERS", action: "Compare audit & advisory →", description: "Missed follow-ups, repeat work or another software proposal? Compare a focused AI opportunity audit with ongoing advice for important decisions.", photo: "speaking-at-laptop", y: 65 },
+  "/work-with-me/": { title: "AI, software, growth.\nWhat to fix first?", label: "FOR ESTABLISHED B2B FOUNDERS", action: "Compare audit & advisory →", description: "Missed follow-ups, repeat work or another software proposal? Compare a focused AI opportunity audit with ongoing advice for important decisions.", photo: "speaking-at-laptop", y: 65 },
   "/ai-profit-opportunity-audit/": { title: "Where could AI\nhelp your business?", label: "AI PROFIT OPPORTUNITY AUDIT", action: "See what the audit covers →", description: "Identify and rank opportunities in your business. Get the top three recommendations and a concise 90-day roadmap. Diagnosis only; no implementation.", photo: "working-at-laptop", y: 100, x: 85, zoom: 1.35 },
   "/ai-profit-opportunity-audit/example/": { title: "What would an AI audit\nactually give you?", label: "ILLUSTRATIVE EXAMPLE · NOT A CLIENT RESULT", action: "Explore the example →", description: "See an illustrative AI opportunity audit: how opportunities can be ranked and turned into priorities. An example, not a documented client result.", photo: false },
   "/advisory/": { title: "An AI proposal?\nGet a second opinion.", label: "PRIVATE AI & GROWTH ADVISOR", action: "See how advisory works →", description: "Independent monthly guidance for B2B founders weighing AI, software and vendor decisions. Question proposals and trade-offs before committing your budget.", photo: "recording-solo", y: 75 },
@@ -65,12 +65,30 @@ export function socialImages(config) {
       };
       await addText("Adrian Ching.", 32, paper, 500, 56, 48);
       await addText(spec.label, 22, rust, titleWidth, 56, 142);
-      let headline;
+      let headline, fits = false;
       for (let size = hasPhoto ? 64 : 76; size >= 48; size -= 2) {
-        headline = await textLayer(spec.title, size, paper, titleWidth);
-        if (headline.info.height <= 260) break;
+        const lines = spec.title.split("\n");
+        if (lines.length > 1) {
+          const rendered = await Promise.all(lines.map(line => textLayer(line, size, paper, 3000)));
+          const height = rendered.reduce((sum, line) => sum + line.info.height, 0) + (lines.length - 1) * 18;
+          fits = height <= 260 && rendered.every(line => line.info.width <= titleWidth);
+          if (fits) {
+            let top = 0;
+            const inputs = rendered.map(line => {
+              const layer = { input: line.data, left: 0, top };
+              top += line.info.height + 18;
+              return layer;
+            });
+            const data = await sharp({ create: { width: titleWidth, height, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } }).composite(inputs).png().toBuffer();
+            headline = { data, info: { height } };
+          }
+        } else {
+          headline = await textLayer(spec.title, size, paper, titleWidth);
+          fits = headline.info.height <= 260;
+        }
+        if (fits) break;
       }
-      if (headline.info.height > 260) throw new Error(`Social title does not fit: ${pageRoute}`);
+      if (!fits) throw new Error(`Social title does not fit: ${pageRoute}`);
       layers.push({ input: headline.data, left: 52, top: 211 });
       await addText(spec.action, 24, rust, titleWidth, 56, 495);
       await addText("adrianching.com", 22, muted, 500, 56, 551);

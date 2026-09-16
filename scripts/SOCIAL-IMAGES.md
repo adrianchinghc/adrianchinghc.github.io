@@ -41,7 +41,9 @@ socialAction: "Read the guide →"
 # socialImage: /assets/images/adrian/reading.webp
 ```
 
-Use newlines in `socialTitle` only when they improve the composition. Do not
+Use newlines in `socialTitle` only when they improve the composition. Authored
+lines must fit without extra wrapping at 48px or larger; the build rejects
+overlong lines instead of producing a one-word orphan. Do not
 reuse the placeholder copy above. For a curated page, change its `cards` entry;
 that entry takes precedence over front matter. `/work/` and `/ventures/` reuse
 their destination's card and metadata.
