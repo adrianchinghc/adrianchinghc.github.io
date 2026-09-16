@@ -66,6 +66,11 @@ if (existsSync(output)) {
   ]);
   for (const file of filesIn(output).filter((path) => path.endsWith(".html"))) {
     const html = readFileSync(file, "utf8");
+    for (const field of ["title", "description"]) {
+      const og = [...html.matchAll(new RegExp(`<meta property="og:${field}" content="([^\"]+)">`, "g"))];
+      const twitter = [...html.matchAll(new RegExp(`<meta name="twitter:${field}" content="([^\"]+)">`, "g"))];
+      if (og.length !== 1 || twitter.length !== 1 || og[0]?.[1] !== twitter[0]?.[1]) errors.push(`${file}: expected one matching social ${field}`);
+    }
     const ogImages = [...html.matchAll(/<meta property="og:image" content="([^"]+)">/g)];
     const twitterImages = [...html.matchAll(/<meta name="twitter:image" content="([^"]+)">/g)];
     if (ogImages.length !== 1 || twitterImages.length !== 1 || ogImages[0]?.[1] !== twitterImages[0]?.[1]) {
