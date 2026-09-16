@@ -25,7 +25,7 @@ Keep this a reading-oriented publication with restrained motion and generous whi
 
 ## Evidence and maintenance
 
-Prices, scope, historical client quotes, canonical URLs and analytics event names are preserved. Each template supplies its social photograph and alt text. Font licensing accompanies the local font asset. Design tooling stays outside this repository.
+Prices, scope, historical client quotes, canonical URLs and analytics event names are preserved. Every page supplies deliberate social share copy; existing local photography is optional and image alt text is generated. Font licensing accompanies the local font asset. Design tooling stays outside this repository.
 
 ## Page composition
 
@@ -42,3 +42,15 @@ Additional photographs show Adrian working, recording and away from the desk. Ke
 The small inline SVG set in `src/_includes/icons.njk` uses a consistent 24px grid and 1.6px line. Icons always supplement visible labels and are hidden from assistive technology. Rust marks editorial subjects; action icons inherit the text colour. Play controls stay in a lower corner so they do not cover faces.
 
 Emil’s opportunity filter and animation recipes guide pointer feedback and the mobile navigation transition. Animate only transforms and opacity; visibility only controls the menu’s discrete hidden state. Menu transitions can reverse without timers; closed mobile links are inert immediately. Keyboard actions and reduced-motion preferences remain instant. Reading content, prices and static photographs do not animate on scroll.
+
+## Social share cards
+
+Follow `scripts/SOCIAL-IMAGES.md` for every new page and share-image change.
+Lead with a specific reader benefit, decision or truthful curiosity, supported
+by the destination. Pair the image with matching OG/Twitter text and a clear
+next action. New pages require authored socialTitle, socialDescription,
+socialLabel and socialAction fields; the build must not silently substitute
+a generic title. Review at feed size and preserve the 48px headline floor.
+Use accurate labels for archives, historical testimonials and illustrative
+examples. Optimize utility pages for clarity and recovery. CTR improvements
+are hypotheses until measured; no invented performance claims.

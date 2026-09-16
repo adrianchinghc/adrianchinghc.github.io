@@ -1,6 +1,7 @@
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { extname, join } from "node:path";
 import { createHash } from "node:crypto";
+import sharp from "sharp";
 
 const output = "_site";
 const errors = [];
@@ -43,6 +44,7 @@ if (existsSync(output)) {
   const titles = new Map();
   const descriptions = new Map();
   const visibleImages = new Map();
+  const socialImages = new Map();
   const duplicatePhotoGroups = new Map([
     ["/assets/images/adrian/founder.webp", "adrian-seated-outside"],
     ["/assets/images/adrian/seated-portrait.webp", "adrian-seated-outside"],
@@ -64,6 +66,34 @@ if (existsSync(output)) {
   ]);
   for (const file of filesIn(output).filter((path) => path.endsWith(".html"))) {
     const html = readFileSync(file, "utf8");
+    for (const field of ["title", "description"]) {
+      const og = [...html.matchAll(new RegExp(`<meta property="og:${field}" content="([^\"]+)">`, "g"))];
+      const twitter = [...html.matchAll(new RegExp(`<meta name="twitter:${field}" content="([^\"]+)">`, "g"))];
+      if (og.length !== 1 || twitter.length !== 1 || og[0]?.[1] !== twitter[0]?.[1]) errors.push(`${file}: expected one matching social ${field}`);
+    }
+    const ogImages = [...html.matchAll(/<meta property="og:image" content="([^"]+)">/g)];
+    const twitterImages = [...html.matchAll(/<meta name="twitter:image" content="([^"]+)">/g)];
+    if (ogImages.length !== 1 || twitterImages.length !== 1 || ogImages[0]?.[1] !== twitterImages[0]?.[1]) {
+      errors.push(`${file}: expected one matching Open Graph and Twitter image`);
+    } else {
+      const imageUrl = ogImages[0][1];
+      if (!/^https:\/\/adrianching\.com\/social\/[a-z0-9.-]+\.jpg$/.test(imageUrl)) errors.push(`${file}: invalid social image URL`);
+      const imageFile = join(output, new URL(imageUrl).pathname);
+      if (!socialImages.has(imageFile)) {
+        if (!existsSync(imageFile)) errors.push(`${file}: social card not generated`);
+        else {
+          const meta = await sharp(imageFile).metadata();
+          if (meta.format !== "jpeg" || meta.width !== 1200 || meta.height !== 630) errors.push(`${file}: social card must be a 1200×630 JPEG`);
+          if (statSync(imageFile).size > 1000000) errors.push(`${file}: social card exceeds 1 MB`);
+        }
+        socialImages.set(imageFile, file);
+      } else if (!html.includes('http-equiv="refresh"') && !readFileSync(socialImages.get(imageFile), "utf8").includes('http-equiv="refresh"')) {
+        errors.push(`${file}: full pages should have distinct share cards`);
+      }
+      for (const marker of ['property="og:image:width" content="1200"', 'property="og:image:height" content="630"', 'property="og:image:type" content="image/jpeg"', 'name="twitter:card" content="summary_large_image"']) {
+        if (!html.includes(marker)) errors.push(`${file}: missing ${marker}`);
+      }
+    }
     if (!html.includes("<html lang=\"en\"")) errors.push(`${file}: missing lang attribute`);
     if (!html.includes("<meta name=\"viewport\"")) errors.push(`${file}: missing viewport metadata`);
     if (/<a\b[^>]*href="(?:|#)"/.test(html)) errors.push(`${file}: empty or dead-end link`);
