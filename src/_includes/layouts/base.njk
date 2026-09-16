@@ -22,15 +22,12 @@
   <meta property="og:title" content="{% if seoTitle or title %}{{ seoTitle or title }} · {% endif %}Adrian Ching">
   <meta property="og:description" content="{{ description or site.description }}">
   <meta property="og:url" content="{{ site.url }}{{ page.url }}">
-  <meta property="og:image" content="{{ site.url }}{{ socialImage or '/assets/images/adrian/founder.webp' }}">
-  <meta property="og:image:alt" content="{{ socialImageAlt or 'Adrian Ching, founder and builder' }}">
+  {% socialImageMeta page.url, title or seoTitle or site.name, socialImage, site.url %}
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@adrianchinghc">
   <meta name="twitter:creator" content="@adrianchinghc">
   <meta name="twitter:title" content="{% if seoTitle or title %}{{ seoTitle or title }} · {% endif %}Adrian Ching">
   <meta name="twitter:description" content="{{ description or site.description }}">
-  <meta name="twitter:image" content="{{ site.url }}{{ socialImage or '/assets/images/adrian/founder.webp' }}">
-  <meta name="twitter:image:alt" content="{{ socialImageAlt or 'Adrian Ching, founder and builder' }}">
   <link rel="stylesheet" href="{{ '/assets/css/site.css' | assetUrl }}">
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://adrianching.com/#website","url":"https://adrianching.com","name":"Adrian Ching","inLanguage":"en"},{"@type":"Person","@id":"https://adrianching.com/#adrian-ching","name":"Adrian Ching","url":"https://adrianching.com","image":"https://adrianching.com/assets/images/adrian/founder.webp","jobTitle":"Founder","worksFor":{"@type":"Organization","name":"Second Team"},"alumniOf":{"@type":"Organization","name":"Upstack Studio"},"homeLocation":{"@type":"Place","name":"Kuala Lumpur, Malaysia"},"sameAs":["{{ site.social.youtube }}","{{ site.social.linkedin }}","{{ site.social.instagram }}","{{ site.social.facebook }}","{{ site.social.x }}"]}]}</script>
   {% block head %}{% endblock %}
