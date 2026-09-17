@@ -1,26 +1,28 @@
-// Let the browser reuse a prefetched document while keeping a real navigation.
-// No prerendering: scripts, analytics and Kit only run after the page is opened.
+// Prefetch only a navigation destination the visitor shows interest in.
+// No prerendering: scripts, analytics and Kit run only after real navigation.
 (() => {
   const connection = navigator.connection;
   if (connection?.saveData || /(^|-)2g$/.test(connection?.effectiveType || "")) return;
   if (!HTMLScriptElement.supports?.("speculationrules")) return;
+  const prefetched = new Set();
 
-  function prepareNavigation() {
-    if (document.visibilityState !== "visible") return;
-    const urls = [...new Set([...document.querySelectorAll('.site-nav a[href]')]
-      .filter((link) => !link.hasAttribute("download") && (!link.target || link.target === "_self"))
-      .map((link) => new URL(link.href, location.href))
-      .filter((url) => url.origin === location.origin && !url.search && !url.hash &&
-        url.pathname !== location.pathname && url.pathname.endsWith("/"))
-      .map((url) => url.href))].slice(0, 6);
-    if (!urls.length) return;
+  function prepareNavigation(event) {
+    if (document.readyState !== "complete" || document.visibilityState !== "visible") return;
+    if (event.type === "pointerover" && event.pointerType !== "mouse" && event.pointerType !== "pen") return;
+    const link = event.target.closest?.('.site-nav a[href]');
+    if (!link || link.hasAttribute("download") || (link.target && link.target !== "_self")) return;
+    const url = new URL(link.href, location.href);
+    if (url.origin !== location.origin || url.search || url.hash ||
+        url.pathname === location.pathname || !url.pathname.endsWith("/")) return;
+    if (prefetched.has(url.href) || prefetched.size >= 6) return;
+    prefetched.add(url.href);
     const rules = document.createElement("script");
     rules.type = "speculationrules";
-    rules.textContent = JSON.stringify({ prefetch: [{ source: "list", urls, eagerness: "immediate" }] });
+    rules.textContent = JSON.stringify({ prefetch: [{ source: "list", urls: [url.href], eagerness: "immediate" }] });
     document.head.append(rules);
   }
 
-  // The current page's images and styles get the connection first.
-  if (document.readyState === "complete") prepareNavigation();
-  else window.addEventListener("load", prepareNavigation, { once: true });
+  // Do no speculative work during initial rendering or on touch navigation.
+  document.addEventListener("pointerover", prepareNavigation, { passive: true });
+  document.addEventListener("focusin", prepareNavigation);
 })();
