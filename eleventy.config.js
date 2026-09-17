@@ -1,3 +1,4 @@
+import { articles } from "./scripts/articles.mjs";
 import { socialImages } from "./scripts/social-images.mjs";
 import { responsiveImages } from "./scripts/responsive-images.mjs";
 import { createHash } from "node:crypto";
@@ -25,6 +26,7 @@ export default function (eleventyConfig) {
     if (!assetUrls.has(source)) throw new Error(`Unknown versioned asset: ${source}`);
     return assetUrls.get(source);
   });
+  articles(eleventyConfig);
   socialImages(eleventyConfig);
   responsiveImages(eleventyConfig);
   eleventyConfig.addTransform("external-links-new-tab", function (content) {

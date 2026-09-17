@@ -613,3 +613,27 @@ html[data-input="keyboard"]{scroll-behavior:auto}
 /* Picture sources keep the same layout and focal points as the original images. */
 .responsive-picture{display:block}
 .video-thumbnail>.responsive-picture{width:100%;height:100%}
+
+/* Article publishing: reading-first in both themes, no additional scripts. */
+.article-header{padding-block:3.5rem 0}
+.article-header h1{font-size:clamp(2.2rem,4.6vw,3.8rem);line-height:1.12;overflow-wrap:anywhere;margin-bottom:1.5rem}
+.article-topic{color:var(--signal);font-size:.875rem;font-weight:600;margin:2rem 0 1rem}
+.article-byline{display:flex;flex-wrap:wrap;gap:.4rem 1.5rem;font-size:.8125rem;color:var(--muted);line-height:1.6}
+.article-byline a{color:var(--ink);text-underline-offset:.2em}
+.archive-disclosure{padding:1rem 1.25rem;background:var(--soft);font-size:.875rem;color:var(--muted);margin:1.5rem 0 0}
+.article-body{padding-block:2.5rem 3rem}
+.article-body>:first-child{margin-top:0}
+.article-body a{overflow-wrap:anywhere}
+.article-body blockquote{margin:2rem 0;padding:.5rem 0 .5rem 1.5rem;border-left:2px solid var(--signal)}
+.article-body table{display:block;max-width:100%;overflow-x:auto;border-collapse:collapse;font-size:.9375rem}
+.article-body th,.article-body td{padding:.75rem;text-align:left;border-bottom:1px solid var(--line);min-width:9rem}
+.article-next{padding:2rem 0;border-block:1px solid var(--line);margin-bottom:3.5rem}
+.article-next h2,.article-related h2{font-size:1.75rem}
+.article-next p,.writing-entry p{color:var(--muted)}
+.article-related{padding-bottom:3.5rem}
+.writing-list{margin-bottom:3.5rem}
+.writing-entry{display:block;padding:1.5rem 0;border-top:1px solid var(--line);text-decoration:none}
+.writing-entry h3{font-size:clamp(1.25rem,2.2vw,1.75rem);line-height:1.35;margin:.5rem 0;max-width:40ch;overflow-wrap:anywhere}
+.writing-entry:hover h3{text-decoration:underline;text-underline-offset:.15em}
+.writing-entry p{max-width:65ch;margin-bottom:.75rem}
+@media(max-width:760px){.article-header{padding-top:2.5rem}.article-byline{gap:.4rem 1rem}.article-body{padding-top:2rem}.article-body th,.article-body td{min-width:8rem}.article-next{margin-bottom:2.5rem}}

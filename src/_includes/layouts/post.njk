@@ -1,5 +1,32 @@
 ---
 layout: layouts/base.njk
 ---
-<header class="page-hero"><div class="shell"><p class="archive-note">Archive · {{ date | year }}</p><h1>{{ title }}</h1><p class="page-lede">An original article from Adrian’s archive. Some tools, links and version numbers may now be out of date.</p></div></header>
-<article class="reading prose">{{ content | safe }}</article>
+{% if page.url %}
+<article class="editorial-article">
+  <header class="article-header reading">
+    <a class="text-link" href="/blog/">All videos and writing</a>
+    <p class="article-topic">{{ 'Archive' if archive else topic }}</p>
+    <h1>{{ title }}</h1>
+    <p class="page-lede">{{ description }}</p>
+    <div class="article-byline"><a href="/about/" rel="author">Adrian Ching</a><span>Published <time datetime="{{ date | isoDate }}">{{ date | readableDate }}</time></span>{% if updated %}<span>Updated <time datetime="{{ updated | isoDate }}">{{ updated | readableDate }}</time></span>{% endif %}</div>
+    {% if archive %}<p class="archive-disclosure">An original article from my {{ date | year }} archive. Some tools, links and version numbers may now be out of date.</p>{% endif %}
+  </header>
+  <div class="reading prose article-body">{{ content | safe }}</div>
+</article>
+<aside class="reading article-next" aria-labelledby="article-next-heading">
+  {% if cta == 'audit' %}
+  <h2 id="article-next-heading">Decide what to fix first.</h2><p>The AI Profit Opportunity Audit ranks opportunities and turns them into a concise 90-day roadmap. Diagnosis and prioritisation only.</p><a class="text-link" href="/ai-profit-opportunity-audit/" data-cta="article_audit">See what the audit covers</a>
+  {% elif cta == 'advisory' %}
+  <h2 id="article-next-heading">A second opinion on the decision.</h2><p>Selective, independent guidance for founders weighing AI, software and vendor choices.</p><a class="text-link" href="/advisory/" data-cta="article_advisory">Explore private advisory</a>
+  {% else %}
+  <h2 id="article-next-heading">More notes from the work.</h2><p>Building companies, choosing what to work on and the lessons along the way. Sent when I have something useful to say.</p><a class="text-link" href="/newsletter/" data-cta="article_newsletter">Join the newsletter</a>
+  {% endif %}
+</aside>
+{% set related = collections.articles | relatedArticles(page.url, topic) %}
+{% if related.length %}
+<section class="reading article-related" aria-labelledby="related-heading"><h2 id="related-heading">Keep reading.</h2>
+{% for item in related %}<a class="writing-entry" href="{{ item.url }}"><span class="content-meta">{{ item.data.topic }}</span><h3>{{ item.data.title }}</h3><p>{{ item.data.description }}</p></a>{% endfor %}
+</section>
+{% endif %}
+
+{% endif %}

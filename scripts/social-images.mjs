@@ -1,3 +1,4 @@
+import { articleSchema, jsonLd } from "./articles.mjs";
 import sharp from "sharp";
 import { readFile, mkdir, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
@@ -45,10 +46,11 @@ async function textLayer(text, size, color, width) {
 export function socialImages(config) {
   let output = "_site";
   const jobs = new Map();
-  config.on("eleventy.before", ({ dir }) => { output = dir.output; jobs.clear(); });
+  config.on("eleventy.before", ({ dir, directories }) => { output = directories?.output || dir.output; jobs.clear(); });
   config.addWatchTarget("scripts/assets/");
 
-  config.addAsyncShortcode("socialImageMeta", async (route, title, source, origin, socialTitle, socialDescription, socialLabel, socialAction) => {
+  config.addAsyncShortcode("socialImageMeta", async function (route, title, source, origin, socialTitle, socialDescription, socialLabel, socialAction) {
+    if (!route) return "";
     const pageRoute = aliases[route] || route;
     const spec = cards[pageRoute] || { title: socialTitle, description: socialDescription, label: socialLabel, action: socialAction, photo: source || false };
     validateSocialCard(spec, pageRoute);
@@ -127,6 +129,9 @@ export function socialImages(config) {
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="${escape(card.alt)}">
   <meta name="twitter:image" content="${escape(image)}">
-  <meta name="twitter:image:alt" content="${escape(card.alt)}">`;
+  <meta name="twitter:image:alt" content="${escape(card.alt)}">${this.ctx.article ? `
+  <meta property="article:published_time" content="${escape(new Date(this.ctx.date).toISOString())}">
+  ${this.ctx.updated ? `<meta property="article:modified_time" content="${escape(new Date(this.ctx.updated).toISOString())}">` : ""}
+  <script type="application/ld+json">${jsonLd(articleSchema(this.ctx, image))}</script>` : ""}`;
   });
 }

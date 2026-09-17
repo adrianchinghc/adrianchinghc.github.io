@@ -1,5 +1,8 @@
 ---
 layout: layouts/post.njk
+article: true
+archive: true
+draft: false
 title: How to Build a Website Using Middleman and GitHub Pages
 description: Website is an essential part of our digital lifestyle. Learn how to build a website using Middleman, a static site generator and host it for free on Github Pages.
 date: 2016-12-04
