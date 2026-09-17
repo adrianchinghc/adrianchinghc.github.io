@@ -31,7 +31,7 @@ socialTitle: "Build, buy or wait?"
 socialDescription: "A practical guide to comparing the options before committing time and money to software."
 socialLabel: "SOFTWARE DECISIONS"
 socialAction: "Read the guide →"
-# socialImage: /assets/images/... # Optional real local photo; default is text-only.
+# socialPalette: cobalt # Bright typography by default; optional artwork below.
 ---
 ```
 
@@ -74,3 +74,34 @@ empty writing section or Writing jump link. Both appear automatically on the
 normal Eleventy build when the first reviewed article is published. This needs
 no template redesign; static-site publication still requires a build/deploy.
 The illustrative audit example remains on the Audit page, not Ideas.
+
+## Illustrated featured images
+
+Every published article automatically receives a bright cover below the byline,
+an Ideas thumbnail, and a matching share image and BlogPosting image. Text is
+rendered by the build, not baked into AI artwork. The page uses 400/800/1200px
+WebP variants with dimensions reserved; social platforms receive a 1200×630 JPEG.
+
+Optional front matter:
+
+```yaml
+socialPalette: cobalt # cobalt (default), yellow, or ivory
+socialArtwork: scripts/assets/illustrations/build-buy-wait.webp
+socialArtworkAlt: Yellow building blocks, a red arch and ivory pause bars illustrate three software decisions.
+```
+
+Use the example artwork only for that decision topic. For a new subject, generate
+and review a distinct, object-based editorial illustration without text, save an
+optimized WebP under scripts/assets/illustrations, and supply meaningful alt text.
+Artwork is contained in the right panel without cropping. Without artwork, the
+build uses a bright typography-only cover. It does not call an AI service or
+invent illustrations during deployment. Avoid robots, brains, glow and generated
+portraits. The site’s reading surfaces remain restrained in light and dark mode.
+
+Illustrations may intentionally repeat as that article's cover and thumbnail;
+this does not relax the existing one-use rule for visible photographs. Articles
+use socialArtwork rather than socialImage. Review headlines at feed size and keep
+them short; extra-long explicit lines still fail the legibility gate.
+
+The noindex /design-preview/article/ demonstration exists only when VERCEL_ENV is
+preview. It is excluded from collections and never built for GitHub Pages.

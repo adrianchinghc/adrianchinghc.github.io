@@ -34,10 +34,10 @@ const aliases = { "/work/": "/work-with-me/", "/ventures/": "/about/" };
 const fontfile = resolve("scripts/assets/manrope-semibold.ttf");
 const escape = (s) => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
-async function textLayer(text, size, color, width) {
+async function textLayer(text, size, color, width, cover = false) {
   return sharp({ text: {
     text: `<span foreground="${color}">${escape(text)}</span>`,
-    font: `Manrope ${size}`, fontfile, rgba: true, width,
+    font: `${cover ? "Manrope Cover SemiBold" : "Manrope"} ${size}`, fontfile: cover ? resolve("scripts/assets/manrope-cover.ttf") : fontfile, rgba: true, width,
     wrap: "word-char", spacing: 8,
   } }).png().toBuffer({ resolveWithObject: true });
 }
@@ -48,29 +48,38 @@ export function socialImages(config) {
   config.on("eleventy.before", ({ dir, directories }) => { output = directories?.output || dir.output; jobs.clear(); });
   config.addWatchTarget("scripts/assets/");
 
-  config.addAsyncShortcode("socialImageMeta", async function (route, title, source, origin, socialTitle, socialDescription, socialLabel, socialAction) {
-    if (!route) return "";
-    const pageRoute = aliases[route] || route;
-    const spec = cards[pageRoute] || { title: socialTitle, description: socialDescription, label: socialLabel, action: socialAction, photo: source || false };
+  const articleSpec = data => ({ title: data.socialTitle, description: data.socialDescription,
+    label: data.socialLabel, action: data.socialAction, photo: false, article: true,
+    artwork: data.socialArtwork, artworkAlt: data.socialArtworkAlt,
+    palette: data.socialPalette || "cobalt" });
+
+  async function renderCard(pageRoute, spec) {
     validateSocialCard(spec, pageRoute);
     const key = JSON.stringify({ pageRoute, spec });
     if (!jobs.has(key)) jobs.set(key, (async () => {
       const hasPhoto = spec.photo !== false;
-      const titleWidth = hasPhoto ? 596 : 1050;
-      const ink = "#22231f", paper = "#fafaf7", muted = "#b6b7ad", rust = "#d49a82";
+      const hasArtwork = Boolean(spec.artwork);
+      const titleWidth = hasPhoto || hasArtwork ? 596 : 1050;
+      const palettes = {
+        cobalt: ["#1646ed", "#fff9e6", "#fff9e6", "#ffe16b"],
+        yellow: ["#ffda35", "#22231f", "#22231f", "#22231f"],
+        ivory: ["#fff9e6", "#22231f", "#22231f", "#1646ed"]
+      };
+      if (spec.article && !palettes[spec.palette]) throw new Error(`Unknown article palette: ${spec.palette}`);
+      const [ink, paper, muted, rust] = spec.article ? palettes[spec.palette] : ["#22231f", "#fafaf7", "#b6b7ad", "#d49a82"];
       const layers = [];
       const addText = async (text, size, color, width, left, top) => {
         const layer = await textLayer(text, size, color, width);
         layers.push({ input: layer.data, left, top });
         return layer.info.height;
       };
-      await addText("Adrian Ching.", 32, paper, 500, 56, 48);
+      await addText("Adrian Ching.", spec.article ? 24 : 32, paper, 500, 56, 48);
       await addText(spec.label, 22, rust, titleWidth, 56, 142);
       let headline, fits = false;
-      for (let size = hasPhoto ? 64 : 76; size >= 48; size -= 2) {
+      for (let size = spec.article ? 100 : hasPhoto || hasArtwork ? 64 : 76; size >= 48; size -= 2) {
         const lines = spec.title.split("\n");
         if (lines.length > 1) {
-          const rendered = await Promise.all(lines.map(line => textLayer(line, size, paper, 3000)));
+          const rendered = await Promise.all(lines.map(line => textLayer(line, size, paper, 3000, spec.article)));
           const height = rendered.reduce((sum, line) => sum + line.info.height, 0) + (lines.length - 1) * 18;
           fits = height <= 260 && rendered.every(line => line.info.width <= titleWidth);
           if (fits) {
@@ -84,7 +93,7 @@ export function socialImages(config) {
             headline = { data, info: { height } };
           }
         } else {
-          headline = await textLayer(spec.title, size, paper, titleWidth);
+          headline = await textLayer(spec.title, size, paper, titleWidth, spec.article);
           fits = headline.info.height <= 260;
         }
         if (fits) break;
@@ -93,6 +102,13 @@ export function socialImages(config) {
       layers.push({ input: headline.data, left: 52, top: 211 });
       await addText(spec.action, 24, rust, titleWidth, 56, 495);
       await addText("adrianching.com", 22, muted, 500, 56, 551);
+      if (hasArtwork) {
+        if (!spec.artworkAlt?.trim()) throw new Error("Article artwork requires socialArtworkAlt");
+        const artworkPath = resolve(spec.artwork);
+        if (!artworkPath.startsWith(resolve("scripts/assets/illustrations") + "/")) throw new Error("Article artwork must be in scripts/assets/illustrations");
+        const artwork = await sharp(await readFile(artworkPath)).resize(440, 534, { fit: "contain", background: ink }).toBuffer();
+        layers.push({ input: artwork, left: 712, top: 48 });
+      }
       if (hasPhoto) {
         const photoPath = spec.photo.startsWith("/assets/images/") ? `src${spec.photo}` : `src/assets/images/adrian/${spec.photo}.webp`;
         if (!resolve(photoPath).startsWith(resolve("src/assets/images") + "/")) throw new Error("Social photos must be local site images");
@@ -112,9 +128,31 @@ export function socialImages(config) {
       const url = `/social/${slug}.${hash}.jpg`;
       await mkdir(join(output, "social"), { recursive: true });
       await writeFile(join(output, url), bytes);
-      return { url, alt: `${spec.title.replace(/\n/g, " ")} — Adrian Ching${hasPhoto ? ", with a photograph of Adrian" : ""}.` };
+      const variants = [];
+      if (spec.article) {
+        for (const width of [400, 800, 1200]) {
+          const path = url.replace(/\.jpg$/, `.${width}.webp`);
+          await writeFile(join(output, path), await sharp(bytes).resize(width).webp({ quality: 85 }).toBuffer());
+          variants.push(`${path} ${width}w`);
+        }
+      }
+      return { url, variants, alt: `${spec.title.replace(/\n/g, " ")} — Adrian Ching${hasArtwork ? `. ${spec.artworkAlt}` : hasPhoto ? ", with a photograph of Adrian." : "."}` };
     })());
-    const card = await jobs.get(key);
+    return jobs.get(key);
+  }
+
+  config.addAsyncShortcode("articleCover", async function (route, data, thumbnail = false) {
+    if (!route) return "";
+    const card = await renderCard(route, articleSpec(data || this.ctx));
+    const sizes = thumbnail ? "(max-width: 760px) calc(100vw - 40px), 400px" : "(max-width: 1000px) calc(100vw - 40px), 960px";
+    return `<picture class="article-cover"><source type="image/webp" srcset="${escape(card.variants.join(', '))}" sizes="${sizes}"><img src="${escape(card.url)}" alt="${thumbnail ? '' : escape(card.alt)}" width="1200" height="630" loading="${thumbnail ? 'lazy' : 'eager'}" decoding="async"></picture>`;
+  });
+
+  config.addAsyncShortcode("socialImageMeta", async function (route, title, source, origin, socialTitle, socialDescription, socialLabel, socialAction) {
+    if (!route) return "";
+    const pageRoute = aliases[route] || route;
+    const spec = this.ctx.article ? articleSpec(this.ctx) : cards[pageRoute] || { title: socialTitle, description: socialDescription, label: socialLabel, action: socialAction, photo: source || false };
+    const card = await renderCard(pageRoute, spec);
     const image = `${origin || "https://adrianching.com"}${card.url}`;
     const shareTitle = `${spec.title.replace(/\n/g, " ")} · Adrian Ching`;
     return `<meta property="og:title" content="${escape(shareTitle)}">

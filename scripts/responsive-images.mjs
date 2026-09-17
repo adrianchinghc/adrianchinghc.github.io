@@ -20,7 +20,7 @@ export function responsiveImages(config) {
   const jobs = new Map();
   config.on("eleventy.before", () => jobs.clear());
   config.addTransform("responsive-images", async function (html) {
-    if (!this.page.outputPath?.endsWith(".html")) return html;
+    if ((typeof this.page.outputPath !== "string" || !this.page.outputPath.endsWith(".html"))) return html;
     for (const [tag] of [...html.matchAll(/<img\b[^>]*>/g)]) {
       const src = tag.match(/\bsrc="(\/assets\/images\/[^"?]+\.(?:webp|jpg|jpeg|png))"/)?.[1];
       if (!src || tag.includes("srcset=")) continue;

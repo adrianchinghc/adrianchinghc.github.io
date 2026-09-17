@@ -49,7 +49,7 @@ test('Eleventy publishes complete articles, hides drafts and produces discovery 
     await put('_data/media.json', JSON.stringify({ featuredVideos: [], youtube: { channelUrl: 'https://www.youtube.com/@adrianchinghc' } }));
     const article = (data, body = 'A clear opening answer.\n\n## The decision\n\nThe useful explanation.') => `---json\n${JSON.stringify(data)}\n---\n${body}`;
     await put('articles/earlier.md', article(valid));
-    await put('articles/latest.md', article({ ...valid, title: 'A newer useful decision', date: '2026-02-01', updated: '2026-03-01', cta: 'audit' }));
+    await put('articles/latest.md', article({ ...valid, title: 'A newer useful decision', date: '2026-02-01', updated: '2026-03-01', cta: 'audit', socialArtwork: 'scripts/assets/illustrations/build-buy-wait.webp', socialArtworkAlt: 'Blocks, arch and pause bars.' }));
     await put('articles/draft.md', article({ title: 'Unreviewed draft' }));
     await put('articles/explicit-draft.md', article({ ...valid, draft: true, title: 'Explicit draft' }));
     const configPath = join(root, 'eleventy.config.mjs');
@@ -66,6 +66,10 @@ test('Eleventy publishes complete articles, hides drafts and produces discovery 
     assert.doesNotMatch(html, /original article from my/);
     assert.match(html, /href="\/ai-profit-opportunity-audit\/"/);
     assert.match(html, /href="\/blog\/earlier\/"/);
+    assert.match(html, /class="article-featured"/);
+    assert.match(html, /srcset="[^"]+400w, [^"]+800w, [^"]+1200w"/);
+    assert.match(html, /Blocks, arch and pause bars/);
+    assert.doesNotMatch(html, /photograph of Adrian/);
     const schema = JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1]);
     assert.equal(schema['@type'], 'BlogPosting');
     assert.equal(schema.image[0], html.match(/property="og:image" content="([^"]+)"/)[1]);
@@ -76,6 +80,11 @@ test('Eleventy publishes complete articles, hides drafts and produces discovery 
     assert.doesNotMatch(listing, /draft/);
     assert.match(listing, /href="#writing"/);
     assert.match(listing, /id="writing"/);
+    assert.match(listing, /writing-entry-featured/);
+    assert.match(listing, /alt="" width="1200" height="630" loading="lazy"/);
+    const featured = html.match(/<picture class="article-cover">.*?<img src="([^"]+)"/s)[1];
+    assert.equal(new URL(schema.image[0]).pathname, featured);
+    await access(join(output, featured.replace('.jpg', '.400.webp')));
     assert.doesNotMatch(listing, /Inside an audit|From the writing archive|ai-profit-opportunity-audit\/example/);
     const sitemap = await readFile(join(output, 'sitemap.xml'), 'utf8');
     assert.match(sitemap, /<loc>https:\/\/adrianching.com\/blog\/latest\/<\/loc><lastmod>2026-03-01T00:00:00.000Z<\/lastmod>/);

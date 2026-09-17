@@ -30,7 +30,7 @@ export default function (eleventyConfig) {
   socialImages(eleventyConfig);
   responsiveImages(eleventyConfig);
   eleventyConfig.addTransform("external-links-new-tab", function (content) {
-    if (!this.page.outputPath?.endsWith(".html")) return content;
+    if ((typeof this.page.outputPath !== "string" || !this.page.outputPath.endsWith(".html"))) return content;
 
     return content.replace(/<a\b([^>]*\bhref="https?:\/\/[^\"]+"[^>]*)>/g, (tag, attributes) => {
       let updated = attributes;

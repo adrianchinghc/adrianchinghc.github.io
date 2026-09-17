@@ -11,6 +11,7 @@ layout: layouts/base.njk
     <div class="article-byline"><a href="/about/" rel="author">Adrian Ching</a><span>Published <time datetime="{{ date | isoDate }}">{{ date | readableDate }}</time></span>{% if updated %}<span>Updated <time datetime="{{ updated | isoDate }}">{{ updated | readableDate }}</time></span>{% endif %}</div>
     {% if archive %}<p class="archive-disclosure">An original article from my {{ date | year }} archive. Some tools, links and version numbers may now be out of date.</p>{% endif %}
   </header>
+  <div class="article-featured">{% articleCover page.url %}</div>
   <div class="reading prose article-body">{{ content | safe }}</div>
 </article>
 <aside class="reading article-next" aria-labelledby="article-next-heading">

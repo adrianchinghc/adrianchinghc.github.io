@@ -27,7 +27,7 @@ socialImageAlt: Adrian Ching recording a video
 <section class="section" id="writing"><div class="shell">
 <div class="section-heading-grid"><h2>Latest writing.</h2><p class="section-lede">Decisions, practical guides and lessons from building businesses.</p></div>
 <div class="writing-list">{% for item in collections.articles %}
-<a class="writing-entry" href="{{ item.url }}"><div class="article-byline"><span>{{ item.data.topic }}</span><time datetime="{{ item.data.date | isoDate }}">{{ item.data.date | readableDate }}</time></div><h3>{{ item.data.title }}</h3><p>{{ item.data.description }}</p><span class="text-link">Read the article</span></a>
+<a class="writing-entry writing-entry-featured" href="{{ item.url }}">{% articleCover item.url, item.data, true %}<div class="writing-summary"><div class="article-byline"><span>{{ item.data.topic }}</span><time datetime="{{ item.data.date | isoDate }}">{{ item.data.date | readableDate }}</time></div><h3>{{ item.data.title }}</h3><p>{{ item.data.description }}</p><span class="text-link">Read the article</span></div></a>
 {% endfor %}</div>
 </div></section>
 {% endif %}

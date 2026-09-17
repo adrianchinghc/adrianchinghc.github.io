@@ -637,3 +637,12 @@ html[data-input="keyboard"]{scroll-behavior:auto}
 .writing-entry:hover h3{text-decoration:underline;text-underline-offset:.15em}
 .writing-entry p{max-width:65ch;margin-bottom:.75rem}
 @media(max-width:760px){.article-header{padding-top:2.5rem}.article-byline{gap:.4rem 1rem}.article-body{padding-top:2rem}.article-body th,.article-body td{min-width:8rem}.article-next{margin-bottom:2.5rem}}
+
+/* Colour lives in editorial covers; reading surfaces retain both site themes. */
+.article-featured{max-width:960px;width:calc(100% - 40px);margin:2.5rem auto 0}
+.article-cover{display:block;overflow:hidden;aspect-ratio:1200/630}
+.article-cover img{display:block;width:100%;height:auto;aspect-ratio:1200/630}
+.writing-entry-featured{display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:2rem;align-items:center;padding-block:2rem}
+.writing-summary{min-width:0}
+@media(max-width:760px){.article-featured{margin-top:2rem}.writing-entry-featured{grid-template-columns:1fr;gap:1.25rem}}
+@media(max-width:420px){.article-featured{width:calc(100% - 32px)}}
