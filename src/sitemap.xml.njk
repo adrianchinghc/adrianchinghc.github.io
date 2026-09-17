@@ -4,5 +4,5 @@ eleventyExcludeFromCollections: true
 ---
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-{% for item in collections.all %}{% if item.url and item.data.robots != 'noindex, nofollow' %}  <url><loc>{{ site.url }}{{ item.url }}</loc></url>
+{% for item in collections.all %}{% if item.url and 'noindex' not in (item.data.robots or '') %}  <url><loc>{{ site.url }}{{ item.url }}</loc>{% if item.data.article %}<lastmod>{{ (item.data.updated or item.data.date) | isoDate }}</lastmod>{% endif %}</url>
 {% endif %}{% endfor %}</urlset>

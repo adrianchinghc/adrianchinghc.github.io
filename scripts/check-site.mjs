@@ -120,6 +120,22 @@ if (existsSync(output)) {
         try { JSON.parse(match[1]); } catch { errors.push(`${file}: invalid JSON-LD`); }
       }
     }
+    if (html.includes('class="editorial-article"')) {
+      const articleNodes = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap(match => {
+        try { const node = JSON.parse(match[1]); return node['@type'] === 'BlogPosting' ? [node] : []; } catch { return []; }
+      });
+      const node = articleNodes[0];
+      if (articleNodes.length !== 1) errors.push(`${file}: expected one BlogPosting node`);
+      else {
+        const canonical = html.match(/rel="canonical" href="([^"]+)"/)?.[1];
+        if (node.url !== canonical || node.mainEntityOfPage?.['@id'] !== canonical) errors.push(`${file}: article canonical mismatch`);
+        if (node.image?.[0] !== ogImages[0]?.[1]) errors.push(`${file}: article image must match the generated share image`);
+        for (const date of [node.datePublished, node.dateModified].filter(Boolean)) {
+          if (!Number.isFinite(+new Date(date)) || !html.includes(`datetime="${date}"`)) errors.push(`${file}: article date must be valid and visible`);
+        }
+        if (!node.datePublished || node.author?.url !== 'https://adrianching.com/about/' || !html.includes('rel="author"')) errors.push(`${file}: missing article date or author attribution`);
+      }
+    }
     if (/cal\.com|CALCOM_URL/i.test(html)) errors.push(`${file}: legacy Cal.com reference found`);
     for (const match of html.matchAll(/<a\b[^>]*>/g)) {
       const tag = match[0];

@@ -75,3 +75,12 @@ compare clicks relative to impressions for comparable posts and audiences.
 Use social-platform data where available; website visits alone do not establish
 CTR. Retain the wording, dates and channel for each comparison. Do not label a
 variant a winner without data, and never send subscriber details to analytics.
+
+## Article illustration system
+
+Articles use a bright cobalt (default), ivory or yellow cover, with optional
+original artwork and programmatically typeset text. The same image appears below
+the byline and in Ideas, using responsive WebP derivatives. See ARTICLES.md for
+socialArtwork, socialArtworkAlt and socialPalette. Existing nonarticle cards
+retain their established treatment. AI artwork is created and reviewed during
+authoring, never generated on each build. No CTR improvement is assumed.
