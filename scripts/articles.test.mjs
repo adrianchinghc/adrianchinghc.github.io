@@ -4,6 +4,7 @@ import { mkdtemp, mkdir, writeFile, readFile, cp, rm, access } from 'node:fs/pro
 import { resolve, join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import Eleventy from '@11ty/eleventy';
+import sharp from 'sharp';
 import { articles, validateArticle, relatedArticles, articleSchema, jsonLd } from './articles.mjs';
 import { socialImages } from './social-images.mjs';
 
@@ -36,7 +37,14 @@ test('Eleventy publishes complete articles, hides drafts and produces discovery 
   const input = join(root, 'src');
   const output = join(root, 'out');
   const put = async (path, text) => { await mkdir(join(input, path, '..'), { recursive: true }); await writeFile(join(input, path), text); };
+  await mkdir('scripts/assets/illustrations', { recursive: true });
+  const artworkRoot = await mkdtemp('scripts/assets/illustrations/.test-');
+  const cover = join(artworkRoot, 'cover.webp');
+  const artwork = join(artworkRoot, 'artwork.webp');
   try {
+    // Synthetic fixtures keep rendering coverage independent of editorial assets.
+    await sharp({ create: { width: 1200, height: 630, channels: 3, background: '#1646ed' } }).webp().toFile(cover);
+    await sharp({ create: { width: 400, height: 400, channels: 3, background: '#ffda35' } }).webp().toFile(artwork);
     await put('articles/articles.11tydata.js', `export { default } from ${JSON.stringify(pathToFileURL(resolve('src/articles/articles.11tydata.js')).href)};`);
     await put('_data/site.json', JSON.stringify({ url: 'https://adrianching.com', name: 'Adrian Ching' }));
     await mkdir(join(input, '_includes/layouts'), { recursive: true });
@@ -48,8 +56,8 @@ test('Eleventy publishes complete articles, hides drafts and produces discovery 
     await cp('src/_includes/icons.njk', join(input, '_includes/icons.njk'));
     await put('_data/media.json', JSON.stringify({ featuredVideos: [], youtube: { channelUrl: 'https://www.youtube.com/@adrianchinghc' } }));
     const article = (data, body = 'A clear opening answer.\n\n## The decision\n\nThe useful explanation.') => `---json\n${JSON.stringify(data)}\n---\n${body}`;
-    await put('articles/earlier.md', article({ ...valid, socialCover: 'scripts/assets/illustrations/build-buy-wait-blue-cover.webp', socialCoverAlt: 'Reviewed blue editorial cover.' }));
-    await put('articles/latest.md', article({ ...valid, title: 'A newer useful decision', date: '2026-02-01', updated: '2026-03-01', cta: 'audit', socialArtwork: 'scripts/assets/illustrations/build-buy-wait.webp', socialArtworkAlt: 'Blocks, arch and pause bars.' }));
+    await put('articles/earlier.md', article({ ...valid, socialCover: cover, socialCoverAlt: 'Reviewed blue editorial cover.' }));
+    await put('articles/latest.md', article({ ...valid, title: 'A newer useful decision', date: '2026-02-01', updated: '2026-03-01', cta: 'audit', socialArtwork: artwork, socialArtworkAlt: 'Yellow test illustration.' }));
     await put('articles/draft.md', article({ title: 'Unreviewed draft' }));
     await put('articles/explicit-draft.md', article({ ...valid, draft: true, title: 'Explicit draft' }));
     const configPath = join(root, 'eleventy.config.mjs');
@@ -68,7 +76,7 @@ test('Eleventy publishes complete articles, hides drafts and produces discovery 
     assert.match(html, /href="\/blog\/earlier\/"/);
     assert.match(html, /class="article-featured"/);
     assert.match(html, /srcset="[^"]+400w, [^"]+800w, [^"]+1200w"/);
-    assert.match(html, /Blocks, arch and pause bars/);
+    assert.match(html, /Yellow test illustration/);
     assert.doesNotMatch(html, /photograph of Adrian/);
     const schema = JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1]);
     assert.equal(schema['@type'], 'BlogPosting');
@@ -93,5 +101,8 @@ test('Eleventy publishes complete articles, hides drafts and produces discovery 
     assert.doesNotMatch(sitemap, /draft/);
     await assert.rejects(access(join(output, 'blog/draft/index.html')));
     await assert.rejects(access(join(output, 'blog/explicit-draft/index.html')));
-  } finally { await rm(root, { recursive: true, force: true }); }
+  } finally {
+    await rm(root, { recursive: true, force: true });
+    await rm(artworkRoot, { recursive: true, force: true });
+  }
 });

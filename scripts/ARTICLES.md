@@ -86,12 +86,12 @@ Optional front matter:
 
 ```yaml
 socialPalette: cobalt # cobalt (default), ivory, or yellow
-socialArtwork: scripts/assets/illustrations/build-buy-wait.webp
-socialArtworkAlt: An anonymous figure considers three colourful paths leading to building blocks, an arch and a pause gateway.
+socialArtwork: scripts/assets/illustrations/your-article-artwork.webp
+socialArtworkAlt: Describe the illustration created for this article.
 ```
 
-Use the example artwork only for that decision topic. For a new subject, generate
-and review a distinct, object-based editorial illustration without text, save an
+The example paths are placeholders; add your own source image before using them.
+For each subject, generate and review a distinct, object-based editorial illustration without text, save an
 optimized WebP under scripts/assets/illustrations, and supply meaningful alt text.
 Artwork is contained in the right panel without cropping. Without artwork, the
 build uses a bright typography-only cover. It does not call an AI service or
@@ -103,12 +103,9 @@ this does not relax the existing one-use rule for visible photographs. Articles
 use socialArtwork rather than socialImage. Review headlines at feed size and keep
 them short; extra-long explicit lines still fail the legibility gate.
 
-The noindex /design-preview/article/ demonstration exists only when VERCEL_ENV is
-preview. It is excluded from collections and never built for GitHub Pages.
-
 ### Preserve an approved composition
 
-Use `socialCover: scripts/assets/illustrations/build-buy-wait-blue-cover.webp`
+Use `socialCover: scripts/assets/illustrations/your-article-cover.webp`
 and a descriptive `socialCoverAlt` for a fully composed, reviewed 1200×630 cover.
 This takes precedence over socialArtwork and palette; it preserves the approved
 art and typography without adding labels, actions or a second headline. Its text
