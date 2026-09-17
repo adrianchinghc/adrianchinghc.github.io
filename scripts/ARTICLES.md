@@ -31,7 +31,7 @@ socialTitle: "Build, buy or wait?"
 socialDescription: "A practical guide to comparing the options before committing time and money to software."
 socialLabel: "SOFTWARE DECISIONS"
 socialAction: "Read the guide →"
-# socialPalette: ivory # Bright typography by default; optional artwork below.
+# socialPalette: cobalt # Bright typography by default; optional artwork below.
 ---
 ```
 
@@ -85,7 +85,7 @@ WebP variants with dimensions reserved; social platforms receive a 1200×630 JPE
 Optional front matter:
 
 ```yaml
-socialPalette: ivory # ivory (default), cobalt, or yellow
+socialPalette: cobalt # cobalt (default), ivory, or yellow
 socialArtwork: scripts/assets/illustrations/build-buy-wait.webp
 socialArtworkAlt: An anonymous figure considers three colourful paths leading to building blocks, an arch and a pause gateway.
 ```
@@ -96,7 +96,7 @@ optimized WebP under scripts/assets/illustrations, and supply meaningful alt tex
 Artwork is contained in the right panel without cropping. Without artwork, the
 build uses a bright typography-only cover. It does not call an AI service or
 invent illustrations during deployment. Avoid robots, brains, glow and generated
-portraits. The site’s reading surfaces remain restrained in light and dark mode. White covers keep their colour in both themes and use a subtle theme-aware border so their edges remain visible.
+portraits. The site’s reading surfaces remain restrained in light and dark mode. Cobalt covers keep their colour in both themes. Prefer a large ivory headline and discreet author branding.
 
 Illustrations may intentionally repeat as that article's cover and thumbnail;
 this does not relax the existing one-use rule for visible photographs. Articles
@@ -105,3 +105,14 @@ them short; extra-long explicit lines still fail the legibility gate.
 
 The noindex /design-preview/article/ demonstration exists only when VERCEL_ENV is
 preview. It is excluded from collections and never built for GitHub Pages.
+
+### Preserve an approved composition
+
+Use `socialCover: scripts/assets/illustrations/build-buy-wait-blue-cover.webp`
+and a descriptive `socialCoverAlt` for a fully composed, reviewed 1200×630 cover.
+This takes precedence over socialArtwork and palette; it preserves the approved
+art and typography without adding labels, actions or a second headline. Its text
+must match socialTitle and be checked visually at thumbnail size. Social metadata
+fields remain required. The build validates dimensions and generates the same
+JPEG/WebP outputs. Without socialCover, the typeset cobalt fallback remains
+available; original illustrations are created during authoring, not deployment.

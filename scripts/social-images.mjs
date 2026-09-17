@@ -51,78 +51,92 @@ export function socialImages(config) {
   const articleSpec = data => ({ title: data.socialTitle, description: data.socialDescription,
     label: data.socialLabel, action: data.socialAction, photo: false, article: true,
     artwork: data.socialArtwork, artworkAlt: data.socialArtworkAlt,
-    palette: data.socialPalette || "ivory" });
+    cover: data.socialCover, coverAlt: data.socialCoverAlt,
+    palette: data.socialPalette || "cobalt" });
 
   async function renderCard(pageRoute, spec) {
     validateSocialCard(spec, pageRoute);
     const key = JSON.stringify({ pageRoute, spec });
     if (!jobs.has(key)) jobs.set(key, (async () => {
-      const hasPhoto = spec.photo !== false;
-      const hasArtwork = Boolean(spec.artwork);
-      const titleWidth = hasPhoto || hasArtwork ? 596 : 1050;
-      const palettes = {
-        cobalt: ["#1646ed", "#fff9e6", "#fff9e6", "#ffe16b"],
-        yellow: ["#ffda35", "#22231f", "#22231f", "#22231f"],
-        ivory: ["#fff9e6", "#22231f", "#22231f", "#1646ed"]
-      };
-      if (spec.article && !palettes[spec.palette]) throw new Error(`Unknown article palette: ${spec.palette}`);
-      const [ink, paper, muted, rust] = spec.article ? palettes[spec.palette] : ["#22231f", "#fafaf7", "#b6b7ad", "#d49a82"];
-      const layers = [];
-      const addText = async (text, size, color, width, left, top) => {
-        const layer = await textLayer(text, size, color, width);
-        layers.push({ input: layer.data, left, top });
-        return layer.info.height;
-      };
-      await addText("Adrian Ching.", spec.article ? 24 : 32, paper, 500, 56, 48);
-      await addText(spec.label, 22, rust, titleWidth, 56, 142);
-      let headline, fits = false;
-      for (let size = spec.article ? 100 : hasPhoto || hasArtwork ? 64 : 76; size >= 48; size -= 2) {
-        const lines = spec.title.split("\n");
-        if (lines.length > 1) {
-          const rendered = await Promise.all(lines.map(line => textLayer(line, size, paper, 3000, spec.article)));
-          const height = rendered.reduce((sum, line) => sum + line.info.height, 0) + (lines.length - 1) * 18;
-          fits = height <= 260 && rendered.every(line => line.info.width <= titleWidth);
-          if (fits) {
-            let top = 0;
-            const inputs = rendered.map(line => {
-              const layer = { input: line.data, left: 0, top };
-              top += line.info.height + 18;
-              return layer;
-            });
-            const data = await sharp({ create: { width: titleWidth, height, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } }).composite(inputs).png().toBuffer();
-            headline = { data, info: { height } };
-          }
-        } else {
-          headline = await textLayer(spec.title, size, paper, titleWidth, spec.article);
-          fits = headline.info.height <= 260;
-        }
-        if (fits) break;
-      }
-      if (!fits) throw new Error(`Social title does not fit: ${pageRoute}`);
-      layers.push({ input: headline.data, left: 52, top: 211 });
-      await addText(spec.action, 24, rust, titleWidth, 56, 495);
-      await addText("adrianching.com", 22, muted, 500, 56, 551);
-      if (hasArtwork) {
-        if (!spec.artworkAlt?.trim()) throw new Error("Article artwork requires socialArtworkAlt");
-        const artworkPath = resolve(spec.artwork);
-        if (!artworkPath.startsWith(resolve("scripts/assets/illustrations") + "/")) throw new Error("Article artwork must be in scripts/assets/illustrations");
-        const artwork = await sharp(await readFile(artworkPath)).resize(440, 534, { fit: "contain", background: ink }).toBuffer();
-        layers.push({ input: artwork, left: 712, top: 48 });
-      }
-      if (hasPhoto) {
-        const photoPath = spec.photo.startsWith("/assets/images/") ? `src${spec.photo}` : `src/assets/images/adrian/${spec.photo}.webp`;
-        if (!resolve(photoPath).startsWith(resolve("src/assets/images") + "/")) throw new Error("Social photos must be local site images");
-        const input = await readFile(photoPath);
+      let bytes;
+      if (spec.cover) {
+        if (!spec.coverAlt?.trim()) throw new Error("Reviewed article covers require socialCoverAlt");
+        const coverPath = resolve(spec.cover);
+        if (!coverPath.startsWith(resolve("scripts/assets/illustrations") + "/")) throw new Error("Article covers must be local illustration assets");
+        const input = await readFile(coverPath);
         const meta = await sharp(input).metadata();
-        const ratio = 440 / 534;
-        const width = Math.round(Math.min(meta.width, meta.height * ratio) / (spec.zoom || 1));
-        const height = Math.round(width / ratio);
-        const crop = { width, height, left: Math.round((meta.width - width) * (spec.x ?? 50) / 100), top: Math.round((meta.height - height) * (spec.y ?? 50) / 100) };
-        const photo = await sharp(input).extract(crop).resize(440, 534).toBuffer();
-        layers.push({ input: photo, left: 712, top: 48 });
+        if (meta.width !== 1200 || meta.height !== 630) throw new Error("Reviewed covers must be 1200×630; preserve the approved composition");
+        bytes = await sharp(input).jpeg({ quality: 90, mozjpeg: true }).toBuffer();
+      } else {
+        const hasPhoto = spec.photo !== false;
+        const hasArtwork = Boolean(spec.artwork);
+        const titleWidth = hasPhoto || hasArtwork ? 596 : 1050;
+        const palettes = {
+          cobalt: ["#1646ed", "#fff9e6", "#fff9e6", "#ffe16b"],
+          yellow: ["#ffda35", "#22231f", "#22231f", "#22231f"],
+          ivory: ["#fff9e6", "#22231f", "#22231f", "#1646ed"]
+        };
+        if (spec.article && !palettes[spec.palette]) throw new Error(`Unknown article palette: ${spec.palette}`);
+        const [ink, paper, muted, rust] = spec.article ? palettes[spec.palette] : ["#22231f", "#fafaf7", "#b6b7ad", "#d49a82"];
+        const layers = [];
+        const addText = async (text, size, color, width, left, top) => {
+          const layer = await textLayer(text, size, color, width);
+          layers.push({ input: layer.data, left, top });
+          return layer.info.height;
+        };
+        await addText("Adrian Ching.", spec.article ? 24 : 32, paper, 500, 56, spec.article ? 551 : 48);
+        if (!spec.article) await addText(spec.label, 22, rust, titleWidth, 56, 142);
+        let headline, fits = false;
+        for (let size = spec.article ? 100 : hasPhoto || hasArtwork ? 64 : 76; size >= 48; size -= 2) {
+          const lines = spec.title.split("\n");
+          if (lines.length > 1) {
+            const rendered = await Promise.all(lines.map(line => textLayer(line, size, paper, 3000, spec.article)));
+            const height = rendered.reduce((sum, line) => sum + line.info.height, 0) + (lines.length - 1) * 18;
+            fits = height <= 260 && rendered.every(line => line.info.width <= titleWidth);
+            if (fits) {
+              let top = 0;
+              const inputs = rendered.map(line => {
+                const layer = { input: line.data, left: 0, top };
+                top += line.info.height + 18;
+                return layer;
+              });
+              const data = await sharp({ create: { width: titleWidth, height, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } }).composite(inputs).png().toBuffer();
+              headline = { data, info: { height } };
+            }
+          } else {
+            headline = await textLayer(spec.title, size, paper, titleWidth, spec.article);
+            fits = headline.info.height <= 260;
+          }
+          if (fits) break;
+        }
+        if (!fits) throw new Error(`Social title does not fit: ${pageRoute}`);
+        layers.push({ input: headline.data, left: 52, top: spec.article ? 155 : 211 });
+        if (!spec.article) {
+          await addText(spec.action, 24, rust, titleWidth, 56, 495);
+          await addText("adrianching.com", 22, muted, 500, 56, 551);
+        }
+        if (hasArtwork) {
+          if (!spec.artworkAlt?.trim()) throw new Error("Article artwork requires socialArtworkAlt");
+          const artworkPath = resolve(spec.artwork);
+          if (!artworkPath.startsWith(resolve("scripts/assets/illustrations") + "/")) throw new Error("Article artwork must be in scripts/assets/illustrations");
+          const artwork = await sharp(await readFile(artworkPath)).resize(440, 534, { fit: "contain", background: ink }).toBuffer();
+          layers.push({ input: artwork, left: 712, top: 48 });
+        }
+        if (hasPhoto) {
+          const photoPath = spec.photo.startsWith("/assets/images/") ? `src${spec.photo}` : `src/assets/images/adrian/${spec.photo}.webp`;
+          if (!resolve(photoPath).startsWith(resolve("src/assets/images") + "/")) throw new Error("Social photos must be local site images");
+          const input = await readFile(photoPath);
+          const meta = await sharp(input).metadata();
+          const ratio = 440 / 534;
+          const width = Math.round(Math.min(meta.width, meta.height * ratio) / (spec.zoom || 1));
+          const height = Math.round(width / ratio);
+          const crop = { width, height, left: Math.round((meta.width - width) * (spec.x ?? 50) / 100), top: Math.round((meta.height - height) * (spec.y ?? 50) / 100) };
+          const photo = await sharp(input).extract(crop).resize(440, 534).toBuffer();
+          layers.push({ input: photo, left: 712, top: 48 });
+        }
+        bytes = await sharp({ create: { width: 1200, height: 630, channels: 3, background: ink } })
+          .composite(layers).jpeg({ quality: 90, mozjpeg: true }).toBuffer();
       }
-      const bytes = await sharp({ create: { width: 1200, height: 630, channels: 3, background: ink } })
-        .composite(layers).jpeg({ quality: 90, mozjpeg: true }).toBuffer();
       const hash = createHash("sha256").update(bytes).digest("hex").slice(0, 12);
       const slug = pageRoute === "/" ? "home" : pageRoute.replace(/^\/+|\/+$/g, "").replace(/[^a-z0-9-]+/gi, "-");
       const url = `/social/${slug}.${hash}.jpg`;
@@ -136,7 +150,7 @@ export function socialImages(config) {
           variants.push(`${path} ${width}w`);
         }
       }
-      return { url, variants, alt: `${spec.title.replace(/\n/g, " ")} — Adrian Ching${hasArtwork ? `. ${spec.artworkAlt}` : hasPhoto ? ", with a photograph of Adrian." : "."}` };
+      return { url, variants, alt: `${spec.title.replace(/\n/g, " ")} — Adrian Ching${spec.cover ? `. ${spec.coverAlt}` : spec.artwork ? `. ${spec.artworkAlt}` : spec.photo !== false ? ", with a photograph of Adrian." : "."}` };
     })());
     return jobs.get(key);
   }

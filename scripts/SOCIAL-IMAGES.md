@@ -78,7 +78,7 @@ variant a winner without data, and never send subscriber details to analytics.
 
 ## Article illustration system
 
-Articles use a bright ivory (default), cobalt or yellow cover, with optional
+Articles use a bright cobalt (default), ivory or yellow cover, with optional
 original artwork and programmatically typeset text. The same image appears below
 the byline and in Ideas, using responsive WebP derivatives. See ARTICLES.md for
 socialArtwork, socialArtworkAlt and socialPalette. Existing nonarticle cards
