@@ -641,7 +641,7 @@ html[data-input="keyboard"]{scroll-behavior:auto}
 /* Colour lives in editorial covers; reading surfaces retain both site themes. */
 .article-featured{max-width:960px;width:calc(100% - 40px);margin:2.5rem auto 0}
 .article-cover{display:block;overflow:hidden;aspect-ratio:1200/630}
-.article-cover img{display:block;width:100%;height:auto;aspect-ratio:1200/630}
+.article-cover img{display:block;width:100%;height:auto;aspect-ratio:1200/630;margin:0}
 .writing-entry-featured{display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:2rem;align-items:center;padding-block:2rem}
 .writing-summary{min-width:0}
 @media(max-width:760px){.article-featured{margin-top:2rem}.writing-entry-featured{grid-template-columns:1fr;gap:1.25rem}}
