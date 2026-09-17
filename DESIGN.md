@@ -61,3 +61,7 @@ Article artwork may use saturated cobalt, yellow, vermilion and warm ivory, as
 requested by Adrian. Keep the page itself quiet and readable. Prefer one clear
 object-based editorial metaphor, bold type and small branding. See ARTICLES.md
 for the automatic featured-image pipeline; art is reviewed before publication.
+
+Adrian selected the warm white editorial illustration direction for article
+covers. Keep that background in both themes, with a subtle theme-aware border
+to separate it from the light page. Cobalt and yellow remain optional palettes.

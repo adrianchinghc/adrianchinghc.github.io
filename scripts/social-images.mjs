@@ -51,7 +51,7 @@ export function socialImages(config) {
   const articleSpec = data => ({ title: data.socialTitle, description: data.socialDescription,
     label: data.socialLabel, action: data.socialAction, photo: false, article: true,
     artwork: data.socialArtwork, artworkAlt: data.socialArtworkAlt,
-    palette: data.socialPalette || "cobalt" });
+    palette: data.socialPalette || "ivory" });
 
   async function renderCard(pageRoute, spec) {
     validateSocialCard(spec, pageRoute);

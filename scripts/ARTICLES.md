@@ -31,7 +31,7 @@ socialTitle: "Build, buy or wait?"
 socialDescription: "A practical guide to comparing the options before committing time and money to software."
 socialLabel: "SOFTWARE DECISIONS"
 socialAction: "Read the guide →"
-# socialPalette: cobalt # Bright typography by default; optional artwork below.
+# socialPalette: ivory # Bright typography by default; optional artwork below.
 ---
 ```
 
@@ -85,9 +85,9 @@ WebP variants with dimensions reserved; social platforms receive a 1200×630 JPE
 Optional front matter:
 
 ```yaml
-socialPalette: cobalt # cobalt (default), yellow, or ivory
+socialPalette: ivory # ivory (default), cobalt, or yellow
 socialArtwork: scripts/assets/illustrations/build-buy-wait.webp
-socialArtworkAlt: Yellow building blocks, a red arch and ivory pause bars illustrate three software decisions.
+socialArtworkAlt: An anonymous figure considers three colourful paths leading to building blocks, an arch and a pause gateway.
 ```
 
 Use the example artwork only for that decision topic. For a new subject, generate
@@ -96,7 +96,7 @@ optimized WebP under scripts/assets/illustrations, and supply meaningful alt tex
 Artwork is contained in the right panel without cropping. Without artwork, the
 build uses a bright typography-only cover. It does not call an AI service or
 invent illustrations during deployment. Avoid robots, brains, glow and generated
-portraits. The site’s reading surfaces remain restrained in light and dark mode.
+portraits. The site’s reading surfaces remain restrained in light and dark mode. White covers keep their colour in both themes and use a subtle theme-aware border so their edges remain visible.
 
 Illustrations may intentionally repeat as that article's cover and thumbnail;
 this does not relax the existing one-use rule for visible photographs. Articles

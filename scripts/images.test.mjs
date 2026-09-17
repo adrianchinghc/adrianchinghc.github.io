@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import sharp from "sharp";
+import { createHash } from "node:crypto";
 import { cropRectangle, imageUrl } from "./responsive-images.mjs";
 
 test("mobile crops preserve the existing CSS focal position", () => {
@@ -36,9 +37,20 @@ test("every generated image candidate exists and matches its content hash and di
     const bytes = readFileSync(`_site${url}`);
     const width = Number(descriptor.slice(0, -1));
     const format = url.split(".").at(-1);
+    assert.ok(bytes.length > 0, `${url}: generated image must not be empty`);
     const meta = await sharp(bytes).metadata();
     assert.equal(meta.width, width, url);
-    assert.equal(url, imageUrl(bytes, width, format), url);
+    if (url.startsWith("/social/")) {
+      // Cover variants are named after their shared master JPEG content hash.
+      const match = url.match(/\.([a-f0-9]{12})\.(\d+)\.webp$/);
+      assert.ok(match, url);
+      assert.equal(Number(match[2]), width, url);
+      assert.equal(meta.height, Math.round(width * 630 / 1200), url);
+      const master = readFileSync(`_site${url.replace(/\.\d+\.webp$/, ".jpg")}`);
+      assert.equal(match[1], createHash("sha256").update(master).digest("hex").slice(0, 12), url);
+    } else {
+      assert.equal(url, imageUrl(bytes, width, format), url);
+    }
   }
 });
 

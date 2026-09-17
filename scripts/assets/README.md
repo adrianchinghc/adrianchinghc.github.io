@@ -8,4 +8,4 @@ It is not shipped as a web font. License: OFL.txt.
 
 illustrations/build-buy-wait.webp is original AI-generated editorial artwork
 created for the September 2026 featured-image concept. It is not a photograph
-or evidence of a client outcome. Source composition: blocks, arch and pause bars.
+or evidence of a client outcome. Source composition: an anonymous illustrated figure choosing paths to blocks, an arch and a pause gateway. This is the warm white screenprint direction selected by Adrian.
