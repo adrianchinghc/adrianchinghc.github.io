@@ -43,13 +43,18 @@ test('Eleventy publishes complete articles, hides drafts and produces discovery 
     await cp('src/_includes/layouts/post.njk', join(input, '_includes/layouts/post.njk'));
     await put('_includes/layouts/base.njk', '<!doctype html><html><head>{% socialImageMeta page.url, title, socialImage, site.url, socialTitle, socialDescription, socialLabel, socialAction %}</head><body>{{ content | safe }}</body></html>');
     await cp('src/sitemap.xml.njk', join(input, 'sitemap.xml.njk'));
-    await put('index.njk', '---\npermalink: /\n---\n{% for item in collections.articles %}<a href="{{ item.url }}">{{ item.data.title }}</a>{% endfor %}');
+    await mkdir(join(input, 'blog'), { recursive: true });
+    await cp('src/blog/index.njk', join(input, 'blog/index.njk'));
+    await cp('src/_includes/icons.njk', join(input, '_includes/icons.njk'));
+    await put('_data/media.json', JSON.stringify({ featuredVideos: [], youtube: { channelUrl: 'https://www.youtube.com/@adrianchinghc' } }));
     const article = (data, body = 'A clear opening answer.\n\n## The decision\n\nThe useful explanation.') => `---json\n${JSON.stringify(data)}\n---\n${body}`;
     await put('articles/earlier.md', article(valid));
     await put('articles/latest.md', article({ ...valid, title: 'A newer useful decision', date: '2026-02-01', updated: '2026-03-01', cta: 'audit' }));
     await put('articles/draft.md', article({ title: 'Unreviewed draft' }));
     await put('articles/explicit-draft.md', article({ ...valid, draft: true, title: 'Explicit draft' }));
-    const elev = new Eleventy(input, output, { configPath: false, quietMode: true, config: config => {
+    const configPath = join(root, 'eleventy.config.mjs');
+    await writeFile(configPath, 'export default function () { return {}; }');
+    const elev = new Eleventy(input, output, { configPath, quietMode: true, config: config => {
       config.setOutputDirectory(output); config.setInputDirectory(input);
       articles(config); socialImages(config); config.addFilter('year', date => new Date(date).getUTCFullYear());
       return { dir: { input, output, includes: '_includes', data: '_data' }, markdownTemplateEngine: 'njk', htmlTemplateEngine: 'njk' };
@@ -66,9 +71,12 @@ test('Eleventy publishes complete articles, hides drafts and produces discovery 
     assert.equal(schema.image[0], html.match(/property="og:image" content="([^"]+)"/)[1]);
     assert.equal(schema.dateModified, '2026-03-01T00:00:00.000Z');
     await access(join(output, new URL(schema.image[0]).pathname));
-    const listing = await readFile(join(output, 'index.html'), 'utf8');
+    const listing = await readFile(join(output, 'blog/index.html'), 'utf8');
     assert.ok(listing.indexOf('/blog/latest/') < listing.indexOf('/blog/earlier/'));
     assert.doesNotMatch(listing, /draft/);
+    assert.match(listing, /href="#writing"/);
+    assert.match(listing, /id="writing"/);
+    assert.doesNotMatch(listing, /Inside an audit|From the writing archive|ai-profit-opportunity-audit\/example/);
     const sitemap = await readFile(join(output, 'sitemap.xml'), 'utf8');
     assert.match(sitemap, /<loc>https:\/\/adrianching.com\/blog\/latest\/<\/loc><lastmod>2026-03-01T00:00:00.000Z<\/lastmod>/);
     assert.doesNotMatch(sitemap, /draft/);

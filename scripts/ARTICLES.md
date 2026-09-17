@@ -51,9 +51,8 @@ advisory. Pick the one that fits the reader's question. No public checkout.
   up to three published articles, prioritising the same topic and then recency.
 - Follow SOCIAL-IMAGES.md. Every new page requires intentional share copy;
   the generated share image is reused in the article's structured data.
-- Keep article dates accurate. The sitemap uses updated, or publication date;
-  archive metadata retains the original date. Do not manufacture freshness.
-- Keep existing URLs and archive warnings. New articles appear automatically
+- Keep article dates accurate. The sitemap uses updated, or publication date. Do not manufacture freshness.
+- Preserve published article URLs unless a removal is explicitly approved. New articles appear automatically
   on /blog/; the latest-writing section stays hidden until there are entries.
 - Use Markdown tables for comparisons; the article table scrolls within its
   reading column on small screens. Include meaningful headings and image alt.
@@ -68,3 +67,10 @@ Check desktop light/dark layouts, generated responsive rules, card legibility,
 links, canonical, dates and BlogPosting JSON-LD on the exact Vercel commit.
 Ask Adrian for real-device checks where needed. Keep the PR draft and do not
 run Lighthouse on routine pushes. Only merge to source with explicit approval.
+
+The obsolete 2016 Middleman tutorial was removed by Adrian’s request. Its old
+URL should return 404; do not redirect it to unrelated content. Ideas shows no
+empty writing section or Writing jump link. Both appear automatically on the
+normal Eleventy build when the first reviewed article is published. This needs
+no template redesign; static-site publication still requires a build/deploy.
+The illustrative audit example remains on the Audit page, not Ideas.

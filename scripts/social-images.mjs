@@ -19,7 +19,6 @@ const cards = {
   "/privacy/": { title: "What this site collects.\nWhat you control.", label: "PRIVACY & ANALYTICS", action: "Review your choices →", description: "Understand this site's analytics, newsletter data and third-party services, and how to change your analytics choice on this device.", photo: false },
   "/newsletter/confirmed/": { title: "Your next read\nstarts here.", label: "NEWSLETTER CONFIRMATION", action: "Explore the ideas →", description: "The newsletter confirmation page includes a path to Adrian's videos and writing on AI, software and building a business.", photo: false },
   "/404.html": { title: "Looking for\na missing page?", label: "ADRIANCHING.COM · PAGE NOT FOUND", action: "Find your way back →", description: "This link doesn't lead to a page. Find your way back to Adrian Ching's website and explore his work and ideas.", photo: false },
-  "/how-to-build-a-website-using-middleman-and-github-pages/": { title: "Build a website.\nHost it for free.", label: "MIDDLEMAN + GITHUB PAGES · 2016 ARCHIVE", action: "Read the archived tutorial →", description: "A 2016 walkthrough of building a static website with Middleman and hosting it on GitHub Pages. Archived instructions may need updating.", photo: false },
 };
 
 // New pages must receive deliberately written share copy, not a generic fallback.
