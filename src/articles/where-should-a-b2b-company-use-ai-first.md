@@ -49,7 +49,7 @@ Pick the one that is costing you the most. Not the one that is most interesting.
 
 ## Separate what you know from what you assume
 
-Before anyone proposes a solution, split what you have into three columns.
+Before anyone proposes a solution, split what you have into three columns. The numbers below are invented to show the shape of it, not taken from a real company.
 
 | Column | What goes in it | Example |
 | --- | --- | --- |
