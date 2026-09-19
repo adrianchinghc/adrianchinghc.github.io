@@ -1,83 +1,100 @@
 ---
 title: "Where Should a B2B Company Use AI First? Start With the Economics"
-description: "A method for choosing your first AI initiative from your own business economics, so you can rank the options, pick one, and know what to leave alone."
+seoTitle: "Where should a B2B company use AI first?"
+description: "A five-option method for picking your first AI project: find the leak, put a number on it, score the options, and run one 90-day test."
 date: 2026-09-18
 draft: true
 topic: AI decisions
 cta: newsletter
 socialTitle: "Where should AI go first?"
-socialDescription: "A method for choosing your first AI initiative from your business economics, not from a demo."
+socialDescription: "Find the leak, put a number on it, then make AI earn its place against the options that don't need it."
 socialLabel: "AI DECISIONS"
 socialAction: "Read the method →"
 ---
 
 For nine years, companies came to me with software they wanted built.
 
-I started Upstack Studio in 2017 and ran it until 2026. I wrote the proposals. I delivered the projects. The brief usually arrived as a solution: an app, a portal, a dashboard, a system to replace the spreadsheet. It rarely arrived as a number.
+I started Upstack Studio in 2017 and ran it until 2026. I wrote the proposals. I delivered the projects. Most briefs arrived the same way: here's the app we want, here's roughly what we'll pay, when can you start?
 
-Then I closed that agency after losing about RM600,000 of my own money. Not because the work was bad. Because I kept paying for a structure that had stopped earning, and I took too long to look at the number honestly.
+What almost never arrived was a number. Nobody could tell me what the problem was costing them that month. So nobody could tell whether the thing they'd asked me to build was worth building.
 
-So I am not a neutral party on this question. I have sat on the vendor side of the table, and I have got the economics of my own company wrong.
+I closed Upstack in 2026. The agency kept earning. It just wasn't the model I wanted to run anymore, because the overhead was fixed and I couldn't grow it without adding more people. I held on longer than I should have, and that cost me about RM600,000 of my own money.
 
-Founders now ask me where they should use AI first. This is the method I use.
+So I'm not neutral here. I've been the vendor writing the proposal, and I've been the owner who didn't do the maths on his own business soon enough.
 
-## Ask a different question
+Here's the method I use now. You can run it yourself in about two hours.
 
-Most AI plans start with "how can we use AI?"
+## Step 1: Stop asking "how can we use AI?"
 
-That question has no wrong answer, which is why it does not help you. Every business can use AI somewhere. Ask it and you get a list of twenty possibilities, all of them technically true, none of them ranked.
+Every business can use AI somewhere, so that question always produces a list. Twenty ideas, all technically possible, nothing to tell you which one to fund.
+
+You can't act on a list like that. You've got one budget and one team's attention this quarter, so you need to know which single item deserves them.
 
 Ask this instead:
 
-**Where is this business losing money, repeating work, or deciding without enough information?**
+**Where is the business losing money, repeating work, or deciding without enough information?**
 
-Answer that first. Only then ask whether AI changes anything about it.
+Answer that first. Then ask whether AI changes anything about it.
 
-Some of your best answers will not involve AI at all. That is the method working, not failing.
+Some of your best answers won't involve AI at all. That's the method working, not failing.
 
-## Find the leak before you shop for a fix
+## Step 2: Find the leak, and pull the actual numbers
 
-There are three places worth looking, in this order.
+Three places to look. Give yourself a week and pull real figures for each one, because the rest of the method is worthless without them.
 
-**Revenue that leaks after you have already paid to get it.** Quotes that go out and are never chased. Enquiries that arrive on Saturday and get answered on Tuesday. Customers who used to order every month and stopped, with nobody noticing. You have already spent the marketing money. The loss happens after the lead arrives.
+**Revenue leaking after you've already paid to get it.** You spent the marketing money, the lead arrived, and then something went wrong. Pull:
 
-**Work that repeats without judgment.** The same data typed into two systems. The same report rebuilt every Monday. The same six questions answered by email every week. Count the hours, then multiply by a real cost.
+- Quotes issued last quarter, and how many closed
+- Average days between an enquiry arriving and the first human reply
+- Customers who ordered in the previous 12 months but not in the last 6
+- Your top 20 accounts by revenue, and when each one last bought
 
-**Decisions made blind.** Pricing set by habit. Stock ordered on feel. A salesperson you suspect is underperforming, with no way to check. The cost here is invisible, which is why it survives for years.
+**Work that repeats without judgment.** Pull:
 
-Pick the one that is costing you the most. Not the one that is most interesting.
+- The same data typed into two systems: how many records a week, times minutes each
+- Reports rebuilt by hand every week: hours per month
+- The questions your team answers by email over and over: count a fortnight's worth
+- Multiply the hours by a loaded hourly cost, not salary divided by 2,080
 
-## Separate what you know from what you assume
+**Decisions made blind.** Harder to price, so write the question instead of a number:
 
-Before anyone proposes a solution, split what you have into three columns. The numbers below are invented to show the shape of it, not taken from a real company.
+- Which products or services actually make money after delivery cost?
+- Which salesperson is underperforming, and how would you know?
+- What does it cost you when stock is wrong in either direction?
 
-| Column | What goes in it | Example |
+Pick the leak that's costing the most. Not the one that's most interesting to fix.
+
+## Step 3: Split what you have into three buckets
+
+Before anyone proposes a solution, sort your evidence. The figures below are invented to show the shape of it, not taken from a real company.
+
+| Bucket | What goes in it | Example |
 | --- | --- | --- |
 | Facts | Things you can pull from a system today | 412 quotes issued last quarter, 96 closed |
 | Inferences | Reasonable conclusions from those facts | Slow follow-up is part of why the rest went quiet |
-| Unknowns | Things you would have to measure to know | How many of the 316 were still open when we stopped replying |
+| Unknowns | Things you'd have to measure to know | How many of the 316 were still open when we stopped replying |
 
-Most bad AI projects are an inference wearing a fact's clothes. Someone believes follow-up is the problem, everyone nods, and six months later there is a tool nobody uses.
+Most bad AI projects start when an inference gets treated as a fact. Someone says follow-up is the problem, everyone nods, nobody checks, and six months later there's a tool nobody uses.
 
 If your biggest unknown is cheap to measure, measure it before you buy anything. A week of counting beats a quarter of building.
 
-## Write the options down before you assume AI is one of them
+## Step 4: Write down all five options
 
-For the leak you picked, there are five honest options. AI is part of two of them.
+For the leak you picked, you have five honest options. Only two of them involve AI.
 
 1. **Fix the process.** Change who does what, when, and in what order. No software.
 2. **Buy something that exists.** Someone has probably solved this. Pay them.
-3. **Automate the repetitive part.** Rules, integrations, and AI for the steps that are genuinely repetitive and low-judgment.
-4. **Build something custom.** Only when the workflow is specific to you and worth the maintenance.
+3. **Automate the repetitive part.** Rules, integrations, and AI for steps that repeat and follow rules.
+4. **Build something custom.** Only when the workflow is specific to you and worth maintaining for years.
 5. **Do nothing.** The leak is real but small, and your attention is worth more elsewhere.
 
-Write all five down every time, even the ones you dislike. A list of one option is not a decision.
+Write all five down every time, including the ones you don't like. A list with one item on it isn't a decision.
 
-I will say the quiet part about option three. AI is good at work that repeats and follows rules. It is not a replacement for the person holding the customer relationship, or for the judgment that decides what the business should do next. Keep your people on the judgment. Give the machine the repetition.
+One caution on options 3 and 4. AI is good at work that repeats and follows rules. It isn't a replacement for the person holding the customer relationship, or for the judgment that decides what the business does next. Keep your people on the judgment and give the machine the repetition.
 
-## Score the options against each other
+## Step 5: Score every option on five dimensions
 
-Five columns, one to five each. Score every option, not just the favourite.
+Score each of the five options from 1 to 5 on each dimension below, then total them.
 
 | Dimension | The question it answers |
 | --- | --- |
@@ -87,43 +104,60 @@ Five columns, one to five each. Score every option, not just the favourite.
 | Strategic relevance | Does this matter to where the business is going? |
 | Ease | Can your actual team run this once it exists? |
 
-The scoring is not the point. The argument you have while scoring is the point. When two people rate economic impact 5 and 2, you have found the thing you disagree about, and it is usually the evidence.
+Here's a worked example for a company whose leak is unchased quotes. The scores are made up to show how the grid behaves.
 
-Be suspicious of any option that scores high on impact and low on evidence. That combination is how I have watched good companies spend real money on a guess.
+| Option | Impact | Evidence | Speed | Relevance | Ease | Total |
+| --- | --- | --- | --- | --- | --- | --- |
+| Fix the process | 4 | 4 | 5 | 3 | 4 | 20 |
+| Buy a CRM add-on | 4 | 3 | 4 | 3 | 3 | 17 |
+| Automate follow-up with AI | 5 | 3 | 3 | 4 | 3 | 18 |
+| Build custom | 5 | 2 | 1 | 3 | 1 | 12 |
+| Do nothing | 0 | 5 | 5 | 1 | 5 | 16 |
 
-## Choose, and write down why
+The grid rarely picks the winner by itself. Its real job is to expose where you disagree. When two people score economic impact 5 and 2, you've found the argument worth having, and it's almost always about evidence rather than about AI.
 
-- Highest score with evidence behind it wins.
-- If the top two are close, take the faster one. You will learn more from finishing.
+Be careful with any option scoring high on impact and low on evidence. That combination is how companies spend real money on a guess.
+
+## Step 6: Choose, then write down why
+
+- Highest total with real evidence behind it wins.
+- If the top two are close, take the faster one. You'll learn more from finishing.
 - If nothing clears the bar, do nothing and say so out loud. "Not yet" is a legitimate result.
 
-Write one paragraph recording what you chose, what you rejected, and what would have to change for the rejected option to come back. In six months, when someone asks why you are not doing the other thing, that paragraph is the answer.
+Then write one paragraph: what you chose, what you rejected, and what would have to change for a rejected option to come back. In six months, when someone asks why you're not doing the other thing, that paragraph is your answer.
 
-## Turn the winner into a bounded test
+## Step 7: Turn the winner into a bounded test
 
-Not a transformation programme. A test with edges.
+Give it edges. Fill in these five lines before anyone starts work:
 
-- **One opportunity.** The one you picked.
-- **One owner.** A named person, not a committee.
-- **One number.** The thing you expect to move, measured before you start.
-- **Ninety days.** Long enough to be real, short enough to stop.
-- **A stop rule.** Decided now, while you are still calm, and written down.
+- **The opportunity:** the one you picked.
+- **The owner:** a named person, not a committee.
+- **The number:** what you expect to move, measured before you start.
+- **The window:** 90 days. Long enough to be real, short enough to stop.
+- **The stop rule:** what result makes you kill it, decided now while you're still calm.
 
-Measure the baseline first. If you cannot measure the baseline, you have picked something you will not be able to judge, and you should pick again.
+Measure the baseline first. If you can't measure the baseline, you've picked something you won't be able to judge, and you should go back to step 2.
 
-## What to require before you approve the spend
+## Step 8: Six questions before you approve any spend
 
-Before you sign anything, make whoever is proposing it answer these. Internal team or outside vendor, same list.
+Make whoever is proposing the work answer these. Internal team or outside vendor, same list.
 
-- Which specific business problem does this address, and what is it costing us now?
-- Which parts of that number are measured, and which are estimated?
-- What are the other four options, and why did this one win?
-- What has to be true for this to work?
-- How will we know in 90 days whether it worked?
-- What happens to this if you disappear?
+1. Which business problem does this address, and what is it costing us now?
+2. Which parts of that number are measured, and which are estimated?
+3. What are the other four options, and why did this one win?
+4. What has to be true for this to work?
+5. How will we know in 90 days whether it worked?
+6. What happens to this if you disappear?
 
-I wrote proposals for nine years. A proposal that cannot answer those six questions is not a plan for your business. It is a plan for someone else's revenue, and I say that as someone who used to be on the other end of it.
+I wrote proposals for nine years. A proposal that can't answer those six questions isn't a plan for your business. It's a plan for someone else's revenue, and I say that as someone who used to be on the other end of it.
 
-You can run this whole method yourself with a whiteboard and two hours. If you would rather have someone independent do the diagnosis with you, that is what the [AI Profit Opportunity Audit](/ai-profit-opportunity-audit/) is: your opportunities ranked, the top three recommended, and a 90-day roadmap. Diagnosis and prioritisation only, no build work, so there is nothing for me to sell you at the end of it.
+## Start here this week
 
-Either way, start in the same place. Find the leak, put a number on it, and make AI earn its place against four other options.
+1. Pick one of the three leaks in step 2 and pull the numbers.
+2. Sort what you find into facts, inferences and unknowns.
+3. Score the five options and pick one.
+4. Write the five lines of the 90-day test.
+
+If you'd rather have someone independent do the diagnosis with you, that's what the [AI Profit Opportunity Audit](/ai-profit-opportunity-audit/) is: your opportunities ranked, the top three recommended, and a 90-day roadmap. Diagnosis and prioritisation only, no build work.
+
+Either way, start in the same place. Find the leak, put a number on it, and make AI earn its place against the three options that don't involve it.
