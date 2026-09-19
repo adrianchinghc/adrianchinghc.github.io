@@ -20,7 +20,7 @@ Almost nobody brought a number. Nobody could tell me what the problem was costin
 
 That's the trouble with "where should we use AI?" It sounds like a technology question. It isn't. It's a money question, and you can answer it with figures you already have.
 
-I closed Upstack in 2026. The agency kept earning. It just wasn't the model I wanted to run anymore, because the overhead was fixed and I couldn't grow it without adding more people. I held on longer than I should have, and that cost me about RM600,000 of my own money.
+I closed Upstack Studio in 2026. The agency made money. It just wasn't the model I wanted to run anymore, because the overhead was fixed and I couldn't grow it without adding more people. I held on longer than I should have when our sales pipeline dried up, and that cost me about RM600,000 of my own money.
 
 So I'm not neutral here. I've been the vendor writing the proposal. I've also been the owner who did the maths on his own business too late.
 
