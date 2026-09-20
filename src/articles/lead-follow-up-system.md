@@ -12,7 +12,7 @@ socialLabel: "CUSTOMER FOLLOW-UP"
 socialAction: "Pull the four numbers →"
 ---
 
-For nine years, I was the only salesperson at Upstack Studio.
+For nine years at Upstack Studio, every new deal closed through me.
 
 Every enquiry came to me. Every request for a proposal came to me. I wrote them, I chased them, and I did all of it while running the rest of the company.
 
@@ -20,9 +20,9 @@ Some enquiries got a reply the same day. Some sat for a week. A few I never answ
 
 I knew. I just never made the time to look at it properly.
 
-That's the part most owners recognise. You already suspect your follow-up is leaking. What you don't have is a quiet hour to prove it, and a way to decide what to do next.
+That's the part most owners recognise. You already suspect your follow-up is leaking. What you don't have is proof, and a way to decide what to do next.
 
-So here's the hour. Four numbers, a way to read them, and a fix that doesn't start with buying software.
+So here's the week. Four numbers, a way to read them, and a fix that doesn't start with buying software.
 
 And yes, AI helps here. Just not the way it gets sold to you. AI is very good at reading a pile of enquiries and telling you what's in it. It's terrible at deciding what your business should do next. Count first. Then choose.
 
@@ -80,7 +80,7 @@ Look at your list and ask who owns the follow-up. If the honest answer is one na
 
 Do the sums on that person, still using the invented company above. Say a real follow-up takes ten minutes: read the history, write something worth reading, set the next date. Say three touches each. At 120 enquiries that's 360 follow-ups a quarter, or about sixty hours. Those two numbers are my assumptions, not measurements. Put your own in and the shape holds. Now add the proposals that person writes, the calls they take, and the job they already had.
 
-That isn't a discipline problem. It's a capacity problem, and trying harder doesn't fix it. I was that one name for nine years.
+That isn't a discipline problem. It's a capacity problem, and trying harder doesn't fix it. For nine years, every new deal closed through me.
 
 ## Where AI helps, and where it doesn't
 
@@ -125,17 +125,17 @@ Then buy in this order: fix the process, use the shared inbox or CRM you already
 
 Nobody paid to be named here and there are no affiliate links on this page. Match the tool to the job you just wrote down, not to the brand with the best home page.
 
-**For the one list.** If enquiries reach you by email and web form, you want a shared inbox before you want a CRM. Help Scout, Front and Missive all do the same core job: one mailbox that several people can work, with a name attached to every conversation. Already paying for Google Workspace or Microsoft 365? Try a shared mailbox there first. Free and dull beats paid and clever while you're still learning what you need.
+**For the one list.** If enquiries reach you by email and web form, you want a shared inbox before you want a CRM. [Help Scout](https://www.helpscout.com/), [Front](https://front.com/) and [Missive](https://missiveapp.com/) all do the same core job: one mailbox that several people can work, with a name attached to every conversation. Already paying for [Google Workspace](https://workspace.google.com/) or [Microsoft 365](https://www.microsoft.com/microsoft-365)? Try a shared mailbox there first. Free and dull beats paid and clever while you're still learning what you need.
 
-If a lot of your enquiries arrive on WhatsApp, that's a different tool. The free WhatsApp Business app is fine for one person with labels and saved replies. The moment two people have to answer the same number, you need the WhatsApp Business API through a platform. Wati sits at the simpler, cheaper end. Respond.io does more routing and reporting.
+If a lot of your enquiries arrive on WhatsApp, that's a different tool. The free [WhatsApp Business app](https://whatsappbusiness.com/products/business-app/) covers more than one person: labels, saved replies, and one account linked to up to four more phones, so a colleague can answer the same number from their own handset. What you get is one shared view. The free app runs out when you need a named owner on each enquiry, work you can hand to that person, and handling you can check. That's when you move to the [WhatsApp Business Platform](https://whatsappbusiness.com/products/business-platform/) through a provider. [Wati](https://www.wati.io/) sits at the simpler, cheaper end. [Respond.io](https://respond.io/) does more routing and reporting.
 
-**For the owner and the clock.** This is what a CRM is really for. Pipedrive is built around it. Its whole model is activity-based selling, and it will show you every open deal that has no next step booked. That's Number 4, done by the software instead of by you. HubSpot has a free tier worth starting on, but check today's limits on users and contacts first, because they've changed. Zoho Bigin is the cheapest solid option. If your follow-up is mostly phone calls, look at Close.
+**For the owner and the clock.** This is what a CRM is really for. [Pipedrive](https://www.pipedrive.com/) is built around it. Its whole model is activity-based selling, and it will show you every open deal that has no next step booked. That's Number 4, done by the software instead of by you. [HubSpot](https://www.hubspot.com/) has a free tier worth starting on, but check today's limits on users and contacts first, because they've changed. [Zoho Bigin](https://www.bigin.com/) is the cheapest paid option. If your follow-up is mostly phone calls, look at [Close](https://close.com/).
 
 **For the memory.** Same tool, one extra test. Does it save the email thread by itself, or does somebody have to remember to paste it in? If it's the second one, that's not a memory. That's a second list.
 
-**For the reminders.** Only automate what you already do by hand. Zapier is the easiest to start on. Make costs less once the volume is real. Use n8n if you want to run it on your own server.
+**For the reminders.** Only automate what you already do by hand. [Zapier](https://zapier.com/) is the easiest to start on. [Make](https://www.make.com/en) costs less once the volume is real. Use [n8n](https://n8n.io/) if you want to run it on your own server.
 
-**For the AI, last.** To read the pile, export 90 days of enquiries and ask Claude or ChatGPT what's in there. For drafts and for watching the clock, use the AI already inside your CRM before you buy a separate AI sales agent. A bolt-on that can't see your history writes confident nonsense.
+**For the AI, last.** To read the pile, export 90 days of enquiries and ask [Claude](https://claude.com/) or [ChatGPT](https://openai.com/chatgpt/) what's in there. For drafts and for watching the clock, use the AI already inside your CRM before you buy a separate AI sales agent. A bolt-on that can't see your history writes confident nonsense.
 
 ## Your next 30 days
 
