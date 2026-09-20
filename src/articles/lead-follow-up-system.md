@@ -28,7 +28,7 @@ And yes, AI helps here. Just not the way it gets sold to you. AI is very good at
 
 ## First, check that this is actually your problem
 
-Don't fix this because it sounds true. Most owners believe follow-up is their weak spot, and plenty of them are wrong. It costs you a week to find out.
+Don't fix this because it sounds true. Suspecting isn't the same as knowing, and which of the four numbers is worst decides what you fix. It costs you a week to find out.
 
 Start with one list: every enquiry that arrived in the last 90 days. Email, web form, phone, WhatsApp, referral, the lot.
 
@@ -43,6 +43,8 @@ Once you have the list, pull four numbers.
 **Number 3: quotes sent, quotes chased, quotes closed.** That's three counts, not one. Most companies know the first and the third. Almost nobody has counted the middle one.
 
 **Number 4: how many open enquiries have no owner and no next date.** Pick ten at random. For each one, can you name the person responsible and the thing that happens next? Count how many times you can't.
+
+If you read the last piece, on where to use AI first, two of those will look familiar. That one had you pull reply times and quote close rates as one leak among several. This one stays on that leak and digs in: the chased count in the middle, your worst case next to your middle one, and the owner test. Same method, one target.
 
 ## How to read the four numbers
 
@@ -68,15 +70,15 @@ A company gets 120 enquiries in 90 days.
 
 Read it back. The 6-hour middle says the team can be fast when it wants to be. The 9-day worst case says speed is luck. And 18 chased quotes out of 64 says the follow-up isn't slow, it's missing.
 
-That company doesn't have a lead problem. It paid for 120 chances and used about 18 of them properly.
+That company doesn't have a lead problem. It paid for 120 chances, sent 64 quotes, and then chased only 18 of them.
 
 ## The one-person test
 
-Now the question that decided this for me.
+Now the question underneath all four numbers.
 
 Look at your list and ask who owns the follow-up. If the honest answer is one name, you've found your ceiling.
 
-Do the sums on that person. A real follow-up takes about ten minutes. Read the history, write something worth reading, set the next date. At 120 enquiries and three touches each, that's 360 follow-ups a quarter. Sixty hours. Now add the proposals they write, the calls they take, and the job they already had.
+Do the sums on that person, still using the invented company above. Say a real follow-up takes ten minutes: read the history, write something worth reading, set the next date. Say three touches each. At 120 enquiries that's 360 follow-ups a quarter, or about sixty hours. Those two numbers are my assumptions, not measurements. Put your own in and the shape holds. Now add the proposals that person writes, the calls they take, and the job they already had.
 
 That isn't a discipline problem. It's a capacity problem, and trying harder doesn't fix it. I was that one name for nine years.
 
@@ -84,7 +86,7 @@ That isn't a discipline problem. It's a capacity problem, and trying harder does
 
 AI is genuinely good at three jobs here.
 
-- **Reading the pile.** Point it at 90 days of enquiry email and ask what's in there. What people asked for, which ones went quiet, which ones nobody answered. If your records are a mess, this is the fastest way to get numbers 1, 2 and 4.
+- **Reading the pile.** Point it at 90 days of enquiry email and ask what's in there. What people asked for, which ones went quiet, which ones nobody answered. If your records are a mess, this is the fastest way to get numbers 1, 2 and 3. Number 4 you still have to do by hand, because a next date that was never set isn't in the email.
 - **Writing the first draft.** It reads the history and gives you something to edit in seconds. You still decide what goes out.
 - **Watching for silence.** A machine never forgets that a quote went out eleven days ago and nobody replied.
 
@@ -119,6 +121,22 @@ Three questions before you pay for anything.
 
 Then buy in this order: fix the process, use the shared inbox or CRM you already pay for, automate the reminders, and put AI on top of that. Most companies I met were shopping at the last step with nothing in place at the first three.
 
+## Which tool does which job
+
+Nobody paid to be named here and there are no affiliate links on this page. Match the tool to the job you just wrote down, not to the brand with the best home page.
+
+**For the one list.** If enquiries reach you by email and web form, you want a shared inbox before you want a CRM. Help Scout, Front and Missive all do the same core job: one mailbox that several people can work, with a name attached to every conversation. Already paying for Google Workspace or Microsoft 365? Try a shared mailbox there first. Free and dull beats paid and clever while you're still learning what you need.
+
+If a lot of your enquiries arrive on WhatsApp, that's a different tool. The free WhatsApp Business app is fine for one person with labels and saved replies. The moment two people have to answer the same number, you need the WhatsApp Business API through a platform. Wati sits at the simpler, cheaper end. Respond.io does more routing and reporting.
+
+**For the owner and the clock.** This is what a CRM is really for. Pipedrive is built around it. Its whole model is activity-based selling, and it will show you every open deal that has no next step booked. That's Number 4, done by the software instead of by you. HubSpot has a free tier worth starting on, but check today's limits on users and contacts first, because they've changed. Zoho Bigin is the cheapest solid option. If your follow-up is mostly phone calls, look at Close.
+
+**For the memory.** Same tool, one extra test. Does it save the email thread by itself, or does somebody have to remember to paste it in? If it's the second one, that's not a memory. That's a second list.
+
+**For the reminders.** Only automate what you already do by hand. Zapier is the easiest to start on. Make costs less once the volume is real. Use n8n if you want to run it on your own server.
+
+**For the AI, last.** To read the pile, export 90 days of enquiries and ask Claude or ChatGPT what's in there. For drafts and for watching the clock, use the AI already inside your CRM before you buy a separate AI sales agent. A bolt-on that can't see your history writes confident nonsense.
+
 ## Your next 30 days
 
 - **Week 1.** Pull the four numbers.
@@ -132,6 +150,8 @@ Write your stop rule now, while you're calm. If the middle reply time and the on
 
 Pull number 2. Count the enquiries that got one attempt and nothing after. It takes an afternoon, and it's usually the number that stings.
 
-If you'd rather have someone from outside run the diagnosis with you, that's what the [AI Profit Opportunity Audit](/ai-profit-opportunity-audit/) is. You get your opportunities ranked, the top three recommended, and a 90-day plan. Diagnosis and priorities only, no build work.
+When you have it, reply and tell me which of the four was worst in your business. Subscribe below and the next exercise comes to you.
 
-Either way, start in the same place. You probably don't need more leads this quarter. You need to know what happened to the last hundred.
+Want somebody from outside to run the count with you? That's the [AI Profit Opportunity Audit](/ai-profit-opportunity-audit/). It ranks where the money leaks, names the three fixes worth doing first, and puts them on a 90-day roadmap. It stops at the diagnosis. Nobody builds anything.
+
+You probably don't need more leads this quarter. You need to know what happened to the last hundred.
