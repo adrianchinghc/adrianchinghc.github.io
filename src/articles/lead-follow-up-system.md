@@ -14,7 +14,7 @@ socialAction: "Pull the four numbers →"
 
 For nine years at Upstack Studio, every new deal closed through me.
 
-Every enquiry came to me. Every request for a proposal came to me. I wrote them, I chased them, and I did all of it while running the rest of the company.
+The enquiries came to me. The proposals came to me. I wrote them, I chased them, and I did all of it while running the rest of the company.
 
 Some enquiries got a reply the same day. Some sat for a week. A few I never answered at all. Not because I didn't care. Because one person can only do so much, and I was the bottleneck for everything sales.
 
@@ -80,7 +80,7 @@ Look at your list and ask who owns the follow-up. If the honest answer is one na
 
 Do the sums on that person, still using the invented company above. Say a real follow-up takes ten minutes: read the history, write something worth reading, set the next date. Say three touches each. At 120 enquiries that's 360 follow-ups a quarter, or about sixty hours. Those two numbers are my assumptions, not measurements. Put your own in and the shape holds. Now add the proposals that person writes, the calls they take, and the job they already had.
 
-That isn't a discipline problem. It's a capacity problem, and trying harder doesn't fix it. For nine years, every new deal closed through me.
+That isn't a discipline problem. It's a capacity problem, and trying harder doesn't fix it. For nine years, that name was mine.
 
 ## Where AI helps, and where it doesn't
 
@@ -127,7 +127,7 @@ Nobody paid to be named here and there are no affiliate links on this page. Matc
 
 **For the one list.** If enquiries reach you by email and web form, you want a shared inbox before you want a CRM. [Help Scout](https://www.helpscout.com/), [Front](https://front.com/) and [Missive](https://missiveapp.com/) all do the same core job: one mailbox that several people can work, with a name attached to every conversation. Already paying for [Google Workspace](https://workspace.google.com/) or [Microsoft 365](https://www.microsoft.com/microsoft-365)? Try a shared mailbox there first. Free and dull beats paid and clever while you're still learning what you need.
 
-If a lot of your enquiries arrive on WhatsApp, that's a different tool. The free [WhatsApp Business app](https://whatsappbusiness.com/products/business-app/) covers more than one person: labels, saved replies, and one account linked to up to four more phones, so a colleague can answer the same number from their own handset. What you get is one shared view. The free app runs out when you need a named owner on each enquiry, work you can hand to that person, and handling you can check. That's when you move to the [WhatsApp Business Platform](https://whatsappbusiness.com/products/business-platform/) through a provider. [Wati](https://www.wati.io/) sits at the simpler, cheaper end. [Respond.io](https://respond.io/) does more routing and reporting.
+If a lot of your enquiries arrive on WhatsApp, that's a different tool. The free [WhatsApp Business app](https://whatsappbusiness.com/products/business-app/) covers more than one person: labels, saved replies, and one account linked to up to four more devices, so a colleague can answer the same number from their own handset. What you get is one shared view. The free app runs out when you need a named owner on each enquiry, work you can hand to that person, and handling you can check. That's when you move to the [WhatsApp Business Platform](https://whatsappbusiness.com/products/business-platform/) through a provider. [Wati](https://www.wati.io/) sits at the simpler, cheaper end. [Respond.io](https://respond.io/) does more routing and reporting.
 
 **For the owner and the clock.** This is what a CRM is really for. [Pipedrive](https://www.pipedrive.com/) is built around it. Its whole model is activity-based selling, and it will show you every open deal that has no next step booked. That's Number 4, done by the software instead of by you. [HubSpot](https://www.hubspot.com/) has a free tier worth starting on, but check today's limits on users and contacts first, because they've changed. [Zoho Bigin](https://www.bigin.com/) is the cheapest paid option. If your follow-up is mostly phone calls, look at [Close](https://close.com/).
 
