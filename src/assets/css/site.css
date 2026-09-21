@@ -529,7 +529,7 @@ figcaption{font-size:.8125rem;line-height:1.5;color:var(--muted);margin-top:.75r
 /* The play control sits clear of faces. Only clickable photographs move. */
 .video-play{inset:auto auto 1rem 1rem}
 .video-play svg{width:40px;height:40px;padding:12px}
-.video-thumbnail img{transition:transform 180ms var(--ease-out)}
+.video-thumbnail img,.related-entry .article-cover img{transition:transform 180ms var(--ease-out)}
 .menu-mark{position:relative;display:block;width:20px;height:16px;flex:0 0 20px}
 .menu-mark span{position:absolute;left:0;width:20px;height:1.5px;background:currentColor;transform-origin:center;transition:transform 140ms var(--ease-out)}
 .menu-mark span:first-child{top:4px}.menu-mark span:last-child{top:11px}
@@ -541,6 +541,7 @@ html[data-input="keyboard"]{scroll-behavior:auto}
   .theme-toggle:hover:not(:focus-visible){background:var(--soft)}
   .text-link:hover:not(:focus-visible) .link-arrow,.button:hover:not(:focus-visible) .link-arrow{transform:translateX(3px)}
   .video-card:hover:not(:focus-visible) .video-thumbnail img{transform:scale(1.02)}
+  .related-entry:hover:not(:focus-visible) .article-cover img{transform:scale(1.02)}
 }
 .text-link:focus-visible .link-arrow,.button:focus-visible .link-arrow,.video-card:focus-visible .video-thumbnail img,.video-card:focus-visible .video-play svg{transform:none;transition:none}
 @media(max-width:1000px){
@@ -579,8 +580,8 @@ html[data-input="keyboard"]{scroll-behavior:auto}
   .current-work-photo .current-company+.current-company{border-top:1px solid var(--line);padding-top:1.25rem}
 }
 @media(prefers-reduced-motion:reduce){
-  .link-arrow,.video-thumbnail img,.menu-mark span{transition:none!important}
-  .text-link:hover .link-arrow,.button:hover .link-arrow,.video-card:hover .video-thumbnail img,.nav-ready .site-nav{transform:none!important}
+  .link-arrow,.video-thumbnail img,.related-entry .article-cover img,.menu-mark span{transition:none!important}
+  .text-link:hover .link-arrow,.button:hover .link-arrow,.video-card:hover .video-thumbnail img,.related-entry:hover .article-cover img,.nav-ready .site-nav{transform:none!important}
 }
 
 /* Historical client stories: open editorial rows, with sources beside the words. */
@@ -680,13 +681,20 @@ html[data-input="keyboard"]{scroll-behavior:auto}
 .article-next{padding:2rem 0;border-block:1px solid var(--line);margin-bottom:3.5rem}
 .article-next h2,.article-related h2{font-size:1.75rem}
 .article-next p,.writing-entry p{color:var(--muted)}
-.article-related{padding-bottom:3.5rem}
+.article-related{padding-bottom:3.5rem;max-width:960px;width:calc(100% - 40px);margin-inline:auto}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2.5rem;margin-top:2rem}
+.related-entry{display:block;text-decoration:none}
+.related-entry .article-cover{margin-bottom:1.25rem}
+.related-entry h3{font-size:1.1875rem;line-height:1.35;margin:.5rem 0;overflow-wrap:anywhere}
+.related-entry:hover h3{text-decoration:underline;text-underline-offset:.15em}
+.related-entry p{color:var(--muted);font-size:.9375rem;margin-bottom:0}
 .writing-list{margin-bottom:3.5rem}
 .writing-entry{display:block;padding:1.5rem 0;border-top:1px solid var(--line);text-decoration:none}
 .writing-entry h3{font-size:clamp(1.25rem,2.2vw,1.75rem);line-height:1.35;margin:.5rem 0;max-width:40ch;overflow-wrap:anywhere}
 .writing-entry:hover h3{text-decoration:underline;text-underline-offset:.15em}
 .writing-entry p{max-width:65ch;margin-bottom:.75rem}
-@media(max-width:760px){.article-header{padding-top:2.5rem}.article-byline{gap:.4rem 1rem}.article-body{padding-top:2rem}.article-body th,.article-body td{min-width:8rem}.article-next{margin-bottom:2.5rem}}
+@media(max-width:1000px){.related-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:2rem}}
+@media(max-width:760px){.article-header{padding-top:2.5rem}.article-byline{gap:.4rem 1rem}.article-body{padding-top:2rem}.article-body th,.article-body td{min-width:8rem}.article-next{margin-bottom:2.5rem}.related-grid{grid-template-columns:1fr;gap:2rem}}
 
 /* Colour lives in editorial covers; reading surfaces retain both site themes. */
 .article-featured{max-width:960px;width:calc(100% - 40px);margin:2.5rem auto 0}
@@ -695,4 +703,4 @@ html[data-input="keyboard"]{scroll-behavior:auto}
 .writing-entry-featured{display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:2rem;align-items:center;padding-block:2rem}
 .writing-summary{min-width:0}
 @media(max-width:760px){.article-featured{margin-top:2rem}.writing-entry-featured{grid-template-columns:1fr;gap:1.25rem}}
-@media(max-width:420px){.article-featured{width:calc(100% - 32px)}}
+@media(max-width:420px){.article-featured,.article-related{width:calc(100% - 32px)}}
