@@ -2,7 +2,7 @@
 title: "Where Should a B2B Company Use AI First? Start With the Economics"
 seoTitle: "Where should a B2B company use AI first?"
 description: "A five-option method for picking your first AI project: find the leak, put a number on it, score the options, and run one 90-day test."
-date: 2026-09-18
+date: "2026-09-23T11:30:00+08:00"
 draft: false
 topic: AI decisions
 cta: newsletter
