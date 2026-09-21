@@ -6,7 +6,7 @@ import { join } from 'node:path';
 import { articleIsVisible, publicationDate } from './publication.mjs';
 import { dueArticlePaths, missingArticlePaths, checkScheduledPublication } from './check-scheduled-publication.mjs';
 
-const data = { draft: false, date: '2026-09-25T09:00:00+08:00', title: 'A decision', description: 'A useful decision.', topic: 'AI decisions', socialTitle: 'AI first?', socialDescription: 'Where to start.', socialLabel: 'AI', socialAction: 'Read' };
+const data = { draft: false, date: '2026-09-25T09:00:00+08:00', title: 'A decision', description: 'A useful decision.', topic: 'AI decisions', socialTitle: 'AI first?', socialDescription: 'Where to start.', socialLabel: 'AI', socialAction: 'Read', socialCover: 'scripts/assets/illustrations/example-cover.webp', socialCoverAlt: 'Screen-printed cobalt illustration of a single lit path.' };
 
 test('publication respects the exact Malaysia-time boundary and draft gate', () => {
   const before = { now: new Date('2026-09-25T00:59:59.999Z'), preview: false };

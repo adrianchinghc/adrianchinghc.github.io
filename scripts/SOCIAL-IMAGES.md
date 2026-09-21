@@ -78,9 +78,11 @@ variant a winner without data, and never send subscriber details to analytics.
 
 ## Article illustration system
 
-Articles use a bright cobalt (default), ivory or yellow cover, with optional
-original artwork and programmatically typeset text. The same image appears below
-the byline and in Ideas, using responsive WebP derivatives. See ARTICLES.md for
-socialArtwork, socialArtworkAlt and socialPalette. Existing nonarticle cards
-retain their established treatment. AI artwork is created and reviewed during
-authoring, never generated on each build. No CTR improvement is assumed.
+Every published article ships one commissioned 1200×630 cover through
+socialCover and socialCoverAlt. The same image appears below the byline, in
+Ideas and on social, using responsive WebP derivatives. The build reproduces it
+unmodified; the typeset card it can draw instead is a development stand-in that
+cannot publish. See ARTICLES.md for the creative standard and the commissioning
+route. Existing nonarticle cards retain their established treatment. Artwork is
+created and reviewed during authoring, never generated on each build. No CTR
+improvement is assumed.

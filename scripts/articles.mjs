@@ -10,6 +10,12 @@ export function validateArticle(data, now = buildTime) {
   for (const field of ['title', 'description', 'topic', 'date', 'socialTitle', 'socialDescription', 'socialLabel', 'socialAction']) {
     if (!data[field]) throw new Error(`Article requires ${field}: ${data.page?.inputPath}`);
   }
+  // The typeset card is a development stand-in. Every article that reaches a
+  // reader or a review preview ships the commissioned cover in all three
+  // placements. See the creative standard in scripts/ARTICLES.md.
+  for (const field of ['socialCover', 'socialCoverAlt']) {
+    if (!data[field]) throw new Error(`Article requires ${field}; the typeset fallback cannot publish. See scripts/ARTICLES.md: ${data.page?.inputPath}`);
+  }
   if (!articleTopics.includes(data.topic)) throw new Error(`Unknown article topic: ${data.topic}`);
   const published = publicationDate(data.date);
   const updated = data.updated && new Date(data.updated);

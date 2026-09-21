@@ -8,7 +8,7 @@ import sharp from 'sharp';
 import { articles, validateArticle, relatedArticles, articleSchema, jsonLd } from './articles.mjs';
 import { socialImages } from './social-images.mjs';
 
-const valid = { draft: false, title: 'A useful decision', description: 'A useful guide to making a specific business decision.', topic: 'Software decisions', date: '2026-01-10', socialTitle: 'Build, buy or wait?', socialDescription: 'Compare the options before committing time and money to new software.', socialLabel: 'SOFTWARE DECISIONS', socialAction: 'Read the guide' };
+const valid = { draft: false, title: 'A useful decision', description: 'A useful guide to making a specific business decision.', topic: 'Software decisions', date: '2026-01-10', socialTitle: 'Build, buy or wait?', socialDescription: 'Compare the options before committing time and money to new software.', socialLabel: 'SOFTWARE DECISIONS', socialAction: 'Read the guide', socialCover: 'scripts/assets/illustrations/example-cover.webp', socialCoverAlt: 'Screen-printed cobalt illustration of two paths past a paused signal.' };
 
 test('publishing rejects missing metadata, unknown topics and misleading dates', () => {
   const now = new Date('2026-09-17');
@@ -16,6 +16,16 @@ test('publishing rejects missing metadata, unknown topics and misleading dates',
   validateArticle({ ...valid, date: "2099-01-01T09:00:00+08:00" }, now);
   validateArticle({ draft: true }, now);
   for (const edit of [{ date: 'invalid' }, { updated: '2025-01-01' }, { updated: '2099-01-01' }, { updated: 'invalid' }, { topic: 'Anything' }, { cta: 'checkout' }, { description: '' }, { socialTitle: '' }]) assert.throws(() => validateArticle({ ...valid, ...edit }, now));
+});
+
+// The typeset card is a stand-in during authoring; an article cannot reach a
+// reader or a review preview without its commissioned cover and alt text.
+test('publishing requires the commissioned cover, not the typeset fallback', () => {
+  const now = new Date('2026-09-17');
+  for (const edit of [{ socialCover: undefined }, { socialCoverAlt: undefined }, { socialCover: '' }, { socialCoverAlt: '' }]) {
+    assert.throws(() => validateArticle({ ...valid, ...edit }, now), /socialCover/);
+  }
+  validateArticle({ ...valid, draft: true, socialCover: undefined, socialCoverAlt: undefined }, now);
 });
 
 test('related reading excludes current and archive, prioritises topic then recency', () => {
@@ -41,11 +51,11 @@ test('Eleventy publishes complete articles, hides drafts and produces discovery 
   await mkdir('scripts/assets/illustrations', { recursive: true });
   const artworkRoot = await mkdtemp('scripts/assets/illustrations/.test-');
   const cover = join(artworkRoot, 'cover.webp');
-  const artwork = join(artworkRoot, 'artwork.webp');
+  const yellowCover = join(artworkRoot, 'yellow-cover.webp');
   try {
     // Synthetic fixtures keep rendering coverage independent of editorial assets.
     await sharp({ create: { width: 1200, height: 630, channels: 3, background: '#1646ed' } }).webp().toFile(cover);
-    await sharp({ create: { width: 400, height: 400, channels: 3, background: '#ffda35' } }).webp().toFile(artwork);
+    await sharp({ create: { width: 1200, height: 630, channels: 3, background: '#ffda35' } }).webp().toFile(yellowCover);
     await put('articles/articles.11tydata.js', `export { default } from ${JSON.stringify(pathToFileURL(resolve('src/articles/articles.11tydata.js')).href)};`);
     await put('_data/site.js', `export { default } from ${JSON.stringify(pathToFileURL(resolve('src/_data/site.js')).href)};`);
     await mkdir(join(input, '_includes/layouts'), { recursive: true });
@@ -60,8 +70,8 @@ test('Eleventy publishes complete articles, hides drafts and produces discovery 
     await put('_data/media.json', JSON.stringify({ featuredVideos: [], youtube: { channelUrl: 'https://www.youtube.com/@adrianchinghc' } }));
     const article = (data, body = 'A clear opening answer.\n\n## The decision\n\nThe useful explanation.') => `---json\n${JSON.stringify(data)}\n---\n${body}`;
     await put('articles/earlier.md', article({ ...valid, socialCover: cover, socialCoverAlt: 'Reviewed blue editorial cover.' }));
-    await put('articles/latest.md', article({ ...valid, title: 'A newer useful decision', date: '2026-02-01', updated: '2026-03-01', cta: 'audit', socialArtwork: artwork, socialArtworkAlt: 'Yellow test illustration.' }));
-    await put('articles/scheduled.md', article({ ...valid, title: 'Scheduled decision', date: '2099-01-01T09:00:00+08:00' }));
+    await put('articles/latest.md', article({ ...valid, title: 'A newer useful decision', date: '2026-02-01', updated: '2026-03-01', cta: 'audit', socialCover: yellowCover, socialCoverAlt: 'Yellow test illustration.' }));
+    await put('articles/scheduled.md', article({ ...valid, title: 'Scheduled decision', date: '2099-01-01T09:00:00+08:00', socialCover: cover, socialCoverAlt: 'Reviewed blue editorial cover.' }));
     await put('articles/draft.md', article({ title: 'Unreviewed draft' }));
     await put('articles/explicit-draft.md', article({ ...valid, draft: true, title: 'Explicit draft' }));
     const configPath = join(root, 'eleventy.config.mjs');
@@ -126,7 +136,7 @@ test('Eleventy publishes complete articles, hides drafts and produces discovery 
       else process.env.VERCEL_ENV = previousPreview;
     }
     // A later production build makes the same article discoverable once due.
-    await put('articles/scheduled.md', article({ ...valid, title: 'Scheduled decision', date: '2026-01-11T09:00:00+08:00' }));
+    await put('articles/scheduled.md', article({ ...valid, title: 'Scheduled decision', date: '2026-01-11T09:00:00+08:00', socialCover: cover, socialCoverAlt: 'Reviewed blue editorial cover.' }));
     await rm(output, { recursive: true, force: true });
     await build().write();
     await access(join(output, 'blog/scheduled/index.html'));
