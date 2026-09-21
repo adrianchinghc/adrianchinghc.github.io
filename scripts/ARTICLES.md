@@ -15,8 +15,10 @@ New files are drafts by default: no HTML output, article listing or sitemap
 entry. Set `draft: false` only when the content has been reviewed for publishing.
 A future publication date fails the build; there is no implicit scheduler.
 Draft files are still in this public repository: do not store confidential
-material in them. To review unpublished writing visually, set draft to false
-on rebuild-2026, inspect the Vercel preview, and obtain approval before merging.
+material in them. To review unpublished writing visually, commit `draft: false`
+on the article's own branch and read the page in that branch's Vercel preview.
+A `draft: true` file builds no page, so its preview shows the site without the
+article. Rendering a preview is not approval; merging to source is.
 
 ```yaml
 ---
@@ -65,8 +67,15 @@ Run a clean build, `npm run check`, `node --test scripts/*.test.mjs`, and
 related links, metadata safety and article output using isolated fixtures.
 Check desktop light/dark layouts, generated responsive rules, card legibility,
 links, canonical, dates and BlogPosting JSON-LD on the exact Vercel commit.
-Ask Adrian for real-device checks where needed. Keep the PR draft and do not
-run Lighthouse on routine pushes. Only merge to source with explicit approval.
+Ask Adrian for real-device checks where needed. Do not run Lighthouse on
+routine pushes; marking a pull request ready for review runs it once.
+
+Each article gets its own pull request, based on `source`, opened in the same
+run as the first push and marked ready for review so Adrian can read it. Never
+stack one article branch on another: merging the upper article would publish
+the lower one too, and neither post could be reviewed on its own. State in the
+PR body which commit the current approval is bound to. Only merge to source
+with explicit approval; merging runs the publish workflow.
 
 The obsolete 2016 Middleman tutorial was removed by Adrian’s request. Its old
 URL should return 404; do not redirect it to unrelated content. Ideas shows no
