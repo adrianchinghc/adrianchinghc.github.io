@@ -56,8 +56,11 @@ export function responsiveImages(config) {
       const result = await jobs.get(key);
       if (!result) continue;
       const mobileSizes = tag.match(/data-mobile-sizes="([^"]+)"/)?.[1] ?? "(max-width: 420px) calc(100vw - 32px), calc(100vw - 40px)";
-      const sizes = tag.includes('loading="lazy"') ? 'auto, (max-width: 420px) calc(100vw - 32px), (max-width: 760px) calc(100vw - 40px), 600px' : '(max-width: 420px) calc(100vw - 32px), (max-width: 760px) calc(100vw - 40px), (max-width: 1000px) 45vw, 520px';
-      let replacement = tag.replace(/\s(?:width|height|data-mobile-crop|data-mobile-position|data-mobile-sizes)="[^"]*"/g, "").replace(`src="${src}"`, `src="${result.webp.fallback}"`);
+      // Both defaults describe an image beside other content. A full-width
+      // figure fills the 720px reading column instead, so it states its own
+      // slot; honor that rather than appending a second, contradicting sizes.
+      const sizes = tag.match(/\ssizes="([^"]+)"/)?.[1] ?? (tag.includes('loading="lazy"') ? 'auto, (max-width: 420px) calc(100vw - 32px), (max-width: 760px) calc(100vw - 40px), 600px' : '(max-width: 420px) calc(100vw - 32px), (max-width: 760px) calc(100vw - 40px), (max-width: 1000px) 45vw, 520px');
+      let replacement = tag.replace(/\s(?:width|height|sizes|data-mobile-crop|data-mobile-position|data-mobile-sizes)="[^"]*"/g, "").replace(`src="${src}"`, `src="${result.webp.fallback}"`);
       replacement = replacement.replace(/>$/, ` data-image-source="${src}" width="${result.meta.width}" height="${result.meta.height}" srcset="${result.webp.srcset}" sizes="${sizes}">`);
       if (result.mobileAvif) {
         const dimensions = `width="${result.crop.width}" height="${result.crop.height}"`;
