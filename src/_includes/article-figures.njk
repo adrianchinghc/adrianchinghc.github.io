@@ -1,46 +1,20 @@
-{# Editorial diagrams drawn by the build, not artwork. Plain HTML so every label is real text at a real size: a diagram scaled to a 343px reading column shrinks its own type, a stacked one does not. #}
+{# Editorial diagrams, generated as standalone SVG images by
+   scripts/generate-explanatory-figures.mjs. Referenced through a plain <img>, each
+   one scales as a single opaque image (site default: img{max-width:100%;height:auto})
+   rather than as part of the page's live DOM and CSS. #}
 
 {% macro moneyVersusProof() %}
 <figure class="article-figure">
-<div class="figure-plot">
-<p class="figure-plot-axis figure-plot-y">Money, 0 to 5</p>
-<div class="figure-plot-area">
-<div class="figure-plot-zone"></div>
-<p class="figure-plot-zone-label">Real money on a guess</p>
-<ol class="figure-plot-points">
-<li style="--proof:4;--money:4"><span>1</span></li>
-<li style="--proof:3;--money:4"><span>2</span></li>
-<li style="--proof:3;--money:5"><span>3</span></li>
-<li class="is-watch" style="--proof:2;--money:5"><span>4</span></li>
-<li style="--proof:5;--money:0"><span>5</span></li>
-</ol>
-</div>
-<p class="figure-plot-axis figure-plot-x">Proof, 0 to 5 — how much of the number is fact, not hope</p>
-</div>
-<ol class="figure-key">
-<li><span class="figure-key-mark">1</span><span>Fix the process <span class="figure-key-score">Money 4 · Proof 4</span></span></li>
-<li><span class="figure-key-mark">2</span><span>Buy a CRM add-on <span class="figure-key-score">Money 4 · Proof 3</span></span></li>
-<li><span class="figure-key-mark">3</span><span>Automate with AI <span class="figure-key-score">Money 5 · Proof 3</span></span></li>
-<li class="is-watch"><span class="figure-key-mark">4</span><span>Build custom <span class="figure-key-score">Money 5 · Proof 2</span></span></li>
-<li><span class="figure-key-mark">5</span><span>Do nothing <span class="figure-key-score">Money 0 · Proof 5</span></span></li>
-</ol>
+<img src="/assets/images/posts/ac-033-money-versus-proof.svg" width="1200" height="1530"
+     alt="A grid plotting five options by proof, left to right, against money, bottom to top. Fix the process sits at money 4, proof 4. Buy a CRM add-on sits at money 4, proof 3. Automate with AI sits at money 5, proof 3. Build custom sits alone in the shaded top-left corner at money 5, proof 2: the highest money score with the weakest proof. Do nothing sits at money 0, proof 5.">
 <figcaption>The worked example from step 5, plotted. The shaded corner is the pair to watch: a big number nobody has checked.</figcaption>
 </figure>
 {% endmacro %}
 
 {% macro decisionPath() %}
 <figure class="article-figure">
-<ol class="figure-flow">
-<li><span>Ask where the business loses money</span></li>
-<li><span>Pull the real numbers</span></li>
-<li><span>Sort them: facts, fair guesses, unknowns</span></li>
-<li><span>Write down all five options</span></li>
-<li><span>Score every option, money against proof</span></li>
-<li><span>Choose, and write down why</span>
-<p class="figure-flow-exit"><strong>Nothing clears the bar?</strong> Stop. Say so out loud.</p></li>
-<li><span>Run one 90-day test with a stop rule</span></li>
-<li><span>Ask six questions before you approve spend</span></li>
-</ol>
+<img src="/assets/images/posts/ac-033-decision-path.svg" width="1200" height="1634"
+     alt="Eight steps in order: ask where the business loses money; pull the real numbers; sort them into facts, fair guesses and unknowns; write down all five options; score them; choose and write down why; run one ninety-day test with a stop rule; ask six questions before approving spend. A callout after the choosing step reads: if nothing clears the bar, stop and say so out loud.">
 <figcaption>Two hours of work, and a real exit. Most of the method happens before anyone writes a line of code.</figcaption>
 </figure>
 {% endmacro %}
