@@ -40,7 +40,8 @@ socialTitle: "Build, buy or wait?"
 socialDescription: "A practical guide to comparing the options before committing time and money to software."
 socialLabel: "SOFTWARE DECISIONS"
 socialAction: "Read the guide →"
-# socialPalette: cobalt # Bright typography by default; optional artwork below.
+socialCover: scripts/assets/illustrations/your-article-cover.webp # See Article covers
+socialCoverAlt: "Describe the actual illustration, not the article."
 ---
 ```
 
@@ -131,41 +132,69 @@ normal Eleventy build when the first reviewed article is published. This needs
 no template redesign; static-site publication still requires a build/deploy.
 The illustrative audit example remains on the Audit page, not Ideas.
 
-## Illustrated featured images
+## Article covers
 
-Every published article automatically receives a bright cover below the byline,
-an Ideas thumbnail, and a matching share image and BlogPosting image. Text is
-rendered by the build, not baked into AI artwork. The page uses 400/800/1200px
-WebP variants with dimensions reserved; social platforms receive a 1200×630 JPEG.
+One commissioned 1200×630 image serves all three placements: the cover below
+the byline, the Ideas listing thumbnail, and the share and BlogPosting image.
+The page uses 400/800/1200px WebP variants with dimensions reserved; social
+platforms receive the 1200×630 JPEG. The build crops nothing and adds no
+labels, actions or second headline, so the approved composition survives.
 
-Optional front matter:
+Required front matter on every published article:
 
 ```yaml
-socialPalette: cobalt # cobalt (default), ivory, or yellow
-socialArtwork: scripts/assets/illustrations/your-article-artwork.webp
-socialArtworkAlt: Describe the illustration created for this article.
+socialCover: scripts/assets/illustrations/your-article-cover.webp
+socialCoverAlt: Describe the actual illustration, not the article.
 ```
 
-The example paths are placeholders; add your own source image before using them.
-For each subject, generate and review a distinct, object-based editorial illustration without text, save an
-optimized WebP under scripts/assets/illustrations, and supply meaningful alt text.
-Artwork is contained in the right panel without cropping. Without artwork, the
-build uses a bright typography-only cover. It does not call an AI service or
-invent illustrations during deployment. Avoid robots, brains, glow and generated
-portraits. The site’s reading surfaces remain restrained in light and dark mode. Cobalt covers keep their colour in both themes. Prefer a large ivory headline and discreet author branding.
+`validateArticle` rejects a published article that omits either field. The
+build also rejects a cover that is not exactly 1200×630 or that sits outside
+`scripts/assets/illustrations/`. The typeset cobalt card the build can draw
+from `socialTitle` alone is a development stand-in: it cannot publish, and it
+does not pass cover review. Covers are made during authoring and committed as
+optimized WebP; deployment never calls an image service.
 
-Illustrations may intentionally repeat as that article's cover and thumbnail;
-this does not relax the existing one-use rule for visible photographs. Articles
-use socialArtwork rather than socialImage. Review headlines at feed size and keep
-them short; extra-long explicit lines still fail the legibility gate.
+### The creative standard
 
-### Preserve an approved composition
+Adrian selected the controlling design reference on 21 September 2026 and it
+governs every new cover. Match its visual language; design a new metaphor for
+each article rather than reusing its objects or headline.
 
-Use `socialCover: scripts/assets/illustrations/your-article-cover.webp`
-and a descriptive `socialCoverAlt` for a fully composed, reviewed 1200×630 cover.
-This takes precedence over socialArtwork and palette; it preserves the approved
-art and typography without adding labels, actions or a second headline. Its text
-must match socialTitle and be checked visually at thumbnail size. Social metadata
-fields remain required. The build validates dimensions and generates the same
-JPEG/WebP outputs. Without socialCover, the typeset cobalt fallback remains
-available; original illustrations are created during authoring, not deployment.
+- **Palette.** Saturated cobalt across the canvas, warm cream lettering, vivid
+  yellow and vermilion accents, deep navy outlines and shadows.
+- **Typography.** One oversized, heavy, condensed sans headline in cream, a few
+  deliberate lines, generous edge clearance. A small `Adrian Ching` attribution
+  sits near the lower left and stays subordinate. Typeset the words cleanly;
+  never ship garbled lettering from an image generator.
+- **Composition.** Headline left, a large conceptual illustration right, joined
+  by a spacious cobalt field. It should read as one designed editorial cover.
+- **Illustration.** Bold simplified geometric forms with a screen-printed or
+  linocut grain, crisp silhouettes, restrained dark outlines, dimensional blocks
+  and long graphic shadows. Deliberately illustrated, not glossy 3D or a
+  photoreal render. A small anonymous figure may set scale; it is not Adrian.
+- **Storytelling.** A clear visual metaphor for the article's central decision,
+  built from a few large objects. Avoid generic robots, AI brains, stock
+  business clip art, clutter, fabricated screenshots or dashboards, invented
+  results and generated portraits.
+
+Headline text must match `socialTitle`. The cobalt field carries its own colour,
+so one image works against both the light and dark page background without a
+theme-specific variant.
+
+### Commissioning and review
+
+Scout writes the brief, Nexus routes it to Chroma, Chroma returns the finished
+1200×630 artwork, Scout integrates and verifies it, then Adrian reviews the
+complete article. Request the cover during the drafting pass, not after review.
+In-body explanatory figures are different work: those are inline SVG macros in
+`src/_includes/article-figures.njk`, drawn by the build.
+
+Before calling a cover done, look at the rendered output at the sizes readers
+get: the article cover, the Ideas thumbnail at 400px wide, and the 1200×630
+share JPEG. Check that the headline is readable, the metaphor is recognizable
+at thumbnail size, the crop is clean, and the image separates from both page
+backgrounds. A cobalt background with text on it fails this review. A new
+artistic direction needs Adrian's approval.
+
+Covers may repeat as that article's cover and thumbnail; this does not relax the
+one-use rule for visible photographs.
