@@ -1,167 +1,77 @@
-{# Editorial diagrams drawn by the build, not artwork. Inline so they follow the reading column and the light/dark tokens. #}
+{# Editorial diagrams drawn by the build, not artwork. Plain HTML so every label is real text at a real size: a diagram scaled to a 343px reading column shrinks its own type, a stacked one does not. #}
 
 {% macro moneyVersusProof() %}
 <figure class="article-figure">
-<svg viewBox="0 0 720 400" role="img" aria-labelledby="fig-money-proof-title fig-money-proof-desc" focusable="false">
-<title id="fig-money-proof-title">The five options plotted on money against proof</title>
-<desc id="fig-money-proof-desc">A grid with proof along the bottom and money up the side, using the worked example scores. Build custom sits alone in the shaded top-left corner: the highest money score with the weakest proof. Automate with AI and buy a CRM add-on sit in the middle. Fix the process scores four on both. Do nothing scores nothing on money and full marks on proof.</desc>
-<g stroke="var(--line,#d8dad1)" stroke-width="1">
-<path d="M96 40V330M96 330h576"/>
-<g opacity=".55"><path d="M208 40v290M320 40v290M432 40v290M544 40v290M656 40v290M96 276h576M96 222h576M96 168h576M96 114h576M96 60h576"/></g>
-</g>
-<rect x="96" y="40" width="280" height="74" fill="var(--signal,#a53b29)" opacity=".09"/>
-<text x="108" y="100" font-size="13" font-weight="600" fill="var(--signal,#a53b29)">Real money on a guess</text>
-<g fill="currentColor">
-<circle cx="432" cy="60" r="6"/><circle cx="432" cy="114" r="6"/><circle cx="544" cy="114" r="6"/><circle cx="656" cy="330" r="6"/>
-</g>
-<circle cx="320" cy="60" r="7" fill="var(--signal,#a53b29)"/>
-<g font-size="14" fill="currentColor">
-<text x="308" y="64" text-anchor="end">Build custom</text>
-<text x="446" y="65">Automate with AI</text>
-<text x="420" y="119" text-anchor="end">Buy a CRM add-on</text>
-<text x="558" y="119">Fix the process</text>
-<text x="644" y="318" text-anchor="end">Do nothing</text>
-</g>
-<g font-size="13" fill="var(--muted,#5e6259)">
-<text x="84" y="335" text-anchor="end">0</text><text x="84" y="65" text-anchor="end">5</text>
-<text x="96" y="352" text-anchor="middle">0</text><text x="656" y="352" text-anchor="middle">5</text>
-<text x="384" y="378" text-anchor="middle">Proof — how much of the number is fact, not hope</text>
-<text x="-185" y="44" transform="rotate(-90)" text-anchor="middle">Money</text>
-</g>
-</svg>
+<div class="figure-plot">
+<p class="figure-plot-axis figure-plot-y">Money, 0 to 5</p>
+<div class="figure-plot-area">
+<div class="figure-plot-zone"></div>
+<p class="figure-plot-zone-label">Real money on a guess</p>
+<ol class="figure-plot-points">
+<li style="--proof:4;--money:4"><span>1</span></li>
+<li style="--proof:3;--money:4"><span>2</span></li>
+<li style="--proof:3;--money:5"><span>3</span></li>
+<li class="is-watch" style="--proof:2;--money:5"><span>4</span></li>
+<li style="--proof:5;--money:0"><span>5</span></li>
+</ol>
+</div>
+<p class="figure-plot-axis figure-plot-x">Proof, 0 to 5 — how much of the number is fact, not hope</p>
+</div>
+<ol class="figure-key">
+<li><span class="figure-key-mark">1</span><span>Fix the process <span class="figure-key-score">Money 4 · Proof 4</span></span></li>
+<li><span class="figure-key-mark">2</span><span>Buy a CRM add-on <span class="figure-key-score">Money 4 · Proof 3</span></span></li>
+<li><span class="figure-key-mark">3</span><span>Automate with AI <span class="figure-key-score">Money 5 · Proof 3</span></span></li>
+<li class="is-watch"><span class="figure-key-mark">4</span><span>Build custom <span class="figure-key-score">Money 5 · Proof 2</span></span></li>
+<li><span class="figure-key-mark">5</span><span>Do nothing <span class="figure-key-score">Money 0 · Proof 5</span></span></li>
+</ol>
 <figcaption>The worked example from step 5, plotted. The shaded corner is the pair to watch: a big number nobody has checked.</figcaption>
 </figure>
 {% endmacro %}
 
 {% macro decisionPath() %}
 <figure class="article-figure">
-<svg viewBox="0 0 720 556" role="img" aria-labelledby="fig-path-title fig-path-desc" focusable="false">
-<title id="fig-path-title">The eight steps, and the point where you stop</title>
-<desc id="fig-path-desc">Eight steps in order: ask where the business loses money; pull the real numbers; sort them into facts, fair guesses and unknowns; write down all five options; score them; choose and write down why; run one ninety-day test with a stop rule; ask six questions before approving spend. At the choosing step a branch leads out to a stop: if nothing clears the bar, do nothing and say so out loud.</desc>
-{% set steps = [
-  "Ask where the business loses money",
-  "Pull the real numbers",
-  "Sort them: facts, fair guesses, unknowns",
-  "Write down all five options",
-  "Score every option, money against proof",
-  "Choose, and write down why",
-  "Run one 90-day test with a stop rule",
-  "Ask six questions before you approve spend"
-] %}
-{% for step in steps %}{% set top = 24 + loop.index0 * 64 %}
-<rect x="40" y="{{ top }}" width="400" height="44" rx="4" fill="var(--white,#fff)" stroke="var(--line,#d8dad1)"/>
-<text x="60" y="{{ top + 27 }}" font-size="14" fill="var(--muted,#5e6259)">{{ loop.index }}</text>
-<text x="82" y="{{ top + 27 }}" font-size="14" fill="currentColor">{{ step }}</text>
-{% if not loop.last %}<path d="M240 {{ top + 44 }}v13" stroke="var(--line,#d8dad1)"/><path d="M234 {{ top + 58 }}l6 6 6-6" fill="none" stroke="var(--line,#d8dad1)"/>{% endif %}
-{% endfor %}
-<path d="M440 366h44" stroke="var(--signal,#a53b29)" stroke-dasharray="4 4"/>
-<path d="M478 360l6 6-6 6" fill="none" stroke="var(--signal,#a53b29)"/>
-<rect x="484" y="338" width="196" height="56" rx="4" fill="none" stroke="var(--signal,#a53b29)"/>
-<text x="500" y="362" font-size="13" font-weight="600" fill="var(--signal,#a53b29)">Nothing clears the bar?</text>
-<text x="500" y="380" font-size="13" fill="var(--signal,#a53b29)">Stop. Say so out loud.</text>
-</svg>
+<ol class="figure-flow">
+<li><span>Ask where the business loses money</span></li>
+<li><span>Pull the real numbers</span></li>
+<li><span>Sort them: facts, fair guesses, unknowns</span></li>
+<li><span>Write down all five options</span></li>
+<li><span>Score every option, money against proof</span></li>
+<li><span>Choose, and write down why</span>
+<p class="figure-flow-exit"><strong>Nothing clears the bar?</strong> Stop. Say so out loud.</p></li>
+<li><span>Run one 90-day test with a stop rule</span></li>
+<li><span>Ask six questions before you approve spend</span></li>
+</ol>
 <figcaption>Two hours of work, and a real exit. Most of the method happens before anyone writes a line of code.</figcaption>
 </figure>
 {% endmacro %}
+
 {% macro leadFollowUpLeak() %}
 <figure class="article-figure">
-<svg viewBox="0 0 720 400" role="img" aria-labelledby="fig-leak-title fig-leak-desc" focusable="false">
-<title id="fig-leak-title">The follow-up leak between quotes sent and quotes chased</title>
-<desc id="fig-leak-desc">An illustrative sequence starts with 120 enquiries in 90 days. A side note shows that 71 received one attempt and nothing after. The main sequence continues to 64 quotes sent, then crosses a large highlighted follow-up gap to only 18 quotes chased, before 11 closed. The sharp drop from 64 sent to 18 chased shows that the business paid for demand and then stopped chasing it.</desc>
-<text x="40" y="34" font-size="13" font-weight="600" fill="var(--muted,#5e6259)">PAID DEMAND</text>
-<g>
-<rect x="40" y="58" width="150" height="86" rx="4" fill="none" stroke="var(--line,#d8dad1)"/>
-<text x="58" y="94" font-size="30" font-weight="700" fill="currentColor">120</text>
-<text x="58" y="118" font-size="14" fill="currentColor">enquiries</text>
-<text x="58" y="136" font-size="12" fill="var(--muted,#5e6259)">in 90 days</text>
-
-<path d="M190 101h38" stroke="var(--line,#d8dad1)"/>
-<path d="M222 95l6 6-6 6" fill="none" stroke="var(--line,#d8dad1)"/>
-
-<rect x="228" y="58" width="150" height="86" rx="4" fill="none" stroke="var(--line,#d8dad1)"/>
-<text x="246" y="94" font-size="30" font-weight="700" fill="currentColor">64</text>
-<text x="246" y="121" font-size="14" fill="currentColor">quotes sent</text>
-
-<path d="M378 101h142" stroke="var(--signal,#a53b29)" stroke-width="3" stroke-dasharray="7 7"/>
-<path d="M514 94l7 7-7 7" fill="none" stroke="var(--signal,#a53b29)" stroke-width="2"/>
-<text x="449" y="82" font-size="13" font-weight="700" text-anchor="middle" fill="var(--signal,#a53b29)">FOLLOW-UP LEAK</text>
-<text x="449" y="125" font-size="12" text-anchor="middle" fill="var(--signal,#a53b29)">sent → chased</text>
-
-<rect x="521" y="58" width="112" height="86" rx="4" fill="none" stroke="var(--signal,#a53b29)" stroke-width="2"/>
-<text x="539" y="94" font-size="30" font-weight="700" fill="var(--signal,#a53b29)">18</text>
-<text x="539" y="121" font-size="14" fill="currentColor">chased</text>
-
-<path d="M633 101h22" stroke="var(--line,#d8dad1)"/>
-<path d="M649 95l6 6-6 6" fill="none" stroke="var(--line,#d8dad1)"/>
-
-<rect x="655" y="58" width="50" height="86" rx="4" fill="none" stroke="var(--line,#d8dad1)"/>
-<text x="680" y="94" font-size="24" font-weight="700" text-anchor="middle" fill="currentColor">11</text>
-<text x="680" y="121" font-size="12" text-anchor="middle" fill="currentColor">closed</text>
-</g>
-
-<path d="M115 144v46" stroke="var(--line,#d8dad1)"/>
-<path d="M109 184l6 6 6-6" fill="none" stroke="var(--line,#d8dad1)"/>
-<rect x="40" y="190" width="250" height="74" rx="4" fill="none" stroke="var(--line,#d8dad1)"/>
-<text x="58" y="224" font-size="26" font-weight="700" fill="currentColor">71</text>
-<text x="105" y="217" font-size="14" fill="currentColor">got one attempt</text>
-<text x="105" y="239" font-size="14" fill="var(--muted,#5e6259)">and nothing after</text>
-
-<path d="M228 300h405" stroke="var(--line,#d8dad1)"/>
-<path d="M228 292v16M633 292v16" stroke="var(--line,#d8dad1)"/>
-<text x="430" y="329" font-size="16" font-weight="600" text-anchor="middle" fill="currentColor">64 quotes sent. Only 18 chased.</text>
-<text x="430" y="355" font-size="13" text-anchor="middle" fill="var(--muted,#5e6259)">The demand arrived. The follow-up did not.</text>
-</svg>
+<p class="figure-eyebrow">Paid demand</p>
+<div class="figure-columns figure-funnel">
+<div class="figure-card"><b class="figure-card-figure">120</b><span class="figure-card-label">enquiries</span><span class="figure-card-note">in 90 days</span></div>
+<div class="figure-card"><b class="figure-card-figure">64</b><span class="figure-card-label">quotes sent</span></div>
+<div class="figure-gap"><strong>Follow-up leak</strong><span>from sent to chased</span></div>
+<div class="figure-card is-watch"><b class="figure-card-figure">18</b><span class="figure-card-label">chased</span></div>
+<div class="figure-card"><b class="figure-card-figure">11</b><span class="figure-card-label">closed</span></div>
+</div>
+<p class="figure-aside"><b>71</b><span>got one attempt and nothing after</span></p>
+<p class="figure-summary"><strong>64 quotes sent. Only 18 chased.</strong> The demand arrived. The follow-up did not.</p>
 <figcaption>Illustrative figures only: these numbers were invented to show the shape of the leak and are not from a real company.</figcaption>
 </figure>
 {% endmacro %}
 
 {% macro leadFollowUpBuyOrder() %}
 <figure class="article-figure">
-<svg viewBox="0 0 720 400" role="img" aria-labelledby="fig-buy-order-title fig-buy-order-desc" focusable="false">
-<title id="fig-buy-order-title">The right order for building and buying a follow-up system</title>
-<desc id="fig-buy-order-desc">Four steps run from left to right in the correct order: fix the process; use the shared inbox or CRM already paid for; automate the reminders; put AI on top. A highlighted marker saying most companies start here points to the last step, showing the mismatch between the right order and where companies often begin.</desc>
-<text x="40" y="58" font-size="13" font-weight="600" fill="var(--muted,#5e6259)">BUY IN THIS ORDER</text>
-
-<g>
-<rect x="40" y="82" width="142" height="116" rx="4" fill="none" stroke="var(--line,#d8dad1)"/>
-<text x="56" y="110" font-size="13" fill="var(--muted,#5e6259)">FIRST</text>
-<text x="56" y="143" font-size="18" font-weight="700" fill="currentColor">Fix the</text>
-<text x="56" y="167" font-size="18" font-weight="700" fill="currentColor">process</text>
-
-<path d="M182 140h24" stroke="var(--line,#d8dad1)"/>
-<path d="M200 134l6 6-6 6" fill="none" stroke="var(--line,#d8dad1)"/>
-
-<rect x="206" y="82" width="142" height="116" rx="4" fill="none" stroke="var(--line,#d8dad1)"/>
-<text x="222" y="110" font-size="13" fill="var(--muted,#5e6259)">THEN</text>
-<text x="222" y="141" font-size="16" font-weight="700" fill="currentColor">Use the shared</text>
-<text x="222" y="163" font-size="16" font-weight="700" fill="currentColor">inbox or CRM</text>
-<text x="222" y="183" font-size="11" fill="var(--muted,#5e6259)">you already pay for</text>
-
-<path d="M348 140h24" stroke="var(--line,#d8dad1)"/>
-<path d="M366 134l6 6-6 6" fill="none" stroke="var(--line,#d8dad1)"/>
-
-<rect x="372" y="82" width="142" height="116" rx="4" fill="none" stroke="var(--line,#d8dad1)"/>
-<text x="388" y="110" font-size="13" fill="var(--muted,#5e6259)">THEN</text>
-<text x="388" y="143" font-size="17" font-weight="700" fill="currentColor">Automate the</text>
-<text x="388" y="167" font-size="17" font-weight="700" fill="currentColor">reminders</text>
-
-<path d="M514 140h24" stroke="var(--line,#d8dad1)"/>
-<path d="M532 134l6 6-6 6" fill="none" stroke="var(--line,#d8dad1)"/>
-
-<rect x="538" y="82" width="142" height="116" rx="4" fill="none" stroke="var(--signal,#a53b29)" stroke-width="2"/>
-<text x="554" y="110" font-size="13" font-weight="700" fill="var(--signal,#a53b29)">LAST</text>
-<text x="554" y="143" font-size="18" font-weight="700" fill="currentColor">Put AI on</text>
-<text x="554" y="167" font-size="18" font-weight="700" fill="currentColor">top of that</text>
-</g>
-
-<path d="M609 254V206" stroke="var(--signal,#a53b29)" stroke-width="2"/>
-<path d="M603 212l6-6 6 6" fill="none" stroke="var(--signal,#a53b29)" stroke-width="2"/>
-<rect x="462" y="254" width="218" height="56" rx="4" fill="none" stroke="var(--signal,#a53b29)"/>
-<text x="571" y="288" font-size="13" font-weight="700" text-anchor="middle" fill="var(--signal,#a53b29)">most companies start here</text>
-<path d="M40 282h382" stroke="var(--line,#d8dad1)"/>
-<text x="40" y="310" font-size="14" fill="var(--muted,#5e6259)">The first three steps come before AI.</text>
-</svg>
+<p class="figure-eyebrow">Buy in this order</p>
+<ol class="figure-columns">
+<li class="figure-card"><span class="figure-rank">First</span><span class="figure-card-title">Fix the process</span></li>
+<li class="figure-card"><span class="figure-rank">Then</span><span class="figure-card-title">Use the shared inbox or CRM</span><span class="figure-card-note">you already pay for</span></li>
+<li class="figure-card"><span class="figure-rank">Then</span><span class="figure-card-title">Automate the reminders</span></li>
+<li class="figure-card is-watch"><span class="figure-rank">Last</span><span class="figure-card-title">Put AI on top of that</span>
+<p class="figure-callout">Most companies start here</p></li>
+</ol>
+<p class="figure-summary">The first three steps come before AI.</p>
 <figcaption>Build from the process up. Most companies I met were shopping for AI while the first three steps were still missing.</figcaption>
 </figure>
 {% endmacro %}
-

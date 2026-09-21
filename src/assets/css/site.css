@@ -238,8 +238,56 @@ figcaption{font-size:.8125rem;line-height:1.5;color:var(--muted);margin-top:.75r
 .prose pre{overflow:auto;padding:1.25rem;background:var(--soft);font-size:.875rem}
 .prose code{font-family:ui-monospace,monospace;font-size:.9em}
 .prose img{margin-block:1.5rem}
+/* Editorial diagrams. Label sizes are fixed in pixels and the layout stacks, so a 375px
+   reading column shortens the lines instead of shrinking the type. Nothing here falls
+   below 14px rendered. See DESIGN.md. */
 .article-figure{margin-block:2.5rem}
-.article-figure svg{display:block;width:100%;height:auto}
+.article-figure figcaption{font-size:.9375rem}
+.article-figure p{max-width:none}
+.figure-eyebrow{font-size:.9375rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 1rem}
+.figure-flow{list-style:none;counter-reset:flow;display:grid;gap:1.5rem;margin:0;padding:0}
+.figure-flow>li{counter-increment:flow;position:relative;display:grid;grid-template-columns:1.5rem minmax(0,1fr);gap:.75rem;padding:.8rem 1rem;border:1px solid var(--line);border-radius:var(--radius-control);background:var(--white);font-size:1rem;line-height:1.45}
+.figure-flow>li::before{content:counter(flow);color:var(--muted);font-variant-numeric:tabular-nums}
+.figure-flow>li:not(:last-child)::after{content:"";position:absolute;left:50%;top:100%;width:1px;height:1.5rem;background:var(--line)}
+.figure-flow-exit{grid-column:2;margin:.85rem 0 0;padding:.7rem .85rem;border:1px solid var(--signal);border-radius:var(--radius-control);color:var(--signal);font-size:1rem;line-height:1.45}
+.figure-flow-exit strong{display:block}
+.figure-plot{display:grid;grid-template-columns:auto minmax(0,1fr);gap:1rem .6rem;padding:1rem 1rem 0 0}
+.figure-plot-axis{margin:0;font-size:1rem;line-height:1.4;color:var(--muted)}
+.figure-plot-y{grid-area:1/1;writing-mode:vertical-rl;transform:rotate(180deg);justify-self:center;align-self:center}
+.figure-plot-x{grid-area:2/2;text-align:center}
+.figure-plot-area{grid-area:1/2;position:relative;aspect-ratio:1;border-left:1px solid var(--line);border-bottom:1px solid var(--line);background-image:repeating-linear-gradient(to right,transparent 0 calc(20% - 1px),var(--line) calc(20% - 1px) 20%),repeating-linear-gradient(to top,transparent 0 calc(20% - 1px),var(--line) calc(20% - 1px) 20%)}
+.figure-plot-zone{position:absolute;inset:0 50% 80% 0;background:var(--signal);opacity:.1}
+.figure-plot-zone-label{position:absolute;left:.5rem;top:calc(20% + .7rem);max-width:50%;font-size:1rem;font-weight:600;line-height:1.35;color:var(--signal)}
+.figure-plot-points{list-style:none;margin:0;padding:0}
+.figure-plot-points>li{position:absolute;left:calc(var(--proof)/5*100%);bottom:calc(var(--money)/5*100%);transform:translate(-50%,50%);display:grid;place-items:center;width:1.9rem;height:1.9rem;border:1px solid var(--ink);border-radius:50%;background:var(--paper);font-size:1rem;font-weight:600;line-height:1;font-variant-numeric:tabular-nums}
+.figure-plot-points>li.is-watch{border-color:var(--signal);background:var(--signal);color:var(--paper)}
+.figure-key{list-style:none;display:grid;gap:.65rem;margin:1.5rem 0 0;padding:0;font-size:1rem;line-height:1.45}
+.figure-key>li{display:grid;grid-template-columns:1.9rem minmax(0,1fr);gap:.75rem}
+.figure-key-mark{display:grid;place-items:center;width:1.9rem;height:1.9rem;border:1px solid var(--ink);border-radius:50%;font-size:1rem;font-weight:600;line-height:1;font-variant-numeric:tabular-nums}
+.figure-key>li.is-watch .figure-key-mark{border-color:var(--signal);background:var(--signal);color:var(--paper)}
+.figure-key-score{display:block;color:var(--muted);font-size:1rem}
+.figure-columns{list-style:none;display:grid;gap:1rem;margin:0;padding:0}
+.figure-card,.figure-gap{display:grid;align-content:start;gap:.3rem;padding:1rem;border:1px solid var(--line);border-radius:var(--radius-control);background:var(--white)}
+.figure-card-figure{font-size:1.9rem;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums}
+.figure-card-label{font-size:1rem;line-height:1.4}
+.figure-card-title{font-size:1.125rem;font-weight:700;line-height:1.3}
+.figure-card-note{font-size:.9375rem;color:var(--muted)}
+.figure-rank{font-size:.9375rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.figure-card.is-watch{border-color:var(--signal);box-shadow:inset 0 0 0 1px var(--signal)}
+.figure-card.is-watch .figure-card-figure,.figure-card.is-watch .figure-rank{color:var(--signal)}
+.figure-gap{align-content:center;border-style:dashed;border-color:var(--signal);background:none;color:var(--signal);text-align:center}
+.figure-gap strong{font-size:1rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.figure-gap span{font-size:1rem}
+.figure-callout{margin:1rem 0 0;padding:.7rem .85rem;border:1px solid var(--signal);border-radius:var(--radius-control);color:var(--signal);font-size:1rem;font-weight:600;line-height:1.4}
+.figure-aside{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:.9rem;margin:1rem 0 0;padding:1rem;border:1px solid var(--line);border-radius:var(--radius-control);font-size:1rem;line-height:1.4}
+.figure-aside b{font-size:1.6rem;line-height:1.1;font-variant-numeric:tabular-nums}
+.figure-summary{margin:1.5rem 0 0;padding-top:1.25rem;border-top:1px solid var(--line);font-size:1rem;line-height:1.5}
+.figure-summary strong{display:block;font-size:1.125rem}
+@media(min-width:620px){
+  .figure-columns{grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);align-items:stretch}
+  .figure-funnel{grid-template-columns:repeat(2,minmax(0,1fr)) 1.3fr repeat(2,minmax(0,1fr))}
+  .figure-plot-area{aspect-ratio:16/10}
+}
 .not-found{padding-block:5rem;text-align:center}
 .not-found>div>strong{display:block;color:var(--signal);font-size:4rem}
 .not-found p{margin-inline:auto}

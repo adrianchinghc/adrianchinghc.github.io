@@ -43,6 +43,22 @@ The small inline SVG set in `src/_includes/icons.njk` uses a consistent 24px gri
 
 Emil’s opportunity filter and animation recipes guide pointer feedback and the mobile navigation transition. Animate only transforms and opacity; visibility only controls the menu’s discrete hidden state. Menu transitions can reverse without timers; closed mobile links are inert immediately. Keyboard actions and reduced-motion preferences remain instant. Reading content, prices and static photographs do not animate on scroll.
 
+## Article diagrams
+
+Explanatory diagrams live in `src/_includes/article-figures.njk` and are built from
+ordinary HTML and CSS, not from a fixed-width drawing. A wide SVG set to `width:100%`
+shrinks its own type as the reading column narrows: a 720-unit board with 14-unit
+labels renders those labels at under 7px on a 375px phone. Compose instead so the
+layout stacks and the lines shorten while the type stays put. Size every label in
+`rem`, never in viewport or user units, and never below 14px rendered; aim for 16px.
+Captions in `.article-figure` sit at 15px, above the site default, because they carry
+the illustrative-figures disclosure. Colour comes from the theme tokens so both
+themes work, and `--signal` marks the one thing the reader should look at.
+
+Check every diagram in a browser at 1280px, 390px and 375px, in both themes, before
+calling it done. A passing build and an absence of horizontal page overflow prove
+nothing about whether a label can be read.
+
 ## Social share cards
 
 Follow `scripts/SOCIAL-IMAGES.md` for every new page and share-image change.
