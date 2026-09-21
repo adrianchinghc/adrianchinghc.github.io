@@ -10,6 +10,8 @@ socialTitle: "Where should AI go first?"
 socialDescription: "Find the leak, put a number on it, then make AI earn its place against the options that don't need it."
 socialLabel: "AI DECISIONS"
 socialAction: "Read the method →"
+socialCover: scripts/assets/illustrations/ac-033-where-should-ai-go-first-cover.webp
+socialCoverAlt: "Screen-printed editorial illustration on cobalt: a cream pipeline leaking gold coins in front of an owner with a clipboard, splitting into five red-tipped branches."
 ---
 {% from "article-figures.njk" import decisionPath, moneyVersusProof %}
 
