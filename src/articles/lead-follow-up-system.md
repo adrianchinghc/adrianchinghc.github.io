@@ -2,7 +2,7 @@
 title: "How to Build a Lead Follow-Up System That Doesn't Depend on One Person"
 seoTitle: "Lead follow-up system for B2B owners"
 description: "Four numbers tell you whether your revenue leaks after the lead arrives. Pull them this week, then fix the system before you buy any tool."
-date: 2026-09-20
+date: "2026-09-30T11:30:00+08:00"
 draft: false
 topic: Customer follow-up
 cta: newsletter
