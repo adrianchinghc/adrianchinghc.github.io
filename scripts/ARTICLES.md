@@ -31,7 +31,7 @@ post authorizes its later automatic publication.
 ---
 title: "The specific question this article answers"
 description: "A clear summary of who this is for and what decision it helps them make."
-date: "2026-09-25T09:00:00+08:00" # 9am Malaysia time
+date: "2026-09-23T12:00:00+08:00" # Wednesday noon Malaysia time
 draft: true
 topic: Software decisions
 # updated: 2026-09-18 # Only after a substantive edit; never set on every build.
@@ -51,7 +51,7 @@ advisory. Pick the one that fits the reader's question. No public checkout.
 ## Scheduled publication
 
 Use a quoted ISO timestamp with an explicit timezone for new posts, for example
-`date: "2026-09-25T09:00:00+08:00"`. This is the existing `date` field, not a second
+`date: "2026-09-23T12:00:00+08:00"`. This is the existing `date` field, not a second
 scheduling field. Legacy date-only values keep their midnight-UTC meaning.
 Visible bylines use Malaysia time; machine-readable metadata preserves the instant.
 
