@@ -113,7 +113,12 @@ not from someone reading source or a review preview.
 Run a clean build, `npm run check`, `node --test scripts/*.test.mjs`, and
 `git diff --check`. Tests exercise draft exclusion, chronological listings,
 related links, metadata safety and article output using isolated fixtures.
-Check desktop light/dark layouts, generated responsive rules, card legibility,
+Vercel runs those same three steps on every branch push, so a branch that fails
+the cover requirement, or any later gate, shows a failed preview deployment on
+its pull request instead of breaking the Pages publish after a merge. Vercel
+builds the branch head rather than the merge result, so merge `source` into an
+article branch before asking for a merge, or the branch can pass a gate it
+predates. Check desktop light/dark layouts, generated responsive rules, card legibility,
 links, canonical, dates and BlogPosting JSON-LD on the exact Vercel commit.
 Ask Adrian for real-device checks where needed. Do not run Lighthouse on
 routine pushes; marking a pull request ready for review runs it once.
