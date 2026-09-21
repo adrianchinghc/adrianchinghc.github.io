@@ -20,7 +20,8 @@ layout: layouts/base.njk
   {% elif cta == 'advisory' %}
   <h2 id="article-next-heading">A second opinion on the decision.</h2><p>Selective, independent guidance for founders weighing AI, software and vendor choices.</p><a class="text-link" href="/advisory/" data-cta="article_advisory">Explore private advisory</a>
   {% else %}
-  <h2 id="article-next-heading">More notes from the work.</h2><p>Building companies, choosing what to work on and the lessons along the way.</p>
+  {% set invitation = newsletter.articleInvitations[topic] or newsletter.articleInvitations.default %}
+  <h2 id="article-next-heading">{{ invitation.heading }}</h2><p>{{ invitation.body }}</p>
   {% include "newsletter-signup.njk" %}
   {% endif %}
 </aside>

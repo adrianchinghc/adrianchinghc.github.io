@@ -55,6 +55,7 @@ test('Eleventy publishes complete articles, hides drafts and produces discovery 
     await cp('src/blog/index.njk', join(input, 'blog/index.njk'));
     await cp('src/_includes/icons.njk', join(input, '_includes/icons.njk'));
     await cp('src/_includes/newsletter-signup.njk', join(input, '_includes/newsletter-signup.njk'));
+    await cp('src/_data/newsletter.json', join(input, '_data/newsletter.json'));
     await put('_data/media.json', JSON.stringify({ featuredVideos: [], youtube: { channelUrl: 'https://www.youtube.com/@adrianchinghc' } }));
     const article = (data, body = 'A clear opening answer.\n\n## The decision\n\nThe useful explanation.') => `---json\n${JSON.stringify(data)}\n---\n${body}`;
     await put('articles/earlier.md', article({ ...valid, socialCover: cover, socialCoverAlt: 'Reviewed blue editorial cover.' }));
