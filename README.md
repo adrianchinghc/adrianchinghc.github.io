@@ -27,7 +27,7 @@ npm run check
 Copy `.env.example` to `.env` or provide the variables in the shell used for the build.
 
 - Founder Fit Call buttons link directly to Adrian's active 30-minute Calendly event at `https://calendly.com/adrianchinghc/30-minute-call`. The event uses Google Meet and intentionally limited availability. No scheduling embed or public checkout is included.
-- Newsletter uses the public Kit form `9916003` (`ab0394af6d`) directly on `/newsletter/`. No API key or `KIT_URL` is needed. The official Kit script handles inline responses and validation.
+- Newsletter uses the public Kit form `9916003` (`ab0394af6d`) directly on `/newsletter/` and at the end of every article whose next step is the newsletter. No API key or `KIT_URL` is needed. The official Kit script handles inline responses and validation.
 - `CONTACT_URL`: optional public contact destination.
 - `PAYMENT_URL`: reserved for a later qualified-client payment flow and not linked from the public site.
 - `GA_MEASUREMENT_ID`: Google Analytics 4 measurement ID. `GOOGLE_SITE_VERIFICATION`: Search Console verification token.
