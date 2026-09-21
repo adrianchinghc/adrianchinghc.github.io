@@ -31,7 +31,7 @@ post authorizes its later automatic publication.
 ---
 title: "The specific question this article answers"
 description: "A clear summary of who this is for and what decision it helps them make."
-date: "2026-09-23T12:00:00+08:00" # Wednesday noon Malaysia time
+date: "2026-09-23T11:30:00+08:00" # Wednesday 11:30am Malaysia time
 draft: true
 topic: Software decisions
 # updated: 2026-09-18 # Only after a substantive edit; never set on every build.
@@ -51,13 +51,17 @@ advisory. Pick the one that fits the reader's question. No public checkout.
 ## Scheduled publication
 
 Use a quoted ISO timestamp with an explicit timezone for new posts, for example
-`date: "2026-09-23T12:00:00+08:00"`. This is the existing `date` field, not a second
+`date: "2026-09-23T11:30:00+08:00"`. This is the existing `date` field, not a second
 scheduling field. Legacy date-only values keep their midnight-UTC meaning.
 Visible bylines use Malaysia time; machine-readable metadata preserves the instant.
 
 The existing Pages workflow checks every Wednesday at 12:00 Malaysia time
-(`0 4 * * 3` in UTC). Set each weekly post's publication timestamp to that
-Wednesday at `12:00:00+08:00` or earlier.
+(`0 4 * * 3` in UTC). Set each weekly post's publication timestamp and its
+Production Pipeline Publish Date to Wednesday at `11:30:00+08:00`, using
+Asia/Kuala_Lumpur time. Use separate Wednesdays for the default one-post-per-week
+cadence. This makes the post eligible 30 minutes before the noon check; obtain
+final-version/date approval and merge it before that run. The timestamp is an
+eligibility cutoff, not a guarantee of the exact time it becomes live.
 It compares due, non-draft article URLs in source with the live sitemap. If all
 are already published, it skips the expensive build and deployment. If a post
 is missing, it runs the normal clean build, site checks, tests, Pages deployment
