@@ -4,7 +4,7 @@ import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import sharp from "sharp";
 import { createHash } from "node:crypto";
-import { cropRectangle, imageUrl } from "./responsive-images.mjs";
+import { cropRectangle, imageUrl, responsiveImages } from "./responsive-images.mjs";
 
 test("mobile crops preserve the existing CSS focal position", () => {
   const rect = cropRectangle(1013, 1800, "16/11", 38);
@@ -52,6 +52,16 @@ test("every generated image candidate exists and matches its content hash and di
       assert.equal(url, imageUrl(bytes, width, format), url);
     }
   }
+});
+
+test("a figure that states its own width keeps that width and gets only one sizes attribute", async () => {
+  let transform;
+  responsiveImages({ on() {}, addTransform(name, fn) { transform = fn; } });
+  const sizes = "(max-width: 420px) calc(100vw - 32px), (max-width: 760px) calc(100vw - 40px), 720px";
+  const html = await transform.call({ page: { outputPath: "_site/figure-sizes.html" } }, `<img src="/assets/images/adrianching.jpg" alt="A test figure" sizes="${sizes}">`);
+  assert.ok(html.includes(`sizes="${sizes}"`), html);
+  assert.equal(html.match(/sizes="/g).length, 1, html);
+  assert.match(html, /srcset="[^"]+\.webp 400w/);
 });
 
 test("hero pages retain a WebP fallback and mobile AVIF sources", () => {

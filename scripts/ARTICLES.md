@@ -192,8 +192,7 @@ theme-specific variant.
 Scout writes the brief, Nexus routes it to Chroma, Chroma returns the finished
 1200×630 artwork, Scout integrates and verifies it, then Adrian reviews the
 complete article. Request the cover during the drafting pass, not after review.
-In-body explanatory figures are different work: those are inline SVG macros in
-`src/_includes/article-figures.njk`, drawn by the build.
+In-body explanatory figures are different work. See below.
 
 Before calling a cover done, look at the rendered output at the sizes readers
 get: the article cover, the Ideas thumbnail at 400px wide, and the 1200×630
@@ -204,3 +203,55 @@ artistic direction needs Adrian's approval.
 
 Covers may repeat as that article's cover and thumbnail; this does not relax the
 one-use rule for visible photographs.
+
+## Explanatory visuals
+
+Every image, diagram, flowchart, chart and table inside an article has to work in
+the reading column, which is 720px wide on a desktop and 343px on a 375px phone.
+Scout owns that check no matter who made the visual.
+
+### Images are responsive already
+
+Put the file in `src/assets/images/` and write an ordinary `<img>`. The build
+emits 400px to 1280px WebP with a `srcset`, reserves the dimensions and holds the
+image to `max-width:100%`. A full-width figure states its own slot, so the browser
+stops fetching a 520px file for a 720px box:
+
+```html
+<figure class="article-figure">
+<img src="/assets/images/posts/your-diagram.webp" alt="Say what the diagram shows."
+     sizes="(max-width: 420px) calc(100vw - 32px), (max-width: 760px) calc(100vw - 40px), 720px">
+<figcaption>What the reader should take from it.</figcaption>
+</figure>
+```
+
+### A flowchart, chart or diagram may be an image
+
+It just has to be drawn for the phone, because an image scales to fit the column
+and its type scales with it. Two rules make that automatic:
+
+- **Essential type is at least 5% of the image width.** 60px on a 1200px canvas,
+  which still renders at 17px in a 343px column. A label at 2% renders at 7px.
+- **At most eight labels, each a few words.** A busy board survives the desktop
+  and fails the phone.
+
+Commission it like a cover: Scout briefs, Nexus routes to Chroma, Chroma returns
+the artwork, Scout wires and checks it. State both rules in the brief.
+
+Build the visual from HTML and CSS instead when its exact labels and numbers
+carry the meaning, as the AC-033 and AC-034 branches do in
+`src/_includes/article-figures.njk`. Text in a layout wraps, selects,
+translates, follows the theme and never shrinks, because the layout stacks
+rather than scaling. Text baked into an image does none of that. Either route is
+fine; choose on whether the words matter.
+
+Tables need nothing extra. `.article-body table` scrolls sideways inside its own
+box, so a wide table never pushes the page. Keep to about four columns anyway.
+
+### The check before a piece goes to review
+
+Open the article preview, then narrow the window to roughly 375px. Confirm the
+labels read without zooming, nothing overlaps or clips, the page has no sideways
+scroll, and the visual still makes its point. Look in both themes. One pass, not a
+protocol. Name what you looked in: a browser window at 375px is emulation, not an
+iPhone, and never report a device test that did not happen.
