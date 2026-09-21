@@ -1,0 +1,46 @@
+name: Verify pull request
+
+# Run the production build, site check and tests before merging into source.
+# Pull request events check the merge result. Configure this job as a required
+# status check in the source branch rules to enforce it as a merge gate.
+on:
+  pull_request:
+    branches: [source]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pull-request-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Build, check and test
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out the merge result
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Production mode matches the publish build and omits future-dated pages.
+      # Required article metadata is validated before the visibility cutoff.
+      # Vercel previews separately render future posts for visual review.
+      - name: Build site
+        run: npm run build
+
+      - name: Check generated site
+        run: npm run check
+
+      - name: Check navigation, images and cache clearing
+        run: node --test scripts/*.test.mjs
