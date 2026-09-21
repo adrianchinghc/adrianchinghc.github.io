@@ -155,10 +155,10 @@ export function socialImages(config) {
     return jobs.get(key);
   }
 
-  config.addAsyncShortcode("articleCover", async function (route, data, thumbnail = false) {
+  config.addAsyncShortcode("articleCover", async function (route, data, thumbnail = false, customSizes) {
     if (!route) return "";
     const card = await renderCard(route, articleSpec(data || this.ctx));
-    const sizes = thumbnail ? "(max-width: 760px) calc(100vw - 40px), 400px" : "(max-width: 1000px) calc(100vw - 40px), 960px";
+    const sizes = customSizes || (thumbnail ? "(max-width: 760px) calc(100vw - 40px), 400px" : "(max-width: 1000px) calc(100vw - 40px), 960px");
     return `<picture class="article-cover"><source type="image/webp" srcset="${escape(card.variants.join(', '))}" sizes="${sizes}"><img src="${escape(card.url)}" alt="${thumbnail ? '' : escape(card.alt)}" width="1200" height="630" loading="${thumbnail ? 'lazy' : 'eager'}" decoding="async"></picture>`;
   });
 
