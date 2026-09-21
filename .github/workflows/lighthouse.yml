@@ -32,9 +32,9 @@ jobs:
             exit 1
           fi
       - uses: actions/upload-artifact@v4
-        if: failure()
+        if: always()
         with:
-          name: lighthouse-failure-reports
+          name: lighthouse-reports
           retention-days: 3
           path: |
             lighthouse-reports
