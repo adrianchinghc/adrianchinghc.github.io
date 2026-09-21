@@ -10,6 +10,8 @@ socialTitle: "Your leads aren't the problem"
 socialDescription: "Four numbers tell you what happens to the demand you already paid for. Count first. Buy software later, if at all."
 socialLabel: "CUSTOMER FOLLOW-UP"
 socialAction: "Pull the four numbers →"
+socialCover: scripts/assets/illustrations/ac-034-lead-follow-up-cover.webp
+socialCoverAlt: "Screen-printed editorial illustration on cobalt: a line of cream envelopes queues at a single yellow gate where one person hand-sorts the only piece that fits, while two cold blue envelopes fall away unopened."
 ---
 {% from "article-figures.njk" import leadFollowUpLeak, leadFollowUpBuyOrder %}
 
