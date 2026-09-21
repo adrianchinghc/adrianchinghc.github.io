@@ -285,6 +285,7 @@ figcaption{font-size:.8125rem;line-height:1.5;color:var(--muted);margin-top:.75r
 .figure-summary strong{display:block;font-size:1.125rem}
 @media(min-width:620px){
   .figure-columns{grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);align-items:stretch}
+  .figure-funnel{grid-template-columns:repeat(2,minmax(0,1fr)) 1.3fr repeat(2,minmax(0,1fr))}
   .figure-plot-area{aspect-ratio:16/10}
 }
 .not-found{padding-block:5rem;text-align:center}
