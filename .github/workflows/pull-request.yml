@@ -42,5 +42,13 @@ jobs:
       - name: Check generated site
         run: npm run check
 
+      # The production build omits future-dated pages, so the check above never
+      # opens a scheduled article. This renders and checks one. npm run build
+      # clears _site first, so the two passes cannot contaminate each other.
+      - name: Build and check the review preview
+        env:
+          VERCEL_ENV: preview
+        run: npm run build && npm run check
+
       - name: Check navigation, images and cache clearing
         run: node --test scripts/*.test.mjs
