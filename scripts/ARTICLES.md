@@ -47,6 +47,11 @@ socialAction: "Read the guide →"
 Replace all example copy. Available topics: AI decisions, Software decisions,
 Customer follow-up, Building businesses. Next steps: newsletter (default), audit,
 advisory. Pick the one that fits the reader's question. No public checkout.
+The newsletter next step renders the Kit signup form at the end of the article,
+so a reader subscribes without leaving the page. Its invitation matches the article's
+topic using `src/_data/newsletter.json`, with a general fallback. Keep the promise
+specific and supported by the newsletter; do not invent results or an email cadence.
+Audit and advisory keep a link.
 
 ## Scheduled publication
 

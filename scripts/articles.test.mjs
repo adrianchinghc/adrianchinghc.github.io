@@ -55,6 +55,8 @@ test('Eleventy publishes complete articles, hides drafts and produces discovery 
     await mkdir(join(input, 'blog'), { recursive: true });
     await cp('src/blog/index.njk', join(input, 'blog/index.njk'));
     await cp('src/_includes/icons.njk', join(input, '_includes/icons.njk'));
+    await cp('src/_includes/newsletter-signup.njk', join(input, '_includes/newsletter-signup.njk'));
+    await cp('src/_data/newsletter.json', join(input, '_data/newsletter.json'));
     await put('_data/media.json', JSON.stringify({ featuredVideos: [], youtube: { channelUrl: 'https://www.youtube.com/@adrianchinghc' } }));
     const article = (data, body = 'A clear opening answer.\n\n## The decision\n\nThe useful explanation.') => `---json\n${JSON.stringify(data)}\n---\n${body}`;
     await put('articles/earlier.md', article({ ...valid, socialCover: cover, socialCoverAlt: 'Reviewed blue editorial cover.' }));
@@ -88,6 +90,9 @@ test('Eleventy publishes complete articles, hides drafts and produces discovery 
     await access(join(output, new URL(schema.image[0]).pathname));
     const earlier = await readFile(join(output, 'blog/earlier/index.html'), 'utf8');
     assert.match(earlier, /Reviewed blue editorial cover/);
+    // A newsletter next step must let the reader subscribe here, not one page later.
+    assert.match(earlier, /<form action="https:\/\/app\.kit\.com\/forms\/9916003\/subscriptions"/);
+    assert.doesNotMatch(html, /app\.kit\.com\/forms/);
     const listing = await readFile(join(output, 'blog/index.html'), 'utf8');
     assert.ok(listing.indexOf('/blog/latest/') < listing.indexOf('/blog/earlier/'));
     assert.doesNotMatch(listing, /draft|scheduled/);
