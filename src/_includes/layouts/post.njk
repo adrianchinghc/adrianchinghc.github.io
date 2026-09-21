@@ -29,7 +29,8 @@ layout: layouts/base.njk
 {% if related.length %}
 <section class="reading article-related" aria-labelledby="related-heading"><h2 id="related-heading">Keep reading.</h2>
 <div class="related-grid">
-{% for item in related %}<a class="related-entry" href="{{ item.url }}">{% articleCover item.url, item.data, true %}<div class="writing-summary"><span class="content-meta">{{ item.data.topic }}</span><h3>{{ item.data.title }}</h3><p>{{ item.data.description }}</p></div></a>{% endfor %}
+{% set relatedCoverSizes = "(max-width: 760px) calc(100vw - 40px), (max-width: 1000px) calc(50vw - 36px), 294px" %}
+{% for item in related %}<a class="related-entry" href="{{ item.url }}">{% articleCover item.url, item.data, true, relatedCoverSizes %}<div class="writing-summary"><span class="content-meta">{{ item.data.topic }}</span><h3>{{ item.data.title }}</h3><p>{{ item.data.description }}</p></div></a>{% endfor %}
 </div>
 </section>
 {% endif %}
