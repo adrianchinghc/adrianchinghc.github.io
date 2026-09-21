@@ -55,17 +55,20 @@ Use a quoted ISO timestamp with an explicit timezone for new posts, for example
 scheduling field. Legacy date-only values keep their midnight-UTC meaning.
 Visible bylines use Malaysia time; machine-readable metadata preserves the instant.
 
-The existing Pages workflow checks at minutes 7 and 37 of every hour (UTC).
+The existing Pages workflow checks every Wednesday at 12:00 Malaysia time
+(`0 4 * * 3` in UTC). Set each weekly post's publication timestamp to that
+Wednesday at `12:00:00+08:00` or earlier.
 It compares due, non-draft article URLs in source with the live sitemap. If all
 are already published, it skips the expensive build and deployment. If a post
 is missing, it runs the normal clean build, site checks, tests, Pages deployment
 and Cloudflare HTML/sitemap purge. Failed sitemap reads fail the check rather
-than guessing. A later run catches missed publication windows. Pushes to source
+than guessing. The next weekly run catches missed publication windows; use manual dispatch
+on source to recover sooner after a missed or failed Wednesday run. Pushes to source
 still build immediately, and manual dispatch on source remains the recovery path.
 All release jobs use the same pinned source commit; non-source runs cannot deploy.
 Lighthouse is not part of scheduled publication.
 
-GitHub cron is best effort, so expect the next check plus build time, not exact
+GitHub cron is best effort, so expect the Wednesday check plus build time, not exact
 minute delivery. GitHub can disable scheduled workflows in public repositories
 after 60 days of inactivity; check Actions if publication stops. A workflow failure
 is visible in Actions and uses the repository's existing notification settings.

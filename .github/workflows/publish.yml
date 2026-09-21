@@ -6,8 +6,8 @@ on:
       - source
   workflow_dispatch:
   schedule:
-    # UTC, twice hourly away from the busy top of the hour.
-    - cron: "7,37 * * * *"
+    # Wednesday 12:00 Malaysia time (UTC+08:00) = Wednesday 04:00 UTC.
+    - cron: "0 4 * * 3"
 
 permissions:
   contents: read
