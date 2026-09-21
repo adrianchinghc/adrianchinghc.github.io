@@ -53,7 +53,8 @@ test("purge includes directory aliases and rejects other origins", () => {
   const urls = purgeUrls('<loc>https://adrianching.com/about/</loc><loc>https://example.com/</loc>');
   assert.ok(urls.includes("https://adrianching.com/about/index.html"));
   assert.ok(urls.includes("https://adrianching.com/about"));
-  assert.equal(urls.length, 5);
+  assert.ok(urls.includes("https://adrianching.com/sitemap.xml"));
+  assert.equal(urls.length, 6);
 });
 test("purge uses bounded batches and fails on API errors", async () => {
   const calls = [];

@@ -13,18 +13,25 @@ with another permalink/layout or collection exclusion.
 
 New files are drafts by default: no HTML output, article listing or sitemap
 entry. Set `draft: false` only when the content has been reviewed for publishing.
-A future publication date fails the build; there is no implicit scheduler.
+Future-dated posts are scheduled: production omits their HTML, Ideas entries,
+sitemap entries and related links until the publication timestamp. Vercel
+preview/development builds render scheduled posts for review with noindex.
+Drafts remain hidden in both modes. Do not manually link a published page to a
+scheduled article: the production link checker will reject that missing route.
 Draft files are still in this public repository: do not store confidential
 material in them. To review unpublished writing visually, commit `draft: false`
 on the article's own branch and read the page in that branch's Vercel preview.
 A `draft: true` file builds no page, so its preview shows the site without the
-article. Rendering a preview is not approval; merging to source is.
+article. Rendering a preview is not approval. Approval to merge a scheduled
+post must explicitly cover the exact final version AND its publication timestamp.
+Merging a due/past-dated post publishes it immediately; merging a future-dated
+post authorizes its later automatic publication.
 
 ```yaml
 ---
 title: "The specific question this article answers"
 description: "A clear summary of who this is for and what decision it helps them make."
-date: 2026-09-17
+date: "2026-09-25T09:00:00+08:00" # 9am Malaysia time
 draft: true
 topic: Software decisions
 # updated: 2026-09-18 # Only after a substantive edit; never set on every build.
@@ -40,6 +47,34 @@ socialAction: "Read the guide →"
 Replace all example copy. Available topics: AI decisions, Software decisions,
 Customer follow-up, Building businesses. Next steps: newsletter (default), audit,
 advisory. Pick the one that fits the reader's question. No public checkout.
+
+## Scheduled publication
+
+Use a quoted ISO timestamp with an explicit timezone for new posts, for example
+`date: "2026-09-25T09:00:00+08:00"`. This is the existing `date` field, not a second
+scheduling field. Legacy date-only values keep their midnight-UTC meaning.
+Visible bylines use Malaysia time; machine-readable metadata preserves the instant.
+
+The existing Pages workflow checks at minutes 7 and 37 of every hour (UTC).
+It compares due, non-draft article URLs in source with the live sitemap. If all
+are already published, it skips the expensive build and deployment. If a post
+is missing, it runs the normal clean build, site checks, tests, Pages deployment
+and Cloudflare HTML/sitemap purge. Failed sitemap reads fail the check rather
+than guessing. A later run catches missed publication windows. Pushes to source
+still build immediately, and manual dispatch on source remains the recovery path.
+All release jobs use the same pinned source commit; non-source runs cannot deploy.
+Lighthouse is not part of scheduled publication.
+
+GitHub cron is best effort, so expect the next check plus build time, not exact
+minute delivery. GitHub can disable scheduled workflows in public repositories
+after 60 days of inactivity; check Actions if publication stops. A workflow failure
+is visible in Actions and uses the repository's existing notification settings.
+
+To reschedule or cancel before release, obtain approval and merge an updated date
+or `draft: true` before the old time. The clean build removes stale output. Do not
+reschedule an already published URL without explicit approval for its removal.
+The repository and previews are public: scheduling hides content from production,
+not from someone reading source or a review preview.
 
 ## Editorial and search standards
 

@@ -13,8 +13,9 @@ const valid = { draft: false, title: 'A useful decision', description: 'A useful
 test('publishing rejects missing metadata, unknown topics and misleading dates', () => {
   const now = new Date('2026-09-17');
   validateArticle(valid, now);
+  validateArticle({ ...valid, date: "2099-01-01T09:00:00+08:00" }, now);
   validateArticle({ draft: true }, now);
-  for (const edit of [{ date: 'invalid' }, { date: '2099-01-01' }, { updated: '2025-01-01' }, { updated: '2099-01-01' }, { updated: 'invalid' }, { topic: 'Anything' }, { cta: 'checkout' }, { description: '' }, { socialTitle: '' }]) assert.throws(() => validateArticle({ ...valid, ...edit }, now));
+  for (const edit of [{ date: 'invalid' }, { updated: '2025-01-01' }, { updated: '2099-01-01' }, { updated: 'invalid' }, { topic: 'Anything' }, { cta: 'checkout' }, { description: '' }, { socialTitle: '' }]) assert.throws(() => validateArticle({ ...valid, ...edit }, now));
 });
 
 test('related reading excludes current and archive, prioritises topic then recency', () => {
@@ -46,10 +47,10 @@ test('Eleventy publishes complete articles, hides drafts and produces discovery 
     await sharp({ create: { width: 1200, height: 630, channels: 3, background: '#1646ed' } }).webp().toFile(cover);
     await sharp({ create: { width: 400, height: 400, channels: 3, background: '#ffda35' } }).webp().toFile(artwork);
     await put('articles/articles.11tydata.js', `export { default } from ${JSON.stringify(pathToFileURL(resolve('src/articles/articles.11tydata.js')).href)};`);
-    await put('_data/site.json', JSON.stringify({ url: 'https://adrianching.com', name: 'Adrian Ching' }));
+    await put('_data/site.js', `export { default } from ${JSON.stringify(pathToFileURL(resolve('src/_data/site.js')).href)};`);
     await mkdir(join(input, '_includes/layouts'), { recursive: true });
     await cp('src/_includes/layouts/post.njk', join(input, '_includes/layouts/post.njk'));
-    await put('_includes/layouts/base.njk', '<!doctype html><html><head>{% socialImageMeta page.url, title, socialImage, site.url, socialTitle, socialDescription, socialLabel, socialAction %}</head><body>{{ content | safe }}</body></html>');
+    await put('_includes/layouts/base.njk', '<!doctype html><html><head><meta name="robots" content="{{ site.robots }}">{% socialImageMeta page.url, title, socialImage, site.url, socialTitle, socialDescription, socialLabel, socialAction %}</head><body>{{ content | safe }}</body></html>');
     await cp('src/sitemap.xml.njk', join(input, 'sitemap.xml.njk'));
     await mkdir(join(input, 'blog'), { recursive: true });
     await cp('src/blog/index.njk', join(input, 'blog/index.njk'));
@@ -58,16 +59,18 @@ test('Eleventy publishes complete articles, hides drafts and produces discovery 
     const article = (data, body = 'A clear opening answer.\n\n## The decision\n\nThe useful explanation.') => `---json\n${JSON.stringify(data)}\n---\n${body}`;
     await put('articles/earlier.md', article({ ...valid, socialCover: cover, socialCoverAlt: 'Reviewed blue editorial cover.' }));
     await put('articles/latest.md', article({ ...valid, title: 'A newer useful decision', date: '2026-02-01', updated: '2026-03-01', cta: 'audit', socialArtwork: artwork, socialArtworkAlt: 'Yellow test illustration.' }));
+    await put('articles/scheduled.md', article({ ...valid, title: 'Scheduled decision', date: '2099-01-01T09:00:00+08:00' }));
     await put('articles/draft.md', article({ title: 'Unreviewed draft' }));
     await put('articles/explicit-draft.md', article({ ...valid, draft: true, title: 'Explicit draft' }));
     const configPath = join(root, 'eleventy.config.mjs');
     await writeFile(configPath, 'export default function () { return {}; }');
-    const elev = new Eleventy(input, output, { configPath, quietMode: true, config: config => {
+    const build = () => new Eleventy(input, output, { configPath, quietMode: true, config: config => {
+      config.setUseTemplateCache(false);
       config.setOutputDirectory(output); config.setInputDirectory(input);
       articles(config); socialImages(config); config.addFilter('year', date => new Date(date).getUTCFullYear());
       return { dir: { input, output, includes: '_includes', data: '_data' }, markdownTemplateEngine: 'njk', htmlTemplateEngine: 'njk' };
     } });
-    await elev.write();
+    await build().write();
     const html = await readFile(join(output, 'blog/latest/index.html'), 'utf8');
     assert.match(html, /Published <time datetime="2026-02-01T00:00:00.000Z"/);
     assert.match(html, /Updated <time datetime="2026-03-01T00:00:00.000Z"/);
@@ -87,7 +90,8 @@ test('Eleventy publishes complete articles, hides drafts and produces discovery 
     assert.match(earlier, /Reviewed blue editorial cover/);
     const listing = await readFile(join(output, 'blog/index.html'), 'utf8');
     assert.ok(listing.indexOf('/blog/latest/') < listing.indexOf('/blog/earlier/'));
-    assert.doesNotMatch(listing, /draft/);
+    assert.doesNotMatch(listing, /draft|scheduled/);
+    assert.doesNotMatch(html, /scheduled/);
     assert.match(listing, /href="#writing"/);
     assert.match(listing, /id="writing"/);
     assert.match(listing, /writing-entry-featured/);
@@ -98,9 +102,33 @@ test('Eleventy publishes complete articles, hides drafts and produces discovery 
     assert.doesNotMatch(listing, /Inside an audit|From the writing archive|ai-profit-opportunity-audit\/example/);
     const sitemap = await readFile(join(output, 'sitemap.xml'), 'utf8');
     assert.match(sitemap, /<loc>https:\/\/adrianching.com\/blog\/latest\/<\/loc><lastmod>2026-03-01T00:00:00.000Z<\/lastmod>/);
-    assert.doesNotMatch(sitemap, /draft/);
+    assert.doesNotMatch(sitemap, /draft|scheduled/);
+    await assert.rejects(access(join(output, "blog/scheduled/index.html")));
     await assert.rejects(access(join(output, 'blog/draft/index.html')));
     await assert.rejects(access(join(output, 'blog/explicit-draft/index.html')));
+    const previousPreview = process.env.VERCEL_ENV;
+    try {
+      process.env.VERCEL_ENV = 'preview';
+      await rm(output, { recursive: true, force: true });
+      await build().write();
+      const preview = await readFile(join(output, 'blog/scheduled/index.html'), 'utf8');
+      assert.match(preview, /name="robots" content="noindex, nofollow"/);
+      assert.match(preview, /2099-01-01T01:00:00.000Z/);
+      assert.match(await readFile(join(output, 'blog/index.html'), 'utf8'), /blog\/scheduled/);
+      await assert.rejects(access(join(output, 'blog/explicit-draft/index.html')));
+    } finally {
+      if (previousPreview === undefined) delete process.env.VERCEL_ENV;
+      else process.env.VERCEL_ENV = previousPreview;
+    }
+    // A later production build makes the same article discoverable once due.
+    await put('articles/scheduled.md', article({ ...valid, title: 'Scheduled decision', date: '2026-01-11T09:00:00+08:00' }));
+    await rm(output, { recursive: true, force: true });
+    await build().write();
+    await access(join(output, 'blog/scheduled/index.html'));
+    for (const file of ['blog/index.html', 'blog/latest/index.html', 'sitemap.xml']) {
+      assert.match(await readFile(join(output, file), 'utf8'), /blog\/scheduled/);
+    }
+
   } finally {
     await rm(root, { recursive: true, force: true });
     await rm(artworkRoot, { recursive: true, force: true });

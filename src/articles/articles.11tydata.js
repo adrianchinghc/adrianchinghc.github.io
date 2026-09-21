@@ -1,3 +1,4 @@
+import { articleIsVisible } from '../../scripts/publication.mjs';
 import { validateArticle } from '../../scripts/articles.mjs';
 
 export default {
@@ -6,8 +7,9 @@ export default {
     permalink: data => {
       if (data.draft !== false) return false;
       validateArticle(data);
+      if (!articleIsVisible(data)) return false;
       return `/blog/${data.page.fileSlug}/`;
     },
-    eleventyExcludeFromCollections: data => data.draft !== false
+    eleventyExcludeFromCollections: data => !articleIsVisible(data)
   }
 };

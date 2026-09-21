@@ -5,6 +5,9 @@ on:
     branches:
       - source
   workflow_dispatch:
+  schedule:
+    # UTC, twice hourly away from the busy top of the hour.
+    - cron: "7,37 * * * *"
 
 permissions:
   contents: read
@@ -16,8 +19,38 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  publication-check:
+    name: Check for scheduled articles
+    if: github.ref == 'refs/heads/source'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    outputs:
+      publish: ${{ steps.due.outputs.publish }}
+      sha: ${{ steps.release.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: source
+      - name: Pin the release commit
+        id: release
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+        if: github.event_name == 'schedule'
+      - name: Check publication dates against the live sitemap
+        id: due
+        if: github.event_name == 'schedule'
+        run: node scripts/check-scheduled-publication.mjs
+
   build:
     name: Build and check
+    needs: publication-check
+    if: github.ref == 'refs/heads/source' && (github.event_name != 'schedule' || needs.publication-check.outputs.publish == 'true')
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
@@ -29,6 +62,8 @@ jobs:
     steps:
       - name: Check out source
         uses: actions/checkout@v7
+        with:
+          ref: ${{ needs.publication-check.outputs.sha }}
 
       - name: Set up Node.js
         uses: actions/setup-node@v7
@@ -58,7 +93,7 @@ jobs:
 
   deploy:
     name: Publish to GitHub Pages
-    needs: build
+    needs: [publication-check, build]
     runs-on: ubuntu-latest
     timeout-minutes: 10
     environment:
@@ -67,6 +102,8 @@ jobs:
     steps:
       - name: Check out release source
         uses: actions/checkout@v7
+        with:
+          ref: ${{ needs.publication-check.outputs.sha }}
 
       - name: Set up Node.js
         uses: actions/setup-node@v7

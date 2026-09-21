@@ -2,7 +2,7 @@ import { readFileSync, readdirSync } from "node:fs";
 import { join, relative } from "node:path";
 
 export function purgeUrls(sitemap) {
-  const urls = new Set(["https://adrianching.com/", "https://adrianching.com/index.html"]);
+  const urls = new Set(["https://adrianching.com/", "https://adrianching.com/index.html", "https://adrianching.com/sitemap.xml"]);
   for (const match of sitemap.matchAll(/<loc>\s*([^<]+)\s*<\/loc>/g)) {
     const url = new URL(match[1].trim());
     if (url.origin !== "https://adrianching.com" || url.search || url.hash) continue;
