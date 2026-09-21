@@ -11,6 +11,7 @@ socialDescription: "Four numbers tell you what happens to the demand you already
 socialLabel: "CUSTOMER FOLLOW-UP"
 socialAction: "Pull the four numbers →"
 ---
+{% from "article-figures.njk" import leadFollowUpLeak, leadFollowUpBuyOrder %}
 
 For nine years at Upstack Studio, every new deal closed through me.
 
@@ -72,6 +73,8 @@ Read it back. The 6-hour middle says the team can be fast when it wants to be. T
 
 That company doesn't have a lead problem. It paid for 120 chances, sent 64 quotes, and then chased only 18 of them.
 
+{{ leadFollowUpLeak() }}
+
 ## The one-person test
 
 Now the question underneath all four numbers.
@@ -121,6 +124,8 @@ Three questions before you pay for anything.
 
 Then buy in this order: fix the process, use the shared inbox or CRM you already pay for, automate the reminders, and put AI on top of that. Most companies I met were shopping at the last step with nothing in place at the first three.
 
+{{ leadFollowUpBuyOrder() }}
+
 ## Which tool does which job
 
 Nobody paid to be named here and there are no affiliate links on this page. Match the tool to the job you just wrote down, not to the brand with the best home page.
@@ -150,7 +155,7 @@ Write your stop rule now, while you're calm. If the middle reply time and the on
 
 Pull number 2. Count the enquiries that got one attempt and nothing after. It takes an afternoon, and it's usually the number that stings.
 
-When you have it, reply and tell me which of the four was worst in your business. Subscribe below and the next exercise comes to you.
+When you have it, [join the newsletter](/newsletter/) for what I'm learning building Second Team. Reply to that email and tell me which of the four was worst.
 
 Want somebody from outside to run the count with you? That's the [AI Profit Opportunity Audit](/ai-profit-opportunity-audit/). It ranks where the money leaks, names the three fixes worth doing first, and puts them on a 90-day roadmap. It stops at the diagnosis. Nobody builds anything.
 
