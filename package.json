@@ -6,11 +6,12 @@
   "description": "The personal website of Adrian Ching.",
   "scripts": {
     "dev": "node scripts/dev.mjs",
-    "build": "eleventy",
+    "build": "node scripts/clean-output.mjs && eleventy",
     "check": "node scripts/check-site.mjs"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
+    "gray-matter": "^4.0.3",
     "sharp": "^0.35.4"
   },
   "engines": {
