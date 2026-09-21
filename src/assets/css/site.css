@@ -238,6 +238,8 @@ figcaption{font-size:.8125rem;line-height:1.5;color:var(--muted);margin-top:.75r
 .prose pre{overflow:auto;padding:1.25rem;background:var(--soft);font-size:.875rem}
 .prose code{font-family:ui-monospace,monospace;font-size:.9em}
 .prose img{margin-block:1.5rem}
+.article-figure{margin-block:2.5rem}
+.article-figure svg{display:block;width:100%;height:auto}
 .not-found{padding-block:5rem;text-align:center}
 .not-found>div>strong{display:block;color:var(--signal);font-size:4rem}
 .not-found p{margin-inline:auto}

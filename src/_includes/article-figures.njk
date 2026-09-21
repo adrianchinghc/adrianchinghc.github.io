@@ -1,0 +1,65 @@
+{# Editorial diagrams drawn by the build, not artwork. Inline so they follow the reading column and the light/dark tokens. #}
+
+{% macro moneyVersusProof() %}
+<figure class="article-figure">
+<svg viewBox="0 0 720 400" role="img" aria-labelledby="fig-money-proof-title fig-money-proof-desc" focusable="false">
+<title id="fig-money-proof-title">The five options plotted on money against proof</title>
+<desc id="fig-money-proof-desc">A grid with proof along the bottom and money up the side, using the worked example scores. Build custom sits alone in the shaded top-left corner: the highest money score with the weakest proof. Automate with AI and buy a CRM add-on sit in the middle. Fix the process scores four on both. Do nothing scores nothing on money and full marks on proof.</desc>
+<g stroke="var(--line,#d8dad1)" stroke-width="1">
+<path d="M96 40V330M96 330h576"/>
+<g opacity=".55"><path d="M208 40v290M320 40v290M432 40v290M544 40v290M656 40v290M96 276h576M96 222h576M96 168h576M96 114h576M96 60h576"/></g>
+</g>
+<rect x="96" y="40" width="280" height="74" fill="var(--signal,#a53b29)" opacity=".09"/>
+<text x="108" y="100" font-size="13" font-weight="600" fill="var(--signal,#a53b29)">Real money on a guess</text>
+<g fill="currentColor">
+<circle cx="432" cy="60" r="6"/><circle cx="432" cy="114" r="6"/><circle cx="544" cy="114" r="6"/><circle cx="656" cy="330" r="6"/>
+</g>
+<circle cx="320" cy="60" r="7" fill="var(--signal,#a53b29)"/>
+<g font-size="14" fill="currentColor">
+<text x="308" y="64" text-anchor="end">Build custom</text>
+<text x="446" y="65">Automate with AI</text>
+<text x="420" y="119" text-anchor="end">Buy a CRM add-on</text>
+<text x="558" y="119">Fix the process</text>
+<text x="644" y="318" text-anchor="end">Do nothing</text>
+</g>
+<g font-size="13" fill="var(--muted,#5e6259)">
+<text x="84" y="335" text-anchor="end">0</text><text x="84" y="65" text-anchor="end">5</text>
+<text x="96" y="352" text-anchor="middle">0</text><text x="656" y="352" text-anchor="middle">5</text>
+<text x="384" y="378" text-anchor="middle">Proof — how much of the number is fact, not hope</text>
+<text x="-185" y="44" transform="rotate(-90)" text-anchor="middle">Money</text>
+</g>
+</svg>
+<figcaption>The worked example from step 5, plotted. The shaded corner is the pair to watch: a big number nobody has checked.</figcaption>
+</figure>
+{% endmacro %}
+
+{% macro decisionPath() %}
+<figure class="article-figure">
+<svg viewBox="0 0 720 556" role="img" aria-labelledby="fig-path-title fig-path-desc" focusable="false">
+<title id="fig-path-title">The eight steps, and the point where you stop</title>
+<desc id="fig-path-desc">Eight steps in order: ask where the business loses money; pull the real numbers; sort them into facts, fair guesses and unknowns; write down all five options; score them; choose and write down why; run one ninety-day test with a stop rule; ask six questions before approving spend. At the choosing step a branch leads out to a stop: if nothing clears the bar, do nothing and say so out loud.</desc>
+{% set steps = [
+  "Ask where the business loses money",
+  "Pull the real numbers",
+  "Sort them: facts, fair guesses, unknowns",
+  "Write down all five options",
+  "Score every option, money against proof",
+  "Choose, and write down why",
+  "Run one 90-day test with a stop rule",
+  "Ask six questions before you approve spend"
+] %}
+{% for step in steps %}{% set top = 24 + loop.index0 * 64 %}
+<rect x="40" y="{{ top }}" width="400" height="44" rx="4" fill="var(--white,#fff)" stroke="var(--line,#d8dad1)"/>
+<text x="60" y="{{ top + 27 }}" font-size="14" fill="var(--muted,#5e6259)">{{ loop.index }}</text>
+<text x="82" y="{{ top + 27 }}" font-size="14" fill="currentColor">{{ step }}</text>
+{% if not loop.last %}<path d="M240 {{ top + 44 }}v13" stroke="var(--line,#d8dad1)"/><path d="M234 {{ top + 58 }}l6 6 6-6" fill="none" stroke="var(--line,#d8dad1)"/>{% endif %}
+{% endfor %}
+<path d="M440 366h44" stroke="var(--signal,#a53b29)" stroke-dasharray="4 4"/>
+<path d="M478 360l6 6-6 6" fill="none" stroke="var(--signal,#a53b29)"/>
+<rect x="484" y="338" width="196" height="56" rx="4" fill="none" stroke="var(--signal,#a53b29)"/>
+<text x="500" y="362" font-size="13" font-weight="600" fill="var(--signal,#a53b29)">Nothing clears the bar?</text>
+<text x="500" y="380" font-size="13" fill="var(--signal,#a53b29)">Stop. Say so out loud.</text>
+</svg>
+<figcaption>Two hours of work, and a real exit. Most of the method happens before anyone writes a line of code.</figcaption>
+</figure>
+{% endmacro %}

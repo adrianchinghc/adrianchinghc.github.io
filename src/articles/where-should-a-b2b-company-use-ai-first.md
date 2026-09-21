@@ -3,7 +3,7 @@ title: "Where Should a B2B Company Use AI First? Start With the Economics"
 seoTitle: "Where should a B2B company use AI first?"
 description: "A five-option method for picking your first AI project: find the leak, put a number on it, score the options, and run one 90-day test."
 date: 2026-09-18
-draft: true
+draft: false
 topic: AI decisions
 cta: newsletter
 socialTitle: "Where should AI go first?"
@@ -11,6 +11,7 @@ socialDescription: "Find the leak, put a number on it, then make AI earn its pla
 socialLabel: "AI DECISIONS"
 socialAction: "Read the method →"
 ---
+{% from "article-figures.njk" import decisionPath, moneyVersusProof %}
 
 Most owners I meet are asking the same thing right now: where should we use AI first?
 
@@ -25,6 +26,8 @@ I closed Upstack Studio in 2026. The agency made money. It just wasn't the model
 So I'm not neutral here. I've been the vendor writing the proposal. I've also been the owner who did the maths on his own business too late.
 
 Here's the method I use now. You can run it yourself in about two hours.
+
+{{ decisionPath() }}
 
 ## Step 1: Stop asking "how can we use AI?"
 
@@ -119,6 +122,8 @@ Here's a worked example. The company's leak is quotes nobody chased. The scores 
 The grid rarely picks the winner by itself. Its real job is to show you where you disagree. When two people score Money 5 and 2, you've found the argument worth having, and it's almost always about proof rather than about AI.
 
 Watch any option that scores high on Money and low on Proof. That pair is how companies spend real money on a guess.
+
+{{ moneyVersusProof() }}
 
 ## Step 6: Choose, then write down why
 
