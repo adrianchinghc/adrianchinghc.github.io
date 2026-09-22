@@ -1,9 +1,25 @@
-{# AC-033: HTML diagrams on phones; original raster layouts on tablet and desktop. #}
+{# AC-033: semantic HTML at every width. Wide layouts follow the original 720-unit compositions; the phone layouts stay unchanged. #}
 
 {% macro moneyVersusProof() %}
 <figure class="article-figure article-figure-responsive">
-<img class="article-figure-desktop" src="/assets/images/posts/ac-033-money-versus-proof.webp" width="1440" height="800"
-     alt="A grid plotting five options by proof, left to right, against money, bottom to top. Fix the process sits at money 4, proof 4. Buy a CRM add-on sits at money 4, proof 3. Automate with AI sits at money 5, proof 3. Build custom sits alone in the shaded top-left corner at money 5, proof 2: the highest money score with the weakest proof. Do nothing sits at money 0, proof 5.">
+<div class="article-figure-desktop figure-wide figure-wide-plot" role="group" aria-label="The five options plotted on money against proof">
+<div class="figure-wide-grid" aria-hidden="true"></div>
+<div class="figure-wide-zone" aria-hidden="true"></div>
+<p class="figure-wide-warning">Real money on a guess</p>
+<p class="figure-wide-y">Money</p>
+<span class="figure-wide-tick figure-wide-y-low">0</span>
+<span class="figure-wide-tick figure-wide-y-high">5</span>
+<span class="figure-wide-tick figure-wide-x-low">0</span>
+<span class="figure-wide-tick figure-wide-x-high">5</span>
+<p class="figure-wide-x">Proof — how much of the number is fact, not hope</p>
+<ul class="figure-wide-points" role="list">
+<li class="figure-wide-point" style="--x:544;--y:114"><span class="figure-wide-label">Fix the process</span><span class="sr-only">: Money 4, Proof 4</span></li>
+<li class="figure-wide-point figure-wide-point-left" style="--x:432;--y:114"><span class="figure-wide-label">Buy a CRM add-on</span><span class="sr-only">: Money 4, Proof 3</span></li>
+<li class="figure-wide-point" style="--x:432;--y:60"><span class="figure-wide-label">Automate with AI</span><span class="sr-only">: Money 5, Proof 3</span></li>
+<li class="figure-wide-point figure-wide-point-left is-watch" style="--x:320;--y:60"><span class="figure-wide-label">Build custom</span><span class="sr-only">: Money 5, Proof 2; in the shaded corner</span></li>
+<li class="figure-wide-point figure-wide-point-left figure-wide-point-low" style="--x:656;--y:330"><span class="figure-wide-label">Do nothing</span><span class="sr-only">: Money 0, Proof 5</span></li>
+</ul>
+</div>
 <div class="article-figure-mobile">
 <div class="figure-plot">
 <p class="figure-plot-axis figure-plot-y">Money, 0 to 5</p>
@@ -34,8 +50,19 @@
 
 {% macro decisionPath() %}
 <figure class="article-figure article-figure-responsive">
-<img class="article-figure-desktop" src="/assets/images/posts/ac-033-decision-path.webp" width="1440" height="1112"
-     alt="Eight steps in order: ask where the business loses money; pull the real numbers; sort them into facts, fair guesses and unknowns; write down all five options; score them; choose and write down why; run one ninety-day test with a stop rule; ask six questions before approving spend. A callout after the choosing step reads: if nothing clears the bar, stop and say so out loud.">
+<div class="article-figure-desktop figure-wide figure-wide-path" role="group" aria-label="The eight steps, and the point where you stop">
+<ol class="figure-wide-steps" role="list">
+<li><span>Ask where the business loses money</span></li>
+<li><span>Pull the real numbers</span></li>
+<li><span>Sort them: facts, fair guesses, unknowns</span></li>
+<li><span>Write down all five options</span></li>
+<li><span>Score every option, money against proof</span></li>
+<li><span>Choose, and write down why</span>
+<p class="figure-wide-exit"><strong>Nothing clears the bar?</strong><span>Stop. Say so out loud.</span></p></li>
+<li><span>Run one 90-day test with a stop rule</span></li>
+<li><span>Ask six questions before you approve spend</span></li>
+</ol>
+</div>
 <div class="article-figure-mobile">
 <ol class="figure-flow">
 <li><span>Ask where the business loses money</span></li>
