@@ -1,7 +1,10 @@
-{# Editorial diagrams drawn by the build, not artwork. Plain HTML so every label is real text at a real size: a diagram scaled to a 343px reading column shrinks its own type, a stacked one does not. #}
+{# AC-033: HTML diagrams on phones; original raster layouts on tablet and desktop. #}
 
 {% macro moneyVersusProof() %}
-<figure class="article-figure">
+<figure class="article-figure article-figure-responsive">
+<img class="article-figure-desktop" src="/assets/images/posts/ac-033-money-versus-proof.webp" width="1440" height="800"
+     alt="A grid plotting five options by proof, left to right, against money, bottom to top. Fix the process sits at money 4, proof 4. Buy a CRM add-on sits at money 4, proof 3. Automate with AI sits at money 5, proof 3. Build custom sits alone in the shaded top-left corner at money 5, proof 2: the highest money score with the weakest proof. Do nothing sits at money 0, proof 5.">
+<div class="article-figure-mobile">
 <div class="figure-plot">
 <p class="figure-plot-axis figure-plot-y">Money, 0 to 5</p>
 <div class="figure-plot-area">
@@ -24,12 +27,16 @@
 <li class="is-watch"><span class="figure-key-mark">4</span><span>Build custom <span class="figure-key-score">Money 5 · Proof 2</span></span></li>
 <li><span class="figure-key-mark">5</span><span>Do nothing <span class="figure-key-score">Money 0 · Proof 5</span></span></li>
 </ol>
+</div>
 <figcaption>The worked example from step 5, plotted. The shaded corner is the pair to watch: a big number nobody has checked.</figcaption>
 </figure>
 {% endmacro %}
 
 {% macro decisionPath() %}
-<figure class="article-figure">
+<figure class="article-figure article-figure-responsive">
+<img class="article-figure-desktop" src="/assets/images/posts/ac-033-decision-path.webp" width="1440" height="1112"
+     alt="Eight steps in order: ask where the business loses money; pull the real numbers; sort them into facts, fair guesses and unknowns; write down all five options; score them; choose and write down why; run one ninety-day test with a stop rule; ask six questions before approving spend. A callout after the choosing step reads: if nothing clears the bar, stop and say so out loud.">
+<div class="article-figure-mobile">
 <ol class="figure-flow">
 <li><span>Ask where the business loses money</span></li>
 <li><span>Pull the real numbers</span></li>
@@ -41,6 +48,7 @@
 <li><span>Run one 90-day test with a stop rule</span></li>
 <li><span>Ask six questions before you approve spend</span></li>
 </ol>
+</div>
 <figcaption>Two hours of work, and a real exit. Most of the method happens before anyone writes a line of code.</figcaption>
 </figure>
 {% endmacro %}

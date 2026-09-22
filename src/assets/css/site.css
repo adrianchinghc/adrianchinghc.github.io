@@ -244,6 +244,12 @@ figcaption{font-size:.8125rem;line-height:1.5;color:var(--muted);margin-top:.75r
 .article-figure{margin-block:2.5rem}
 .article-figure figcaption{font-size:.9375rem}
 .article-figure p{max-width:none}
+/* AC-033 keeps its original diagram layouts above the site's phone breakpoint. */
+.article-figure-responsive>.article-figure-mobile{display:none}
+@media(max-width:760px){
+  .article-figure-responsive>.article-figure-desktop{display:none}
+  .article-figure-responsive>.article-figure-mobile{display:block}
+}
 .figure-eyebrow{font-size:.9375rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 1rem}
 .figure-flow{list-style:none;counter-reset:flow;display:grid;gap:1.5rem;margin:0;padding:0}
 .figure-flow>li{counter-increment:flow;position:relative;display:grid;grid-template-columns:1.5rem minmax(0,1fr);gap:.75rem;padding:.8rem 1rem;border:1px solid var(--line);border-radius:var(--radius-control);background:var(--white);font-size:1rem;line-height:1.45}
