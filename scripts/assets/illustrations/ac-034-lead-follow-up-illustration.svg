@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  AC-034 — Lead follow-up illustration
+  Editable, lettering-free artwork for the accepted AC-033 Manrope master.
+  Artboard: 596 × 454. Place at x=604 y=69 in a 1200 × 630 master.
+  Every object is native SVG; no raster, stock, generated image, or text layer.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="596" height="454" viewBox="0 0 596 454" role="img" aria-labelledby="title desc">
+  <title id="title">AC-034 lead follow-up bottleneck illustration</title>
+  <desc id="desc">A single operator catches a backlog of enquiry cards at a narrow handoff and redirects it into an orderly route.</desc>
+  <defs>
+    <filter id="rough" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency=".06" numOctaves="2" seed="34" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.1" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="paper" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".68" numOctaves="3" seed="19" result="noise"/>
+      <feColorMatrix in="noise" type="saturate" values="0" result="mono"/>
+      <feComponentTransfer in="mono"><feFuncA type="table" tableValues="0 .11"/></feComponentTransfer>
+    </filter>
+  </defs>
+
+  <g id="shadow" fill="#072a74" opacity=".48">
+    <path d="M38 113 231 73l45 47-204 52z"/>
+    <path d="m264 293 198-34 77 47-204 50z"/>
+    <ellipse cx="366" cy="410" rx="140" ry="16"/>
+  </g>
+
+  <g id="backlog" stroke="#102654" stroke-width="7" stroke-linejoin="round" filter="url(#rough)">
+    <g transform="rotate(-13 120 103)"><rect x="29" y="63" width="169" height="106" rx="8" fill="#fff4d9"/><path d="M54 92h69M54 118h105M54 144h46" stroke="#e85831" stroke-width="10" stroke-linecap="round"/></g>
+    <g transform="rotate(8 182 136)"><rect x="83" y="94" width="170" height="109" rx="8" fill="#ffd447"/><path d="M108 124h77M108 151h108M108 177h45" stroke="#e85831" stroke-width="10" stroke-linecap="round"/></g>
+    <g transform="rotate(-5 192 208)"><rect x="114" y="155" width="166" height="106" rx="8" fill="#fff4d9"/><path d="M139 185h59M139 212h110M139 238h48" stroke="#e85831" stroke-width="10" stroke-linecap="round"/></g>
+  </g>
+
+  <g id="handoff-route" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#rough)">
+    <path d="M283 93c55 2 46 75 42 123-4 50 16 80 84 84l99 6" stroke="#102654" stroke-width="38"/>
+    <path d="M283 93c55 2 46 75 42 123-4 50 16 80 84 84l99 6" stroke="#ffd447" stroke-width="24"/>
+    <path d="m493 275 47 31-49 27" stroke="#102654" stroke-width="19"/>
+    <path d="m493 275 47 31-49 27" stroke="#ffd447" stroke-width="10"/>
+    <path d="M282 95c27 0 32 17 32 36" stroke="#e85831" stroke-width="14"/>
+  </g>
+
+  <g id="operator" stroke="#102654" stroke-width="7" stroke-linejoin="round" filter="url(#rough)">
+    <path d="M315 211c-17-5-37 6-44 25l-15 39 45 13 25-52c7-15 3-22-11-25z" fill="#fff4d9"/>
+    <circle cx="349" cy="161" r="37" fill="#fff4d9"/>
+    <path d="M326 153c15-25 53-22 61 7-21 1-34-3-49 10z" fill="#e85831" stroke="none"/>
+    <path d="M323 203c15-16 55-15 73 6l13 121h-116l14-105c2-9 7-17 16-22z" fill="#fff4d9"/>
+    <path d="M334 212c13 15 42 15 54-1l-4 70h-52z" fill="#ffd447" stroke="none"/>
+    <path d="M319 330h38l-6 80h-57zM372 330h35l25 80h-58z" fill="#e85831"/>
+    <path d="M351 278c29 9 53 10 77-7l39-31 18 26-49 44c-17 15-42 21-76 13" fill="#fff4d9"/>
+    <path d="m466 241 27-17 14 23-24 20z" fill="#ffd447"/>
+    <path d="M300 232c-17 22-39 40-64 41l-34-1-1 30 47 5c35 3 59-15 78-42" fill="#fff4d9"/>
+    <path d="m201 272-22-4-4 28 27 6z" fill="#ffd447"/>
+  </g>
+
+  <g id="repaired-queue" stroke="#102654" stroke-width="7" stroke-linejoin="round" filter="url(#rough)">
+    <g transform="rotate(-4 477 122)"><rect x="421" y="75" width="113" height="70" rx="7" fill="#fff4d9"/><circle cx="450" cy="110" r="12" fill="#e85831" stroke="none"/><path d="M474 98h36M474 121h24" stroke="#102654" stroke-width="8" stroke-linecap="round"/></g>
+    <g transform="rotate(4 504 189)"><rect x="450" y="153" width="112" height="70" rx="7" fill="#ffd447"/><circle cx="478" cy="188" r="12" fill="#e85831" stroke="none"/><path d="M502 177h36M502 199h24" stroke="#102654" stroke-width="8" stroke-linecap="round"/></g>
+  </g>
+
+  <g id="grain" opacity=".24"><rect width="596" height="454" fill="#fff4d9" filter="url(#paper)"/></g>
+</svg>

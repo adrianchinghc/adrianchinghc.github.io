@@ -11,7 +11,7 @@ socialDescription: "Four numbers tell you what happens to the demand you already
 socialLabel: "CUSTOMER FOLLOW-UP"
 socialAction: "Pull the four numbers →"
 socialCover: scripts/assets/illustrations/ac-034-lead-follow-up-cover.webp
-socialCoverAlt: "Screen-printed editorial illustration on cobalt: a line of cream envelopes queues at a single yellow gate where one person hand-sorts the only piece that fits, while two cold blue envelopes fall away unopened."
+socialCoverAlt: "Cobalt cover reading 'You're the bottleneck': one operator catches a three-card enquiry backlog at a narrow handoff and redirects it into an orderly queue."
 ---
 {% from "article-figures.njk" import leadFollowUpLeak, leadFollowUpBuyOrder %}
 
