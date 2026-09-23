@@ -279,5 +279,5 @@ window.addEventListener("unhandledrejection", () => track("javascript_error", { 
 // event detail: it includes the email address. Confirmation happens in Kit.
 document.addEventListener("ckjs:submission:complete", (event) => {
   if (!event.target.matches?.(".newsletter-form")) return;
-  track("newsletter_signup_submitted", { form_id: "9916003" });
+  track("newsletter_signup_submitted", { form_id: "9916003", signup_placement: event.target.dataset.signupPlacement || "unknown" });
 });
