@@ -1,0 +1,71 @@
+{
+  "method": "@napi-rs/canvas compositor; it fills a plain, uninterrupted cobalt field (no procedural grain, no gradient), loads the ADR-447 owner-approved transparent raster illustration directly onto the illustration box via loadImage (no SVG rasterization, no hand-coded vector step), draws real Manrope font files for headline and author, and encodes PNG/WebP. No Sharp import, invocation, crop, composite, resize, or encoder is used. No Resvg import, invocation, or SVG illustration source is used.",
+  "renderer": "@napi-rs/canvas",
+  "background": {
+    "color": "#0557e1",
+    "note": "Flat fill only, verified by sampling ac-033-where-should-ai-go-first-cover.webp background pixels (bottom band avg #0254e1, top band avg #0356e1; both cluster on the master SVG's own base fill #0557e1). This supersedes the #0858d8 value cited in ADR-408, which does not match the source bytes. The prior render's hand-rolled per-pixel grain() PRNG produced visible banding; it has been removed in favor of a plain field per the owner correction."
+  },
+  "typography": {
+    "note": "Tracking opened from the rejected -6.5px/-1.2px candidate. Headline tracking is bounded by the locked 550px headline box (bottleneck at 0px tracking measures ~576px, wider than the box), so -3px is the most open value that still clears the box before the illustration; author tracking moved to a slightly open +0.5px.",
+    "headlineTrackingPx": -3,
+    "authorTrackingPx": 0.5
+  },
+  "master": {
+    "file": "scripts/article-cover-master/ac-033-manrope-master.svg",
+    "sha256": "41f25313e3bb092bd509f8af764453e68b3d60da541b03734d5fcff40f8ee544",
+    "acceptedInteraction": "0b27f1dc-8a54-40f1-adf0-54c7ad474804",
+    "acceptedAt": "2026-09-22T09:24:03.678Z",
+    "acceptedMasterSha256": "185212c092d3757536260aed4ce4de1cea57f58584fa4f63209504b61f2248a0"
+  },
+  "illustration": {
+    "file": "scripts/assets/illustrations/ac-034-lead-follow-up-illustration-transparent.png",
+    "sha256": "3ac633806278474c501694fa3890bb79da0343bd37a2fb62e11d33bce2bb2e93",
+    "box": {
+      "x": 604,
+      "y": 69,
+      "width": 596,
+      "height": 454
+    },
+    "source": "Chroma (ADR-447), owner-approved via Paperclip attachment 14e1e53c-73a3-4e8a-9e74-a826854b29cb",
+    "note": "Transparent 596x454 RGBA raster illustration, independently passed by Oracle and approved by Adrian on ADR-447 (2026-09-23). Supersedes the hand-coded ac-034-lead-follow-up-illustration.svg + Resvg rasterization path banned by ADR-446's illustration standard."
+  },
+  "headline": {
+    "family": "Manrope",
+    "weight": 800,
+    "fontFile": "scripts/assets/manrope-extrabold.ttf",
+    "fontSha256": "3ae11c49db0455a3cc33e37d380f20fdb8c7f8b41dc07625c177e3d87a9d6ae6",
+    "registeredFamily": "Manrope Cover",
+    "lines": [
+      "You're the",
+      "bottleneck"
+    ],
+    "renderedWith": "CanvasRenderingContext2D font: 800 112px Manrope Cover, letterSpacing -3px"
+  },
+  "author": {
+    "family": "Manrope",
+    "weight": 600,
+    "fontFile": "scripts/assets/manrope-semibold.ttf",
+    "fontSha256": "a53abdb1db7685b5b58a3fa204d9b2daa127b8b734287d999f72c861dd76c8ac",
+    "renderedWith": "CanvasRenderingContext2D font: 600 27px Manrope Cover, letterSpacing 0.5px"
+  },
+  "files": {
+    "ac-034-manrope-baseline.png": {
+      "width": 1200,
+      "height": 630,
+      "sha256": "83ccb4e923f95f7be2c727fd6bfcacc3dc1dbf4b20221dd424ad81b32452ce8f"
+    },
+    "ac-034-manrope-400.png": {
+      "width": 400,
+      "height": 210,
+      "sha256": "5ab9a5090d32e6e376e245cced94b95d01bcc29eec7f045f1af2196ad83665cb"
+    },
+    "ac-034-manrope-320.png": {
+      "width": 320,
+      "height": 168,
+      "sha256": "af004383f037ecfcde8ef128e2562bc7bfa5c3ea5d35e6e866cb12569a6eae1f"
+    },
+    "ac-034-manrope-baseline.webp": {
+      "sha256": "121a224f96c961c5baa284d0c8c72f6a85fad447130fd43c44e10472f068203e"
+    }
+  }
+}
