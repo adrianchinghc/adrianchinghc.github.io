@@ -2,7 +2,7 @@
   <div aria-live="polite" aria-atomic="true">
     <ul class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert" role="alert"></ul>
     <div data-element="fields" class="newsletter-fields">
-      {% if not signupCompact %}<label class="newsletter-email">First name<input class="formkit-input" name="fields[first_name]" type="text" autocomplete="given-name" placeholder="Your first name" required data-hj-suppress></label>{% endif %}
+      <label class="newsletter-email"><span{% if signupCompact %} class="sr-only"{% endif %}>First name</span><input class="formkit-input" name="fields[first_name]" type="text" autocomplete="given-name" placeholder="Your first name" required data-hj-suppress></label>
       <label class="newsletter-email"><span{% if signupCompact %} class="sr-only"{% endif %}>Email address</span><input class="formkit-input" name="email_address" type="email" autocomplete="email" placeholder="you@example.com" required data-hj-suppress></label>
       <button class="button formkit-submit" type="submit" data-element="submit"><span class="signup-label">Get the free emails</span><span class="signup-busy" hidden>Subscribing…</span></button>
     </div>

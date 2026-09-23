@@ -362,10 +362,11 @@ figcaption{font-size:.8125rem;line-height:1.5;color:var(--muted);margin-top:.75r
 .hero-signup{margin-top:1.75rem;max-width:640px}
 .hero-signup-intro{margin:0;color:var(--muted)}
 .hero-signup .newsletter-form{margin-top:.75rem}
-.newsletter-form-compact .newsletter-fields{grid-template-columns:minmax(0,1fr) auto}
-.newsletter-form-compact .newsletter-fields .button{grid-column:auto}
+/* Wraps by available width, not viewport: the hero column narrows in the two-column layout. */
+.newsletter-form-compact .newsletter-fields{display:flex;flex-wrap:wrap;align-items:flex-end}
+.newsletter-form-compact .newsletter-email{flex:2 1 11rem}
+.newsletter-form-compact .newsletter-fields .button{flex:1 0 auto}
 .newsletter-form-compact .newsletter-email input{margin-top:0}
-@media(max-width:420px){.newsletter-form-compact .newsletter-fields{grid-template-columns:1fr}}
 .hero-signup .microcopy{margin-bottom:0}
 .home-copy .hero-links{margin-top:1rem}
 .home-portrait img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 90%}
