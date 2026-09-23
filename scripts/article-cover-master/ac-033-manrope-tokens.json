@@ -1,0 +1,52 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "name": "AC-033 Manrope article-cover master",
+  "canvas": { "width": 1200, "height": 630, "aspectRatio": "1.9048:1" },
+  "safeMargin": { "left": 33, "right": 33, "top": 40, "bottom": 43, "percent": { "x": 2.75, "y": 6.83 } },
+  "background": { "color": "#0557e1", "texture": "none; a flat, uninterrupted fill with no grain, noise, filter or gradient" },
+  "headline": {
+    "family": "Manrope",
+    "fontFile": "scripts/assets/manrope-extrabold.ttf",
+    "fontFileNote": "Manrope variable font, fvar wght 200-800, default instance ExtraLight 200. A weight token alone does not instance it; the renderer pins the axis with font-variation-settings 'wght' 800.",
+    "registeredFamilyAlias": "AC Cover ExtraBold",
+    "weight": 800,
+    "sizePx": 112,
+    "sizeRule": "112px is the default and the maximum. A cover whose approved wording overruns reserveRightEdge at 112px uses the largest whole-pixel size below 112 that keeps every line's ink at or before x=583. Never change weight, tracking or wording to force the fit. This cover's fitted size is fittedSizePx below; AC-034 fits at 107px, recorded in exports/ac-034-render-provenance.json.",
+    "fittedSizePx": 86,
+    "lineHeightPx": 116,
+    "trackingPx": -3,
+    "color": "#fff7df",
+    "box": { "x": 33, "y": 134, "width": 550, "height": 232 },
+    "baselineY": [250, 366],
+    "maxLines": 2,
+    "reserveRightEdge": 603
+  },
+  "authorName": {
+    "family": "Manrope",
+    "fontFile": "scripts/assets/manrope-semibold.ttf",
+    "fontFileNote": "Static wght=600 instance of the same Manrope source. It carries no fvar table, so no axis is set. Its internal name table still reads Manrope ExtraLight; the renderer addresses it by alias, never by its embedded family name.",
+    "registeredFamilyAlias": "AC Cover SemiBold",
+    "weight": 600,
+    "sizePx": 27,
+    "trackingPx": 0.5,
+    "color": "#fff7df",
+    "origin": { "x": 35, "y": 560 },
+    "baselineY": 582,
+    "visualHeightPx": 27
+  },
+  "illustration": { "box": { "x": 604, "y": 69, "width": 596, "height": 454 }, "headlineClearance": "The illustration begins at x=604. Text never extends past x=583.", "scaleRule": "Keep the primary inlet on x=604 and the branch tips within the canvas. Scale article-specific illustration 0.95–1.05 only; retain at least 20px from the headline reserve." },
+  "shortHeadlineRule": "Set deliberate sentence-case line breaks of no more than two lines. Do not change tracking or distort Manrope to fit. Size may come down from 112px under headline.sizeRule.",
+  "escalationRule": "If accurate copy cannot fit the locked box in two lines at a readable size, return a shorter accurate wording for copy approval. Do not redesign the cover.",
+  "measuredFit": {
+    "measuredAt": "2026-09-23",
+    "underDirection": "ADR-462, applying Adrian's ADR-460 comment 5343fedb-9ad8-4ee6-a718-14bc492d3ea4 (2026-09-23T14:00:47.348Z) to reduce the headline size and keep the approved wording.",
+    "method": "Pixel ink extent of each line rendered by @napi-rs/canvas at weight 800 and -3px tracking, origin x=33; see exports/ac-033-render-provenance.json.",
+    "sizeSearch": "Whole-pixel sizes tried downward from 112. At 112px both lines overran (ink right x=754 and x=587). 87px still overran on \"Where should\" at ink right x=586. 86px is the largest size at which every line clears x=583.",
+    "fittedSizePx": 86,
+    "lines": [
+      { "text": "Where should", "advanceRightEdgeX": 582.66, "inkRightX": 579, "limitX": 583, "fits": true },
+      { "text": "AI go first?", "advanceRightEdgeX": 453.48, "inkRightX": 452, "limitX": 583, "fits": true }
+    ]
+  },
+  "layers": ["background", "illustration", "headline", "author-name"]
+}
