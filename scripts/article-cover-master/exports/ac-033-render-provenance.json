@@ -1,0 +1,141 @@
+{
+  "method": "@napi-rs/canvas compositor. It fills a flat #0557e1 field with no grain, noise, filter or gradient; decodes the canonical AC-033 WebP and isolates its right-side artwork onto that field; draws the Manrope variable font pinned to wght 800 for the headline and the static wght 600 face for the attribution, each under its own registration alias; and encodes PNG and WebP. No Sharp import, invocation, crop, composite, resize or encoder is used. No Resvg import or invocation is used.",
+  "renderer": "@napi-rs/canvas",
+  "correctedUnder": "ADR-461, applying the ADR-459 audit findings",
+  "background": {
+    "color": "#0557e1",
+    "texture": "none",
+    "note": "The earlier build layered a per-pixel PRNG grain over the fill and the master SVG carried a paper-grain feTurbulence filter. Both are removed."
+  },
+  "typography": {
+    "headlineTrackingPx": -3,
+    "authorTrackingPx": 0.5,
+    "note": "Tracking values are the ADR-446 mandated ones. They are not re-derived from measured fit; see headlineFit below for what they actually measure at weight 800."
+  },
+  "fonts": {
+    "AC Cover ExtraBold": {
+      "file": "scripts/assets/manrope-extrabold.ttf",
+      "sha256": "3ae11c49db0455a3cc33e37d380f20fdb8c7f8b41dc07625c177e3d87a9d6ae6",
+      "registeredFamily": "AC Cover ExtraBold",
+      "weight": 800,
+      "variableAxes": [
+        {
+          "tag": "wght",
+          "min": 200,
+          "max": 800,
+          "defaultValue": 200
+        }
+      ],
+      "pinnedTo": "'wght' 800"
+    },
+    "AC Cover SemiBold": {
+      "file": "scripts/assets/manrope-semibold.ttf",
+      "sha256": "a53abdb1db7685b5b58a3fa204d9b2daa127b8b734287d999f72c861dd76c8ac",
+      "registeredFamily": "AC Cover SemiBold",
+      "weight": 600,
+      "variableAxes": [],
+      "pinnedTo": "static instance, no axis"
+    }
+  },
+  "weightProof": {
+    "probe": "Where should",
+    "sizePx": 112,
+    "advanceAsConfigured": 762.72,
+    "advanceAt800": 762.72,
+    "advanceAt600": 738.7,
+    "advanceAt200": 690.48,
+    "note": "Advances of the same string from the same file at three axis positions. Ascending advances prove the headline face resolves to a real ExtraBold 800 and not to the 200 default or the 600 instance. The build throws if this ordering fails."
+  },
+  "headline": {
+    "family": "Manrope",
+    "weight": 800,
+    "fontFile": "scripts/assets/manrope-extrabold.ttf",
+    "registeredFamily": "AC Cover ExtraBold",
+    "variationSettings": "'wght' 800",
+    "lines": [
+      "Where should",
+      "AI go first?"
+    ],
+    "renderedWith": "CanvasRenderingContext2D font: 800 112px \"AC Cover ExtraBold\", fontVariationSettings 'wght' 800, letterSpacing -3px"
+  },
+  "author": {
+    "family": "Manrope",
+    "weight": 600,
+    "fontFile": "scripts/assets/manrope-semibold.ttf",
+    "registeredFamily": "AC Cover SemiBold",
+    "renderedWith": "CanvasRenderingContext2D font: 600 27px \"AC Cover SemiBold\", letterSpacing 0.5px"
+  },
+  "headlineFit": {
+    "limitX": 583,
+    "illustrationBoxStartsX": 604,
+    "method": "Pixel ink extent of each line rendered at the locked settings, origin x=33.",
+    "lines": [
+      {
+        "text": "Where should",
+        "advancePx": 726.72,
+        "advanceRightEdgeX": 759.72,
+        "inkLeftX": 34,
+        "inkRightX": 754,
+        "inkPixels": 27672
+      },
+      {
+        "text": "AI go first?",
+        "advancePx": 557.58,
+        "advanceRightEdgeX": 590.58,
+        "inkLeftX": 35,
+        "inkRightX": 587,
+        "inkPixels": 20392
+      }
+    ],
+    "fits": false,
+    "status": "HELD. The approved wording overruns the locked headline box at the mandated 800/-3px settings. Tightening, shrinking and substitute wording are all forbidden, so these exports are measurement evidence only and no AC-033 cover is finalized here."
+  },
+  "authorFit": {
+    "text": "Adrian Ching",
+    "advancePx": 171.66,
+    "advanceRightEdgeX": 206.66,
+    "inkLeftX": 35,
+    "inkRightX": 204,
+    "inkPixels": 1498
+  },
+  "source": {
+    "file": "scripts/assets/illustrations/ac-033-where-should-ai-go-first-cover.webp",
+    "sha256": "fe10ed3a770d1b92be4f7ff60c63a8573d0699e084e9e66a222ea80469c692f3",
+    "note": "Read-only input. This shipped cover is the ADR-446 illustration-style reference and is never rewritten by this script."
+  },
+  "isolatedIllustration": {
+    "file": "scripts/article-cover-master/ac-033-illustration-isolated.png",
+    "sha256": "5326acbbfe99559bad54affd25231c42f087b4631bc581c4bbfaa89630fcd9dd",
+    "note": "Regenerated deterministically from the source above; byte-identical to the approved committed file."
+  },
+  "master": {
+    "file": "scripts/article-cover-master/ac-033-manrope-master.svg",
+    "sha256": "8aaf2e3379f36d8eeecfebab19e411ff02a1ba4f26846b44f5897969691a8221"
+  },
+  "tokens": {
+    "file": "scripts/article-cover-master/ac-033-manrope-tokens.json",
+    "sha256": "7b480fa2be836ed2a14ae8623998fb9cf050d8b45e4c51a6fdadad97d4a5cfc5"
+  },
+  "files": {
+    "ac-033-manrope-baseline.png": {
+      "width": 1200,
+      "height": 630,
+      "sha256": "c5721bbaac86599c941d55d8e63aa0b926812e401ada72478702f1f233805a25"
+    },
+    "ac-033-manrope-400.png": {
+      "width": 400,
+      "height": 210,
+      "sha256": "3d246a419ecfd6f588324dd9a355e4310835a014fae54c95cfabbb7db9820aa9"
+    },
+    "ac-033-manrope-320.png": {
+      "width": 320,
+      "height": 168,
+      "sha256": "e6573e8b84be6afaa440bcc114b056a3f17137fe1bfb14ad10965c54999c733f"
+    },
+    "ac-033-manrope-baseline.webp": {
+      "width": 1200,
+      "height": 630,
+      "sha256": "97dd36d87a2af6c92aa169ef173c47348242adb5a9ee41e65419839d357ec13a"
+    }
+  }
+}

@@ -3,21 +3,16 @@
   AC-033 Article Cover Master — 1200 × 630
   Editable groups: background, illustration, headline, author-name.
   Render with: node scripts/article-cover-master/render-ac-033-manrope.mjs
-  The renderer inlines the canonical AC-033 illustration source and loads the supplied Manrope font file. It does not use Sharp.
+  The renderer inlines the canonical AC-033 illustration source and loads the Manrope
+  variable font, pinned to wght 800 for the headline. It does not use Sharp.
+
+  Values here must match render-ac-033-manrope.mjs and ac-033-manrope-tokens.json:
+  flat #0557e1 background with no filter, headline tracking -3px, author tracking +0.5px.
+  The named faces are the renderer's registration aliases, not system font names.
 -->
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <defs>
-    <filter id="paper-grain" x="0" y="0" width="100%" height="100%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="3" seed="33" result="noise"/>
-      <feColorMatrix in="noise" type="saturate" values="0" result="mono"/>
-      <feComponentTransfer in="mono"><feFuncA type="table" tableValues="0 .12"/></feComponentTransfer>
-    </filter>
-    <filter id="print-rough"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="1.6"/></filter>
-  </defs>
-
-  <g id="background" aria-label="Continuous cobalt paper field">
+  <g id="background" aria-label="Flat cobalt field">
     <rect width="1200" height="630" fill="#0557e1"/>
-    <rect width="1200" height="630" fill="#fff9e6" filter="url(#paper-grain)"/>
   </g>
 
   <g id="illustration" aria-label="Canonical AC-033 editorial illustration, background isolated">
@@ -25,12 +20,11 @@
     <image id="ac-033-isolated-illustration" href="ac-033-illustration-isolated.png" x="0" y="0" width="1200" height="630"/>
   </g>
 
-
-  <g id="headline" aria-label="Headline text layer" fill="#fff7df" font-family="Manrope, sans-serif" font-size="112" font-weight="800" letter-spacing="-6.5">
+  <g id="headline" aria-label="Headline text layer" fill="#fff7df" font-family="AC Cover ExtraBold" font-size="112" font-weight="800" font-variation-settings="'wght' 800" letter-spacing="-3">
     <text x="33" y="250">Where should</text>
     <text x="33" y="366">AI go first?</text>
   </g>
-  <g id="author-name" aria-label="Author name layer" fill="#fff7df" font-family="Manrope, sans-serif" font-size="27" font-weight="600" letter-spacing="-1.2">
+  <g id="author-name" aria-label="Author name layer" fill="#fff7df" font-family="AC Cover SemiBold" font-size="27" font-weight="600" letter-spacing="0.5">
     <text x="35" y="582">Adrian Ching</text>
   </g>
 </svg>

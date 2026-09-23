@@ -1,0 +1,48 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "name": "AC-033 Manrope article-cover master",
+  "canvas": { "width": 1200, "height": 630, "aspectRatio": "1.9048:1" },
+  "safeMargin": { "left": 33, "right": 33, "top": 40, "bottom": 43, "percent": { "x": 2.75, "y": 6.83 } },
+  "background": { "color": "#0557e1", "texture": "none; a flat, uninterrupted fill with no grain, noise, filter or gradient" },
+  "headline": {
+    "family": "Manrope",
+    "fontFile": "scripts/assets/manrope-extrabold.ttf",
+    "fontFileNote": "Manrope variable font, fvar wght 200-800, default instance ExtraLight 200. A weight token alone does not instance it; the renderer pins the axis with font-variation-settings 'wght' 800.",
+    "registeredFamilyAlias": "AC Cover ExtraBold",
+    "weight": 800,
+    "sizePx": 112,
+    "lineHeightPx": 116,
+    "trackingPx": -3,
+    "color": "#fff7df",
+    "box": { "x": 33, "y": 134, "width": 550, "height": 232 },
+    "baselineY": [250, 366],
+    "maxLines": 2,
+    "reserveRightEdge": 603
+  },
+  "authorName": {
+    "family": "Manrope",
+    "fontFile": "scripts/assets/manrope-semibold.ttf",
+    "fontFileNote": "Static wght=600 instance of the same Manrope source. It carries no fvar table, so no axis is set. Its internal name table still reads Manrope ExtraLight; the renderer addresses it by alias, never by its embedded family name.",
+    "registeredFamilyAlias": "AC Cover SemiBold",
+    "weight": 600,
+    "sizePx": 27,
+    "trackingPx": 0.5,
+    "color": "#fff7df",
+    "origin": { "x": 35, "y": 560 },
+    "baselineY": 582,
+    "visualHeightPx": 27
+  },
+  "illustration": { "box": { "x": 604, "y": 69, "width": 596, "height": 454 }, "headlineClearance": "The illustration begins at x=604. Text never extends past x=583.", "scaleRule": "Keep the primary inlet on x=604 and the branch tips within the canvas. Scale article-specific illustration 0.95–1.05 only; retain at least 20px from the headline reserve." },
+  "shortHeadlineRule": "Set deliberate sentence-case line breaks of no more than two lines. Do not reduce size, tracking, or distort Manrope to fit.",
+  "escalationRule": "If accurate copy cannot fit the locked box in two lines, return a shorter accurate wording for copy approval. Do not redesign the cover.",
+  "measuredFit": {
+    "measuredAt": "2026-09-23",
+    "method": "Pixel ink extent of each line rendered by @napi-rs/canvas at the locked settings above; see exports/ac-033-render-provenance.json.",
+    "note": "At the mandated 800/-3px settings the approved AC-033 wording does not fit the locked box. Recorded here so no future build re-derives tracking from a wrong-weight measurement.",
+    "lines": [
+      { "text": "Where should", "advanceRightEdgeX": 759.72, "inkRightX": 754, "limitX": 583, "fits": false },
+      { "text": "AI go first?", "advanceRightEdgeX": 590.58, "inkRightX": 587, "limitX": 583, "fits": false }
+    ]
+  },
+  "layers": ["background", "illustration", "headline", "author-name"]
+}

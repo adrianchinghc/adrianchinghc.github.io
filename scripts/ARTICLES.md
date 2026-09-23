@@ -162,22 +162,44 @@ optimized WebP; deployment never calls an image service.
 
 ### The creative standard
 
-Adrian selected the controlling design reference on 21 September 2026 and it
-governs every new cover. Match its visual language; design a new metaphor for
-each article rather than reusing its objects or headline.
+Adrian selected the controlling design reference on 21 September 2026 and
+corrected it on 23 September 2026 (ADR-446). Two files control it:
 
-- **Palette.** Saturated cobalt across the canvas, warm cream lettering, vivid
-  yellow and vermilion accents, deep navy outlines and shadows.
-- **Typography.** One oversized, heavy, condensed sans headline in cream, a few
-  deliberate lines, generous edge clearance. A small `Adrian Ching` attribution
-  sits near the lower left and stays subordinate. Typeset the words cleanly;
-  never ship garbled lettering from an image generator.
+- `scripts/article-cover-master/ac-033-manrope-tokens.json` — the measured
+  values. Canvas, background, type and box geometry come from here.
+- `scripts/assets/illustrations/ac-033-where-should-ai-go-first-cover.webp` —
+  the illustration-style reference. Match its visual language; design a new
+  metaphor for each article rather than reusing its objects or headline.
+
+`scripts/article-cover-master/render-ac-03*-manrope.mjs` are the only renderers,
+and `verify-ac-034.mjs` is the check that has to pass before a cover ships.
+
+- **Palette.** A flat `#0557e1` cobalt field with no grain, noise, filter or
+  gradient, warm cream `#fff7df` lettering, and the illustration's own vivid
+  yellow and vermilion accents over deep navy outlines and shadows.
+- **Typography.** Headline in Manrope ExtraBold 800 at 112px, 116px line height,
+  −3px tracking, `#fff7df`, sentence case, at most two lines, origin x=33 with
+  baselines y=250 and y=366. Attribution is `Adrian Ching` in Manrope SemiBold
+  600 at 27px, +0.5px tracking, origin x=35 baseline y=582, and stays
+  subordinate. Typeset the words cleanly; never ship garbled lettering from an
+  image generator.
+  The weight has to be pinned, not requested. `scripts/assets/manrope-extrabold.ttf`
+  is the Manrope variable font whose default instance is ExtraLight 200, so a CSS
+  weight token alone silently renders the wrong face. `cover-fonts.mjs` registers
+  each face under its own alias and sets the `wght` axis explicitly; the build
+  throws if the rendered 800 does not measure heavier than 600 and 200.
 - **Composition.** Headline left, a large conceptual illustration right, joined
-  by a spacious cobalt field. It should read as one designed editorial cover.
-- **Illustration.** Bold simplified geometric forms with a screen-printed or
-  linocut grain, crisp silhouettes, restrained dark outlines, dimensional blocks
-  and long graphic shadows. Deliberately illustrated, not glossy 3D or a
-  photoreal render. A small anonymous figure may set scale; it is not Adrian.
+  by a spacious flat cobalt field. It should read as one designed editorial
+  cover. The headline box is x=33 to x=583 and the illustration box starts at
+  x=604. Do not shrink or tighten type to force a fit: if accurate copy cannot
+  fit the box in two lines, return shorter accurate wording for Adrian's
+  approval rather than redesigning the cover.
+- **Illustration.** A transparent raster illustration (PNG or WebP with alpha),
+  not a hand-coded vector imitation. Bold simplified geometric forms with a
+  screen-printed or linocut character, crisp silhouettes, restrained dark
+  outlines, dimensional blocks and long graphic shadows. Deliberately
+  illustrated, not glossy 3D or a photoreal render. A small anonymous figure may
+  set scale; it is not Adrian.
 - **Storytelling.** A clear visual metaphor for the article's central decision,
   built from a few large objects. Avoid generic robots, AI brains, stock
   business clip art, clutter, fabricated screenshots or dashboards, invented

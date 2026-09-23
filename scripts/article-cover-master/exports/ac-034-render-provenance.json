@@ -1,21 +1,62 @@
 {
-  "method": "@napi-rs/canvas compositor; it fills a plain, uninterrupted cobalt field (no procedural grain, no gradient), loads the ADR-447 owner-approved transparent raster illustration directly onto the illustration box via loadImage (no SVG rasterization, no hand-coded vector step), draws real Manrope font files for headline and author, and encodes PNG/WebP. No Sharp import, invocation, crop, composite, resize, or encoder is used. No Resvg import, invocation, or SVG illustration source is used.",
+  "method": "@napi-rs/canvas compositor. It fills a flat #0557e1 field with no grain, noise, filter or gradient, loads the ADR-447 owner-approved transparent raster illustration directly onto the illustration box via loadImage (no SVG rasterization, no hand-coded vector step), draws the Manrope variable font pinned to wght 800 for the headline and the static wght 600 face for the attribution under separate registration aliases, and encodes PNG and WebP. No Sharp import, invocation, crop, composite, resize or encoder is used. No Resvg import, invocation or SVG illustration source is used.",
   "renderer": "@napi-rs/canvas",
+  "correctedUnder": "ADR-461, applying the ADR-459 audit findings",
   "background": {
     "color": "#0557e1",
-    "note": "Flat fill only, verified by sampling ac-033-where-should-ai-go-first-cover.webp background pixels (bottom band avg #0254e1, top band avg #0356e1; both cluster on the master SVG's own base fill #0557e1). This supersedes the #0858d8 value cited in ADR-408, which does not match the source bytes. The prior render's hand-rolled per-pixel grain() PRNG produced visible banding; it has been removed in favor of a plain field per the owner correction."
+    "texture": "none",
+    "note": "Flat fill only. The earlier hand-rolled per-pixel grain PRNG produced visible banding and is removed."
   },
   "typography": {
-    "note": "Tracking opened from the rejected -6.5px/-1.2px candidate. Headline tracking is bounded by the locked 550px headline box (bottleneck at 0px tracking measures ~576px, wider than the box), so -3px is the most open value that still clears the box before the illustration; author tracking moved to a slightly open +0.5px.",
     "headlineTrackingPx": -3,
-    "authorTrackingPx": 0.5
+    "authorTrackingPx": 0.5,
+    "note": "The ADR-446 mandated values. See headlineFit for what they measure at the corrected weight 800."
+  },
+  "fonts": {
+    "AC Cover ExtraBold": {
+      "file": "scripts/assets/manrope-extrabold.ttf",
+      "sha256": "3ae11c49db0455a3cc33e37d380f20fdb8c7f8b41dc07625c177e3d87a9d6ae6",
+      "registeredFamily": "AC Cover ExtraBold",
+      "weight": 800,
+      "variableAxes": [
+        {
+          "tag": "wght",
+          "min": 200,
+          "max": 800,
+          "defaultValue": 200
+        }
+      ],
+      "pinnedTo": "'wght' 800"
+    },
+    "AC Cover SemiBold": {
+      "file": "scripts/assets/manrope-semibold.ttf",
+      "sha256": "a53abdb1db7685b5b58a3fa204d9b2daa127b8b734287d999f72c861dd76c8ac",
+      "registeredFamily": "AC Cover SemiBold",
+      "weight": 600,
+      "variableAxes": [],
+      "pinnedTo": "static instance, no axis"
+    }
+  },
+  "weightProof": {
+    "probe": "bottleneck",
+    "sizePx": 112,
+    "advanceAsConfigured": 597.74,
+    "advanceAt800": 597.74,
+    "advanceAt600": 576.28,
+    "advanceAt200": 533.23,
+    "note": "Advances of the same string from the same file at three axis positions. Ascending advances prove the headline face resolves to a real ExtraBold 800 and not to the 200 default or the 600 instance. The build throws if this ordering fails."
   },
   "master": {
     "file": "scripts/article-cover-master/ac-033-manrope-master.svg",
-    "sha256": "41f25313e3bb092bd509f8af764453e68b3d60da541b03734d5fcff40f8ee544",
+    "sha256": "8aaf2e3379f36d8eeecfebab19e411ff02a1ba4f26846b44f5897969691a8221",
     "acceptedInteraction": "0b27f1dc-8a54-40f1-adf0-54c7ad474804",
     "acceptedAt": "2026-09-22T09:24:03.678Z",
-    "acceptedMasterSha256": "185212c092d3757536260aed4ce4de1cea57f58584fa4f63209504b61f2248a0"
+    "acceptedMasterSha256": "185212c092d3757536260aed4ce4de1cea57f58584fa4f63209504b61f2248a0",
+    "note": "The accepted sha256 is the version Adrian approved on 2026-09-22. The current sha256 differs because ADR-446 then ordered the grain and tracking corrections and ADR-461 applied them; the composition, palette and layer structure are unchanged."
+  },
+  "tokens": {
+    "file": "scripts/article-cover-master/ac-033-manrope-tokens.json",
+    "sha256": "7b480fa2be836ed2a14ae8623998fb9cf050d8b45e4c51a6fdadad97d4a5cfc5"
   },
   "illustration": {
     "file": "scripts/assets/illustrations/ac-034-lead-follow-up-illustration-transparent.png",
@@ -27,45 +68,79 @@
       "height": 454
     },
     "source": "Chroma (ADR-447), owner-approved via Paperclip attachment 14e1e53c-73a3-4e8a-9e74-a826854b29cb",
-    "note": "Transparent 596x454 RGBA raster illustration, independently passed by Oracle and approved by Adrian on ADR-447 (2026-09-23). Supersedes the hand-coded ac-034-lead-follow-up-illustration.svg + Resvg rasterization path banned by ADR-446's illustration standard."
+    "note": "Transparent 596x454 RGBA raster illustration, independently passed by Oracle and approved by Adrian on ADR-447 (2026-09-23). Bytes unchanged by ADR-461."
   },
   "headline": {
     "family": "Manrope",
     "weight": 800,
     "fontFile": "scripts/assets/manrope-extrabold.ttf",
-    "fontSha256": "3ae11c49db0455a3cc33e37d380f20fdb8c7f8b41dc07625c177e3d87a9d6ae6",
-    "registeredFamily": "Manrope Cover",
+    "registeredFamily": "AC Cover ExtraBold",
+    "variationSettings": "'wght' 800",
     "lines": [
       "You're the",
       "bottleneck"
     ],
-    "renderedWith": "CanvasRenderingContext2D font: 800 112px Manrope Cover, letterSpacing -3px"
+    "renderedWith": "CanvasRenderingContext2D font: 800 112px \"AC Cover ExtraBold\", fontVariationSettings 'wght' 800, letterSpacing -3px"
   },
   "author": {
     "family": "Manrope",
     "weight": 600,
     "fontFile": "scripts/assets/manrope-semibold.ttf",
-    "fontSha256": "a53abdb1db7685b5b58a3fa204d9b2daa127b8b734287d999f72c861dd76c8ac",
-    "renderedWith": "CanvasRenderingContext2D font: 600 27px Manrope Cover, letterSpacing 0.5px"
+    "registeredFamily": "AC Cover SemiBold",
+    "renderedWith": "CanvasRenderingContext2D font: 600 27px \"AC Cover SemiBold\", letterSpacing 0.5px"
+  },
+  "headlineFit": {
+    "limitX": 583,
+    "illustrationBoxStartsX": 604,
+    "method": "Pixel ink extent of each line rendered at the locked settings, origin x=33.",
+    "lines": [
+      {
+        "text": "You're the",
+        "advancePx": 528.54,
+        "advanceRightEdgeX": 561.54,
+        "inkLeftX": 33,
+        "inkRightX": 560,
+        "inkPixels": 18351
+      },
+      {
+        "text": "bottleneck",
+        "advancePx": 570.74,
+        "advanceRightEdgeX": 603.74,
+        "inkLeftX": 40,
+        "inkRightX": 608,
+        "inkPixels": 22590
+      }
+    ],
+    "fits": false
+  },
+  "authorFit": {
+    "text": "Adrian Ching",
+    "advancePx": 171.66,
+    "advanceRightEdgeX": 206.66,
+    "inkLeftX": 35,
+    "inkRightX": 204,
+    "inkPixels": 1498
   },
   "files": {
     "ac-034-manrope-baseline.png": {
       "width": 1200,
       "height": 630,
-      "sha256": "83ccb4e923f95f7be2c727fd6bfcacc3dc1dbf4b20221dd424ad81b32452ce8f"
+      "sha256": "37c6dbd1d37d59d6b1c7aab9da087b7e43c30cb67d2f461f8aefc2980597b9a7"
     },
     "ac-034-manrope-400.png": {
       "width": 400,
       "height": 210,
-      "sha256": "5ab9a5090d32e6e376e245cced94b95d01bcc29eec7f045f1af2196ad83665cb"
+      "sha256": "7bb54f3de270642eb2e9b7f22cb78922f59c5fcf7f9e9b745e235ad5918a73cb"
     },
     "ac-034-manrope-320.png": {
       "width": 320,
       "height": 168,
-      "sha256": "af004383f037ecfcde8ef128e2562bc7bfa5c3ea5d35e6e866cb12569a6eae1f"
+      "sha256": "83241929c0dba226f7011b98447c24d37e77a3ee376640d76934e79b19e7ba0d"
     },
     "ac-034-manrope-baseline.webp": {
-      "sha256": "121a224f96c961c5baa284d0c8c72f6a85fad447130fd43c44e10472f068203e"
+      "width": 1200,
+      "height": 630,
+      "sha256": "416fbf8a714eda66109345b8589dd2f2780a7e6bd577d0d348b1a9df1bae655f"
     }
   }
 }
