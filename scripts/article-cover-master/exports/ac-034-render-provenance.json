@@ -1,16 +1,18 @@
 {
   "method": "@napi-rs/canvas compositor. It fills a flat #0557e1 field with no grain, noise, filter or gradient, loads the ADR-447 owner-approved transparent raster illustration directly onto the illustration box via loadImage (no SVG rasterization, no hand-coded vector step), draws the Manrope variable font pinned to wght 800 for the headline and the static wght 600 face for the attribution under separate registration aliases, and encodes PNG and WebP. No Sharp import, invocation, crop, composite, resize or encoder is used. No Resvg import, invocation or SVG illustration source is used.",
   "renderer": "@napi-rs/canvas",
-  "correctedUnder": "ADR-461, applying the ADR-459 audit findings",
+  "correctedUnder": "ADR-462, applying Adrian's ADR-460 direction on top of the ADR-461 build",
   "background": {
     "color": "#0557e1",
     "texture": "none",
     "note": "Flat fill only. The earlier hand-rolled per-pixel grain PRNG produced visible banding and is removed."
   },
   "typography": {
+    "headlineSizePx": 107,
+    "headlineMaxSizePx": 112,
     "headlineTrackingPx": -3,
     "authorTrackingPx": 0.5,
-    "note": "The ADR-446 mandated values. See headlineFit for what they measure at the corrected weight 800."
+    "note": "Tracking is the ADR-446 mandated -3px and is not re-derived from measured fit. Only the headline size moved, from the standard's 112px maximum down to the fitted 107px, under Adrian's ADR-460 direction to reduce the size rather than the wording."
   },
   "fonts": {
     "AC Cover ExtraBold": {
@@ -39,16 +41,16 @@
   },
   "weightProof": {
     "probe": "bottleneck",
-    "sizePx": 112,
-    "advanceAsConfigured": 597.74,
-    "advanceAt800": 597.74,
-    "advanceAt600": 576.28,
-    "advanceAt200": 533.23,
+    "sizePx": 107,
+    "advanceAsConfigured": 571.06,
+    "advanceAt800": 571.06,
+    "advanceAt600": 550.55,
+    "advanceAt200": 509.43,
     "note": "Advances of the same string from the same file at three axis positions. Ascending advances prove the headline face resolves to a real ExtraBold 800 and not to the 200 default or the 600 instance. The build throws if this ordering fails."
   },
   "master": {
     "file": "scripts/article-cover-master/ac-033-manrope-master.svg",
-    "sha256": "8aaf2e3379f36d8eeecfebab19e411ff02a1ba4f26846b44f5897969691a8221",
+    "sha256": "1a02eecb459ab420b27483254d5fa7c507a4d3bd20c8d6994ded4ec2c2f4c82a",
     "acceptedInteraction": "0b27f1dc-8a54-40f1-adf0-54c7ad474804",
     "acceptedAt": "2026-09-22T09:24:03.678Z",
     "acceptedMasterSha256": "185212c092d3757536260aed4ce4de1cea57f58584fa4f63209504b61f2248a0",
@@ -56,7 +58,7 @@
   },
   "tokens": {
     "file": "scripts/article-cover-master/ac-033-manrope-tokens.json",
-    "sha256": "7b480fa2be836ed2a14ae8623998fb9cf050d8b45e4c51a6fdadad97d4a5cfc5"
+    "sha256": "4970dd4c15d29d73d86502c0a05caef7188eb36790385b7c600ed2aebd34901e"
   },
   "illustration": {
     "file": "scripts/assets/illustrations/ac-034-lead-follow-up-illustration-transparent.png",
@@ -80,7 +82,7 @@
       "You're the",
       "bottleneck"
     ],
-    "renderedWith": "CanvasRenderingContext2D font: 800 112px \"AC Cover ExtraBold\", fontVariationSettings 'wght' 800, letterSpacing -3px"
+    "renderedWith": "CanvasRenderingContext2D font: 800 107px \"AC Cover ExtraBold\", fontVariationSettings 'wght' 800, letterSpacing -3px"
   },
   "author": {
     "family": "Manrope",
@@ -92,26 +94,30 @@
   "headlineFit": {
     "limitX": 583,
     "illustrationBoxStartsX": 604,
-    "method": "Pixel ink extent of each line rendered at the locked settings, origin x=33.",
+    "method": "Pixel ink extent of each line rendered at the settings above, origin x=33.",
+    "maxSizePx": 112,
+    "selectedSizePx": 107,
+    "selection": "Largest whole-pixel size at or below the standard's 112px maximum for which every line's ink ends at or before x=583, searched downward at the production font, weight 800 and -3px tracking. 108px overruns (ink right x=587 on \"bottleneck\"); 107px is the first that clears.",
     "lines": [
       {
         "text": "You're the",
-        "advancePx": 528.54,
-        "advanceRightEdgeX": 561.54,
+        "advancePx": 503.61,
+        "advanceRightEdgeX": 536.61,
         "inkLeftX": 33,
-        "inkRightX": 560,
-        "inkPixels": 18351
+        "inkRightX": 535,
+        "inkPixels": 16936
       },
       {
         "text": "bottleneck",
-        "advancePx": 570.74,
-        "advanceRightEdgeX": 603.74,
+        "advancePx": 544.06,
+        "advanceRightEdgeX": 577.06,
         "inkLeftX": 40,
-        "inkRightX": 608,
-        "inkPixels": 22590
+        "inkRightX": 582,
+        "inkPixels": 20782
       }
     ],
-    "fits": false
+    "fits": true,
+    "directive": "Adrian's ADR-460 comment 5343fedb-9ad8-4ee6-a718-14bc492d3ea4, 2026-09-23T14:00:47.348Z: reduce the headline font size. The words, weight and tracking stay as approved."
   },
   "authorFit": {
     "text": "Adrian Ching",
@@ -125,22 +131,22 @@
     "ac-034-manrope-baseline.png": {
       "width": 1200,
       "height": 630,
-      "sha256": "37c6dbd1d37d59d6b1c7aab9da087b7e43c30cb67d2f461f8aefc2980597b9a7"
+      "sha256": "1685487f482a24c96b8602591ff0d1ad0373a24bcaf28e600d5579964448f63a"
     },
     "ac-034-manrope-400.png": {
       "width": 400,
       "height": 210,
-      "sha256": "7bb54f3de270642eb2e9b7f22cb78922f59c5fcf7f9e9b745e235ad5918a73cb"
+      "sha256": "71a971127ee0e610d20b63e16475eb416cbe7a14843096c48d78a1be35c6f4ef"
     },
     "ac-034-manrope-320.png": {
       "width": 320,
       "height": 168,
-      "sha256": "83241929c0dba226f7011b98447c24d37e77a3ee376640d76934e79b19e7ba0d"
+      "sha256": "1ef76a5dd2d84c91726478aaa6943aeefe1ef1224760476ad28cf41f97d15834"
     },
     "ac-034-manrope-baseline.webp": {
       "width": 1200,
       "height": 630,
-      "sha256": "416fbf8a714eda66109345b8589dd2f2780a7e6bd577d0d348b1a9df1bae655f"
+      "sha256": "725e02b7c395da7a0a1d3b9548b6c1c467520b84d34e374aa8ba56a938aaba61"
     }
   }
 }

@@ -11,6 +11,8 @@
     "registeredFamilyAlias": "AC Cover ExtraBold",
     "weight": 800,
     "sizePx": 112,
+    "sizeRule": "112px is the default and the maximum. A cover whose approved wording overruns reserveRightEdge at 112px uses the largest whole-pixel size below 112 that keeps every line's ink at or before x=583. Never change weight, tracking or wording to force the fit. This cover's fitted size is fittedSizePx below; AC-034 fits at 107px, recorded in exports/ac-034-render-provenance.json.",
+    "fittedSizePx": 86,
     "lineHeightPx": 116,
     "trackingPx": -3,
     "color": "#fff7df",
@@ -33,15 +35,17 @@
     "visualHeightPx": 27
   },
   "illustration": { "box": { "x": 604, "y": 69, "width": 596, "height": 454 }, "headlineClearance": "The illustration begins at x=604. Text never extends past x=583.", "scaleRule": "Keep the primary inlet on x=604 and the branch tips within the canvas. Scale article-specific illustration 0.95–1.05 only; retain at least 20px from the headline reserve." },
-  "shortHeadlineRule": "Set deliberate sentence-case line breaks of no more than two lines. Do not reduce size, tracking, or distort Manrope to fit.",
-  "escalationRule": "If accurate copy cannot fit the locked box in two lines, return a shorter accurate wording for copy approval. Do not redesign the cover.",
+  "shortHeadlineRule": "Set deliberate sentence-case line breaks of no more than two lines. Do not change tracking or distort Manrope to fit. Size may come down from 112px under headline.sizeRule.",
+  "escalationRule": "If accurate copy cannot fit the locked box in two lines at a readable size, return a shorter accurate wording for copy approval. Do not redesign the cover.",
   "measuredFit": {
     "measuredAt": "2026-09-23",
-    "method": "Pixel ink extent of each line rendered by @napi-rs/canvas at the locked settings above; see exports/ac-033-render-provenance.json.",
-    "note": "At the mandated 800/-3px settings the approved AC-033 wording does not fit the locked box. Recorded here so no future build re-derives tracking from a wrong-weight measurement.",
+    "underDirection": "ADR-462, applying Adrian's ADR-460 comment 5343fedb-9ad8-4ee6-a718-14bc492d3ea4 (2026-09-23T14:00:47.348Z) to reduce the headline size and keep the approved wording.",
+    "method": "Pixel ink extent of each line rendered by @napi-rs/canvas at weight 800 and -3px tracking, origin x=33; see exports/ac-033-render-provenance.json.",
+    "sizeSearch": "Whole-pixel sizes tried downward from 112. At 112px both lines overran (ink right x=754 and x=587). 87px still overran on \"Where should\" at ink right x=586. 86px is the largest size at which every line clears x=583.",
+    "fittedSizePx": 86,
     "lines": [
-      { "text": "Where should", "advanceRightEdgeX": 759.72, "inkRightX": 754, "limitX": 583, "fits": false },
-      { "text": "AI go first?", "advanceRightEdgeX": 590.58, "inkRightX": 587, "limitX": 583, "fits": false }
+      { "text": "Where should", "advanceRightEdgeX": 582.66, "inkRightX": 579, "limitX": 583, "fits": true },
+      { "text": "AI go first?", "advanceRightEdgeX": 453.48, "inkRightX": 452, "limitX": 583, "fits": true }
     ]
   },
   "layers": ["background", "illustration", "headline", "author-name"]

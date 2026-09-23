@@ -179,7 +179,12 @@ and `verify-ac-034.mjs` is the check that has to pass before a cover ships.
   yellow and vermilion accents over deep navy outlines and shadows.
 - **Typography.** Headline in Manrope ExtraBold 800 at 112px, 116px line height,
   −3px tracking, `#fff7df`, sentence case, at most two lines, origin x=33 with
-  baselines y=250 and y=366. Attribution is `Adrian Ching` in Manrope SemiBold
+  baselines y=250 and y=366. 112px is the default and the maximum. When approved
+  wording overruns the box at 112px, take the size down to the largest whole
+  pixel value that keeps every line's ink at or before x=583, and record that
+  value in the renderer and its provenance. Weight, tracking, colour, origin and
+  baselines never move to force a fit. AC-033 fits at 86px, AC-034 at 107px.
+  Attribution is `Adrian Ching` in Manrope SemiBold
   600 at 27px, +0.5px tracking, origin x=35 baseline y=582, and stays
   subordinate. Typeset the words cleanly; never ship garbled lettering from an
   image generator.
@@ -191,9 +196,10 @@ and `verify-ac-034.mjs` is the check that has to pass before a cover ships.
 - **Composition.** Headline left, a large conceptual illustration right, joined
   by a spacious flat cobalt field. It should read as one designed editorial
   cover. The headline box is x=33 to x=583 and the illustration box starts at
-  x=604. Do not shrink or tighten type to force a fit: if accurate copy cannot
-  fit the box in two lines, return shorter accurate wording for Adrian's
-  approval rather than redesigning the cover.
+  x=604. Never tighten tracking or distort the face to force a fit; reduce the
+  size under the typography rule above instead. If accurate copy cannot fit the
+  box in two lines at a readable size, return shorter accurate wording for
+  Adrian's approval rather than redesigning the cover.
 - **Illustration.** A transparent raster illustration (PNG or WebP with alpha),
   not a hand-coded vector imitation. Bold simplified geometric forms with a
   screen-printed or linocut character, crisp silhouettes, restrained dark

@@ -5,6 +5,11 @@
 // so a request for weight 800 resolved to the registered 600 face and the headline
 // shipped as SemiBold. Face selection now lives in cover-fonts.mjs, one alias per
 // face, with the variable font's wght axis pinned explicitly.
+//
+// At 112px "bottleneck" overran the locked box. Adrian's ADR-460 direction was to
+// reduce the headline size rather than change the words, so ADR-462 set this cover
+// to the largest whole pixel size that keeps every line at or before x=583: 107px.
+// Wording, weight, tracking, origin and baselines are unchanged.
 import { createCanvas, GlobalFonts, loadImage } from "@napi-rs/canvas";
 import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
@@ -26,7 +31,9 @@ const authorTrackingPx = 0.5;
 const headlineLines = ["You're the", "bottleneck"];
 const headlineBaselines = [250, 366];
 const headlineOriginX = 33;
-const headlineSizePx = 112;
+// ADR-462: fitted size, not the standard's 112px maximum. See headlineFit below.
+const headlineMaxSizePx = 112;
+const headlineSizePx = 107;
 const authorText = "Adrian Ching";
 const authorOriginX = 35;
 const authorBaselineY = 582;
@@ -87,9 +94,15 @@ const evidence = {
   method:
     "@napi-rs/canvas compositor. It fills a flat #0557e1 field with no grain, noise, filter or gradient, loads the ADR-447 owner-approved transparent raster illustration directly onto the illustration box via loadImage (no SVG rasterization, no hand-coded vector step), draws the Manrope variable font pinned to wght 800 for the headline and the static wght 600 face for the attribution under separate registration aliases, and encodes PNG and WebP. No Sharp import, invocation, crop, composite, resize or encoder is used. No Resvg import, invocation or SVG illustration source is used.",
   renderer: "@napi-rs/canvas",
-  correctedUnder: "ADR-461, applying the ADR-459 audit findings",
+  correctedUnder: "ADR-462, applying Adrian's ADR-460 direction on top of the ADR-461 build",
   background: { color: backgroundColor, texture: "none", note: "Flat fill only. The earlier hand-rolled per-pixel grain PRNG produced visible banding and is removed." },
-  typography: { headlineTrackingPx, authorTrackingPx, note: "The ADR-446 mandated values. See headlineFit for what they measure at the corrected weight 800." },
+  typography: {
+    headlineSizePx,
+    headlineMaxSizePx,
+    headlineTrackingPx,
+    authorTrackingPx,
+    note: "Tracking is the ADR-446 mandated -3px and is not re-derived from measured fit. Only the headline size moved, from the standard's 112px maximum down to the fitted 107px, under Adrian's ADR-460 direction to reduce the size rather than the wording.",
+  },
   fonts: faces,
   weightProof: {
     ...weightProof,
@@ -123,9 +136,15 @@ const evidence = {
   headlineFit: {
     limitX: headlineRightLimitX,
     illustrationBoxStartsX: illustrationBox.x,
-    method: "Pixel ink extent of each line rendered at the locked settings, origin x=33.",
+    method: "Pixel ink extent of each line rendered at the settings above, origin x=33.",
+    maxSizePx: headlineMaxSizePx,
+    selectedSizePx: headlineSizePx,
+    selection:
+      "Largest whole-pixel size at or below the standard's 112px maximum for which every line's ink ends at or before x=583, searched downward at the production font, weight 800 and -3px tracking. 108px overruns (ink right x=587 on \"bottleneck\"); 107px is the first that clears.",
     lines: headlineBounds,
     fits: headlineBounds.every(line => line.inkRightX <= headlineRightLimitX),
+    directive:
+      "Adrian's ADR-460 comment 5343fedb-9ad8-4ee6-a718-14bc492d3ea4, 2026-09-23T14:00:47.348Z: reduce the headline font size. The words, weight and tracking stay as approved.",
   },
   authorFit: authorBounds,
   files,

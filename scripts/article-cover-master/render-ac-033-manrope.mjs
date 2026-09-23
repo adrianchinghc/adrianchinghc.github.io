@@ -4,10 +4,14 @@
 // per-pixel grain PRNG is gone), headline tracking -3px, author tracking +0.5px,
 // and a real ExtraBold 800 face pinned on the variable font's wght axis.
 //
-// The headline does not fit the locked box at those settings. The exports below
-// are measurement evidence, not an approved cover: the shipped
-// scripts/assets/illustrations/ac-033-where-should-ai-go-first-cover.webp is the
-// read-only input here and is never overwritten.
+// At 112px the approved wording overran the locked box. Adrian's ADR-460
+// direction was to reduce the headline size rather than change the words, so
+// ADR-462 set this cover to the largest whole pixel size that keeps every line
+// at or before x=583: 86px. Wording, weight, tracking, origin and baselines are
+// unchanged.
+//
+// The shipped scripts/assets/illustrations/ac-033-where-should-ai-go-first-cover.webp
+// is the read-only input here and is never overwritten.
 import { createCanvas, GlobalFonts, loadImage } from "@napi-rs/canvas";
 import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
@@ -30,7 +34,9 @@ const authorTrackingPx = 0.5;
 const headlineLines = ["Where should", "AI go first?"];
 const headlineBaselines = [250, 366];
 const headlineOriginX = 33;
-const headlineSizePx = 112;
+// ADR-462: fitted size, not the standard's 112px maximum. See headlineFit below.
+const headlineMaxSizePx = 112;
+const headlineSizePx = 86;
 const authorText = "Adrian Ching";
 const authorOriginX = 35;
 const authorBaselineY = 582;
@@ -108,12 +114,14 @@ const evidence = {
   method:
     "@napi-rs/canvas compositor. It fills a flat #0557e1 field with no grain, noise, filter or gradient; decodes the canonical AC-033 WebP and isolates its right-side artwork onto that field; draws the Manrope variable font pinned to wght 800 for the headline and the static wght 600 face for the attribution, each under its own registration alias; and encodes PNG and WebP. No Sharp import, invocation, crop, composite, resize or encoder is used. No Resvg import or invocation is used.",
   renderer: "@napi-rs/canvas",
-  correctedUnder: "ADR-461, applying the ADR-459 audit findings",
+  correctedUnder: "ADR-462, applying Adrian's ADR-460 direction on top of the ADR-461 build",
   background: { color: backgroundColor, texture: "none", note: "The earlier build layered a per-pixel PRNG grain over the fill and the master SVG carried a paper-grain feTurbulence filter. Both are removed." },
   typography: {
+    headlineSizePx,
+    headlineMaxSizePx,
     headlineTrackingPx,
     authorTrackingPx,
-    note: "Tracking values are the ADR-446 mandated ones. They are not re-derived from measured fit; see headlineFit below for what they actually measure at weight 800.",
+    note: "Tracking is the ADR-446 mandated -3px and is not re-derived from measured fit. Only the headline size moved, from the standard's 112px maximum down to the fitted 86px, under Adrian's ADR-460 direction to reduce the size rather than the wording.",
   },
   fonts: faces,
   weightProof: {
@@ -139,11 +147,15 @@ const evidence = {
   headlineFit: {
     limitX: headlineRightLimitX,
     illustrationBoxStartsX: 604,
-    method: "Pixel ink extent of each line rendered at the locked settings, origin x=33.",
+    method: "Pixel ink extent of each line rendered at the settings above, origin x=33.",
+    maxSizePx: headlineMaxSizePx,
+    selectedSizePx: headlineSizePx,
+    selection:
+      "Largest whole-pixel size at or below the standard's 112px maximum for which every line's ink ends at or before x=583, searched downward at the production font, weight 800 and -3px tracking. 87px overruns (ink right x=586 on \"Where should\"); 86px is the first that clears.",
     lines: headlineBounds,
     fits: headlineBounds.every(line => line.inkRightX <= headlineRightLimitX),
-    status:
-      "HELD. The approved wording overruns the locked headline box at the mandated 800/-3px settings. Tightening, shrinking and substitute wording are all forbidden, so these exports are measurement evidence only and no AC-033 cover is finalized here.",
+    directive:
+      "Adrian's ADR-460 comment 5343fedb-9ad8-4ee6-a718-14bc492d3ea4, 2026-09-23T14:00:47.348Z: reduce the headline font size. That supersedes the earlier ADR-461 hold and the pending request for shorter wording. The words, weight and tracking stay as approved.",
   },
   authorFit: authorBounds,
   source: { file: "scripts/assets/illustrations/ac-033-where-should-ai-go-first-cover.webp", sha256: sha256(source), note: "Read-only input. This shipped cover is the ADR-446 illustration-style reference and is never rewritten by this script." },

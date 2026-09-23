@@ -3,6 +3,11 @@
 // Extended under ADR-461: hash pinning alone passed while the headline was
 // rendering SemiBold 600 from a shared font alias, so this now also proves the
 // glyph weight, the tracking, the ink bounds and the file dependencies.
+//
+// Extended again under ADR-462: the headline sizes are now per-cover fitted
+// values rather than a shared 112px. Every line must land inside the box, each
+// cover must use the largest whole pixel size that does so, and the renderers,
+// tokens and master SVG must all carry the same number.
 import { createCanvas } from "@napi-rs/canvas";
 import { createHash } from "node:crypto";
 import { access, readFile } from "node:fs/promises";
@@ -15,6 +20,16 @@ const failures = [];
 const check = (condition, message) => {
   if (!condition) failures.push(message);
 };
+
+// The locked headline box and each cover's ADR-462 fitted size. The sizes are
+// not free parameters: section 6 re-derives them and fails if a larger whole
+// pixel size would also have fitted, or if the recorded one does not.
+const limitX = 583;
+const maxSizePx = 112;
+const COVERS = [
+  { id: "AC-033", sizePx: 86, renderer: "scripts/article-cover-master/render-ac-033-manrope.mjs", lines: ["Where should", "AI go first?"] },
+  { id: "AC-034", sizePx: 107, renderer: "scripts/article-cover-master/render-ac-034-manrope.mjs", lines: ["You're the", "bottleneck"] },
+];
 
 // 1. Every file the build reads or writes must exist. The audited head was
 //    missing two of these, which made the AC-033 master unbuildable.
@@ -109,6 +124,15 @@ check(HEADLINE.alias !== AUTHOR.alias, "The headline and author faces share one 
 // 5. The master, the tokens and the renderers must agree on the same numbers.
 const tokens = JSON.parse(await readFile(at("scripts/article-cover-master/ac-033-manrope-tokens.json"), "utf8"));
 check(tokens.headline.trackingPx === -3, `Token headline tracking is ${tokens.headline.trackingPx}, expected -3.`);
+check(tokens.headline.sizePx === 112, `Token headline sizePx is ${tokens.headline.sizePx}; 112 is the standard's maximum and must not move.`);
+check(
+  tokens.headline.fittedSizePx === COVERS[0].sizePx,
+  `Token headline fittedSizePx is ${tokens.headline.fittedSizePx}, expected the AC-033 fitted ${COVERS[0].sizePx}.`,
+);
+check(
+  new RegExp(`font-size="${COVERS[0].sizePx}"[^>]*font-weight="800"`).test(master),
+  `Master SVG headline font-size is not the AC-033 fitted ${COVERS[0].sizePx}px.`,
+);
 check(tokens.authorName.trackingPx === 0.5, `Token author tracking is ${tokens.authorName.trackingPx}, expected 0.5.`);
 check(tokens.background.color === "#0557e1", `Token background is ${tokens.background.color}, expected #0557e1.`);
 check(/letter-spacing="-3"/.test(master), "Master SVG headline tracking is not -3.");
@@ -129,17 +153,50 @@ for (const file of [
   );
 }
 
-// 6. Report the measured ink bounds for both headlines against the locked box.
-const limitX = 583;
+// Each renderer must declare the fitted size this file re-derives in section 6,
+// and must still declare -3px tracking. A silent edit to either fails here.
+for (const cover of COVERS) {
+  const source = await readFile(at(cover.renderer), "utf8");
+  check(
+    new RegExp(`^const headlineSizePx = ${cover.sizePx};$`, "m").test(source),
+    `${cover.renderer} does not declare headlineSizePx = ${cover.sizePx}.`,
+  );
+  check(
+    new RegExp(`^const headlineMaxSizePx = ${maxSizePx};$`, "m").test(source),
+    `${cover.renderer} does not declare headlineMaxSizePx = ${maxSizePx}.`,
+  );
+  check(/^const headlineTrackingPx = -3;$/m.test(source), `${cover.renderer} does not declare headlineTrackingPx = -3.`);
+}
+
+// The shipped AC-034 cover must be the exported baseline WebP byte for byte.
+// Without this the article can keep serving a stale render of an older build.
+const shippedCover = await readFile(at("scripts/assets/illustrations/ac-034-lead-follow-up-cover.webp"));
+const exportedCover = await readFile(at("scripts/article-cover-master/exports/ac-034-manrope-baseline.webp"));
+check(
+  shippedCover.equals(exportedCover),
+  "scripts/assets/illustrations/ac-034-lead-follow-up-cover.webp does not match exports/ac-034-manrope-baseline.webp; the shipped cover is stale.",
+);
+
+// 6. Re-derive each cover's headline size from pixels and hold it to the box.
+//    Every line has to fit, and the recorded size has to be the largest whole
+//    pixel value at or below 112 that fits, so a needlessly small headline fails
+//    the build just as an overrunning one does.
+const fitsAt = (lines, sizePx) => lines.every(line => measureInk(createCanvas, line, HEADLINE, sizePx, -3, 33).inkRightX <= limitX);
 const bounds = [];
-for (const [id, lines] of [
-  ["AC-033", ["Where should", "AI go first?"]],
-  ["AC-034", ["You're the", "bottleneck"]],
-]) {
-  for (const line of lines) {
-    const measured = measureInk(createCanvas, line, HEADLINE, 112, -3, 33);
-    bounds.push({ cover: id, ...measured, limitX, overrunPx: Math.max(0, measured.inkRightX - limitX) });
+for (const cover of COVERS) {
+  for (const line of cover.lines) {
+    const measured = measureInk(createCanvas, line, HEADLINE, cover.sizePx, -3, 33);
+    bounds.push({ cover: cover.id, sizePx: cover.sizePx, ...measured, limitX, overrunPx: Math.max(0, measured.inkRightX - limitX) });
   }
+  check(
+    fitsAt(cover.lines, cover.sizePx),
+    `${cover.id} headline overruns the box at its recorded ${cover.sizePx}px: every line must end at or before x=${limitX}.`,
+  );
+  check(
+    cover.sizePx >= maxSizePx || !fitsAt(cover.lines, cover.sizePx + 1),
+    `${cover.id} is set to ${cover.sizePx}px but also fits at ${cover.sizePx + 1}px. Use the largest whole pixel size that fits.`,
+  );
+  check(cover.sizePx <= maxSizePx, `${cover.id} headline size ${cover.sizePx}px exceeds the ${maxSizePx}px standard maximum.`);
 }
 
 if (failures.length) {
@@ -147,18 +204,14 @@ if (failures.length) {
   throw new Error(`${failures.length} cover build check(s) failed.`);
 }
 
-console.log("Cover build checks passed: file dependencies, approved illustration bytes, 1200x630 PNG + WebP, 400/320 variants, ExtraBold 800 glyph weight, tracking, flat background, no Sharp, no Resvg.");
+console.log(
+  "Cover build checks passed: file dependencies, approved illustration bytes, shipped cover freshness, 1200x630 PNG + WebP, " +
+    "400/320 variants, ExtraBold 800 glyph weight, tracking, fitted headline sizes, headline box fit, flat background, no Sharp, no Resvg.",
+);
 console.log(`Headline weight proof (advance of "bottleneck" at 112px): wght 800 = ${weightProof.advanceAt800}, wght 600 = ${weightProof.advanceAt600}, wght 200 = ${weightProof.advanceAt200}.`);
-console.log(`\nHeadline ink bounds at the locked 112px / -3px settings, origin x=33, box limit x=${limitX}:`);
+console.log(`\nHeadline ink bounds at -3px tracking, origin x=33, box limit x=${limitX} (maximum size ${maxSizePx}px):`);
 for (const row of bounds) {
   console.log(
-    `  ${row.cover}  ${JSON.stringify(row.text).padEnd(16)} advance right x=${String(row.advanceRightEdgeX).padStart(7)}  ink right x=${String(row.inkRightX).padStart(4)}  ${row.overrunPx ? `OVERRUNS the box by ${row.overrunPx}px` : "within the box"}`,
-  );
-}
-const overruns = bounds.filter(row => row.overrunPx > 0);
-if (overruns.length) {
-  console.log(
-    `\nHELD: ${overruns.length} headline line(s) overrun the locked box at the mandated settings. ` +
-      "ADR-446 forbids tightening, shrinking and substitute wording, so no cover is finalized until Adrian approves wording that fits.",
+    `  ${row.cover}  ${String(row.sizePx).padStart(3)}px  ${JSON.stringify(row.text).padEnd(16)} advance right x=${String(row.advanceRightEdgeX).padStart(7)}  ink right x=${String(row.inkRightX).padStart(4)}  ${row.overrunPx ? `OVERRUNS the box by ${row.overrunPx}px` : `within the box, ${limitX - row.inkRightX}px clear`}`,
   );
 }

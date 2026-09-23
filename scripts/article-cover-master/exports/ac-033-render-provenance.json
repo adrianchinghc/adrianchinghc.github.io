@@ -1,16 +1,18 @@
 {
   "method": "@napi-rs/canvas compositor. It fills a flat #0557e1 field with no grain, noise, filter or gradient; decodes the canonical AC-033 WebP and isolates its right-side artwork onto that field; draws the Manrope variable font pinned to wght 800 for the headline and the static wght 600 face for the attribution, each under its own registration alias; and encodes PNG and WebP. No Sharp import, invocation, crop, composite, resize or encoder is used. No Resvg import or invocation is used.",
   "renderer": "@napi-rs/canvas",
-  "correctedUnder": "ADR-461, applying the ADR-459 audit findings",
+  "correctedUnder": "ADR-462, applying Adrian's ADR-460 direction on top of the ADR-461 build",
   "background": {
     "color": "#0557e1",
     "texture": "none",
     "note": "The earlier build layered a per-pixel PRNG grain over the fill and the master SVG carried a paper-grain feTurbulence filter. Both are removed."
   },
   "typography": {
+    "headlineSizePx": 86,
+    "headlineMaxSizePx": 112,
     "headlineTrackingPx": -3,
     "authorTrackingPx": 0.5,
-    "note": "Tracking values are the ADR-446 mandated ones. They are not re-derived from measured fit; see headlineFit below for what they actually measure at weight 800."
+    "note": "Tracking is the ADR-446 mandated -3px and is not re-derived from measured fit. Only the headline size moved, from the standard's 112px maximum down to the fitted 86px, under Adrian's ADR-460 direction to reduce the size rather than the wording."
   },
   "fonts": {
     "AC Cover ExtraBold": {
@@ -39,11 +41,11 @@
   },
   "weightProof": {
     "probe": "Where should",
-    "sizePx": 112,
-    "advanceAsConfigured": 762.72,
-    "advanceAt800": 762.72,
-    "advanceAt600": 738.7,
-    "advanceAt200": 690.48,
+    "sizePx": 86,
+    "advanceAsConfigured": 585.66,
+    "advanceAt800": 585.66,
+    "advanceAt600": 567.21,
+    "advanceAt200": 530.19,
     "note": "Advances of the same string from the same file at three axis positions. Ascending advances prove the headline face resolves to a real ExtraBold 800 and not to the 200 default or the 600 instance. The build throws if this ordering fails."
   },
   "headline": {
@@ -56,7 +58,7 @@
       "Where should",
       "AI go first?"
     ],
-    "renderedWith": "CanvasRenderingContext2D font: 800 112px \"AC Cover ExtraBold\", fontVariationSettings 'wght' 800, letterSpacing -3px"
+    "renderedWith": "CanvasRenderingContext2D font: 800 86px \"AC Cover ExtraBold\", fontVariationSettings 'wght' 800, letterSpacing -3px"
   },
   "author": {
     "family": "Manrope",
@@ -68,27 +70,30 @@
   "headlineFit": {
     "limitX": 583,
     "illustrationBoxStartsX": 604,
-    "method": "Pixel ink extent of each line rendered at the locked settings, origin x=33.",
+    "method": "Pixel ink extent of each line rendered at the settings above, origin x=33.",
+    "maxSizePx": 112,
+    "selectedSizePx": 86,
+    "selection": "Largest whole-pixel size at or below the standard's 112px maximum for which every line's ink ends at or before x=583, searched downward at the production font, weight 800 and -3px tracking. 87px overruns (ink right x=586 on \"Where should\"); 86px is the first that clears.",
     "lines": [
       {
         "text": "Where should",
-        "advancePx": 726.72,
-        "advanceRightEdgeX": 759.72,
-        "inkLeftX": 34,
-        "inkRightX": 754,
-        "inkPixels": 27672
+        "advancePx": 549.66,
+        "advanceRightEdgeX": 582.66,
+        "inkLeftX": 33,
+        "inkRightX": 579,
+        "inkPixels": 16735
       },
       {
         "text": "AI go first?",
-        "advancePx": 557.58,
-        "advanceRightEdgeX": 590.58,
-        "inkLeftX": 35,
-        "inkRightX": 587,
-        "inkPixels": 20392
+        "advancePx": 420.48,
+        "advanceRightEdgeX": 453.48,
+        "inkLeftX": 34,
+        "inkRightX": 452,
+        "inkPixels": 12404
       }
     ],
-    "fits": false,
-    "status": "HELD. The approved wording overruns the locked headline box at the mandated 800/-3px settings. Tightening, shrinking and substitute wording are all forbidden, so these exports are measurement evidence only and no AC-033 cover is finalized here."
+    "fits": true,
+    "directive": "Adrian's ADR-460 comment 5343fedb-9ad8-4ee6-a718-14bc492d3ea4, 2026-09-23T14:00:47.348Z: reduce the headline font size. That supersedes the earlier ADR-461 hold and the pending request for shorter wording. The words, weight and tracking stay as approved."
   },
   "authorFit": {
     "text": "Adrian Ching",
@@ -110,32 +115,32 @@
   },
   "master": {
     "file": "scripts/article-cover-master/ac-033-manrope-master.svg",
-    "sha256": "8aaf2e3379f36d8eeecfebab19e411ff02a1ba4f26846b44f5897969691a8221"
+    "sha256": "1a02eecb459ab420b27483254d5fa7c507a4d3bd20c8d6994ded4ec2c2f4c82a"
   },
   "tokens": {
     "file": "scripts/article-cover-master/ac-033-manrope-tokens.json",
-    "sha256": "7b480fa2be836ed2a14ae8623998fb9cf050d8b45e4c51a6fdadad97d4a5cfc5"
+    "sha256": "4970dd4c15d29d73d86502c0a05caef7188eb36790385b7c600ed2aebd34901e"
   },
   "files": {
     "ac-033-manrope-baseline.png": {
       "width": 1200,
       "height": 630,
-      "sha256": "c5721bbaac86599c941d55d8e63aa0b926812e401ada72478702f1f233805a25"
+      "sha256": "cfa500809331536f13545aa4e74cffb90c4d665b307b732585fcea28c8a1b4f4"
     },
     "ac-033-manrope-400.png": {
       "width": 400,
       "height": 210,
-      "sha256": "3d246a419ecfd6f588324dd9a355e4310835a014fae54c95cfabbb7db9820aa9"
+      "sha256": "6acc6c76667bb67dd9ec5235def4c5c9aa4792654c04789a380f1cf3c5ae6fd3"
     },
     "ac-033-manrope-320.png": {
       "width": 320,
       "height": 168,
-      "sha256": "e6573e8b84be6afaa440bcc114b056a3f17137fe1bfb14ad10965c54999c733f"
+      "sha256": "8bdb8ecb78440dfc46ad2c15798a8dcd0ffb662c857e7212becbd1996705073e"
     },
     "ac-033-manrope-baseline.webp": {
       "width": 1200,
       "height": 630,
-      "sha256": "97dd36d87a2af6c92aa169ef173c47348242adb5a9ee41e65419839d357ec13a"
+      "sha256": "08c4a6df4803147491655bf33a066d6f8cf0809230ec7d3ffd57cbf10c381339"
     }
   }
 }
