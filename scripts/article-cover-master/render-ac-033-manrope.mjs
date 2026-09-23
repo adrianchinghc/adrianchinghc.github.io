@@ -12,6 +12,13 @@ const widths = [1200, 400, 320];
 const backgroundColor = "#0557e1";
 const headlineTrackingPx = -3;
 const authorTrackingPx = 0.5;
+// Owner-approved exception (interaction 64b999b6-6426-4578-a003-c944130d6023,
+// resolved 2026-09-23T05:51:43Z): keep the original headline wording and
+// shrink the type to fit, overriding the standard's no-shrink rule for this
+// article only. 94px is the largest size where both lines stay inside the
+// 550px box (x=33..583) at -3px tracking (measured via pixel bounding box:
+// "Where should" = 541px, "AI go first?" = 402px).
+const headlineSizePx = 94;
 const dimensions = png => ({ width: png.readUInt32BE(16), height: png.readUInt32BE(20) });
 const isolateIllustration = sourceImage => {
   const canvas = createCanvas(1200, 630); const ctx = canvas.getContext("2d");
@@ -22,7 +29,7 @@ const isolateIllustration = sourceImage => {
   }
   ctx.putImageData(pixels, 0, 0); return canvas;
 };
-const render = (illustration, width, format) => { const height = Math.round(width * 630 / 1200); const scale = width / 1200; const canvas = createCanvas(width, height); const ctx = canvas.getContext("2d"); ctx.fillStyle = backgroundColor; ctx.fillRect(0, 0, width, height); ctx.drawImage(illustration, 0, 0, 1200, 630, 0, 0, width, height); ctx.fillStyle = "#fff7df"; ctx.font = `800 ${112 * scale}px Manrope Cover`; ctx.letterSpacing = `${headlineTrackingPx * scale}px`; ctx.fillText("Where should", 33 * scale, 250 * scale); ctx.fillText("AI go first?", 33 * scale, 366 * scale); ctx.font = `600 ${27 * scale}px Manrope Cover`; ctx.letterSpacing = `${authorTrackingPx * scale}px`; ctx.fillText("Adrian Ching", 35 * scale, 582 * scale); return canvas.toBuffer(format); };
+const render = (illustration, width, format) => { const height = Math.round(width * 630 / 1200); const scale = width / 1200; const canvas = createCanvas(width, height); const ctx = canvas.getContext("2d"); ctx.fillStyle = backgroundColor; ctx.fillRect(0, 0, width, height); ctx.drawImage(illustration, 0, 0, 1200, 630, 0, 0, width, height); ctx.fillStyle = "#fff7df"; ctx.font = `800 ${headlineSizePx * scale}px Manrope Cover`; ctx.letterSpacing = `${headlineTrackingPx * scale}px`; ctx.fillText("Where should", 33 * scale, 250 * scale); ctx.fillText("AI go first?", 33 * scale, 366 * scale); ctx.font = `600 ${27 * scale}px Manrope Cover`; ctx.letterSpacing = `${authorTrackingPx * scale}px`; ctx.fillText("Adrian Ching", 35 * scale, 582 * scale); return canvas.toBuffer(format); };
 await mkdir(output, { recursive: true });
 const [source, headlineBytes, authorBytes] = await Promise.all([readFile(original), readFile(headlineFont), readFile(authorFont)]);
 GlobalFonts.registerFromPath(headlineFont, "Manrope Cover"); GlobalFonts.registerFromPath(authorFont, "Manrope Cover");
@@ -37,12 +44,13 @@ const evidence = {
   renderer: "@napi-rs/canvas",
   background: { color: backgroundColor, note: "Flat fill only, matching the render-ac-034-manrope.mjs type/background/name reference. The prior hand-rolled per-pixel grain() PRNG has been removed per the ADR-446 owner correction." },
   typography: {
-    note: "KNOWN OPEN ISSUE, escalated to Nexus: at 112px Manrope ExtraBold 800, the headline 'Where should' measures 651px of pixel-rendered width even at the new -3px tracking (612px at the old -6.5px, 684px at 0px) against the 550px locked box (x=33 to x=583). It does not fit at any tracking value without shrinking or distorting the type, which the standard forbids. Per the escalation rule, this render keeps the copy unchanged and overflows the box; it is NOT a finished, review-passing cover. Do not ship until Nexus approves shorter socialTitle wording.",
+    note: "At the standard 112px, 'Where should' measures 651px at -3px tracking against the 550px locked box (x=33 to x=583) and does not fit at any tracking value without shrinking. Escalated via interaction 64b999b6-6426-4578-a003-c944130d6023; owner resolved 2026-09-23T05:51:43Z selecting 'keep original wording, shrink the letters to fit', overriding the standard's no-shrink rule for this article only. Headline rendered at " + headlineSizePx + "px (pixel-measured: 'Where should' = 541px, 'AI go first?' = 402px, both under the 550px box) with tracking and baselines otherwise unchanged.",
+    headlineSizePx,
     headlineTrackingPx,
     authorTrackingPx,
   },
   source: { file: "scripts/assets/illustrations/ac-033-where-should-ai-go-first-cover.webp", sha256: createHash("sha256").update(source).digest("hex") },
-  headline: { family: "Manrope", weight: 800, fontFile: "scripts/assets/manrope-extrabold.ttf", fontSha256: createHash("sha256").update(headlineBytes).digest("hex"), registeredFamily: "Manrope Cover", lines: ["Where should", "AI go first?"], renderedWith: `CanvasRenderingContext2D font: 800 112px Manrope Cover, letterSpacing ${headlineTrackingPx}px` },
+  headline: { family: "Manrope", weight: 800, fontFile: "scripts/assets/manrope-extrabold.ttf", fontSha256: createHash("sha256").update(headlineBytes).digest("hex"), registeredFamily: "Manrope Cover", lines: ["Where should", "AI go first?"], renderedWith: `CanvasRenderingContext2D font: 800 ${headlineSizePx}px Manrope Cover, letterSpacing ${headlineTrackingPx}px` },
   author: { family: "Manrope", weight: 600, fontFile: "scripts/assets/manrope-semibold.ttf", fontSha256: createHash("sha256").update(authorBytes).digest("hex"), renderedWith: `CanvasRenderingContext2D font: 600 27px Manrope Cover, letterSpacing ${authorTrackingPx}px` },
   files,
 };
