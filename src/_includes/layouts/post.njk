@@ -22,7 +22,7 @@ layout: layouts/base.njk
   {% else %}
   {% set invitation = newsletter.articleInvitations[topic] or newsletter.articleInvitations.default %}
   <h2 id="article-next-heading">{{ invitation.heading }}</h2><p>{{ invitation.body }}</p>
-  {% include "newsletter-signup.njk" %}
+  {% set signupPlacement = "article_end" %}{% include "newsletter-signup.njk" %}
   {% endif %}
 </aside>
 {% set related = collections.articles | relatedArticles(page.url, topic) %}

@@ -137,6 +137,13 @@ if (existsSync(output)) {
       }
     }
     if (/cal\.com|CALCOM_URL/i.test(html)) errors.push(`${file}: legacy Cal.com reference found`);
+    const signupForms = [...html.matchAll(/<form\b[^>]*\bdata-sv-form=[^>]*>/g)].map(match => match[0]);
+    const kitScripts = (html.match(/<script\b[^>]*ckjs\/ck\.5\.js/g) || []).length;
+    // The layout loads Kit's script once, only on pages that render a form.
+    if (kitScripts !== (signupForms.length ? 1 : 0)) errors.push(`${file}: expected ${signupForms.length ? "one" : "no"} Kit script, found ${kitScripts}`);
+    for (const form of signupForms) {
+      if (!/\bdata-signup-placement="[a-z0-9_]+"/.test(form)) errors.push(`${file}: newsletter form needs a data-signup-placement for analytics`);
+    }
     for (const match of html.matchAll(/<a\b[^>]*>/g)) {
       const tag = match[0];
       const locationCount = (tag.match(/\bdata-cta=/g) || []).length;
