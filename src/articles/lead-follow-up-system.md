@@ -25,9 +25,9 @@ I knew. I just never made the time to look at it properly.
 
 That's the part most owners recognise. You already suspect your follow-up is leaking. What you don't have is proof, and a way to decide what to do next.
 
-So here's the week. Four numbers, a way to read them, and a fix that doesn't start with buying software.
+Here's what you'll do this week. Pull four numbers from your last 90 days of enquiries: how fast a human replies, what share get only one follow-up attempt, how many quotes get chased instead of forgotten, and how many open enquiries have no owner. Then read what they're telling you, and fix the system before you buy any tool.
 
-And yes, AI helps here. Just not the way it gets sold to you. AI is very good at reading a pile of enquiries and telling you what's in it. It's terrible at deciding what your business should do next. Count first. Then choose.
+And yes, AI helps here. Just not the way it gets sold to you. AI is very good at reading a pile of enquiries and telling you what's in it. It's terrible at deciding what your business should do next. Count those four numbers first. Then choose what to fix.
 
 ## First, check that this is actually your problem
 
@@ -39,15 +39,15 @@ If that list doesn't exist anywhere, stop. That's your finding. You can't manage
 
 Once you have the list, pull four numbers.
 
-**Number 1: how long until a human replied.** Not the auto-reply. A real person. Write down the middle value and the worst one.
+**Number 1: how long until a human replied.** Not the auto-reply — anyone on your team who wrote back as a person, not just you. Write down the middle value and the worst one.
 
-**Number 2: how many got one attempt and nothing after.** One email, no reply, silence.
+**Number 2: what share got one attempt and nothing after.** Count them, then divide by your total for the period. One email, no reply, silence.
 
 **Number 3: quotes sent, quotes chased, quotes closed.** That's three counts, not one. Most companies know the first and the third. Almost nobody has counted the middle one.
 
 **Number 4: how many open enquiries have no owner and no next date.** Pick ten at random. For each one, can you name the person responsible and the thing that happens next? Count how many times you can't.
 
-If you read the last piece, on where to use AI first, two of those will look familiar. That one had you pull reply times and quote close rates as one leak among several. This one stays on that leak and digs in: the chased count in the middle, your worst case next to your middle one, and the owner test. Same method, one target.
+Two of these numbers came up before, in [where a B2B company should use AI first](/blog/where-should-a-b2b-company-use-ai-first/): reply times and quote close rates, there as one leak among several. This piece stays on that single leak and digs in: the chased count in the middle, your worst case next to your middle one, and the owner test. Same method, one target.
 
 ## How to read the four numbers
 
@@ -67,7 +67,7 @@ The figures below are invented to show the shape of it. They're not from a real 
 A company gets 120 enquiries in 90 days.
 
 - Middle time to first reply: 6 hours. Worst: 9 days.
-- 71 got one attempt and nothing after.
+- 71 of the 120 (59%) got one attempt and nothing after.
 - 64 quotes sent. 18 chased. 11 closed.
 - Of 10 open enquiries, 7 had no owner and no next date.
 
@@ -91,7 +91,7 @@ That isn't a discipline problem. It's a capacity problem, and trying harder does
 
 AI is genuinely good at three jobs here.
 
-- **Reading the pile.** Point it at 90 days of enquiry email and ask what's in there. What people asked for, which ones went quiet, which ones nobody answered. If your records are a mess, this is the fastest way to get numbers 1, 2 and 3. Number 4 you still have to do by hand, because a next date that was never set isn't in the email.
+- **Reading the pile.** Point it at 90 days of enquiries from every channel — email, web form exports, WhatsApp chat exports, call notes, referral records, whatever you've got in writing. What people asked for, which ones went quiet, which ones nobody answered. If your records are a mess, this is the fastest way to get numbers 1, 2 and 3, as long as you feed it every channel. Read email only and you get an email-only answer, not the real one. Number 4 you still have to do by hand, because a next date that was never set isn't written down anywhere.
 - **Writing the first draft.** It reads the history and gives you something to edit in seconds. You still decide what goes out.
 - **Watching for silence.** A machine never forgets that a quote went out eleven days ago and nobody replied.
 
@@ -142,7 +142,7 @@ If a lot of your enquiries arrive on WhatsApp, that's a different tool. The free
 
 **For the reminders.** Only automate what you already do by hand. [Zapier](https://zapier.com/) is the easiest to start on. [Make](https://www.make.com/en) costs less once the volume is real. Use [n8n](https://n8n.io/) if you want to run it on your own server.
 
-**For the AI, last.** To read the pile, export 90 days of enquiries and ask [Claude](https://claude.com/) or [ChatGPT](https://openai.com/chatgpt/) what's in there. For drafts and for watching the clock, use the AI already inside your CRM before you buy a separate AI sales agent. A bolt-on that can't see your history writes confident nonsense.
+**For the AI, last.** A 90-day enquiry list usually has names, pricing and client detail in it, so this isn't a personal-account job. Use a business workspace with proper data-processing terms, pull in the minimum you need, strip what you don't, and check your retention settings and your right to process the records before anything leaves your systems. From there, you have two ways to read the pile with [Claude](https://claude.com/) or [ChatGPT](https://openai.com/chatgpt/): export the 90 days into that business workspace, or connect your CRM or inbox directly through a native connector or MCP so the model queries the records instead of you handing over a raw file. MCP isn't automatically safe or seamless. It still needs the same permission checks as an export, just narrower, since you can usually limit what it's allowed to see. For drafts and for watching the clock, use the AI already inside your CRM before you buy a separate AI sales agent. A bolt-on that can't see your history writes confident nonsense.
 
 ## Your next 30 days
 
@@ -151,13 +151,13 @@ If a lot of your enquiries arrive on WhatsApp, that's a different tool. The free
 - **Week 3.** Watch what breaks. Whatever you forget twice is what you should automate.
 - **Week 4.** Fix that one thing, and only that one thing.
 
-Write your stop rule now, while you're calm. If the middle reply time and the one-attempt count haven't moved in 90 days, this is a capacity problem. You need another person, not another tool.
+Write your stop rule now, while you're calm. Compare one 90-day period against another at similar enquiry volume, not a bigger period against a smaller one. If the middle reply time and the share of enquiries getting only one attempt haven't moved, this is a capacity problem. You need another person, not another tool.
 
 ## Start here this week
 
-Pull number 2. Count the enquiries that got one attempt and nothing after. It takes an afternoon, and it's usually the number that stings.
+Pull number 2. Count the enquiries that got one attempt and nothing after, then divide by your total for the period. It takes an afternoon, and it's usually the number that stings.
 
-When you have it, [join the newsletter](/newsletter/) for what I'm learning building Second Team. Reply to that email and tell me which of the four was worst.
+When you have it, [join the newsletter](/newsletter/) for what I'm learning building Second Team. Reply to the welcome email you get when you join, and tell me which of the four was worst.
 
 Want somebody from outside to run the count with you? That's the [AI Profit Opportunity Audit](/ai-profit-opportunity-audit/). It ranks where the money leaks, names the three fixes worth doing first, and puts them on a 90-day roadmap. It stops at the diagnosis. Nobody builds anything.
 
