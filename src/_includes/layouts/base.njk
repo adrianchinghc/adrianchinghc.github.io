@@ -50,9 +50,10 @@
     </div>
     <div class="shell footer-bottom"><span>© {{ "now" | year }} Adrian Ching</span><span>Kuala Lumpur · Building globally</span></div>
   </footer>
-  {% if site.analyticsEnabled %}<aside class="consent" data-consent-banner hidden aria-label="Analytics choice"><p><strong>Help me improve this site.</strong> Analytics shows which pages and links are useful. Optional tracking only runs if you accept. <a href="/privacy/">Privacy details</a>.</p><div><button class="button" type="button" data-consent="accept">Accept analytics</button><button class="text-button" type="button" data-consent="decline">Decline</button></div></aside>{% endif %}
+  {% if site.analyticsEnabled %}<aside class="consent" data-consent-banner hidden aria-label="Analytics choice"><p><strong>Help me improve this site.</strong> Analytics shows which pages and links are useful. Optional analytics only runs if you accept. <a href="/privacy/">Privacy details</a>.</p><div><button class="button" type="button" data-consent="accept">Accept analytics</button><button class="text-button" type="button" data-consent="decline">Decline</button></div></aside>{% endif %}
   <script src="{{ '/assets/js/site.js' | assetUrl }}" defer onerror="document.documentElement.classList.remove('nav-ready')"></script>
   <script src="{{ '/assets/js/prefetch.js' | assetUrl }}" defer></script>
+  <script src="{{ '/assets/js/attribution.js' | assetUrl }}" defer></script>
   {% if 'data-sv-form=' in content %}<script src="https://f.convertkit.com/ckjs/ck.5.js" crossorigin="anonymous" defer></script>{% endif %}
 </body>
 </html>

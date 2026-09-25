@@ -29,6 +29,23 @@ Register `cta_location`, `video_title` and `video_id` as event-scoped custom dim
 
 Do not send names, email addresses, intake answers, business data or full URL query strings to analytics.
 
+## Newsletter signup attribution
+
+Kit is the source of truth for confirmed subscribers. Its built-in **Referrer** and **UTM Source/Medium/Campaign/Term/Content** fields come from the page the form is submitted on: `document.referrer` and that page's query string. A visitor who lands on an article from Google and subscribes on `/newsletter/` would otherwise be credited to this site.
+
+`src/assets/js/attribution.js` keeps the first outside source of the browser tab in `sessionStorage` (`adrian_first_touch`): the referring site only (scheme and host, never the path or query) and the five standard campaign tags, `utm_source`, `utm_medium`, `utm_campaign`, `utm_term` and `utm_content`, each cut to 200 characters. When a Kit newsletter form submits, it fills Kit's own fields with them, and only when the signup page has no outside source of its own. No custom Kit fields are needed and nothing else receives the data.
+
+- The signup page's own outside source wins as a whole. If it has an outside referrer or campaign tags, Kit gets exactly what that page sends, so one subscriber is never credited to two sources.
+- Otherwise the first touch is applied as a whole too. If it had campaign tags but no outside referrer, Kit's Referrer is left blank rather than showing an internal page of this site.
+- A direct visit with no outside referrer or tags changes nothing.
+- A visitor who declined analytics gets none of this: nothing is stored, a stored value is removed when they click Decline (in that tab and in any other open tab of the site), and a decline recorded in any tab stops it being sent. Undecided and accepting visitors are attributed. Expect Kit's outside-source coverage to fall slightly short of every signup for that reason.
+- The first outside source in a tab wins over later ones.
+- Kit attributes a subscriber on first signup only; a returning subscriber keeps their original values.
+
+This depends on Kit's form script (`ck.5.js`) sending its `FormData`, with the `referrer`, `host` and `search` fields, through `window.fetch` to `app.kit.com/forms/<id>/subscriptions`. `scripts/attribution.test.mjs` mirrors that request, so it cannot notice if Kit changes it. After a Kit script change, and once a quarter, recheck: open the site from a link carrying `?utm_source=test`, subscribe on another page with a test address, and confirm the subscriber's Referrer and UTM fields in Kit.
+
+GA4's `newsletter_signup_submitted` carries `signup_placement` (`home_hero`, `article_end`, `newsletter_page`, `<page>_band`). Read it alongside GA4's session source and landing page. Only Kit shows confirmations.
+
 ## Funnel definitions
 
 1. Website interest: offer-page view or `work_with_me_click`.
@@ -37,7 +54,7 @@ Do not send names, email addresses, intake answers, business data or full URL qu
 4. Qualified opportunity: record after the call in the CRM.
 5. Paid engagement: record after payment. Do not expose a public checkout.
 
-Use UTMs on campaign links: `utm_source`, `utm_medium`, `utm_campaign`, and only when useful, `utm_content`. Keep a controlled naming sheet rather than inventing a new label for every post.
+Use UTMs on every link you control: `utm_source`, `utm_medium`, `utm_campaign`, and only when useful, `utm_content`. Write them in lowercase from a controlled naming sheet rather than inventing a new label for every post: for example `utm_source=youtube&utm_medium=video&utm_campaign=<video-slug>` in video descriptions and `utm_source=linkedin&utm_medium=social&utm_campaign=<post-topic>` on posts. ChatGPT already adds `utm_source=chatgpt.com` to the links it cites.
 
 ## Search intent map
 
