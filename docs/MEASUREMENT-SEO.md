@@ -38,7 +38,7 @@ Kit is the source of truth for confirmed subscribers. Its built-in **Referrer** 
 - The signup page's own outside source wins as a whole. If it has an outside referrer or campaign tags, Kit gets exactly what that page sends, so one subscriber is never credited to two sources.
 - Otherwise the first touch is applied as a whole too. If it had campaign tags but no outside referrer, Kit's Referrer is left blank rather than showing an internal page of this site.
 - A direct visit with no outside referrer or tags changes nothing.
-- A visitor who declined analytics gets none of this: nothing is stored, a stored value is removed when they click Decline, and a decline recorded in any tab stops it being sent. Undecided and accepting visitors are attributed. Expect Kit's outside-source coverage to fall slightly short of every signup for that reason.
+- A visitor who declined analytics gets none of this: nothing is stored, a stored value is removed when they click Decline (in that tab and in any other open tab of the site), and a decline recorded in any tab stops it being sent. Undecided and accepting visitors are attributed. Expect Kit's outside-source coverage to fall slightly short of every signup for that reason.
 - The first outside source in a tab wins over later ones.
 - Kit attributes a subscriber on first signup only; a returning subscriber keeps their original values.
 

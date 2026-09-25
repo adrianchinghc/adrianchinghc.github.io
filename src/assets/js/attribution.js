@@ -54,6 +54,10 @@
   document.addEventListener("click", (event) => {
     if (event.target.closest?.('[data-consent="decline"]')) forget();
   });
+  // A decline in another tab of this site reaches every open tab.
+  window.addEventListener("storage", (event) => {
+    if (event.key === consentKey && event.newValue === "declined") forget();
+  });
 
   function attribute(form) {
     if (declined()) return forget();

@@ -11,7 +11,11 @@ const kit = "https://app.kit.com/forms/9916003/subscriptions";
 function visit(href, referrer, tab, saved = new Map()) {
   const sent = [];
   const clicks = [];
-  const window = { fetch: (resource, options) => { sent.push({ resource, options }); return Promise.resolve(); } };
+  const storageEvents = [];
+  const window = {
+    fetch: (resource, options) => { sent.push({ resource, options }); return Promise.resolve(); },
+    addEventListener: (type, listener) => type === "storage" && storageEvents.push(listener)
+  };
   const location = new URL(href);
   runInNewContext(code, {
     window, location, URL, URLSearchParams, FormData, JSON,
@@ -29,6 +33,10 @@ function visit(href, referrer, tab, saved = new Map()) {
     const button = { closest: (selector) => (selector === '[data-consent="decline"]' ? button : null) };
     clicks.forEach((listener) => listener({ target: button }));
   }
+  // What the browser fires in this tab when another tab changes localStorage.
+  function storageChanged(key, newValue) {
+    storageEvents.forEach((listener) => listener({ key, newValue }));
+  }
   // Mirrors ck.5.js's submit: FormData with the page's own referrer, address and
   // query, sent through window.fetch. Update this if Kit changes its request.
   function subscribe(action = kit) {
@@ -40,7 +48,7 @@ function visit(href, referrer, tab, saved = new Map()) {
     window.fetch(action, { method: "POST", body: form });
     return Object.fromEntries(sent.at(-1).options.body);
   }
-  return { window, sent, subscribe, decline };
+  return { window, sent, subscribe, decline, storageChanged };
 }
 
 test("a Google visitor who subscribes on a later page is credited to Google", () => {
@@ -96,7 +104,7 @@ test("a direct visit leaves Kit's values unchanged, and other requests are untou
 
 test("blocked storage never stops the signup request", () => {
   const sent = [];
-  const window = { fetch: (resource, options) => { sent.push(options); return Promise.resolve(); } };
+  const window = { fetch: (resource, options) => { sent.push(options); return Promise.resolve(); }, addEventListener() {} };
   runInNewContext(code, {
     window, location: new URL("https://adrianching.com/newsletter/"),
     document: { referrer: "https://www.google.com/", addEventListener() {} },
@@ -208,5 +216,17 @@ test("declining in another tab stops this tab's stored source from being sent", 
   const fields = page.subscribe();
   assert.equal(fields.referrer, "https://adrianching.com/");
   assert.equal(fields.search, "");
+  assert.equal(tab.size, 0);
+});
+
+test("declining in another tab forgets this tab's stored source straight away", () => {
+  const tab = new Map();
+  const saved = new Map();
+  const page = visit("https://adrianching.com/?utm_source=youtube", "https://www.youtube.com/", tab, saved);
+  assert.equal(tab.size, 1);
+  page.storageChanged("adrian_theme", "declined");
+  page.storageChanged("adrian_analytics_consent_v1", "accepted");
+  assert.equal(tab.size, 1, "other keys and other choices leave it alone");
+  page.storageChanged("adrian_analytics_consent_v1", "declined");
   assert.equal(tab.size, 0);
 });
