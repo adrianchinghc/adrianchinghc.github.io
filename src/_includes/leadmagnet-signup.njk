@@ -1,0 +1,23 @@
+{# One Kit form per lead magnet. `magnet` is src/_data/leadmagnets.json[contentId],
+   and contentId is both that key and the value Kit stores in its content_id field,
+   so a new lead magnet needs a data entry and an article field, never a template
+   edit. base.njk loads Kit's script whenever a rendered page contains data-sv-form. #}
+{% if magnet.formId %}
+<form action="https://app.kit.com/forms/{{ magnet.formId }}/subscriptions" class="newsletter-form seva-form formkit-form" method="post" data-signup-placement="{{ signupPlacement }}" data-sv-form="{{ magnet.formId }}" data-uid="{{ magnet.formUid }}" data-format="inline" data-version="5" data-options='{"settings":{"after_subscribe":{"action":"message","success_message":{{ magnet.successMessage | dump | safe }},"redirect_url":""},"analytics":{"google":null,"facebook":null},"recaptcha":{"enabled":false},"return_visitor":{"action":"show"},"powered_by":{"show":false}},"version":"5"}'>
+  <input type="hidden" name="fields[content_id]" value="{{ contentId }}">
+  <div aria-live="polite" aria-atomic="true">
+    <ul class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert" role="alert"></ul>
+    <div data-element="fields" class="newsletter-fields">
+      <label class="newsletter-email"><span>First name (optional)</span><input class="formkit-input" name="fields[first_name]" type="text" autocomplete="given-name" placeholder="Your first name" data-hj-suppress></label>
+      <label class="newsletter-email"><span>Email address</span><input class="formkit-input" name="email_address" type="email" autocomplete="email" placeholder="you@example.com" required data-hj-suppress></label>
+      <button class="button formkit-submit" type="submit" data-element="submit"><span class="signup-label">{{ magnet.submitLabel }}</span><span class="signup-busy" hidden>{{ magnet.pendingLabel }}</span></button>
+    </div>
+  </div>
+  <p class="microcopy">{{ magnet.microcopy }} <a href="/privacy/">Privacy</a>.</p>
+  <noscript><p class="microcopy">JavaScript is off. Submitting will open Kit to finish your signup.</p></noscript>
+</form>
+{% else %}
+{# Review-preview state only. validateArticle refuses to publish a lead magnet
+   whose Kit form is not configured, so a reader never sees this. See scripts/ARTICLES.md. #}
+<p class="microcopy">Review preview: the Kit form for {{ contentId }} is not connected yet, so there is no working signup here. This article cannot be published in this state.</p>
+{% endif %}
