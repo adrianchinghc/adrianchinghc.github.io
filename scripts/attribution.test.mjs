@@ -48,7 +48,7 @@ test("campaign tags from the landing page reach Kit's UTM fields on a later page
   const fields = visit("https://adrianching.com/newsletter/", "https://adrianching.com/blog/", tab).subscribe();
   assert.equal(fields.search, "?utm_source=chatgpt.com&utm_medium=ai");
   assert.equal(fields.host, "https://adrianching.com/newsletter/?utm_source=chatgpt.com&utm_medium=ai");
-  assert.equal(fields.referrer, "https://adrianching.com/blog/", "no outside referrer was known, so Kit keeps its own");
+  assert.equal(fields.referrer, "", "the first touch had no outside referrer, and this site is not a source");
 });
 
 test("the first outside source in a tab wins over later ones", () => {

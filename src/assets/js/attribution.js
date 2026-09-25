@@ -56,7 +56,9 @@
       form.set("search", page.search);
       form.set("host", page.href);
     }
-    if (touch.referrer) form.set("referrer", touch.referrer);
+    // Blank when the first touch had tags but no outside referrer, as a signup
+    // on that landing page would have sent; an internal page is not a source.
+    form.set("referrer", touch.referrer || "");
   }
 
   const nativeFetch = window.fetch;

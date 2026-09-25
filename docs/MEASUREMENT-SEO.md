@@ -36,6 +36,7 @@ Kit is the source of truth for confirmed subscribers. Its built-in **Referrer** 
 `src/assets/js/attribution.js` keeps the first outside source of the browser tab in `sessionStorage` (`adrian_first_touch`): the referring site only (scheme and host, never the path or query) and the five standard campaign tags, `utm_source`, `utm_medium`, `utm_campaign`, `utm_term` and `utm_content`, each cut to 200 characters. When a Kit newsletter form submits, it fills Kit's own fields with them, and only when the signup page has no outside source of its own. No custom Kit fields are needed and nothing else receives the data.
 
 - The signup page's own outside source wins as a whole. If it has an outside referrer or campaign tags, Kit gets exactly what that page sends, so one subscriber is never credited to two sources.
+- Otherwise the first touch is applied as a whole too. If it had campaign tags but no outside referrer, Kit's Referrer is left blank rather than showing an internal page of this site.
 - A direct visit with no outside referrer or tags changes nothing.
 - The first outside source in a tab wins over later ones.
 - Kit attributes a subscriber on first signup only; a returning subscriber keeps their original values.
