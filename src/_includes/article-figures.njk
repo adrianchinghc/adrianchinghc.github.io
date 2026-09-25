@@ -110,3 +110,67 @@
 <figcaption>Build from the process up. Most companies I met were shopping for AI while the first three steps were still missing.</figcaption>
 </figure>
 {% endmacro %}
+
+{% macro buildCostOwnershipCost() %}
+<figure class="article-figure">
+<div class="figure-ownership">
+<div class="figure-card figure-ownership-build">
+<span class="figure-rank">What got cheaper</span>
+<strong class="figure-card-title">The build</strong>
+</div>
+<div class="figure-ownership-stays">
+<p class="figure-rank">What did not</p>
+<ul>
+<li>Maintaining it</li>
+<li>Fixing it when it breaks</li>
+<li>Security, data handling and reliability</li>
+<li>Someone who owns upkeep</li>
+<li>Being wrong about what you needed</li>
+</ul>
+</div>
+</div>
+<p class="figure-summary"><strong>The expensive mistake today isn't a failed build. It's a successful build of the wrong thing.</strong></p>
+</figure>
+{% endmacro %}
+
+{% macro buildBuyQuestions() %}
+<figure class="article-figure">
+<ol class="figure-question-list">
+<li class="figure-card">
+<div><span class="figure-rank">Question 1</span><strong class="figure-card-title">Technical team, capacity, internal tool?</strong></div>
+<p><strong>The call</strong>If all three are true, build it.</p>
+</li>
+<li class="figure-card">
+<div><span class="figure-rank">Question 2</span><strong class="figure-card-title">Internal or customer-facing?</strong></div>
+<p><strong>The call</strong>Internal narrows exposure, but still needs a named owner for security, data handling, reliability and upkeep. External needs a properly credentialed technical team, with someone explicitly owning security.</p>
+</li>
+<li class="figure-card">
+<div><span class="figure-rank">Question 3</span><strong class="figure-card-title">Who owns maintenance, and for how long?</strong></div>
+<p><strong>The call</strong>No owner named, no build approved.</p>
+</li>
+<li class="figure-card is-watch">
+<div><span class="figure-rank">Question 4 · Check the full cost</span><strong class="figure-card-title">The total resource picture, not just the build?</strong></div>
+<p><strong>The call</strong>Want the outcome, but do not have the time or team to own the build? Buying is usually the better call.</p>
+</li>
+</ol>
+</figure>
+{% endmacro %}
+
+{% macro buildBuyRunOrder() %}
+<figure class="article-figure">
+<ol class="figure-flow figure-decision-flow">
+<li><span><strong>Is anything actually broken or costing you?</strong></span>
+<p class="figure-flow-exit"><strong>Nothing broken?</strong> Leave it alone.</p></li>
+<li><span><strong>Is the process stable and documented?</strong></span>
+<p class="figure-flow-exit"><strong>Not stable or documented?</strong> Fix that first. Do not automate a mess.</p></li>
+<li><span><strong>Is it worth automating?</strong> If the process is proven and repeats often, start looking at tools or a custom workflow.</span></li>
+<li><span><strong>Build or buy?</strong> Run the four questions.</span>
+<ul class="figure-flow-outcomes">
+<li><strong>Internal, technical team, has the time:</strong> build it, use AI to move faster, and name someone to own security and upkeep.</li>
+<li><strong>External or customer-facing:</strong> build only with a properly credentialed technical team that owns security, or buy.</li>
+<li><strong>Non-technical, short on time, want the outcome:</strong> buy.</li>
+</ul></li>
+</ol>
+<figcaption>This is the judgment I would bring to a specific proposal, not a universal formula.</figcaption>
+</figure>
+{% endmacro %}

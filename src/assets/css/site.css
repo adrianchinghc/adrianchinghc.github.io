@@ -331,6 +331,25 @@ figcaption{font-size:.8125rem;line-height:1.5;color:var(--muted);margin-top:.75r
 .figure-aside b{font-size:1.6rem;line-height:1.1;font-variant-numeric:tabular-nums}
 .figure-summary{margin:1.5rem 0 0;padding-top:1.25rem;border-top:1px solid var(--line);font-size:1rem;line-height:1.5}
 .figure-summary strong{display:block;font-size:1.125rem}
+.figure-ownership{display:grid;grid-template-columns:minmax(0,.68fr) minmax(0,1.32fr);gap:1rem;align-items:stretch}
+.figure-ownership-build{align-self:center;text-align:center;padding-block:1.5rem}
+.figure-ownership-stays{padding:1rem;border:1px solid var(--line);border-radius:var(--radius-control);background:var(--white)}
+.figure-ownership-stays .figure-rank{margin:0 0 .6rem}
+.figure-ownership-stays ul{display:grid;gap:.55rem;margin:0;padding-left:1.2rem;font-size:1rem;line-height:1.45}
+.figure-ownership-stays li::marker{color:var(--signal)}
+.figure-question-list{list-style:none;display:grid;gap:1rem;margin:0;padding:0}
+.figure-question-list .figure-card{grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:1rem 1.5rem}
+.figure-question-list .figure-rank,.figure-question-list .figure-card-title{display:block}
+.figure-question-list p{margin:0;font-size:1rem;line-height:1.5;color:var(--muted)}
+.figure-question-list p strong{display:block;margin-bottom:.2rem;color:var(--ink)}
+.figure-question-list .is-watch p strong{color:var(--signal)}
+.figure-decision-flow strong{font-weight:700}
+.figure-flow-outcomes{grid-column:2;list-style:none;display:grid;gap:.75rem;margin:.9rem 0 0;padding:0}
+.figure-flow-outcomes li{padding:.75rem .85rem;border:1px solid var(--line);border-radius:var(--radius-control);font-size:1rem;line-height:1.45}
+@media(max-width:619px){
+  .figure-ownership,.figure-question-list .figure-card{grid-template-columns:1fr}
+  .figure-ownership-build{text-align:left}
+}
 @media(min-width:620px){
   .figure-columns{grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);align-items:stretch}
   .figure-funnel{grid-template-columns:repeat(2,minmax(0,1fr)) 1.3fr repeat(2,minmax(0,1fr))}
