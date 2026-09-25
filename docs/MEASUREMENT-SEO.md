@@ -29,6 +29,21 @@ Register `cta_location`, `video_title` and `video_id` as event-scoped custom dim
 
 Do not send names, email addresses, intake answers, business data or full URL query strings to analytics.
 
+## Newsletter signup attribution
+
+Kit is the source of truth for confirmed subscribers. Its built-in **Referrer** and **UTM Source/Medium/Campaign/Term/Content** fields come from the page the form is submitted on: `document.referrer` and that page's query string. A visitor who lands on an article from Google and subscribes on `/newsletter/` would otherwise be credited to this site.
+
+`src/assets/js/attribution.js` keeps the first outside referrer and `utm_*` tags of the browser tab in `sessionStorage` (`adrian_first_touch`, cleared when the tab closes). When a Kit newsletter form submits, it fills Kit's own fields with them, and only when the signup page has none of its own. No custom Kit fields are needed and nothing else receives the data.
+
+- A signup page's own outside referrer or campaign tags always win.
+- A direct visit with no outside referrer or tags changes nothing.
+- The first outside source in a tab wins over later ones.
+- Kit attributes a subscriber on first signup only; a returning subscriber keeps their original values.
+
+GA4's `newsletter_signup_submitted` carries `signup_placement` (`home_hero`, `article_end`, `newsletter_page`, `<page>_band`). Read it alongside GA4's session source and landing page. Only Kit shows confirmations.
+
+Use UTMs on every link you control, lowercase, from the controlled naming sheet: for example `utm_source=youtube&utm_medium=video&utm_campaign=<video-slug>` in video descriptions and `utm_source=linkedin&utm_medium=social&utm_campaign=<post-topic>` on posts. ChatGPT already adds `utm_source=chatgpt.com` to the links it cites.
+
 ## Funnel definitions
 
 1. Website interest: offer-page view or `work_with_me_click`.

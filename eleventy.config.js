@@ -9,7 +9,7 @@ export default function (eleventyConfig) {
   // New content gets a new URL, including in browsers with a cached old stylesheet.
   const assetUrls = new Map();
   const assetBytes = new Map();
-  for (const [source, extension] of [["/assets/css/site.css", "css"], ["/assets/js/site.js", "js"], ["/assets/js/prefetch.js", "js"]]) {
+  for (const [source, extension] of [["/assets/css/site.css", "css"], ["/assets/js/site.js", "js"], ["/assets/js/prefetch.js", "js"], ["/assets/js/attribution.js", "js"]]) {
     const bytes = readFileSync(`src${source}`);
     const hash = createHash("sha256").update(bytes).digest("hex").slice(0, 12);
     const name = source.split("/").pop().split(".")[0];

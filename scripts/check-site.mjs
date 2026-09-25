@@ -5,7 +5,7 @@ import sharp from "sharp";
 
 const output = "_site";
 const errors = [];
-const versionedAssets = [["site", "css"], ["site", "js"], ["prefetch", "js"]].map(([name, extension]) => {
+const versionedAssets = [["site", "css"], ["site", "js"], ["prefetch", "js"], ["attribution", "js"]].map(([name, extension]) => {
   const bytes = readFileSync(`src/assets/${extension}/${name}.${extension}`);
   const hash = createHash("sha256").update(bytes).digest("hex").slice(0, 12);
   const url = `/static/${name}.${hash}.${extension}`;
