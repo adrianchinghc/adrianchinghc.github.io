@@ -9,11 +9,21 @@
 // search fields, through window.fetch. docs/MEASUREMENT-SEO.md says how to recheck.
 (() => {
   const key = "adrian_first_touch";
+  const consentKey = "adrian_analytics_consent_v1";
   const campaignKeys = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"];
   const kitSubscription = /^https:\/\/app\.(?:kit|convertkit)\.com\/forms\/\d+\/subscriptions\/?(?:\?|$)/;
 
   function read() {
     try { return JSON.parse(sessionStorage.getItem(key) || "null"); } catch (_) { return null; }
+  }
+
+  // A visitor who declined analytics gets no first-touch attribution either.
+  function declined() {
+    try { return localStorage.getItem(consentKey) === "declined"; } catch (_) { return false; }
+  }
+
+  function forget() {
+    try { sessionStorage.removeItem(key); } catch (_) { /* Nothing was stored. */ }
   }
 
   // Keeps only the referring site, which is all attribution needs. Paths and
@@ -37,11 +47,16 @@
   }
 
   const arrival = { referrer: outsideReferrer(document.referrer), campaign: campaign(location.search) };
-  if (!read() && (arrival.referrer || arrival.campaign)) {
+  if (declined()) forget();
+  else if (!read() && (arrival.referrer || arrival.campaign)) {
     try { sessionStorage.setItem(key, JSON.stringify(arrival)); } catch (_) { /* Kit keeps the current page's values. */ }
   }
+  document.addEventListener("click", (event) => {
+    if (event.target.closest?.('[data-consent="decline"]')) forget();
+  });
 
   function attribute(form) {
+    if (declined()) return forget();
     const touch = read();
     if (!touch) return;
     // The signup page's own outside source is the more specific answer. Keep it
