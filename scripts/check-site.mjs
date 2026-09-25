@@ -1,14 +1,11 @@
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { extname, join } from "node:path";
-import { createHash } from "node:crypto";
 import sharp from "sharp";
+import { versionedAssets as currentAssets } from "./versioned-assets.mjs";
 
 const output = "_site";
 const errors = [];
-const versionedAssets = [["site", "css"], ["site", "js"], ["prefetch", "js"], ["attribution", "js"]].map(([name, extension]) => {
-  const bytes = readFileSync(`src/assets/${extension}/${name}.${extension}`);
-  const hash = createHash("sha256").update(bytes).digest("hex").slice(0, 12);
-  const url = `/static/${name}.${hash}.${extension}`;
+const versionedAssets = currentAssets().map(({ bytes, url }) => {
   const destination = join(output, url);
   if (!existsSync(destination) || !readFileSync(destination).equals(bytes)) {
     errors.push(`Missing or mismatched versioned asset: ${url}`);

@@ -1,21 +1,17 @@
 import { articles } from "./scripts/articles.mjs";
 import { socialImages } from "./scripts/social-images.mjs";
 import { responsiveImages } from "./scripts/responsive-images.mjs";
-import { createHash } from "node:crypto";
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { versionedAssets } from "./scripts/versioned-assets.mjs";
+import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 export default function (eleventyConfig) {
   // New content gets a new URL, including in browsers with a cached old stylesheet.
   const assetUrls = new Map();
   const assetBytes = new Map();
-  for (const [source, extension] of [["/assets/css/site.css", "css"], ["/assets/js/site.js", "js"], ["/assets/js/prefetch.js", "js"], ["/assets/js/attribution.js", "js"]]) {
-    const bytes = readFileSync(`src${source}`);
-    const hash = createHash("sha256").update(bytes).digest("hex").slice(0, 12);
-    const name = source.split("/").pop().split(".")[0];
-    const destination = `static/${name}.${hash}.${extension}`;
-    assetBytes.set(destination, bytes);
-    assetUrls.set(source, `/${destination}`);
+  for (const { source, bytes, url } of versionedAssets()) {
+    assetBytes.set(url.slice(1), bytes);
+    assetUrls.set(source, url);
   }
   // Write after passthrough completes; clean-build checks catch any truncated assets.
   eleventyConfig.on("eleventy.after", ({ dir }) => {

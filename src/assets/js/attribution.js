@@ -2,19 +2,28 @@
 // submitted on. Someone who arrives from Google on an article and subscribes on
 // /newsletter/ would otherwise be credited to this site. Keep the first outside
 // source of this browser tab and give it to Kit's own fields when a newsletter
-// form is submitted. Nothing is sent anywhere else, and the value is forgotten
-// when the tab closes.
+// form is submitted. Nothing is sent anywhere else, and the value lives only in
+// this tab's session storage.
+//
+// This relies on ck.5.js sending its FormData, including the referrer, host and
+// search fields, through window.fetch. docs/MEASUREMENT-SEO.md says how to recheck.
 (() => {
   const key = "adrian_first_touch";
   const campaignKeys = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"];
-  const kitSubscription = /^https:\/\/app\.(kit|convertkit)\.com\/forms\/\d+\/subscriptions$/;
+  const kitSubscription = /^https:\/\/app\.(?:kit|convertkit)\.com\/forms\/\d+\/subscriptions\/?(?:\?|$)/;
 
   function read() {
     try { return JSON.parse(sessionStorage.getItem(key) || "null"); } catch (_) { return null; }
   }
 
+  // Keeps only the referring site, which is all attribution needs. Paths and
+  // query strings can carry search terms or IDs. App referrers such as
+  // android-app://com.google.android.gm/ have no web origin, so keep the host.
   function outsideReferrer(value) {
-    try { return value && new URL(value).origin !== location.origin ? value : ""; } catch (_) { return ""; }
+    try {
+      const url = new URL(value);
+      return url.origin !== location.origin ? `${url.protocol}//${url.host}/` : "";
+    } catch (_) { return ""; }
   }
 
   function campaign(search) {
@@ -22,7 +31,7 @@
     const kept = new URLSearchParams();
     campaignKeys.forEach((name) => {
       const value = found.get(name);
-      if (value) kept.set(name, value.slice(0, 200));
+      if (value) kept.set(name, Array.from(value).slice(0, 200).join(""));
     });
     return kept.toString();
   }
@@ -35,8 +44,10 @@
   function attribute(form) {
     const touch = read();
     if (!touch) return;
-    // Campaign tags on the signup page itself are the more specific answer.
-    if (touch.campaign && !campaign(form.get("search") || "")) {
+    // The signup page's own outside source is the more specific answer. Keep it
+    // whole: mixing its referrer with first-touch tags would name two sources.
+    if (outsideReferrer(form.get("referrer") || "") || campaign(form.get("search") || "")) return;
+    if (touch.campaign) {
       const search = new URLSearchParams(form.get("search") || "");
       new URLSearchParams(touch.campaign).forEach((value, name) => search.set(name, value));
       const page = new URL(form.get("host") || location.href);
@@ -45,15 +56,14 @@
       form.set("search", page.search);
       form.set("host", page.href);
     }
-    if (touch.referrer && !outsideReferrer(form.get("referrer") || "")) form.set("referrer", touch.referrer);
+    if (touch.referrer) form.set("referrer", touch.referrer);
   }
 
   const nativeFetch = window.fetch;
   if (typeof nativeFetch !== "function") return;
   window.fetch = function (resource, options) {
     try {
-      const url = typeof resource === "string" ? resource : resource?.url;
-      if (kitSubscription.test(url || "") && options?.body instanceof FormData) attribute(options.body);
+      if (kitSubscription.test(String(resource?.url ?? resource)) && options?.body instanceof FormData) attribute(options.body);
     } catch (_) { /* Kit keeps its own values. */ }
     return nativeFetch.apply(this, arguments);
   };
