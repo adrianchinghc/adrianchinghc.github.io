@@ -14,6 +14,8 @@ socialAction: "Read the guide →"
 socialCover: scripts/assets/illustrations/ac-035-build-vs-buy-cover.webp
 socialCoverAlt: "Screen-printed illustration on cobalt of machine parts on a workbench beside a complete machine on a shelf, split by a forked arrow."
 ---
+{% from "article-figures.njk" import buildCostOwnershipCost, buildBuyQuestions, buildBuyRunOrder %}
+
 Software got cheap to build. That's the trap.
 
 I spent nine years selling and delivering custom software. Back then, "build it yourself" was rarely a real option. Building took too long and cost too much. So buying, or just sticking with a manual process, was the obvious call for most owners.
@@ -25,6 +27,8 @@ It cut build time down so much that "let's just build it" has quietly become the
 A team can now ship something that looks like a real product in very little time. Looking good and being ready to run your business on are two different things. Launching a production-ready product still takes real technical foundations: security, data handling, reliability, someone who owns upkeep. Skip those, and a fast build turns into a disaster later, usually right when you can least afford it.
 
 The cost of building fell. The cost of owning what you built did not. That means maintaining it, fixing it when it breaks, and being wrong about what you needed in the first place. The expensive mistake today isn't a failed build. It's a successful build of the wrong thing.
+
+{{ buildCostOwnershipCost() }}
 
 Before you decide whether to build, buy, automate, or fix anything, answer a more basic question first:
 
@@ -77,6 +81,8 @@ How to judge it: add up the build time, plus six months of expected fixes, plus 
 
 The call: if you want a specific outcome and don't have the time or the team to own a build, buying is usually the better call. What you'd be signing up for with a build isn't the build itself. It's the upkeep, the time, and the risk of being wrong.
 
+{{ buildBuyQuestions() }}
+
 **What about the "we can just no-code it" pitch?**
 
 What it means: a no-code tool or an AI app builder doesn't change the four questions above, it just changes who's typing. The output is still software. It still touches whatever data you feed it, still needs someone watching for the day it breaks, and still needs a named owner six months from now, not just on launch day.
@@ -96,6 +102,8 @@ Here's the order I'd actually run through, in a proposal review or a "should we 
    - Internal, technical team, has the time: build it, use AI to move faster, and name someone to own security and upkeep.
    - External or customer-facing: build only with a properly credentialed technical team that owns security, or buy.
    - Non-technical, short on time, want the outcome: buy.
+
+{{ buildBuyRunOrder() }}
 
 None of this is a universal formula. It's the judgment I'd bring to your specific proposal if you handed it to me across a table. The stage numbers are my judgment call.
 
