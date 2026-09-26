@@ -2,6 +2,7 @@ import { articles } from "./scripts/articles.mjs";
 import { socialImages } from "./scripts/social-images.mjs";
 import { responsiveImages } from "./scripts/responsive-images.mjs";
 import { versionedAssets } from "./scripts/versioned-assets.mjs";
+import { writeCloudflareFiles } from "./scripts/cloudflare.mjs";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
@@ -17,6 +18,7 @@ export default function (eleventyConfig) {
   eleventyConfig.on("eleventy.after", ({ dir }) => {
     mkdirSync(join(dir.output, "static"), { recursive: true });
     for (const [destination, bytes] of assetBytes) writeFileSync(join(dir.output, destination), bytes);
+    writeCloudflareFiles(dir.output);
   });
   eleventyConfig.addFilter("assetUrl", (source) => {
     if (!assetUrls.has(source)) throw new Error(`Unknown versioned asset: ${source}`);
@@ -48,6 +50,7 @@ export default function (eleventyConfig) {
   });
   eleventyConfig.addPassthroughCopy("src/CNAME");
   eleventyConfig.addPassthroughCopy("src/BingSiteAuth.xml");
+  eleventyConfig.addPassthroughCopy("src/_headers");
   eleventyConfig.addFilter("year", (date) => {
     const value = date === "now" ? new Date() : new Date(date);
     return value.getUTCFullYear();

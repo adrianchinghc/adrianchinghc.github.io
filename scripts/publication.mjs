@@ -1,6 +1,14 @@
 // Keep one cutoff throughout a build; scheduling uses the same date rules.
 export const buildTime = new Date();
-export const isReviewPreview = () => ['preview', 'development'].includes(process.env.VERCEL_ENV);
+// SITE_ENV names the kind of build: production (the default), preview for
+// review builds, or audit for Lighthouse. VERCEL_ENV counts while Vercel still
+// builds previews.
+export const siteEnvironment = () => process.env.SITE_ENV || process.env.VERCEL_ENV || 'production';
+// Review previews are not for search engines and show scheduled articles.
+export const isReviewPreview = () => ['preview', 'development'].includes(siteEnvironment());
+// Audit builds show scheduled articles too, so Lighthouse can check them before
+// they publish, but otherwise match production.
+export const showsScheduledArticles = () => isReviewPreview() || siteEnvironment() === 'audit';
 
 export function publicationDate(value) {
   if (!(value instanceof Date) && (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}:\d{2}(?:\.\d{3})?(?:Z|[+-]\d{2}:\d{2}))?$/.test(value))) {
@@ -18,6 +26,6 @@ export function publicationDate(value) {
   return date;
 }
 
-export function articleIsVisible(data, { now = buildTime, preview = isReviewPreview() } = {}) {
+export function articleIsVisible(data, { now = buildTime, preview = showsScheduledArticles() } = {}) {
   return data.draft === false && (publicationDate(data.date) <= now || preview);
 }

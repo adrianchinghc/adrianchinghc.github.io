@@ -1,0 +1,26 @@
+# Response headers for Cloudflare Workers static assets. Pages and other files
+# keep Cloudflare's default "public, max-age=0, must-revalidate": browsers
+# recheck them on every visit. Two rules that both match a path join their
+# values, so give each path at most one Cache-Control.
+
+/*
+  X-Content-Type-Options: nosniff
+  Access-Control-Allow-Origin: *
+
+# Content-hashed files: a changed file gets a new name.
+/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/responsive/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Files that keep their name when they change: browsers recheck after eight days.
+/assets/*
+  Cache-Control: max-age=691200
+
+/social/*
+  Cache-Control: max-age=691200
+
+# workers.dev addresses duplicate the site. Keep them out of search results.
+https://:worker.:account.workers.dev/*
+  X-Robots-Tag: noindex

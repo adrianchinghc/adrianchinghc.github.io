@@ -8,7 +8,7 @@ Eleventy keeps the output as plain HTML, CSS and a tiny amount of JavaScript. It
 
 ## Local development
 
-Requires Node.js 20.12 or newer.
+Requires Node.js 22 or newer, as Wrangler does. CI and Cloudflare builds use Node 24 (`.node-version`).
 
 ```bash
 npm install
@@ -39,6 +39,8 @@ When analytics is configured and accepted, the site measures navigation, outboun
 
 Source code belongs on `source`. Merging an approved pull request into `source` is the production release signal. `.github/workflows/publish.yml` installs dependencies, builds the site, runs the site checks and deploys the generated `_site` artifact through GitHub Pages. `master` no longer needs to be updated.
 
+The site is moving to Cloudflare Workers static assets. Until the cutover, Cloudflare's Workers Builds deploys every push to `source` alongside GitHub Pages on a `workers.dev` address, and builds a protected preview for every other branch. [`docs/CLOUDFLARE.md`](docs/CLOUDFLARE.md) covers the setup, cutover, rollback and cleanup.
+
 Before the first automated release, set **Settings → Pages → Build and deployment → Source** to **GitHub Actions**. This is a one-time repository setting. The workflow can also be run manually from the Actions tab when a release needs to be retried.
 
 See [`docs/LEGACY-AUDIT.md`](docs/LEGACY-AUDIT.md) for the migration constraints and retained assets.
@@ -59,7 +61,7 @@ Images are resized at build time by Sharp into content-hashed WebP variants. Sou
 
 The homepage, About and Newsletter hero photographs and homepage video covers also use mobile art direction through `<picture>`. Mobile crops preserve the existing CSS aspect ratios and focal positions, with AVIF preferred and WebP fallback. Generated filenames hash the final encoded bytes, so crop, quality and codec changes cannot overwrite a cached image. Only generated `/responsive/` images and hashed `/static/` CSS/JS are eligible for one-year immutable caching; original image and font URLs retain their existing policy.
 
-The Lighthouse workflow audits eight primary routes on mobile and desktop, three runs each, using local production-mode output. It requires median performance of at least 95 and automated accessibility, best-practices and SEO scores of 100. Reports are retained as workflow artifacts. These checks do not establish real-user performance or replace manual accessibility reviews. Vercel previews remain deliberately non-indexable.
+The Lighthouse workflow audits every pull request that can change the site, again on each new push, before anything publishes. It covers the homepage, Client stories, Work with me and Newsletter pages, the newest article, and every page the pull request adds or changes, up to ten pages (`scripts/lighthouse-urls.mjs`). It builds with `SITE_ENV=audit`: production output that also renders scheduled articles, so a new article is audited before its publication date. Mobile takes the median of three runs and desktop one. The workflow requires performance of at least 95 on desktop and 85 on mobile, LCP under 2.5 s, CLS under 0.1, pages under 500 KB, and accessibility, best-practices and SEO scores of 100 (`lighthouserc.cjs`). Treat a failure as blocking. Reports are retained as workflow artifacts. These checks do not establish real-user performance or replace manual accessibility reviews. Review previews remain deliberately non-indexable.
 
 Work stays on `rebuild-2026` in PR #116. Vercel automatically builds branch pushes using `vercel.json`; the stable preview is https://adrianchingcom-git-rebuild-2026-upstackstudio.vercel.app/. Vercel is the preview environment; GitHub Pages hosts production. Never promote a Vercel preview or change production domains without Adrian's approval. Preview protection is managed in Vercel.
 

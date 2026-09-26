@@ -2,6 +2,7 @@ import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { extname, join } from "node:path";
 import sharp from "sharp";
 import { versionedAssets as currentAssets } from "./versioned-assets.mjs";
+import { parseRedirects } from "./cloudflare.mjs";
 import { kitOptInForms, missingRequiredOptInFields } from "./optin-fields.mjs";
 
 const output = "_site";
@@ -16,7 +17,7 @@ const versionedAssets = currentAssets().map(({ bytes, url }) => {
 const required = [
   "index.html", "work-with-me/index.html", "ai-profit-opportunity-audit/index.html",
   "advisory/index.html", "about/index.html", "client-stories/index.html", "blog/index.html", "newsletter/index.html", "newsletter/confirmed/index.html", "privacy/index.html",
-  "404.html", "robots.txt", "sitemap.xml", "CNAME", "BingSiteAuth.xml"
+  "404.html", "robots.txt", "sitemap.xml", "CNAME", "BingSiteAuth.xml", "_headers", "_redirects", ".assetsignore"
 ];
 
 for (const file of required) {
@@ -213,6 +214,30 @@ if (existsSync(output)) {
   if (!confirmationHtml.includes('<meta name="robots" content="noindex, nofollow">')) errors.push("newsletter/confirmed/index.html: confirmation page must remain noindex");
   if (sitemap.includes("/newsletter/confirmed/")) errors.push("sitemap.xml: confirmation page must not be indexed");
   if (existsSync(join(output, ".agents"))) errors.push("Development skills must not be published in the site output");
+
+  // Cloudflare Workers routing: every redirect lands on a real page and anchor,
+  // and caching matches what GitHub Pages and the Cloudflare rules served.
+  if (existsSync(join(output, "_redirects"))) {
+    try {
+      for (const { source, destination } of parseRedirects(readFileSync(join(output, "_redirects"), "utf8"))) {
+        const target = internalTarget(destination);
+        if (!target || !existsSync(target)) errors.push(`_redirects: ${source} leads to missing ${destination}`);
+        const fragment = destination.split("#")[1];
+        if (target && fragment && existsSync(target) && !readFileSync(target, "utf8").includes(`id="${fragment}"`)) errors.push(`_redirects: ${source} leads to missing anchor ${destination}`);
+      }
+    } catch (error) {
+      errors.push(`_redirects: ${error.message}`);
+    }
+  }
+  if (existsSync(join(output, "_headers"))) {
+    const headers = readFileSync(join(output, "_headers"), "utf8");
+    for (const [path, value] of [["/static/*", "public, max-age=31536000, immutable"], ["/responsive/*", "public, max-age=31536000, immutable"], ["/assets/*", "max-age=691200"], ["/social/*", "max-age=691200"]]) {
+      if (!headers.includes(`\n${path}\n  Cache-Control: ${value}\n`)) errors.push(`_headers: ${path} must be cached with ${value}`);
+    }
+  }
+  if (existsSync(join(output, ".assetsignore")) && !readFileSync(join(output, ".assetsignore"), "utf8").split("\n").includes("CNAME")) {
+    errors.push(".assetsignore: CNAME is for GitHub Pages and must not be published on Cloudflare");
+  }
 }
 
 if (existsSync(join(output, "CNAME")) && readFileSync(join(output, "CNAME"), "utf8").trim() !== "adrianching.com") {

@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync, readdirSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, rmSync } from "node:fs";
 import { join } from "node:path";
 import sharp from "sharp";
 import { createHash } from "node:crypto";
@@ -58,7 +58,17 @@ test("a figure that states its own width keeps that width and gets only one size
   let transform;
   responsiveImages({ on() {}, addTransform(name, fn) { transform = fn; } });
   const sizes = "(max-width: 420px) calc(100vw - 32px), (max-width: 760px) calc(100vw - 40px), 720px";
-  const html = await transform.call({ page: { outputPath: "_site/figure-sizes.html" } }, `<img src="/assets/images/adrianching.jpg" alt="A test figure" sizes="${sizes}">`);
+  // The transform writes its variants into _site. Remove the ones this test
+  // adds, so a build that is tested and then deployed publishes no stray files.
+  const existing = new Set(existsSync("_site/responsive") ? readdirSync("_site/responsive") : []);
+  let html;
+  try {
+    html = await transform.call({ page: { outputPath: "_site/figure-sizes.html" } }, `<img src="/assets/images/adrianching.jpg" alt="A test figure" sizes="${sizes}">`);
+  } finally {
+    for (const name of existsSync("_site/responsive") ? readdirSync("_site/responsive") : []) {
+      if (!existing.has(name)) rmSync(join("_site/responsive", name));
+    }
+  }
   assert.ok(html.includes(`sizes="${sizes}"`), html);
   assert.equal(html.match(/sizes="/g).length, 1, html);
   assert.match(html, /srcset="[^"]+\.webp 400w/);

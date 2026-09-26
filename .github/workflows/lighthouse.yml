@@ -1,9 +1,22 @@
 name: Lighthouse
+# Audits every pull request that can change the site, and each new push to it,
+# before anything publishes: the core templates, the newest article, and every
+# page the pull request adds or changes, including scheduled articles.
 on:
   workflow_dispatch:
   pull_request:
     branches: [source]
-    types: [ready_for_review]
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths:
+      - "src/**"
+      - "scripts/**"
+      - "!scripts/**/*.md"
+      - "!scripts/*.test.mjs"
+      - eleventy.config.js
+      - package.json
+      - package-lock.json
+      - lighthouserc.cjs
+      - .github/workflows/lighthouse.yml
 permissions:
   contents: read
 concurrency:
@@ -11,18 +24,37 @@ concurrency:
   cancel-in-progress: true
 jobs:
   audit:
+    # Drafts are audited once they are marked ready for review.
+    if: github.event_name == 'workflow_dispatch' || !github.event.pull_request.draft
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v7
+        with:
+          # The base commit is needed to list the files the pull request changes.
+          fetch-depth: 0
       - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
       - run: npm ci
-      # Local production-mode output: preview noindex is deliberately preserved on Vercel.
+      # Production output, except that scheduled articles are included so they
+      # are audited before they publish. Audit builds stay indexable.
       - run: npm run build && npm run check
-      - name: Audit representative pages on mobile and desktop
+        env:
+          SITE_ENV: audit
+      - name: Choose pages
+        id: pages
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          if [ -n "$BASE_SHA" ]; then git diff --name-only "$BASE_SHA" HEAD > changed-files.txt; else : > changed-files.txt; fi
+          urls=$(node scripts/lighthouse-urls.mjs changed-files.txt)
+          echo "Auditing: $urls"
+          echo "urls=$urls" >> "$GITHUB_OUTPUT"
+      - name: Audit on mobile and desktop
+        env:
+          LHCI_URLS: ${{ steps.pages.outputs.urls }}
         run: |
           mobile_status=0
           desktop_status=0
