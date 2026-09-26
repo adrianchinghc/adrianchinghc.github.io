@@ -1,6 +1,6 @@
 // Chooses the pages Lighthouse audits for a pull request: the four core
 // templates, the newest article (the article template), and every page the
-// pull request adds or changes, including a scheduled article before it
+// pull request adds or changes, up to ten pages in all, including a scheduled article before it
 // publishes. Usage: node scripts/lighthouse-urls.mjs <changed-files.txt>
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { basename, join } from "node:path";
@@ -27,7 +27,9 @@ export function newestArticle(directory = "src/articles") {
 
 export function lighthouseUrls(changedFiles, { output = "_site", newest = newestArticle() } = {}) {
   const built = (page) => existsSync(join(output, page, "index.html"));
-  const pages = [...new Set([...corePages, ...changedFiles.map(pageForSource), newest].filter((page) => page && built(page)))];
+  // The newest article comes before changed pages so the article template is
+  // always audited, however many pages a pull request changes.
+  const pages = [...new Set([...corePages, newest, ...changedFiles.map(pageForSource)].filter((page) => page && built(page)))];
   if (pages.length > maxPages) console.error(`Auditing ${maxPages} of ${pages.length} pages; skipped ${pages.slice(maxPages).join(", ")}`);
   return pages.slice(0, maxPages);
 }

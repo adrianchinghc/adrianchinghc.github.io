@@ -169,8 +169,16 @@ test("Lighthouse audits the core pages, the newest article and every changed pag
     }
     const changed = ["src/about/index.njk", "src/articles/new-post.md", "src/ai-profit-opportunity-audit/example/index.njk", "src/assets/css/site.css", "src/articles/deleted-post.md", "README.md"];
     assert.deepEqual(lighthouseUrls(changed, { output, newest: "/blog/older-post/" }), [
-      "/", "/client-stories/", "/work-with-me/", "/newsletter/", "/about/", "/blog/new-post/", "/ai-profit-opportunity-audit/example/", "/blog/older-post/"
+      "/", "/client-stories/", "/work-with-me/", "/newsletter/", "/blog/older-post/", "/about/", "/blog/new-post/", "/ai-profit-opportunity-audit/example/"
     ]);
+    // With more changed pages than slots, the newest article keeps its place.
+    for (let index = 0; index < 8; index += 1) {
+      mkdirSync(join(output, `page-${index}`), { recursive: true });
+      writeFileSync(join(output, `page-${index}`, "index.html"), "");
+    }
+    const many = lighthouseUrls(Array.from({ length: 8 }, (_, index) => `src/page-${index}/index.njk`), { output, newest: "/blog/older-post/" });
+    assert.equal(many.length, 10);
+    assert.ok(many.includes("/blog/older-post/"));
     // A site-wide change still audits the article template through the newest article.
     assert.deepEqual(lighthouseUrls(["src/assets/css/site.css"], { output, newest: "/blog/new-post/" }), [...corePages, "/blog/new-post/"]);
     assert.equal(pageForSource("src/index.njk"), "/");

@@ -8,7 +8,7 @@ Eleventy keeps the output as plain HTML, CSS and a tiny amount of JavaScript. It
 
 ## Local development
 
-Requires Node.js 20.12 or newer.
+Requires Node.js 22 or newer, as Wrangler does. CI and Cloudflare builds use Node 24 (`.node-version`).
 
 ```bash
 npm install
