@@ -113,64 +113,33 @@
 
 {% macro buildCostOwnershipCost() %}
 <figure class="article-figure">
-<div class="figure-ownership">
-<div class="figure-card figure-ownership-build">
-<span class="figure-rank">What got cheaper</span>
-<strong class="figure-card-title">The build</strong>
+<div class="figure-burden" role="img" aria-label="A small build block sits beside a much taller ownership stack made of maintenance, breaks, security, reliability, upkeep and the risk of building the wrong thing.">
+<div class="figure-burden-build"><span class="figure-burden-arrow" aria-hidden="true">↓</span><span class="figure-burden-block">Build</span></div>
+<div class="figure-burden-own"><span class="figure-burden-brace" aria-hidden="true"></span><div class="figure-burden-stack"><span>Wrong thing</span><span>Upkeep</span><span>Reliability</span><span>Security + data</span><span>Breaks</span><span>Maintenance</span></div><strong>Ownership</strong></div>
 </div>
-<div class="figure-ownership-stays">
-<p class="figure-rank">What did not</p>
-<ul>
-<li>Maintaining it</li>
-<li>Fixing it when it breaks</li>
-<li>Security, data handling and reliability</li>
-<li>Someone who owns upkeep</li>
-<li>Being wrong about what you needed</li>
-</ul>
-</div>
-</div>
-<p class="figure-summary"><strong>The expensive mistake today isn't a failed build. It's a successful build of the wrong thing.</strong></p>
+<figcaption>The cost of building fell. The cost of owning what you built did not.</figcaption>
 </figure>
 {% endmacro %}
 
 {% macro buildBuyQuestions() %}
 <figure class="article-figure">
-<ol class="figure-question-list">
-<li class="figure-card">
-<div><span class="figure-rank">Question 1</span><strong class="figure-card-title">Technical team, capacity, internal tool?</strong></div>
-<p><strong>The call</strong>If all three are true, build it.</p>
-</li>
-<li class="figure-card">
-<div><span class="figure-rank">Question 2</span><strong class="figure-card-title">Internal or customer-facing?</strong></div>
-<p><strong>The call</strong>Internal narrows exposure, but still needs a named owner for security, data handling, reliability and upkeep. External needs a properly credentialed technical team, with someone explicitly owning security.</p>
-</li>
-<li class="figure-card">
-<div><span class="figure-rank">Question 3</span><strong class="figure-card-title">Who owns maintenance, and for how long?</strong></div>
-<p><strong>The call</strong>No owner named, no build approved.</p>
-</li>
-<li class="figure-card is-watch">
-<div><span class="figure-rank">Question 4 · Check the full cost</span><strong class="figure-card-title">The total resource picture, not just the build?</strong></div>
-<p><strong>The call</strong>Want the outcome, but do not have the time or team to own the build? Buying is usually the better call.</p>
-</li>
+<ol class="figure-question-map">
+<li><div class="figure-question-icon figure-question-team" aria-hidden="true"><i></i><i></i><i></i></div><p><span>Team + time + internal</span><strong>Build</strong></p></li>
+<li><div class="figure-question-icon figure-question-shield" aria-hidden="true"><i></i></div><p><span>Internal or customer-facing</span><strong>Match the exposure</strong></p></li>
+<li><div class="figure-question-icon figure-question-owner" aria-hidden="true"><i></i></div><p><span>Named owner</span><strong>No owner → no build</strong></p></li>
+<li class="is-watch"><div class="figure-question-icon figure-question-iceberg" aria-hidden="true"><i></i></div><p><span>Build + upkeep + risk</span><strong>No time or team → buy</strong></p></li>
 </ol>
+<figcaption>Four questions: team and capacity, exposure, ownership, then the full resource picture.</figcaption>
 </figure>
 {% endmacro %}
 
 {% macro buildBuyRunOrder() %}
 <figure class="article-figure">
-<ol class="figure-flow figure-decision-flow">
-<li><span><strong>Is anything actually broken or costing you?</strong></span>
-<p class="figure-flow-exit"><strong>Nothing broken?</strong> Leave it alone.</p></li>
-<li><span><strong>Is the process stable and documented?</strong></span>
-<p class="figure-flow-exit"><strong>Not stable or documented?</strong> Fix that first. Do not automate a mess.</p></li>
-<li><span><strong>Is it worth automating?</strong> If the process is proven and repeats often, start looking at tools or a custom workflow.</span></li>
-<li><span><strong>Build or buy?</strong> Run the four questions.</span>
-<ul class="figure-flow-outcomes">
-<li><strong>Internal, technical team, has the time:</strong> build it, use AI to move faster, and name someone to own security and upkeep.</li>
-<li><strong>External or customer-facing:</strong> build only with a properly credentialed technical team that owns security, or buy.</li>
-<li><strong>Non-technical, short on time, want the outcome:</strong> buy.</li>
-</ul></li>
-</ol>
+<div class="figure-route" role="img" aria-label="Decision route: if nothing is broken, leave it alone. If the process is not stable and documented, fix that first. Otherwise decide whether it is worth automating, then run the build or buy questions. The outcomes are build, credentialed technical team or buy, and buy.">
+<div class="figure-route-main"><span>Broken?</span><span>Stable?</span><span>Worth<br>automating?</span><span>Build<br>or buy?</span></div>
+<div class="figure-route-exits"><p><b>Nothing broken</b><strong>Leave it alone</strong></p><p><b>Not stable</b><strong>Fix that first</strong></p></div>
+<div class="figure-route-outcomes"><span>Build</span><span>Technical team<br>or buy</span><span>Buy</span></div>
+</div>
 <figcaption>This is the judgment I would bring to a specific proposal, not a universal formula.</figcaption>
 </figure>
 {% endmacro %}
