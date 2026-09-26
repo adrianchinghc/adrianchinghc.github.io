@@ -110,3 +110,36 @@
 <figcaption>Build from the process up. Most companies I met were shopping for AI while the first three steps were still missing.</figcaption>
 </figure>
 {% endmacro %}
+
+{% macro buildCostOwnershipCost() %}
+<figure class="article-figure">
+<div class="figure-burden" role="img" aria-label="A small build block sits beside a much taller ownership stack made of maintenance, breaks, security, reliability, upkeep and the risk of building the wrong thing.">
+<div class="figure-burden-build"><span class="figure-burden-arrow" aria-hidden="true">↓</span><span class="figure-burden-block">Build</span></div>
+<div class="figure-burden-own"><span class="figure-burden-brace" aria-hidden="true"></span><div class="figure-burden-stack"><span>Wrong thing</span><span>Upkeep</span><span>Reliability</span><span>Security + data</span><span>Breaks</span><span>Maintenance</span></div><strong>Ownership</strong></div>
+</div>
+<figcaption>The cost of building fell. The cost of owning what you built did not.</figcaption>
+</figure>
+{% endmacro %}
+
+{% macro buildBuyQuestions() %}
+<figure class="article-figure">
+<ol class="figure-question-map">
+<li><p><span>Team + time + internal</span><strong>Build</strong></p></li>
+<li><p><span>Internal or customer-facing</span><strong>Internal: name an owner. Customer-facing: use a credentialed technical team.</strong></p></li>
+<li><p><span>Named owner</span><strong>No owner → no build</strong></p></li>
+<li class="is-watch"><p><span>Build + upkeep + risk</span><strong>No time or team → usually buy</strong></p></li>
+</ol>
+<figcaption>Four questions: team and capacity, exposure, ownership, then the full resource picture.</figcaption>
+</figure>
+{% endmacro %}
+
+{% macro buildBuyRunOrder() %}
+<figure class="article-figure">
+<div class="figure-route" role="img" aria-label="Decision route: if nothing is broken, leave it alone. If the process is not stable and documented, fix that first. Otherwise decide whether it is worth automating, then run the build or buy questions. The outcomes are build, credentialed technical team or buy, and buy.">
+<div class="figure-route-main"><span>Broken?</span><span>Stable?</span><span>Worth<br>automating?</span><span>Build<br>or buy?</span></div>
+<div class="figure-route-exits"><p><b>Nothing broken</b><strong>Leave it alone</strong></p><p><b>Not stable</b><strong>Fix that first</strong></p></div>
+<div class="figure-route-outcomes"><span>Build</span><span>Technical team<br>or buy</span><span>Buy</span></div>
+</div>
+<figcaption>This is the judgment I would bring to a specific proposal, not a universal formula.</figcaption>
+</figure>
+{% endmacro %}

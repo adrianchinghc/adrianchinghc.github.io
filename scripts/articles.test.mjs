@@ -28,6 +28,20 @@ test('publishing requires the commissioned cover, not the typeset fallback', () 
   validateArticle({ ...valid, draft: true, socialCover: undefined, socialCoverAlt: undefined }, now);
 });
 
+// A lead magnet promises one file by email, so the article cannot publish until
+// its own Kit form exists. A review preview renders it so the writing can be read.
+test('a lead magnet next step requires its own configured Kit form to publish', () => {
+  const now = new Date('2026-09-17');
+  const leadmagnets = { 'AC-035': { formId: '9916004', formUid: 'abc123' }, 'AC-036': { formId: '' } };
+  const article = { ...valid, cta: 'leadmagnet', leadmagnets };
+  validateArticle({ ...article, leadMagnet: 'AC-035' }, now, { preview: false });
+  assert.throws(() => validateArticle({ ...article, leadMagnet: 'AC-036' }, now, { preview: false }), /formId/);
+  assert.throws(() => validateArticle({ ...article, leadMagnet: 'AC-999' }, now, { preview: false }), /leadmagnets\.json/);
+  assert.throws(() => validateArticle({ ...article, leadMagnet: undefined }, now, { preview: false }), /leadmagnets\.json/);
+  validateArticle({ ...article, leadMagnet: 'AC-036' }, now, { preview: true });
+  assert.throws(() => validateArticle({ ...article, leadMagnet: 'AC-999' }, now, { preview: true }), /leadmagnets\.json/);
+});
+
 test('related reading excludes current and archive, prioritises topic then recency', () => {
   const item = (url, topic, date, archive = false) => ({ url, date: new Date(date), data: { topic, archive } });
   const items = [item('/self/', 'AI', '2026-09-01'), item('/older/', 'AI', '2026-01-01'), item('/newer/', 'AI', '2026-08-01'), item('/other/', 'Software', '2026-09-02'), item('/archive/', 'AI', '2016-01-01', true)];

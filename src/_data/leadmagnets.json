@@ -1,0 +1,12 @@
+{
+  "AC-035": {
+    "heading": "Get the one-page checklist.",
+    "body": "The four questions above, condensed onto one page you can keep next to the next build proposal.",
+    "submitLabel": "Email me the checklist",
+    "pendingLabel": "Sending…",
+    "successMessage": "One more step: check your inbox and click the confirmation link to get the checklist.",
+    "microcopy": "The checklist arrives by email. Unsubscribe anytime.",
+    "formId": "9960166",
+    "formUid": "7649b5f7bc"
+  }
+}
