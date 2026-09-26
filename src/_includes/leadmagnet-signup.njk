@@ -8,7 +8,7 @@
   <div aria-live="polite" aria-atomic="true">
     <ul class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert" role="alert"></ul>
     <div data-element="fields" class="newsletter-fields">
-      <label class="newsletter-email"><span>First name (optional)</span><input class="formkit-input" name="fields[first_name]" type="text" autocomplete="given-name" placeholder="Your first name" data-hj-suppress></label>
+      <label class="newsletter-email"><span>First name</span><input class="formkit-input" name="fields[first_name]" type="text" autocomplete="given-name" placeholder="Your first name" required data-hj-suppress></label>
       <label class="newsletter-email"><span>Email address</span><input class="formkit-input" name="email_address" type="email" autocomplete="email" placeholder="you@example.com" required data-hj-suppress></label>
       <button class="button formkit-submit" type="submit" data-element="submit"><span class="signup-label">{{ magnet.submitLabel }}</span><span class="signup-busy" hidden>{{ magnet.pendingLabel }}</span></button>
     </div>

@@ -84,6 +84,18 @@ and rejects an entry with an empty `formId`. A review preview still renders the
 article, with a visible note standing in for the form, so the writing can be read
 while its Kit form is still being created. That state cannot publish.
 
+### Every opt-in asks for First Name and Email
+
+Both fields are required on every newsletter and lead-magnet opt-in. Neither gets
+an "optional" label or an input without `required`. When you create a new Kit
+form, toggle First Name to required in the Kit form builder as well.
+
+Kit only enforces `email_address` on its side: post an empty payload and it names
+that field alone. So the `required` attribute in our own markup is the control a
+reader actually meets, and it has to be there. `scripts/check-site.mjs` reads the
+rendered HTML and fails the build on any Kit subscription form missing either
+required field, which covers a new opt-in on any page, not just these includes.
+
 ## Scheduled publication
 
 Use a quoted ISO timestamp with an explicit timezone for new posts, for example
