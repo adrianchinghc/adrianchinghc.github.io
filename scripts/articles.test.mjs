@@ -52,10 +52,11 @@ test('Eleventy publishes complete articles, hides drafts and produces discovery 
   const artworkRoot = await mkdtemp('scripts/assets/illustrations/.test-');
   const cover = join(artworkRoot, 'cover.webp');
   const yellowCover = join(artworkRoot, 'yellow-cover.webp');
-  // Vercel sets VERCEL_ENV during a preview build, which would make the
-  // production assertions below see scheduled articles. This test owns the
-  // variable for its whole run and sets it deliberately where it matters.
-  const previousPreview = process.env.VERCEL_ENV;
+  // A preview build sets SITE_ENV (or Vercel's VERCEL_ENV), which would make the
+  // production assertions below see scheduled articles. This test owns both
+  // variables for its whole run and sets SITE_ENV deliberately where it matters.
+  const previous = { SITE_ENV: process.env.SITE_ENV, VERCEL_ENV: process.env.VERCEL_ENV };
+  delete process.env.SITE_ENV;
   delete process.env.VERCEL_ENV;
   try {
     // Synthetic fixtures keep rendering coverage independent of editorial assets.
@@ -127,7 +128,7 @@ test('Eleventy publishes complete articles, hides drafts and produces discovery 
     await assert.rejects(access(join(output, 'blog/draft/index.html')));
     await assert.rejects(access(join(output, 'blog/explicit-draft/index.html')));
     try {
-      process.env.VERCEL_ENV = 'preview';
+      process.env.SITE_ENV = 'preview';
       await rm(output, { recursive: true, force: true });
       await build().write();
       const preview = await readFile(join(output, 'blog/scheduled/index.html'), 'utf8');
@@ -136,7 +137,7 @@ test('Eleventy publishes complete articles, hides drafts and produces discovery 
       assert.match(await readFile(join(output, 'blog/index.html'), 'utf8'), /blog\/scheduled/);
       await assert.rejects(access(join(output, 'blog/explicit-draft/index.html')));
     } finally {
-      delete process.env.VERCEL_ENV;
+      delete process.env.SITE_ENV;
     }
     // A later production build makes the same article discoverable once due.
     await put('articles/scheduled.md', article({ ...valid, title: 'Scheduled decision', date: '2026-01-11T09:00:00+08:00', socialCover: cover, socialCoverAlt: 'Reviewed blue editorial cover.' }));
@@ -148,8 +149,10 @@ test('Eleventy publishes complete articles, hides drafts and produces discovery 
     }
 
   } finally {
-    if (previousPreview === undefined) delete process.env.VERCEL_ENV;
-    else process.env.VERCEL_ENV = previousPreview;
+    for (const [name, value] of Object.entries(previous)) {
+      if (value === undefined) delete process.env[name];
+      else process.env[name] = value;
+    }
     await rm(root, { recursive: true, force: true });
     await rm(artworkRoot, { recursive: true, force: true });
   }

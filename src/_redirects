@@ -1,0 +1,10 @@
+# Redirects for Cloudflare Workers static assets: source, destination, status.
+# The build appends a 301 from every page's address without its trailing slash,
+# and with index.html, to the canonical address. See scripts/cloudflare.mjs.
+
+/work /work-with-me/ 301
+/work/ /work-with-me/ 301
+/work/index.html /work-with-me/ 301
+/ventures /about/#what-im-building 301
+/ventures/ /about/#what-im-building 301
+/ventures/index.html /about/#what-im-building 301

@@ -2,9 +2,10 @@ module.exports = {
   ci: {
     collect: {
       staticDistDir: "./_site",
-      // Cover the homepage, proof, commercial and third-party form patterns.
-      // The deterministic site check validates every generated page separately.
-      url: ["/", "/client-stories/", "/work-with-me/", "/newsletter/"],
+      // The homepage, proof, commercial and form templates, plus the pages a pull
+      // request changes: scripts/lighthouse-urls.mjs sets LHCI_URLS. The
+      // deterministic site check validates every generated page separately.
+      url: process.env.LHCI_URLS ? process.env.LHCI_URLS.split(/\s+/).filter(Boolean) : ["/", "/client-stories/", "/work-with-me/", "/newsletter/"],
       // Desktop measures the same numbers every time. Mobile simulates a 4x
       // slower CPU, which multiplies ordinary runner jitter into a large swing
       // in Total Blocking Time, so take a median instead of one sample.

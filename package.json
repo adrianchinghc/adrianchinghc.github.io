@@ -7,14 +7,17 @@
   "scripts": {
     "dev": "node scripts/dev.mjs",
     "build": "node scripts/clean-output.mjs && eleventy",
-    "check": "node scripts/check-site.mjs"
+    "check": "node scripts/check-site.mjs",
+    "build:cloudflare": "node scripts/cloudflare-build.mjs",
+    "deploy:cloudflare": "node scripts/cloudflare-deploy.mjs"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
     "@napi-rs/canvas": "^1.0.9",
     "@resvg/resvg-js": "^2.6.2",
     "gray-matter": "^4.0.3",
-    "sharp": "^0.35.4"
+    "sharp": "^0.35.4",
+    "wrangler": "^4.141.0"
   },
   "engines": {
     "node": ">=20.12"

@@ -35,7 +35,7 @@ jobs:
 
       # Production mode matches the publish build and omits future-dated pages.
       # Required article metadata is validated before the visibility cutoff.
-      # Vercel previews separately render future posts for visual review.
+      # Review previews separately render future posts for visual review.
       - name: Build site
         run: npm run build
 
@@ -47,7 +47,7 @@ jobs:
       # clears _site first, so the two passes cannot contaminate each other.
       - name: Build and check the review preview
         env:
-          VERCEL_ENV: preview
+          SITE_ENV: preview
         run: npm run build && npm run check
 
       - name: Check navigation, images and cache clearing

@@ -6,6 +6,8 @@ _site/
 .lighthouseci/
 lighthouse-reports/
 .sites-runtime/
+.wrangler/
+changed-files.txt
 
 # Keep locally installed design skill packages out of source control.
 .agents/skills/

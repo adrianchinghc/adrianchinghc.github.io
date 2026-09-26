@@ -1,5 +1,6 @@
 import { existsSync } from "node:fs";
 import { loadEnvFile } from "node:process";
+import { isReviewPreview } from "../../scripts/publication.mjs";
 
 if (existsSync(".env")) loadEnvFile(".env");
 
@@ -13,7 +14,7 @@ export default function () {
     metaPixel: cleanId("META_PIXEL_ID", /^\d+$/),
     hotjar: cleanId("HOTJAR_ID", /^\d+$/)
   };
-  const isPreview = process.env.VERCEL_ENV === "preview" || process.env.VERCEL_ENV === "development";
+  const isPreview = isReviewPreview();
 
   return {
     name: "Adrian Ching",

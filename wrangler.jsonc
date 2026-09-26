@@ -1,0 +1,21 @@
+// Cloudflare Workers hosting for AdrianChing.com: the built _site folder served as
+// static assets, with no Worker script. docs/CLOUDFLARE.md covers the dashboard
+// settings, the cutover and rollback.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // Workers Builds needs the dashboard Worker to have this exact name.
+  "name": "adrianching",
+  "compatibility_date": "2026-09-25",
+  "assets": {
+    "directory": "./_site",
+    // Serve 404.html with a 404 status, as GitHub Pages does.
+    "not_found_handling": "404-page",
+    // /about/ serves about/index.html. scripts/cloudflare.mjs adds 301s for
+    // /about and /about/index.html, which would otherwise be 307s.
+    "html_handling": "auto-trailing-slash"
+  },
+  // The workers.dev address is for comparing the Worker with production before
+  // the cutover. _headers keeps it out of search results.
+  "workers_dev": true,
+  "preview_urls": true
+}
