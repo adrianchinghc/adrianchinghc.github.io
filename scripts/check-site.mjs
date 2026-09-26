@@ -2,6 +2,7 @@ import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { extname, join } from "node:path";
 import sharp from "sharp";
 import { versionedAssets as currentAssets } from "./versioned-assets.mjs";
+import { kitOptInForms, missingRequiredOptInFields } from "./optin-fields.mjs";
 
 const output = "_site";
 const errors = [];
@@ -140,6 +141,10 @@ if (existsSync(output)) {
     if (kitScripts !== (signupForms.length ? 1 : 0)) errors.push(`${file}: expected ${signupForms.length ? "one" : "no"} Kit script, found ${kitScripts}`);
     for (const form of signupForms) {
       if (!/\bdata-signup-placement="[a-z0-9_]+"/.test(form)) errors.push(`${file}: newsletter form needs a data-signup-placement for analytics`);
+    }
+    for (const { formId, form } of kitOptInForms(html)) {
+      const missing = missingRequiredOptInFields(form);
+      if (missing.length) errors.push(`${file}: Kit form ${formId} must mark ${missing.join(" and ")} required — every opt-in asks for First Name and Email`);
     }
     for (const match of html.matchAll(/<a\b[^>]*>/g)) {
       const tag = match[0];

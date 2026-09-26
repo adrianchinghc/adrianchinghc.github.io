@@ -47,12 +47,54 @@ socialCoverAlt: "Describe the actual illustration, not the article."
 
 Replace all example copy. Available topics: AI decisions, Software decisions,
 Customer follow-up, Building businesses. Next steps: newsletter (default), audit,
-advisory. Pick the one that fits the reader's question. No public checkout.
-The newsletter next step renders the Kit signup form at the end of the article,
-so a reader subscribes without leaving the page. Its invitation matches the article's
-topic using `src/_data/newsletter.json`, with a general fallback. Keep the promise
-specific and supported by the newsletter; do not invent results or an email cadence.
-Audit and advisory keep a link.
+advisory, leadmagnet. Pick the one that fits the reader's question. No public
+checkout. The newsletter next step renders the Kit signup form at the end of the
+article, so a reader subscribes without leaving the page. Its invitation matches the
+article's topic using `src/_data/newsletter.json`, with a general fallback. Keep the
+promise specific and supported by the newsletter; do not invent results or an email
+cadence. Audit and advisory keep a link.
+
+### The leadmagnet next step
+
+Use `cta: leadmagnet` when the article offers one specific file rather than the
+newsletter. It renders that magnet's own Kit form in the place the newsletter
+form otherwise occupies, directly below the article body, so the reader never
+leaves the page.
+
+```yaml
+cta: leadmagnet
+leadMagnet: AC-035 # the article's Content ID, and the key in src/_data/leadmagnets.json
+```
+
+Each lead magnet is one entry in `src/_data/leadmagnets.json`, keyed by the
+article's Content ID. The entry holds the heading, promise, button and success
+copy, plus the `formId` and `formUid` of that magnet's own Kit form. The key is
+also the value posted in the hidden `fields[content_id]` input, which is how Kit
+records the article a subscriber came from, so it must match the value Kit's
+`content_id` custom field expects. Adding the next lead magnet is a data entry
+and two front matter lines, never a template edit.
+
+Give every lead magnet its own Kit form instead of pointing a second article at
+an existing one: the form is what applies the tag and triggers the delivery
+email. The promise above the form has to be what Kit actually delivers. Do not
+promise the newsletter, a cadence or a result from a form that sends one file.
+
+`validateArticle` rejects a published article whose `leadMagnet` names no entry,
+and rejects an entry with an empty `formId`. A review preview still renders the
+article, with a visible note standing in for the form, so the writing can be read
+while its Kit form is still being created. That state cannot publish.
+
+### Every opt-in asks for First Name and Email
+
+Both fields are required on every newsletter and lead-magnet opt-in. Neither gets
+an "optional" label or an input without `required`. When you create a new Kit
+form, toggle First Name to required in the Kit form builder as well.
+
+Kit only enforces `email_address` on its side: post an empty payload and it names
+that field alone. So the `required` attribute in our own markup is the control a
+reader actually meets, and it has to be there. `scripts/check-site.mjs` reads the
+rendered HTML and fails the build on any Kit subscription form missing either
+required field, which covers a new opt-in on any page, not just these includes.
 
 ## Scheduled publication
 

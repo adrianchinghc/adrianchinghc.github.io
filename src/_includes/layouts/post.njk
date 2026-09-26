@@ -19,6 +19,10 @@ layout: layouts/base.njk
   <h2 id="article-next-heading">Decide what to fix first.</h2><p>The AI Profit Opportunity Audit ranks opportunities and turns them into a concise 90-day roadmap. Diagnosis and prioritisation only.</p><a class="text-link" href="/ai-profit-opportunity-audit/" data-cta="article_audit">See what the audit covers</a>
   {% elif cta == 'advisory' %}
   <h2 id="article-next-heading">A second opinion on the decision.</h2><p>Selective, independent guidance for founders weighing AI, software and vendor choices.</p><a class="text-link" href="/advisory/" data-cta="article_advisory">Explore private advisory</a>
+  {% elif cta == 'leadmagnet' %}
+  {% set contentId = leadMagnet %}{% set magnet = leadmagnets[contentId] %}
+  <h2 id="article-next-heading">{{ magnet.heading }}</h2><p>{{ magnet.body }}</p>
+  {% set signupPlacement = "article_lead_magnet" %}{% include "leadmagnet-signup.njk" %}
   {% else %}
   {% set invitation = newsletter.articleInvitations[topic] or newsletter.articleInvitations.default %}
   <h2 id="article-next-heading">{{ invitation.heading }}</h2><p>{{ invitation.body }}</p>
